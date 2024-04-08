@@ -58,13 +58,14 @@ int main(void)
 					LCD_voidSendCommand(Write_SecondLine);
 					LCD_voidDisplayStringDelay((u8*)"control(1-6)");
 					_delay_ms(30);
+					light_choosing_KPD_WAIT:
 					//busy wait for KPD
 					while(local_lightNum== KPD_Not_Pressed)
 					{
 					//get KPD Light Number
 					KPD_voidGetValue(&local_lightNum);
 					}
-					if (local_lightNum=='1')
+											if (local_lightNum=='1')
 					{
 						LCD_voidClear();
 						if (i==1)
@@ -79,10 +80,10 @@ int main(void)
 							LCD_voidSendCommand(Write_SecondLine);
 							LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
 						}
-						local_lightNum=KPD_Not_Pressed;
+						
 					}
 					
-					if (local_lightNum=='2')
+										else if (local_lightNum=='2')
 					{
 						LCD_voidClear();
 						if (i==1)
@@ -97,8 +98,93 @@ int main(void)
 							LCD_voidSendCommand(Write_SecondLine);
 							LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
 						}
-						local_lightNum=KPD_Not_Pressed;
+						
 					}
+										else if (local_lightNum=='3')
+					{
+						LCD_voidClear();
+						if (i==1)
+						{
+							LCD_voidDisplayStringDelay((u8*)"Light 3 is On");
+							LCD_voidSendCommand(Write_SecondLine);
+							LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
+						}
+						else if (i==0)
+						{
+							LCD_voidDisplayStringDelay((u8*)"Light 3 is OFF");
+							LCD_voidSendCommand(Write_SecondLine);
+							LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
+						}
+
+					}
+										else if (local_lightNum=='4')
+					{
+						LCD_voidClear();
+						if (i==1)
+						{
+							LCD_voidDisplayStringDelay((u8*)"Light 4 is On");
+							LCD_voidSendCommand(Write_SecondLine);
+							LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
+						}
+						else if (i==0)
+						{
+							LCD_voidDisplayStringDelay((u8*)"Light 4 is OFF");
+							LCD_voidSendCommand(Write_SecondLine);
+							LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
+						}
+						
+					}
+										else if (local_lightNum=='5')
+					{
+						LCD_voidClear();
+						if (i==1)
+						{
+							LCD_voidDisplayStringDelay((u8*)"Light 5 is On");
+							LCD_voidSendCommand(Write_SecondLine);
+							LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
+						}
+						else if (i==0)
+						{
+							LCD_voidDisplayStringDelay((u8*)"Light 5 is OFF");
+							LCD_voidSendCommand(Write_SecondLine);
+							LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
+						}
+						
+					}
+										else if (local_lightNum=='6')
+					{
+						LCD_voidClear();
+						if (i==1)
+						{
+							LCD_voidDisplayStringDelay((u8*)"Light 6 is On");
+							LCD_voidSendCommand(Write_SecondLine);
+							LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
+						}
+						else if (i==0)
+						{
+							LCD_voidDisplayStringDelay((u8*)"Light 6 is OFF");
+							LCD_voidSendCommand(Write_SecondLine);
+							LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
+						}
+						
+					}
+										else 
+						{
+							LCD_voidClear();
+							LCD_voidDisplayStringDelay((u8*)"  Invalid Input");
+							_delay_ms(1000);
+							LCD_voidClear();
+							LCD_voidDisplayStringDelay((u8*)"  please choose ");
+							LCD_voidSendCommand(Write_SecondLine);
+							LCD_voidDisplayStringDelay((u8*)"  from 1 to 6");
+							_delay_ms(1000);
+							
+							//clear the local_lightNum to get the light number again
+							local_lightNum = KPD_Not_Pressed;
+							// go to the beginning of the loop to get the light number again
+							goto light_choosing_KPD_WAIT;
+						}
+						local_lightNum =KPD_Not_Pressed;
 				break;						
 			}
 

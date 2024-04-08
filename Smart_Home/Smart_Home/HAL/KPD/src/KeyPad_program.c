@@ -24,7 +24,7 @@ void	KPD_voidInit(void)
 	DIO_voidSetPinDirection(KPD_C0_Port,KPD_C0_Pin,DIO_PIN_OUTPUT);
 	DIO_voidSetPinDirection(KPD_C1_Port,KPD_C1_Pin,DIO_PIN_OUTPUT);
 	DIO_voidSetPinDirection(KPD_C2_Port,KPD_C2_Pin,DIO_PIN_OUTPUT);
-	DIO_voidSetPinDirection(KPD_C3_Port,KPD_C3_Pin,DIO_PIN_OUTPUT);
+	
 	
 	//Setting Rows To Input
 	DIO_voidSetPinDirection(KPD_R0_Port,KPD_R0_Pin,DIO_PIN_INPUT);
@@ -44,8 +44,8 @@ void	KPD_voidGetValue(u8* copy_pu8value)
 {
 	if (copy_pu8value != NULL)
 	{
-		u8	Local_u8ColsPort[4]={KPD_C0_Port,KPD_C1_Port,KPD_C2_Port,KPD_C3_Port};
-		u8	Local_u8ColsPins[4]={KPD_C0_Pin,KPD_C1_Pin,KPD_C2_Pin,KPD_C3_Pin};
+		u8	Local_u8ColsPort[4]={KPD_C0_Port,KPD_C1_Port,KPD_C2_Port};
+		u8	Local_u8ColsPins[4]={KPD_C0_Pin,KPD_C1_Pin,KPD_C2_Pin};
 									 
 		u8	Local_u8RowsPort[4]={KPD_R0_Port,KPD_R1_Port,KPD_R2_Port,KPD_R3_Port};
 		u8	Local_u8RowsPins[4]={KPD_R0_Pin,KPD_R1_Pin,KPD_R2_Pin,KPD_R3_Pin};
