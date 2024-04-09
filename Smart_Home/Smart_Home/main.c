@@ -19,6 +19,7 @@
 #include "KeyPad_interface.h"
 #include "LCD_INTERFACE.h"
 #include "LCD_CONFIG.h"
+#include "LED_interface.h"
 
 
 int main(void)
@@ -33,9 +34,12 @@ int main(void)
 	LCD_voidDisplayString((u8*)"1-AC 2-light");
 	LCD_voidSendCommand(Write_SecondLine);
 	LCD_voidDisplayString((u8*)"3-temperature");
+	
+	
 	u8	Local_copyKPDValue;
 	u8	local_lightNum=KPD_Not_Pressed;
-	u8 i=0;
+	u8 local_lightStatus=KPD_Not_Pressed;
+	u8 led_status;
 	
     while (1) 
     {
@@ -66,19 +70,40 @@ int main(void)
 					KPD_voidGetValue(&local_lightNum);
 					}
 											if (local_lightNum=='1')
+					
 					{
+						DIO_voidGetPinValue(DIO_PORTA,DIO_PIN0,led_status);
 						LCD_voidClear();
-						if (i==1)
+						if (led_status ==1)
 						{
 							LCD_voidDisplayStringDelay((u8*)"Light 1 is On");
 							LCD_voidSendCommand(Write_SecondLine);
 							LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
+							while(local_lightStatus== KPD_Not_Pressed)
+							{
+								KPD_voidGetValue(&local_lightStatus);
+							}
+								if (local_lightStatus=='1')
+								{
+								DIO_voidSetPinValue(DIO_PORTA,DIO_PIN0,DIO_PIN_LOW);
+								}
+							
+							
 						}
-						else if (i==0)
+						else if (led_status ==0)
 						{
 							LCD_voidDisplayStringDelay((u8*)"Light 1 is OFF");
 							LCD_voidSendCommand(Write_SecondLine);
 							LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
+							while(local_lightStatus== KPD_Not_Pressed)
+							{
+							KPD_voidGetValue(&local_lightStatus);
+							}
+							if (local_lightStatus=='1')
+								{
+									DIO_voidSetPinValue(DIO_PORTA,DIO_PIN0,DIO_PIN_HIGH);
+								}
+							
 						}
 						
 					}
@@ -86,13 +111,13 @@ int main(void)
 										else if (local_lightNum=='2')
 					{
 						LCD_voidClear();
-						if (i==1)
+						if (led_status ==1)
 						{
 							LCD_voidDisplayStringDelay((u8*)"Light 2 is On");
 							LCD_voidSendCommand(Write_SecondLine);
 							LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
 						}
-						else if (i==0)
+						else if (led_status ==0)
 						{
 							LCD_voidDisplayStringDelay((u8*)"Light 2 is OFF");
 							LCD_voidSendCommand(Write_SecondLine);
@@ -103,13 +128,13 @@ int main(void)
 										else if (local_lightNum=='3')
 					{
 						LCD_voidClear();
-						if (i==1)
+						if (led_status ==1)
 						{
 							LCD_voidDisplayStringDelay((u8*)"Light 3 is On");
 							LCD_voidSendCommand(Write_SecondLine);
 							LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
 						}
-						else if (i==0)
+						else if (led_status ==0)
 						{
 							LCD_voidDisplayStringDelay((u8*)"Light 3 is OFF");
 							LCD_voidSendCommand(Write_SecondLine);
@@ -120,13 +145,13 @@ int main(void)
 										else if (local_lightNum=='4')
 					{
 						LCD_voidClear();
-						if (i==1)
+						if (led_status ==1)
 						{
 							LCD_voidDisplayStringDelay((u8*)"Light 4 is On");
 							LCD_voidSendCommand(Write_SecondLine);
 							LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
 						}
-						else if (i==0)
+						else if (led_status ==0)
 						{
 							LCD_voidDisplayStringDelay((u8*)"Light 4 is OFF");
 							LCD_voidSendCommand(Write_SecondLine);
@@ -137,13 +162,13 @@ int main(void)
 										else if (local_lightNum=='5')
 					{
 						LCD_voidClear();
-						if (i==1)
+						if (led_status ==1)
 						{
 							LCD_voidDisplayStringDelay((u8*)"Light 5 is On");
 							LCD_voidSendCommand(Write_SecondLine);
 							LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
 						}
-						else if (i==0)
+						else if (led_status ==0)
 						{
 							LCD_voidDisplayStringDelay((u8*)"Light 5 is OFF");
 							LCD_voidSendCommand(Write_SecondLine);
@@ -154,13 +179,13 @@ int main(void)
 										else if (local_lightNum=='6')
 					{
 						LCD_voidClear();
-						if (i==1)
+						if (led_status ==1)
 						{
 							LCD_voidDisplayStringDelay((u8*)"Light 6 is On");
 							LCD_voidSendCommand(Write_SecondLine);
 							LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
 						}
-						else if (i==0)
+						else if (led_status ==0)
 						{
 							LCD_voidDisplayStringDelay((u8*)"Light 6 is OFF");
 							LCD_voidSendCommand(Write_SecondLine);

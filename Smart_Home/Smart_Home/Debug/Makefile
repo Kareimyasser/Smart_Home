@@ -51,6 +51,7 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../HAL/KPD/src/KeyPad_program.c \
 ../HAL/LCD/src/LCD_PROGRAM.c \
+../LED_program.c \
 ../main.c \
 ../MCAL/DIO/src/DIO_program.c
 
@@ -64,24 +65,28 @@ ASM_SRCS +=
 OBJS +=  \
 HAL/KPD/src/KeyPad_program.o \
 HAL/LCD/src/LCD_PROGRAM.o \
+LED_program.o \
 main.o \
 MCAL/DIO/src/DIO_program.o
 
 OBJS_AS_ARGS +=  \
 HAL/KPD/src/KeyPad_program.o \
 HAL/LCD/src/LCD_PROGRAM.o \
+LED_program.o \
 main.o \
 MCAL/DIO/src/DIO_program.o
 
 C_DEPS +=  \
 HAL/KPD/src/KeyPad_program.d \
 HAL/LCD/src/LCD_PROGRAM.d \
+LED_program.d \
 main.d \
 MCAL/DIO/src/DIO_program.d
 
 C_DEPS_AS_ARGS +=  \
 HAL/KPD/src/KeyPad_program.d \
 HAL/LCD/src/LCD_PROGRAM.d \
+LED_program.d \
 main.d \
 MCAL/DIO/src/DIO_program.d
 
@@ -107,6 +112,13 @@ HAL/KPD/src/KeyPad_program.o: ../HAL/KPD/src/KeyPad_program.c
 	
 
 HAL/LCD/src/LCD_PROGRAM.o: ../HAL/LCD/src/LCD_PROGRAM.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../HAL/KPD/inc" -I"../HAL/LCD/inc" -I"../MCAL/DIO/inc" -I"../UTILES_LIB"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./LED_program.o: .././LED_program.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../HAL/KPD/inc" -I"../HAL/LCD/inc" -I"../MCAL/DIO/inc" -I"../UTILES_LIB"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
