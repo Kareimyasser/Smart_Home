@@ -24,6 +24,7 @@ void	KPD_voidInit(void)
 	DIO_voidSetPinDirection(KPD_C0_Port,KPD_C0_Pin,DIO_PIN_OUTPUT);
 	DIO_voidSetPinDirection(KPD_C1_Port,KPD_C1_Pin,DIO_PIN_OUTPUT);
 	DIO_voidSetPinDirection(KPD_C2_Port,KPD_C2_Pin,DIO_PIN_OUTPUT);
+	// DIO_voidSetPinDirection(KPD_C3_Port,KPD_C3_Pin,DIO_PIN_OUTPUT);
 	
 	
 	//Setting Rows To Input
@@ -56,7 +57,7 @@ void	KPD_voidGetValue(u8* copy_pu8value)
 		
 		*copy_pu8value = KPD_Not_Pressed;
 		//LOOP Columns
-		for (Local_u8ColsCounter=0 ; Local_u8ColsCounter<4 ; Local_u8ColsCounter++)
+		for (Local_u8ColsCounter=0 ; Local_u8ColsCounter<3 ; Local_u8ColsCounter++)
 		{
 			//Activate Each Column
 			DIO_voidSetPinValue(Local_u8ColsPort[Local_u8ColsCounter] , Local_u8ColsPins[Local_u8ColsCounter],DIO_PIN_LOW);

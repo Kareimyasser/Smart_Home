@@ -26,7 +26,7 @@ void LED_voidOn		(u8 copy_u8LedPortId,u8 copy_u8LedPinId,u8 copy_u8LedConnection
 	switch(copy_u8LedConnectionType)
 	{
 	case LED_FORWARD_CONNECTION:
-		DIO_voidSetPinValue    ( copy_u8LedPortId,  copy_u8LedPinId, DIO_PIN_High);
+		DIO_voidSetPinValue    ( copy_u8LedPortId,  copy_u8LedPinId, DIO_PIN_HIGH);
 		break;
 	
 	case LED_REVERSE_CONNECTION:
@@ -43,7 +43,7 @@ void LED_voidOff	(u8 copy_u8LedPortId,u8 copy_u8LedPinId,u8 copy_u8LedConnection
 		break;
 	
 	case LED_REVERSE_CONNECTION	:
-		DIO_voidSetPinValue    ( copy_u8LedPortId,  copy_u8LedPinId, DIO_PIN_High);
+		DIO_voidSetPinValue    ( copy_u8LedPortId,  copy_u8LedPinId, DIO_PIN_HIGH);
 		break;
 	}
 }

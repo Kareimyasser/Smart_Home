@@ -24,6 +24,7 @@
 
 int main(void)
 {
+	LED_voidInit(DIO_PORTA,DIO_PIN0);
     LCD_voidInit();
 	KPD_voidInit();
 	LCD_voidDisplayStringDelay((u8*)" Welcome to your");
@@ -34,12 +35,14 @@ int main(void)
 	LCD_voidDisplayString((u8*)"1-AC 2-light");
 	LCD_voidSendCommand(Write_SecondLine);
 	LCD_voidDisplayString((u8*)"3-temperature");
+	LED_voidOff(DIO_PORTA,DIO_PIN0,LED_FORWARD_CONNECTION);
+	_delay_ms(1000);
 	
 	
 	u8	Local_copyKPDValue;
 	u8	local_lightNum=KPD_Not_Pressed;
 	u8 local_lightStatus=KPD_Not_Pressed;
-	u8 led_status;
+	u8 led_status =0;
 	
     while (1) 
     {
@@ -72,7 +75,7 @@ int main(void)
 											if (local_lightNum=='1')
 					
 					{
-						DIO_voidGetPinValue(DIO_PORTA,DIO_PIN0,led_status);
+						DIO_voidGetPinValue(DIO_PORTA,DIO_PIN0,&led_status);
 						LCD_voidClear();
 						if (led_status ==1)
 						{
@@ -85,9 +88,9 @@ int main(void)
 							}
 								if (local_lightStatus=='1')
 								{
-								DIO_voidSetPinValue(DIO_PORTA,DIO_PIN0,DIO_PIN_LOW);
+								LED_voidOff(DIO_PORTA,DIO_PIN0,LED_REVERSE_CONNECTION);
 								}
-							
+							local_lightStatus=KPD_Not_Pressed;
 							
 						}
 						else if (led_status ==0)
@@ -101,8 +104,9 @@ int main(void)
 							}
 							if (local_lightStatus=='1')
 								{
-									DIO_voidSetPinValue(DIO_PORTA,DIO_PIN0,DIO_PIN_HIGH);
+									LED_voidToggle(DIO_PORTA,DIO_PIN0);
 								}
+							local_lightStatus=KPD_Not_Pressed;
 							
 						}
 						
