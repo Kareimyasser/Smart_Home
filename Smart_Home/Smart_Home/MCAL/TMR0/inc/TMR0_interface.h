@@ -18,5 +18,6 @@ void TMR0_voidStart					(void);
 void TMR0_voidStop					(void);
 void TMR0_SetCallBackOVF			(void (*copy_pFunAction)(void));
 void TMR0_SetCallBackCTC			(void (*copy_pFunAction)(void));
+void TMR0_IDLE(u8* copy_pu8value,void (*copy_pFunAction)(void));
 void TMR0_voidSetDelay_ms_UsingCTC	(u16 copy_u16Delay_ms);
 #endif /* TMR0_INTERFACE_H_ */

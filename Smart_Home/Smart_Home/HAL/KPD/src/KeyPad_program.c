@@ -45,12 +45,12 @@ void	KPD_voidGetValue(u8* copy_pu8value)
 {
 	if (copy_pu8value != NULL)
 	{
-		u8	Local_u8ColsPort[4]={KPD_C0_Port,KPD_C1_Port,KPD_C2_Port};
-		u8	Local_u8ColsPins[4]={KPD_C0_Pin,KPD_C1_Pin,KPD_C2_Pin};
+		u8	Local_u8ColsPort[3]={KPD_C0_Port,KPD_C1_Port,KPD_C2_Port};
+		u8	Local_u8ColsPins[3]={KPD_C0_Pin,KPD_C1_Pin,KPD_C2_Pin};
 									 
 		u8	Local_u8RowsPort[4]={KPD_R0_Port,KPD_R1_Port,KPD_R2_Port,KPD_R3_Port};
 		u8	Local_u8RowsPins[4]={KPD_R0_Pin,KPD_R1_Pin,KPD_R2_Pin,KPD_R3_Pin};
-		u8	Local_Keys[4][4]   =KPD_Keys;
+		u8	Local_Keys[4][3]   =KPD_Keys;
 		
 		u8	Local_u8ColsCounter,Local_u8RowsCounter;
 		u8	Local_u8RowValue;

@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "keypad_config.h": "c",
+        "std_types.h": "c",
+        "gi_register.h": "c",
+        "gi_interface.h": "c",
+        "led_interface.h": "c"
+    }
+}

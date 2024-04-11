@@ -12,3 +12,7 @@ main.c
 
 MCAL\DIO\src\DIO_program.c
 
+MCAL\GI\src\GI_program.c
+
+MCAL\TMR0\src\TMR0_program.c
+

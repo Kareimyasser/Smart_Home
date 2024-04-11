@@ -97,6 +97,41 @@ void TMR0_SetCallBackCTC(void (*copy_pFunAction)(void))
 	}
 }
 
+void TMR0_IDLE(u8* copy_pu8value,void (*copy_pFunAction)(void))
+{
+// 	if(copy_pFunAction != NULL)
+// 	{
+		
+// 		PRV_pFunCallBackCTC=copy_pFunAction;
+// 	}
+// 	else
+// 	{
+// 		//error state
+// 	}
+// 	// local_u16Counter++;
+	
+// 	// if(local_u16Counter==TMR0_CTC_COUNTER)
+// 	// {
+		
+// 	// 	/*CLR counter*/
+// 	// 	local_u16Counter=0;
+		
+// 	// 	if(PRV_pFunCallBackCTC != NULL)
+// 	// 	{
+// 	// 		/*execute action*/
+// 	// 		PRV_pFunCallBackCTC();
+			
+// 	// 	}
+// 	// 	else
+// 	// 	{
+// 	// 			//error state
+// 	// 	}
+
+	
+// 	// }
+// }
+}
+
 
 void __vector_11(void)__attribute__((signal));
 void __vector_11(void)
