@@ -64,17 +64,16 @@ int main(void)
 }
 KPD_Interface()
 	{
-    while (1) 
-		{
+		
 			TMR0_SetCallBackCTC(&LCD_DisplayTemp);
 			TMR0_voidStart();
+			
 			//busy wait for KPD
 			while (Local_copyKPDValue== KPD_Not_Pressed)
 			{
 			KPD_voidGetValue(&Local_copyKPDValue);
 			}
 			TMR0_voidStop();
-				
 				switch (Local_copyKPDValue)
 				{
 					case ('1'):
@@ -346,7 +345,7 @@ KPD_Interface()
 				}
 
 			
-		}
+		
 	}
 
 void WelcomeScreen()
@@ -364,6 +363,8 @@ void HomeScreen()
 	LCD_voidDisplayString((u8*)"1-AC 2-light");
 	LCD_voidSendCommand(Write_SecondLine);
 	LCD_voidDisplayString((u8*)"3-temperature");
+	Reset_AllKPDValues();
+	TMR0clear_flag();
 	KPD_Interface();
 	
 }
@@ -381,6 +382,8 @@ void LCD_DisplayTemp()
 		do {
 		KPD_voidGetValue(&local_KPDIdleValue);
 	} while (local_KPDIdleValue != '0');
+	TMR0clear_flag();
+	TMR0_voidStop();
 	HomeScreen();
 
 	

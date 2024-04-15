@@ -19,6 +19,8 @@
 static void(*PRV_pFunCallBackOVF)(void) = NULL;
 static void(*PRV_pFunCallBackCTC)(void) = NULL;
 
+static u16 local_u16Counter=0;
+
 void TMR0_voidInit(void)
 {
 
@@ -62,6 +64,8 @@ void TMR0_voidStart(void)
 	SET_BIT(TCCR0_REG,CS00);
 	SET_BIT(TCCR0_REG,CS01);
 	CLR_BIT(TCCR0_REG,CS02);
+	// TIMSK_REG |= (1 << OCIE0);
+	local_u16Counter=0;
 }
 void TMR0_voidStop(void)
 {
@@ -69,6 +73,7 @@ void TMR0_voidStop(void)
 	CLR_BIT(TCCR0_REG,CS00);
 	CLR_BIT(TCCR0_REG,CS01);
 	CLR_BIT(TCCR0_REG,CS02);
+	// TIMSK_REG &= ~(1 << OCIE0);
 }
 
 void TMR0_SetCallBackOVF(void (*copy_pFunAction)(void))
@@ -97,46 +102,20 @@ void TMR0_SetCallBackCTC(void (*copy_pFunAction)(void))
 	}
 }
 
-void TMR0_IDLE(u8* copy_pu8value,void (*copy_pFunAction)(void))
+void TMR0clear_flag(void)
 {
-// 	if(copy_pFunAction != NULL)
-// 	{
-		
-// 		PRV_pFunCallBackCTC=copy_pFunAction;
-// 	}
-// 	else
-// 	{
-// 		//error state
-// 	}
-// 	// local_u16Counter++;
-	
-// 	// if(local_u16Counter==TMR0_CTC_COUNTER)
-// 	// {
-		
-// 	// 	/*CLR counter*/
-// 	// 	local_u16Counter=0;
-		
-// 	// 	if(PRV_pFunCallBackCTC != NULL)
-// 	// 	{
-// 	// 		/*execute action*/
-// 	// 		PRV_pFunCallBackCTC();
-			
-// 	// 	}
-// 	// 	else
-// 	// 	{
-// 	// 			//error state
-// 	// 	}
-
-	
-// 	// }
-// }
+	// SET_BIT(TIFR_REG,OCF0);
+	TIFR_REG |= (1 << OCF0); 
+	SET_BIT(TIFR_REG,TOV0);
 }
+
+
 
 
 void __vector_11(void)__attribute__((signal));
 void __vector_11(void)
 {
-	static u16 local_u16Counter=0;
+	
 	
 	local_u16Counter++;
 	
@@ -164,7 +143,7 @@ void __vector_10(void)__attribute__((signal));
 void __vector_10(void)
 {
 	
-	static u16 local_u16Counter=0;
+
 	
 	local_u16Counter++;
 	
@@ -178,6 +157,7 @@ void __vector_10(void)
 		{
 			/*execute action*/
 			PRV_pFunCallBackCTC();
+			TMR0clear_flag();
 		}
 		else
 		{
