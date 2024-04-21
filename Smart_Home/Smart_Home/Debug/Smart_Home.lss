@@ -3,31 +3,31 @@ Smart_Home.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000f06  00000000  00000000  00000094  2**1
+  0 .text         00000f2c  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         0000018e  00800060  00000f06  00000f9a  2**0
+  1 .data         0000018e  00800060  00000f2c  00000fc0  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000007  008001ee  008001ee  00001128  2**0
+  2 .bss          00000007  008001ee  008001ee  0000114e  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00001128  2**0
+  3 .comment      00000030  00000000  00000000  0000114e  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00001158  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00001180  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000001d8  00000000  00000000  00001194  2**0
+  5 .debug_aranges 000001d0  00000000  00000000  000011bc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00002a6f  00000000  00000000  0000136c  2**0
+  6 .debug_info   00002ade  00000000  00000000  0000138c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000b45  00000000  00000000  00003ddb  2**0
+  7 .debug_abbrev 00000b24  00000000  00000000  00003e6a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   0000148d  00000000  00000000  00004920  2**0
+  8 .debug_line   00001488  00000000  00000000  0000498e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  0000043c  00000000  00000000  00005db0  2**2
+  9 .debug_frame  0000041c  00000000  00000000  00005e18  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000008f6  00000000  00000000  000061ec  2**0
+ 10 .debug_str    000008eb  00000000  00000000  00006234  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000011a7  00000000  00000000  00006ae2  2**0
+ 11 .debug_loc    000011ef  00000000  00000000  00006b1f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000198  00000000  00000000  00007c89  2**0
+ 12 .debug_ranges 00000190  00000000  00000000  00007d0e  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -43,8 +43,8 @@ Disassembly of section .text:
   1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-  28:	0c 94 46 07 	jmp	0xe8c	; 0xe8c <__vector_10>
-  2c:	0c 94 0b 07 	jmp	0xe16	; 0xe16 <__vector_11>
+  28:	0c 94 59 07 	jmp	0xeb2	; 0xeb2 <__vector_10>
+  2c:	0c 94 1e 07 	jmp	0xe3c	; 0xe3c <__vector_11>
   30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
@@ -67,7 +67,7 @@ Disassembly of section .text:
   60:	11 e0       	ldi	r17, 0x01	; 1
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	e6 e0       	ldi	r30, 0x06	; 6
+  66:	ec e2       	ldi	r30, 0x2C	; 44
   68:	ff e0       	ldi	r31, 0x0F	; 15
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
@@ -89,8 +89,8 @@ Disassembly of section .text:
   80:	a5 3f       	cpi	r26, 0xF5	; 245
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
-  86:	0e 94 14 05 	call	0xa28	; 0xa28 <main>
-  8a:	0c 94 81 07 	jmp	0xf02	; 0xf02 <_exit>
+  86:	0e 94 4f 05 	call	0xa9e	; 0xa9e <main>
+  8a:	0c 94 94 07 	jmp	0xf28	; 0xf28 <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -105,17 +105,17 @@ void	KPD_voidInit(void)
   92:	41 e0       	ldi	r20, 0x01	; 1
   94:	64 e0       	ldi	r22, 0x04	; 4
   96:	81 e0       	ldi	r24, 0x01	; 1
-  98:	0e 94 5c 05 	call	0xab8	; 0xab8 <DIO_voidSetPinDirection>
+  98:	0e 94 6f 05 	call	0xade	; 0xade <DIO_voidSetPinDirection>
 	DIO_voidSetPinDirection(KPD_C1_Port,KPD_C1_Pin,DIO_PIN_OUTPUT);
   9c:	41 e0       	ldi	r20, 0x01	; 1
   9e:	65 e0       	ldi	r22, 0x05	; 5
   a0:	81 e0       	ldi	r24, 0x01	; 1
-  a2:	0e 94 5c 05 	call	0xab8	; 0xab8 <DIO_voidSetPinDirection>
+  a2:	0e 94 6f 05 	call	0xade	; 0xade <DIO_voidSetPinDirection>
 	DIO_voidSetPinDirection(KPD_C2_Port,KPD_C2_Pin,DIO_PIN_OUTPUT);
   a6:	41 e0       	ldi	r20, 0x01	; 1
   a8:	66 e0       	ldi	r22, 0x06	; 6
   aa:	81 e0       	ldi	r24, 0x01	; 1
-  ac:	0e 94 5c 05 	call	0xab8	; 0xab8 <DIO_voidSetPinDirection>
+  ac:	0e 94 6f 05 	call	0xade	; 0xade <DIO_voidSetPinDirection>
 	// DIO_voidSetPinDirection(KPD_C3_Port,KPD_C3_Pin,DIO_PIN_OUTPUT);
 	
 	
@@ -124,40 +124,40 @@ void	KPD_voidInit(void)
   b0:	40 e0       	ldi	r20, 0x00	; 0
   b2:	63 e0       	ldi	r22, 0x03	; 3
   b4:	82 e0       	ldi	r24, 0x02	; 2
-  b6:	0e 94 5c 05 	call	0xab8	; 0xab8 <DIO_voidSetPinDirection>
+  b6:	0e 94 6f 05 	call	0xade	; 0xade <DIO_voidSetPinDirection>
 	DIO_voidSetPinDirection(KPD_R1_Port,KPD_R1_Pin,DIO_PIN_INPUT);
   ba:	40 e0       	ldi	r20, 0x00	; 0
   bc:	64 e0       	ldi	r22, 0x04	; 4
   be:	82 e0       	ldi	r24, 0x02	; 2
-  c0:	0e 94 5c 05 	call	0xab8	; 0xab8 <DIO_voidSetPinDirection>
+  c0:	0e 94 6f 05 	call	0xade	; 0xade <DIO_voidSetPinDirection>
 	DIO_voidSetPinDirection(KPD_R2_Port,KPD_R2_Pin,DIO_PIN_INPUT);
   c4:	40 e0       	ldi	r20, 0x00	; 0
   c6:	65 e0       	ldi	r22, 0x05	; 5
   c8:	82 e0       	ldi	r24, 0x02	; 2
-  ca:	0e 94 5c 05 	call	0xab8	; 0xab8 <DIO_voidSetPinDirection>
+  ca:	0e 94 6f 05 	call	0xade	; 0xade <DIO_voidSetPinDirection>
 	DIO_voidSetPinDirection(KPD_R3_Port,KPD_R3_Pin,DIO_PIN_INPUT);
   ce:	40 e0       	ldi	r20, 0x00	; 0
   d0:	66 e0       	ldi	r22, 0x06	; 6
   d2:	82 e0       	ldi	r24, 0x02	; 2
-  d4:	0e 94 5c 05 	call	0xab8	; 0xab8 <DIO_voidSetPinDirection>
+  d4:	0e 94 6f 05 	call	0xade	; 0xade <DIO_voidSetPinDirection>
 	
 	//Setting Rows For Pull UP
 	DIO_voidActivePinInPullUpResistance(KPD_R0_Port,KPD_R0_Pin);
   d8:	63 e0       	ldi	r22, 0x03	; 3
   da:	82 e0       	ldi	r24, 0x02	; 2
-  dc:	0e 94 97 06 	call	0xd2e	; 0xd2e <DIO_voidActivePinInPullUpResistance>
+  dc:	0e 94 aa 06 	call	0xd54	; 0xd54 <DIO_voidActivePinInPullUpResistance>
 	DIO_voidActivePinInPullUpResistance(KPD_R1_Port,KPD_R1_Pin);
   e0:	64 e0       	ldi	r22, 0x04	; 4
   e2:	82 e0       	ldi	r24, 0x02	; 2
-  e4:	0e 94 97 06 	call	0xd2e	; 0xd2e <DIO_voidActivePinInPullUpResistance>
+  e4:	0e 94 aa 06 	call	0xd54	; 0xd54 <DIO_voidActivePinInPullUpResistance>
 	DIO_voidActivePinInPullUpResistance(KPD_R2_Port,KPD_R2_Pin);
   e8:	65 e0       	ldi	r22, 0x05	; 5
   ea:	82 e0       	ldi	r24, 0x02	; 2
-  ec:	0e 94 97 06 	call	0xd2e	; 0xd2e <DIO_voidActivePinInPullUpResistance>
+  ec:	0e 94 aa 06 	call	0xd54	; 0xd54 <DIO_voidActivePinInPullUpResistance>
 	DIO_voidActivePinInPullUpResistance(KPD_R3_Port,KPD_R3_Pin);
   f0:	66 e0       	ldi	r22, 0x06	; 6
   f2:	82 e0       	ldi	r24, 0x02	; 2
-  f4:	0e 94 97 06 	call	0xd2e	; 0xd2e <DIO_voidActivePinInPullUpResistance>
+  f4:	0e 94 aa 06 	call	0xd54	; 0xd54 <DIO_voidActivePinInPullUpResistance>
   f8:	08 95       	ret
 
 000000fa <KPD_voidGetValue>:
@@ -221,7 +221,7 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  154:	98 8b       	std	Y+16, r25	; 0x10
 		u8	Local_Keys[4][3]   =KPD_Keys;
  156:	8c e0       	ldi	r24, 0x0C	; 12
- 158:	e3 e6       	ldi	r30, 0x63	; 99
+ 158:	e4 e6       	ldi	r30, 0x64	; 100
  15a:	f0 e0       	ldi	r31, 0x00	; 0
  15c:	de 01       	movw	r26, r28
  15e:	11 96       	adiw	r26, 0x01	; 1
@@ -263,7 +263,7 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  192:	40 e0       	ldi	r20, 0x00	; 0
  194:	66 2d       	mov	r22, r6
  196:	87 2d       	mov	r24, r7
- 198:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 198:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
 			
 			//LOOP Rows
 			for(Local_u8RowsCounter=0 ; Local_u8RowsCounter<4 ; Local_u8RowsCounter++)
@@ -293,7 +293,7 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  1c4:	5f 4f       	sbci	r21, 0xFF	; 255
  1c6:	60 2f       	mov	r22, r16
  1c8:	89 2d       	mov	r24, r9
- 1ca:	0e 94 5c 06 	call	0xcb8	; 0xcb8 <DIO_voidGetPinValue>
+ 1ca:	0e 94 6f 06 	call	0xcde	; 0xcde <DIO_voidGetPinValue>
 				
 				// Is Pressed ?
 				if (0==Local_u8RowValue)
@@ -311,7 +311,7 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  1da:	5f 4f       	sbci	r21, 0xFF	; 255
  1dc:	60 2f       	mov	r22, r16
  1de:	89 2d       	mov	r24, r9
- 1e0:	0e 94 5c 06 	call	0xcb8	; 0xcb8 <DIO_voidGetPinValue>
+ 1e0:	0e 94 6f 06 	call	0xcde	; 0xcde <DIO_voidGetPinValue>
 				
 				// Is Pressed ?
 				if (0==Local_u8RowValue)
@@ -362,7 +362,7 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  214:	41 e0       	ldi	r20, 0x01	; 1
  216:	66 2d       	mov	r22, r6
  218:	87 2d       	mov	r24, r7
- 21a:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 21a:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
 		u8	Local_u8ColsCounter,Local_u8RowsCounter;
 		u8	Local_u8RowValue;
 		
@@ -416,45 +416,45 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  25a:	41 e0       	ldi	r20, 0x01	; 1
  25c:	64 e0       	ldi	r22, 0x04	; 4
  25e:	80 e0       	ldi	r24, 0x00	; 0
- 260:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 260:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  264:	05 c0       	rjmp	.+10     	; 0x270 <PRV_voidWriteHalfPort+0x1e>
  266:	40 e0       	ldi	r20, 0x00	; 0
  268:	64 e0       	ldi	r22, 0x04	; 4
  26a:	80 e0       	ldi	r24, 0x00	; 0
- 26c:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 26c:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  270:	c1 ff       	sbrs	r28, 1
  272:	06 c0       	rjmp	.+12     	; 0x280 <PRV_voidWriteHalfPort+0x2e>
  274:	41 e0       	ldi	r20, 0x01	; 1
  276:	65 e0       	ldi	r22, 0x05	; 5
  278:	80 e0       	ldi	r24, 0x00	; 0
- 27a:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 27a:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  27e:	05 c0       	rjmp	.+10     	; 0x28a <PRV_voidWriteHalfPort+0x38>
  280:	40 e0       	ldi	r20, 0x00	; 0
  282:	65 e0       	ldi	r22, 0x05	; 5
  284:	80 e0       	ldi	r24, 0x00	; 0
- 286:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 286:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  28a:	c2 ff       	sbrs	r28, 2
  28c:	06 c0       	rjmp	.+12     	; 0x29a <PRV_voidWriteHalfPort+0x48>
  28e:	41 e0       	ldi	r20, 0x01	; 1
  290:	66 e0       	ldi	r22, 0x06	; 6
  292:	80 e0       	ldi	r24, 0x00	; 0
- 294:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 294:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  298:	05 c0       	rjmp	.+10     	; 0x2a4 <PRV_voidWriteHalfPort+0x52>
  29a:	40 e0       	ldi	r20, 0x00	; 0
  29c:	66 e0       	ldi	r22, 0x06	; 6
  29e:	80 e0       	ldi	r24, 0x00	; 0
- 2a0:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 2a0:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  2a4:	c3 ff       	sbrs	r28, 3
  2a6:	06 c0       	rjmp	.+12     	; 0x2b4 <PRV_voidWriteHalfPort+0x62>
  2a8:	41 e0       	ldi	r20, 0x01	; 1
  2aa:	67 e0       	ldi	r22, 0x07	; 7
  2ac:	80 e0       	ldi	r24, 0x00	; 0
- 2ae:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 2ae:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  2b2:	05 c0       	rjmp	.+10     	; 0x2be <PRV_voidWriteHalfPort+0x6c>
  2b4:	40 e0       	ldi	r20, 0x00	; 0
  2b6:	67 e0       	ldi	r22, 0x07	; 7
  2b8:	80 e0       	ldi	r24, 0x00	; 0
- 2ba:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 2ba:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  2be:	cf 91       	pop	r28
  2c0:	08 95       	ret
 
@@ -464,11 +464,11 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  2c6:	40 e0       	ldi	r20, 0x00	; 0
  2c8:	61 e0       	ldi	r22, 0x01	; 1
  2ca:	81 e0       	ldi	r24, 0x01	; 1
- 2cc:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 2cc:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  2d0:	40 e0       	ldi	r20, 0x00	; 0
  2d2:	62 e0       	ldi	r22, 0x02	; 2
  2d4:	81 e0       	ldi	r24, 0x01	; 1
- 2d6:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 2d6:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  2da:	8c 2f       	mov	r24, r28
  2dc:	82 95       	swap	r24
  2de:	8f 70       	andi	r24, 0x0F	; 15
@@ -476,7 +476,7 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  2e4:	41 e0       	ldi	r20, 0x01	; 1
  2e6:	63 e0       	ldi	r22, 0x03	; 3
  2e8:	81 e0       	ldi	r24, 0x01	; 1
- 2ea:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 2ea:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  2ee:	8f e9       	ldi	r24, 0x9F	; 159
  2f0:	9f e0       	ldi	r25, 0x0F	; 15
  2f2:	01 97       	sbiw	r24, 0x01	; 1
@@ -486,13 +486,13 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  2fa:	40 e0       	ldi	r20, 0x00	; 0
  2fc:	63 e0       	ldi	r22, 0x03	; 3
  2fe:	81 e0       	ldi	r24, 0x01	; 1
- 300:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 300:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  304:	8c 2f       	mov	r24, r28
  306:	0e 94 29 01 	call	0x252	; 0x252 <PRV_voidWriteHalfPort>
  30a:	41 e0       	ldi	r20, 0x01	; 1
  30c:	63 e0       	ldi	r22, 0x03	; 3
  30e:	81 e0       	ldi	r24, 0x01	; 1
- 310:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 310:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  314:	8f e9       	ldi	r24, 0x9F	; 159
  316:	9f e0       	ldi	r25, 0x0F	; 15
  318:	01 97       	sbiw	r24, 0x01	; 1
@@ -502,7 +502,7 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  320:	40 e0       	ldi	r20, 0x00	; 0
  322:	63 e0       	ldi	r22, 0x03	; 3
  324:	81 e0       	ldi	r24, 0x01	; 1
- 326:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 326:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  32a:	cf 91       	pop	r28
  32c:	08 95       	ret
 
@@ -510,31 +510,31 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  32e:	41 e0       	ldi	r20, 0x01	; 1
  330:	61 e0       	ldi	r22, 0x01	; 1
  332:	81 e0       	ldi	r24, 0x01	; 1
- 334:	0e 94 5c 05 	call	0xab8	; 0xab8 <DIO_voidSetPinDirection>
+ 334:	0e 94 6f 05 	call	0xade	; 0xade <DIO_voidSetPinDirection>
  338:	41 e0       	ldi	r20, 0x01	; 1
  33a:	62 e0       	ldi	r22, 0x02	; 2
  33c:	81 e0       	ldi	r24, 0x01	; 1
- 33e:	0e 94 5c 05 	call	0xab8	; 0xab8 <DIO_voidSetPinDirection>
+ 33e:	0e 94 6f 05 	call	0xade	; 0xade <DIO_voidSetPinDirection>
  342:	41 e0       	ldi	r20, 0x01	; 1
  344:	63 e0       	ldi	r22, 0x03	; 3
  346:	81 e0       	ldi	r24, 0x01	; 1
- 348:	0e 94 5c 05 	call	0xab8	; 0xab8 <DIO_voidSetPinDirection>
+ 348:	0e 94 6f 05 	call	0xade	; 0xade <DIO_voidSetPinDirection>
  34c:	41 e0       	ldi	r20, 0x01	; 1
  34e:	64 e0       	ldi	r22, 0x04	; 4
  350:	80 e0       	ldi	r24, 0x00	; 0
- 352:	0e 94 5c 05 	call	0xab8	; 0xab8 <DIO_voidSetPinDirection>
+ 352:	0e 94 6f 05 	call	0xade	; 0xade <DIO_voidSetPinDirection>
  356:	41 e0       	ldi	r20, 0x01	; 1
  358:	65 e0       	ldi	r22, 0x05	; 5
  35a:	80 e0       	ldi	r24, 0x00	; 0
- 35c:	0e 94 5c 05 	call	0xab8	; 0xab8 <DIO_voidSetPinDirection>
+ 35c:	0e 94 6f 05 	call	0xade	; 0xade <DIO_voidSetPinDirection>
  360:	41 e0       	ldi	r20, 0x01	; 1
  362:	66 e0       	ldi	r22, 0x06	; 6
  364:	80 e0       	ldi	r24, 0x00	; 0
- 366:	0e 94 5c 05 	call	0xab8	; 0xab8 <DIO_voidSetPinDirection>
+ 366:	0e 94 6f 05 	call	0xade	; 0xade <DIO_voidSetPinDirection>
  36a:	41 e0       	ldi	r20, 0x01	; 1
  36c:	67 e0       	ldi	r22, 0x07	; 7
  36e:	80 e0       	ldi	r24, 0x00	; 0
- 370:	0e 94 5c 05 	call	0xab8	; 0xab8 <DIO_voidSetPinDirection>
+ 370:	0e 94 6f 05 	call	0xade	; 0xade <DIO_voidSetPinDirection>
  374:	2f e7       	ldi	r18, 0x7F	; 127
  376:	85 eb       	ldi	r24, 0xB5	; 181
  378:	91 e0       	ldi	r25, 0x01	; 1
@@ -547,17 +547,17 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  386:	40 e0       	ldi	r20, 0x00	; 0
  388:	61 e0       	ldi	r22, 0x01	; 1
  38a:	81 e0       	ldi	r24, 0x01	; 1
- 38c:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 38c:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  390:	40 e0       	ldi	r20, 0x00	; 0
  392:	62 e0       	ldi	r22, 0x02	; 2
  394:	81 e0       	ldi	r24, 0x01	; 1
- 396:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 396:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  39a:	82 e0       	ldi	r24, 0x02	; 2
  39c:	0e 94 29 01 	call	0x252	; 0x252 <PRV_voidWriteHalfPort>
  3a0:	41 e0       	ldi	r20, 0x01	; 1
  3a2:	63 e0       	ldi	r22, 0x03	; 3
  3a4:	81 e0       	ldi	r24, 0x01	; 1
- 3a6:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 3a6:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  3aa:	8f e9       	ldi	r24, 0x9F	; 159
  3ac:	9f e0       	ldi	r25, 0x0F	; 15
  3ae:	01 97       	sbiw	r24, 0x01	; 1
@@ -567,7 +567,7 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  3b6:	40 e0       	ldi	r20, 0x00	; 0
  3b8:	63 e0       	ldi	r22, 0x03	; 3
  3ba:	81 e0       	ldi	r24, 0x01	; 1
- 3bc:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 3bc:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  3c0:	88 e2       	ldi	r24, 0x28	; 40
  3c2:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
  3c6:	90 ef       	ldi	r25, 0xF0	; 240
@@ -596,11 +596,11 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  3f6:	41 e0       	ldi	r20, 0x01	; 1
  3f8:	61 e0       	ldi	r22, 0x01	; 1
  3fa:	81 e0       	ldi	r24, 0x01	; 1
- 3fc:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 3fc:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  400:	40 e0       	ldi	r20, 0x00	; 0
  402:	62 e0       	ldi	r22, 0x02	; 2
  404:	81 e0       	ldi	r24, 0x01	; 1
- 406:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 406:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  40a:	8c 2f       	mov	r24, r28
  40c:	82 95       	swap	r24
  40e:	8f 70       	andi	r24, 0x0F	; 15
@@ -608,7 +608,7 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  414:	41 e0       	ldi	r20, 0x01	; 1
  416:	63 e0       	ldi	r22, 0x03	; 3
  418:	81 e0       	ldi	r24, 0x01	; 1
- 41a:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 41a:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  41e:	8f e9       	ldi	r24, 0x9F	; 159
  420:	9f e0       	ldi	r25, 0x0F	; 15
  422:	01 97       	sbiw	r24, 0x01	; 1
@@ -618,13 +618,13 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  42a:	40 e0       	ldi	r20, 0x00	; 0
  42c:	63 e0       	ldi	r22, 0x03	; 3
  42e:	81 e0       	ldi	r24, 0x01	; 1
- 430:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 430:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  434:	8c 2f       	mov	r24, r28
  436:	0e 94 29 01 	call	0x252	; 0x252 <PRV_voidWriteHalfPort>
  43a:	41 e0       	ldi	r20, 0x01	; 1
  43c:	63 e0       	ldi	r22, 0x03	; 3
  43e:	81 e0       	ldi	r24, 0x01	; 1
- 440:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 440:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  444:	8f e9       	ldi	r24, 0x9F	; 159
  446:	9f e0       	ldi	r25, 0x0F	; 15
  448:	01 97       	sbiw	r24, 0x01	; 1
@@ -634,7 +634,7 @@ void	KPD_voidGetValue(u8* copy_pu8value)
  450:	40 e0       	ldi	r20, 0x00	; 0
  452:	63 e0       	ldi	r22, 0x03	; 3
  454:	81 e0       	ldi	r24, 0x01	; 1
- 456:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 456:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  45a:	cf 91       	pop	r28
  45c:	08 95       	ret
 
@@ -703,14 +703,14 @@ void	LCD_voidClear (void)
  4c8:	40 e0       	ldi	r20, 0x00	; 0
  4ca:	61 e0       	ldi	r22, 0x01	; 1
  4cc:	81 e0       	ldi	r24, 0x01	; 1
- 4ce:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 4ce:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
 	
 	//set RW pin = 0	(write)
 	DIO_voidSetPinValue(LCD_RW_PORT,LCD_RW_PIN,DIO_PIN_LOW);
  4d2:	40 e0       	ldi	r20, 0x00	; 0
  4d4:	62 e0       	ldi	r22, 0x02	; 2
  4d6:	81 e0       	ldi	r24, 0x01	; 1
- 4d8:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 4d8:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
 	
 	//Write The Most 4 Bits Of command On Data Pins
 	PRV_voidWriteHalfPort(0b0000>>4);
@@ -722,7 +722,7 @@ void	LCD_voidClear (void)
  4e2:	41 e0       	ldi	r20, 0x01	; 1
  4e4:	63 e0       	ldi	r22, 0x03	; 3
  4e6:	81 e0       	ldi	r24, 0x01	; 1
- 4e8:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 4e8:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
@@ -740,7 +740,7 @@ void	LCD_voidClear (void)
  4f8:	40 e0       	ldi	r20, 0x00	; 0
  4fa:	63 e0       	ldi	r22, 0x03	; 3
  4fc:	81 e0       	ldi	r24, 0x01	; 1
- 4fe:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 4fe:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
 	
 	//Write The Least 4 Bits Of Command On Data Pins
 	PRV_voidWriteHalfPort(0b0001);
@@ -752,7 +752,7 @@ void	LCD_voidClear (void)
  508:	41 e0       	ldi	r20, 0x01	; 1
  50a:	63 e0       	ldi	r22, 0x03	; 3
  50c:	81 e0       	ldi	r24, 0x01	; 1
- 50e:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 50e:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  512:	8f e9       	ldi	r24, 0x9F	; 159
  514:	9f e0       	ldi	r25, 0x0F	; 15
  516:	01 97       	sbiw	r24, 0x01	; 1
@@ -764,7 +764,7 @@ void	LCD_voidClear (void)
  51e:	40 e0       	ldi	r20, 0x00	; 0
  520:	63 e0       	ldi	r22, 0x03	; 3
  522:	81 e0       	ldi	r24, 0x01	; 1
- 524:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 524:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  528:	08 95       	ret
 
 0000052a <LED_voidInit>:
@@ -775,7 +775,7 @@ void LED_voidInit	(u8 copy_u8LedPortId,u8 copy_u8LedPinId)
 {
 	DIO_voidSetPinDirection( copy_u8LedPortId,  copy_u8LedPinId, DIO_PIN_OUTPUT);
  52a:	41 e0       	ldi	r20, 0x01	; 1
- 52c:	0e 94 5c 05 	call	0xab8	; 0xab8 <DIO_voidSetPinDirection>
+ 52c:	0e 94 6f 05 	call	0xade	; 0xade <DIO_voidSetPinDirection>
  530:	08 95       	ret
 
 00000532 <LED_voidOn>:
@@ -794,14 +794,14 @@ void LED_voidOn		(u8 copy_u8LedPortId,u8 copy_u8LedPinId,u8 copy_u8LedConnection
 	case LED_FORWARD_CONNECTION:
 		DIO_voidSetPinValue    ( copy_u8LedPortId,  copy_u8LedPinId, DIO_PIN_HIGH);
  53c:	41 e0       	ldi	r20, 0x01	; 1
- 53e:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 53e:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
 		break;
  542:	08 95       	ret
 	
 	case LED_REVERSE_CONNECTION:
 		DIO_voidSetPinValue    ( copy_u8LedPortId,  copy_u8LedPinId, DIO_PIN_LOW);
  544:	40 e0       	ldi	r20, 0x00	; 0
- 546:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 546:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  54a:	08 95       	ret
 
 0000054c <LED_voidOff>:
@@ -820,1663 +820,1692 @@ void LED_voidOff	(u8 copy_u8LedPortId,u8 copy_u8LedPinId,u8 copy_u8LedConnection
 	case LED_FORWARD_CONNECTION	:
 		DIO_voidSetPinValue    ( copy_u8LedPortId,  copy_u8LedPinId, DIO_PIN_LOW);
  556:	40 e0       	ldi	r20, 0x00	; 0
- 558:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 558:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
 		break;
  55c:	08 95       	ret
 	
 	case LED_REVERSE_CONNECTION	:
 		DIO_voidSetPinValue    ( copy_u8LedPortId,  copy_u8LedPinId, DIO_PIN_HIGH);
  55e:	41 e0       	ldi	r20, 0x01	; 1
- 560:	0e 94 dc 05 	call	0xbb8	; 0xbb8 <DIO_voidSetPinValue>
+ 560:	0e 94 ef 05 	call	0xbde	; 0xbde <DIO_voidSetPinValue>
  564:	08 95       	ret
 
-00000566 <WelcomeScreen>:
-		
+00000566 <LCD_DisplayTemp>:
+void LCD_DisplayTemp()
+{
+	
+	
+	// TMR0_voidStop();
+	 LCD_voidClear();
+ 566:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
+	LCD_voidDisplayStringDelay((u8*)"Temp: 30c");
+ 56a:	89 ec       	ldi	r24, 0xC9	; 201
+ 56c:	90 e0       	ldi	r25, 0x00	; 0
+ 56e:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+	LCD_voidSendCommand(Write_SecondLine);
+ 572:	80 ec       	ldi	r24, 0xC0	; 192
+ 574:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+	LCD_voidDisplayStringDelay((u8*)"0-go to home");
+ 578:	80 e7       	ldi	r24, 0x70	; 112
+ 57a:	90 e0       	ldi	r25, 0x00	; 0
+ 57c:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+		do {
+		KPD_voidGetValue(&local_KPDIdleValue);
+ 580:	80 e6       	ldi	r24, 0x60	; 96
+ 582:	90 e0       	ldi	r25, 0x00	; 0
+ 584:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
+	} while (local_KPDIdleValue != '0');
+ 588:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 58c:	80 33       	cpi	r24, 0x30	; 48
+ 58e:	c1 f7       	brne	.-16     	; 0x580 <LCD_DisplayTemp+0x1a>
+	TMR0_voidStop();
+ 590:	0e 94 06 07 	call	0xe0c	; 0xe0c <TMR0_voidStop>
+	TMR0clear_flag();
+ 594:	0e 94 17 07 	call	0xe2e	; 0xe2e <TMR0clear_flag>
+	LCD_voidClear();
+ 598:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
+ 59c:	08 95       	ret
+
+0000059e <WelcomeScreen>:
+		}					
 	}
 
 void WelcomeScreen()
 {
 	LCD_voidDisplayStringDelay((u8*)" Welcome to your");
- 566:	8f e6       	ldi	r24, 0x6F	; 111
- 568:	90 e0       	ldi	r25, 0x00	; 0
- 56a:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 59e:	8d e7       	ldi	r24, 0x7D	; 125
+ 5a0:	90 e0       	ldi	r25, 0x00	; 0
+ 5a2:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 	LCD_voidSendCommand(Write_SecondLine);
- 56e:	80 ec       	ldi	r24, 0xC0	; 192
- 570:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ 5a6:	80 ec       	ldi	r24, 0xC0	; 192
+ 5a8:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 	LCD_voidDisplayStringDelay((u8*)"   Smart Home");
- 574:	80 e8       	ldi	r24, 0x80	; 128
- 576:	90 e0       	ldi	r25, 0x00	; 0
- 578:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
- 57c:	2f ef       	ldi	r18, 0xFF	; 255
- 57e:	83 ed       	ldi	r24, 0xD3	; 211
- 580:	90 e3       	ldi	r25, 0x30	; 48
- 582:	21 50       	subi	r18, 0x01	; 1
- 584:	80 40       	sbci	r24, 0x00	; 0
- 586:	90 40       	sbci	r25, 0x00	; 0
- 588:	e1 f7       	brne	.-8      	; 0x582 <WelcomeScreen+0x1c>
- 58a:	00 c0       	rjmp	.+0      	; 0x58c <WelcomeScreen+0x26>
- 58c:	00 00       	nop
- 58e:	08 95       	ret
+ 5ac:	8e e8       	ldi	r24, 0x8E	; 142
+ 5ae:	90 e0       	ldi	r25, 0x00	; 0
+ 5b0:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 5b4:	2f ef       	ldi	r18, 0xFF	; 255
+ 5b6:	83 ed       	ldi	r24, 0xD3	; 211
+ 5b8:	90 e3       	ldi	r25, 0x30	; 48
+ 5ba:	21 50       	subi	r18, 0x01	; 1
+ 5bc:	80 40       	sbci	r24, 0x00	; 0
+ 5be:	90 40       	sbci	r25, 0x00	; 0
+ 5c0:	e1 f7       	brne	.-8      	; 0x5ba <WelcomeScreen+0x1c>
+ 5c2:	00 c0       	rjmp	.+0      	; 0x5c4 <WelcomeScreen+0x26>
+ 5c4:	00 00       	nop
+ 5c6:	08 95       	ret
 
-00000590 <Reset_AllKPDValues>:
+000005c8 <Reset_AllKPDValues>:
 	
 }
 
 void Reset_AllKPDValues()
 {
 	Local_copyKPDValue=KPD_Not_Pressed;
- 590:	8f ef       	ldi	r24, 0xFF	; 255
- 592:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <Local_copyKPDValue>
+ 5c8:	8f ef       	ldi	r24, 0xFF	; 255
+ 5ca:	80 93 63 00 	sts	0x0063, r24	; 0x800063 <Local_copyKPDValue>
 	local_lightNum=KPD_Not_Pressed;
- 596:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <local_lightNum>
+ 5ce:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <local_lightNum>
 	local_lightStatus=KPD_Not_Pressed;
- 59a:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
- 59e:	08 95       	ret
+ 5d2:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <local_lightStatus>
+ 5d6:	08 95       	ret
 
-000005a0 <KPD_Interface>:
-	
-}
-KPD_Interface()
+000005d8 <KPD_Interface>:
+void KPD_Interface(void)
 	{
-		
+		while (1)
+		{
+
 			TMR0_SetCallBackCTC(&LCD_DisplayTemp);
- 5a0:	87 e3       	ldi	r24, 0x37	; 55
- 5a2:	95 e0       	ldi	r25, 0x05	; 5
- 5a4:	0e 94 fd 06 	call	0xdfa	; 0xdfa <TMR0_SetCallBackCTC>
+ 5d8:	83 eb       	ldi	r24, 0xB3	; 179
+ 5da:	92 e0       	ldi	r25, 0x02	; 2
+ 5dc:	0e 94 10 07 	call	0xe20	; 0xe20 <TMR0_SetCallBackCTC>
+
 			TMR0_voidStart();
- 5a8:	0e 94 e5 06 	call	0xdca	; 0xdca <TMR0_voidStart>
-			
+ 5e0:	0e 94 f8 06 	call	0xdf0	; 0xdf0 <TMR0_voidStart>
+			LCD_voidClear();
+ 5e4:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
+			LCD_voidDisplayString((u8*)"1-AC 2-light");
+ 5e8:	8c e9       	ldi	r24, 0x9C	; 156
+ 5ea:	90 e0       	ldi	r25, 0x00	; 0
+ 5ec:	0e 94 2f 02 	call	0x45e	; 0x45e <LCD_voidDisplayString>
+			LCD_voidSendCommand(Write_SecondLine);
+ 5f0:	80 ec       	ldi	r24, 0xC0	; 192
+ 5f2:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+			LCD_voidDisplayString((u8*)"3-temperature");
+ 5f6:	89 ea       	ldi	r24, 0xA9	; 169
+ 5f8:	90 e0       	ldi	r25, 0x00	; 0
+ 5fa:	0e 94 2f 02 	call	0x45e	; 0x45e <LCD_voidDisplayString>
+			Reset_AllKPDValues();
+ 5fe:	0e 94 e4 02 	call	0x5c8	; 0x5c8 <Reset_AllKPDValues>
+ 602:	0c c0       	rjmp	.+24     	; 0x61c <KPD_Interface+0x44>
+
+
 			//busy wait for KPD
 			while (Local_copyKPDValue== KPD_Not_Pressed)
- 5ac:	04 c0       	rjmp	.+8      	; 0x5b6 <KPD_Interface+0x16>
 			{
-			KPD_voidGetValue(&Local_copyKPDValue);
- 5ae:	82 e6       	ldi	r24, 0x62	; 98
- 5b0:	90 e0       	ldi	r25, 0x00	; 0
- 5b2:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
-		
-			TMR0_SetCallBackCTC(&LCD_DisplayTemp);
-			TMR0_voidStart();
-			
+				if (local_KPDIdleValue=='0')
+ 604:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 608:	80 33       	cpi	r24, 0x30	; 48
+ 60a:	21 f4       	brne	.+8      	; 0x614 <KPD_Interface+0x3c>
+				{
+					local_KPDIdleValue=KPD_Not_Pressed;
+ 60c:	8f ef       	ldi	r24, 0xFF	; 255
+ 60e:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+					break;
+ 612:	08 c0       	rjmp	.+16     	; 0x624 <KPD_Interface+0x4c>
+				}
+				else
+				{
+					KPD_voidGetValue(&Local_copyKPDValue);
+ 614:	83 e6       	ldi	r24, 0x63	; 99
+ 616:	90 e0       	ldi	r25, 0x00	; 0
+ 618:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
+			LCD_voidDisplayString((u8*)"3-temperature");
+			Reset_AllKPDValues();
+
+
 			//busy wait for KPD
 			while (Local_copyKPDValue== KPD_Not_Pressed)
- 5b6:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <Local_copyKPDValue>
- 5ba:	8f 3f       	cpi	r24, 0xFF	; 255
- 5bc:	c1 f3       	breq	.-16     	; 0x5ae <KPD_Interface+0xe>
-			{
-			KPD_voidGetValue(&Local_copyKPDValue);
+ 61c:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <Local_copyKPDValue>
+ 620:	8f 3f       	cpi	r24, 0xFF	; 255
+ 622:	81 f3       	breq	.-32     	; 0x604 <KPD_Interface+0x2c>
+				{
+					KPD_voidGetValue(&Local_copyKPDValue);
+				}
+				
 			}
 			TMR0_voidStop();
- 5be:	0e 94 f3 06 	call	0xde6	; 0xde6 <TMR0_voidStop>
+ 624:	0e 94 06 07 	call	0xe0c	; 0xe0c <TMR0_voidStop>
 				switch (Local_copyKPDValue)
- 5c2:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <Local_copyKPDValue>
- 5c6:	81 33       	cpi	r24, 0x31	; 49
- 5c8:	19 f0       	breq	.+6      	; 0x5d0 <KPD_Interface+0x30>
- 5ca:	82 33       	cpi	r24, 0x32	; 50
- 5cc:	79 f0       	breq	.+30     	; 0x5ec <KPD_Interface+0x4c>
- 5ce:	08 95       	ret
+ 628:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <Local_copyKPDValue>
+ 62c:	81 33       	cpi	r24, 0x31	; 49
+ 62e:	19 f0       	breq	.+6      	; 0x636 <KPD_Interface+0x5e>
+ 630:	82 33       	cpi	r24, 0x32	; 50
+ 632:	79 f0       	breq	.+30     	; 0x652 <KPD_Interface+0x7a>
+ 634:	d1 cf       	rjmp	.-94     	; 0x5d8 <KPD_Interface>
 				{
 					case ('1'):
 
 						LCD_voidClear();
- 5d0:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
+ 636:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
 						LCD_voidDisplayStringDelay((u8*)"AC Is On/off");
- 5d4:	8e e8       	ldi	r24, 0x8E	; 142
- 5d6:	90 e0       	ldi	r25, 0x00	; 0
- 5d8:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 63a:	87 eb       	ldi	r24, 0xB7	; 183
+ 63c:	90 e0       	ldi	r25, 0x00	; 0
+ 63e:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 						LCD_voidSendCommand(Write_SecondLine);
- 5dc:	80 ec       	ldi	r24, 0xC0	; 192
- 5de:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ 642:	80 ec       	ldi	r24, 0xC0	; 192
+ 644:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 						LCD_voidDisplayStringDelay((u8*)"Room Temp: 30c");
- 5e2:	8b e9       	ldi	r24, 0x9B	; 155
- 5e4:	90 e0       	ldi	r25, 0x00	; 0
- 5e6:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 648:	84 ec       	ldi	r24, 0xC4	; 196
+ 64a:	90 e0       	ldi	r25, 0x00	; 0
+ 64c:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 						
 					break;
- 5ea:	08 95       	ret
+ 650:	c3 cf       	rjmp	.-122    	; 0x5d8 <KPD_Interface>
 					
 					case ('2'):
 
 						LCD_voidClear();
- 5ec:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
+ 652:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
 						LCD_voidDisplayStringDelay((u8*)"Choose light to");
- 5f0:	8a ea       	ldi	r24, 0xAA	; 170
- 5f2:	90 e0       	ldi	r25, 0x00	; 0
- 5f4:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 656:	83 ed       	ldi	r24, 0xD3	; 211
+ 658:	90 e0       	ldi	r25, 0x00	; 0
+ 65a:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 						LCD_voidSendCommand(Write_SecondLine);
- 5f8:	80 ec       	ldi	r24, 0xC0	; 192
- 5fa:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ 65e:	80 ec       	ldi	r24, 0xC0	; 192
+ 660:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 						LCD_voidDisplayStringDelay((u8*)"control(1-6)");
- 5fe:	8a eb       	ldi	r24, 0xBA	; 186
- 600:	90 e0       	ldi	r25, 0x00	; 0
- 602:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 664:	83 ee       	ldi	r24, 0xE3	; 227
+ 666:	90 e0       	ldi	r25, 0x00	; 0
+ 668:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 					
 						TMR0_SetCallBackCTC(&LCD_DisplayTemp);
- 606:	87 e3       	ldi	r24, 0x37	; 55
- 608:	95 e0       	ldi	r25, 0x05	; 5
- 60a:	0e 94 fd 06 	call	0xdfa	; 0xdfa <TMR0_SetCallBackCTC>
+ 66c:	83 eb       	ldi	r24, 0xB3	; 179
+ 66e:	92 e0       	ldi	r25, 0x02	; 2
+ 670:	0e 94 10 07 	call	0xe20	; 0xe20 <TMR0_SetCallBackCTC>
 						TMR0_voidStart();
- 60e:	0e 94 e5 06 	call	0xdca	; 0xdca <TMR0_voidStart>
+ 674:	0e 94 f8 06 	call	0xdf0	; 0xdf0 <TMR0_voidStart>
 						//busy wait for KPD
 						while(local_lightNum== KPD_Not_Pressed)
- 612:	04 c0       	rjmp	.+8      	; 0x61c <KPD_Interface+0x7c>
+ 678:	0c c0       	rjmp	.+24     	; 0x692 <KPD_Interface+0xba>
 						{
-						//get KPD Light Number
-						KPD_voidGetValue(&local_lightNum);
- 614:	81 e6       	ldi	r24, 0x61	; 97
- 616:	90 e0       	ldi	r25, 0x00	; 0
- 618:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
+							if (local_KPDIdleValue=='0')
+ 67a:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 67e:	80 33       	cpi	r24, 0x30	; 48
+ 680:	21 f4       	brne	.+8      	; 0x68a <KPD_Interface+0xb2>
+							{
+								local_KPDIdleValue=KPD_Not_Pressed;
+ 682:	8f ef       	ldi	r24, 0xFF	; 255
+ 684:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+								break;
+ 688:	08 c0       	rjmp	.+16     	; 0x69a <KPD_Interface+0xc2>
+							}
+							else
+							{
+								KPD_voidGetValue(&local_lightNum);
+ 68a:	82 e6       	ldi	r24, 0x62	; 98
+ 68c:	90 e0       	ldi	r25, 0x00	; 0
+ 68e:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
 						LCD_voidDisplayStringDelay((u8*)"control(1-6)");
 					
 						TMR0_SetCallBackCTC(&LCD_DisplayTemp);
 						TMR0_voidStart();
 						//busy wait for KPD
 						while(local_lightNum== KPD_Not_Pressed)
- 61c:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <local_lightNum>
- 620:	8f 3f       	cpi	r24, 0xFF	; 255
- 622:	c1 f3       	breq	.-16     	; 0x614 <KPD_Interface+0x74>
-						{
-						//get KPD Light Number
-						KPD_voidGetValue(&local_lightNum);
+ 692:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <local_lightNum>
+ 696:	8f 3f       	cpi	r24, 0xFF	; 255
+ 698:	81 f3       	breq	.-32     	; 0x67a <KPD_Interface+0xa2>
+							else
+							{
+								KPD_voidGetValue(&local_lightNum);
+							}
 						}
 						TMR0_voidStop();
- 624:	0e 94 f3 06 	call	0xde6	; 0xde6 <TMR0_voidStop>
+ 69a:	0e 94 06 07 	call	0xe0c	; 0xe0c <TMR0_voidStop>
 												if (local_lightNum=='1')
- 628:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <local_lightNum>
- 62c:	81 33       	cpi	r24, 0x31	; 49
- 62e:	09 f0       	breq	.+2      	; 0x632 <KPD_Interface+0x92>
- 630:	4e c0       	rjmp	.+156    	; 0x6ce <KPD_Interface+0x12e>
+ 69e:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <local_lightNum>
+ 6a2:	81 33       	cpi	r24, 0x31	; 49
+ 6a4:	09 f0       	breq	.+2      	; 0x6a8 <KPD_Interface+0xd0>
+ 6a6:	4a c0       	rjmp	.+148    	; 0x73c <KPD_Interface+0x164>
 						
 						{
 							DIO_voidGetPinValue(DIO_PORTA,DIO_PIN0,&led_status);
- 632:	4e ee       	ldi	r20, 0xEE	; 238
- 634:	51 e0       	ldi	r21, 0x01	; 1
- 636:	60 e0       	ldi	r22, 0x00	; 0
- 638:	80 e0       	ldi	r24, 0x00	; 0
- 63a:	0e 94 5c 06 	call	0xcb8	; 0xcb8 <DIO_voidGetPinValue>
+ 6a8:	4e ee       	ldi	r20, 0xEE	; 238
+ 6aa:	51 e0       	ldi	r21, 0x01	; 1
+ 6ac:	60 e0       	ldi	r22, 0x00	; 0
+ 6ae:	80 e0       	ldi	r24, 0x00	; 0
+ 6b0:	0e 94 6f 06 	call	0xcde	; 0xcde <DIO_voidGetPinValue>
 							LCD_voidClear();
- 63e:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
+ 6b4:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
 							if (led_status ==1)
- 642:	80 91 ee 01 	lds	r24, 0x01EE	; 0x8001ee <__data_end>
- 646:	81 30       	cpi	r24, 0x01	; 1
- 648:	01 f5       	brne	.+64     	; 0x68a <KPD_Interface+0xea>
+ 6b8:	80 91 ee 01 	lds	r24, 0x01EE	; 0x8001ee <__data_end>
+ 6bc:	81 30       	cpi	r24, 0x01	; 1
+ 6be:	f1 f4       	brne	.+60     	; 0x6fc <KPD_Interface+0x124>
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 1 is On");
- 64a:	87 ec       	ldi	r24, 0xC7	; 199
- 64c:	90 e0       	ldi	r25, 0x00	; 0
- 64e:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 6c0:	80 ef       	ldi	r24, 0xF0	; 240
+ 6c2:	90 e0       	ldi	r25, 0x00	; 0
+ 6c4:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								LCD_voidSendCommand(Write_SecondLine);
- 652:	80 ec       	ldi	r24, 0xC0	; 192
- 654:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ 6c8:	80 ec       	ldi	r24, 0xC0	; 192
+ 6ca:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
- 658:	85 ed       	ldi	r24, 0xD5	; 213
- 65a:	90 e0       	ldi	r25, 0x00	; 0
- 65c:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 6ce:	8e ef       	ldi	r24, 0xFE	; 254
+ 6d0:	90 e0       	ldi	r25, 0x00	; 0
+ 6d2:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								while(local_lightStatus== KPD_Not_Pressed)
- 660:	04 c0       	rjmp	.+8      	; 0x66a <KPD_Interface+0xca>
+ 6d6:	04 c0       	rjmp	.+8      	; 0x6e0 <KPD_Interface+0x108>
 								{
 									KPD_voidGetValue(&local_lightStatus);
- 662:	80 e6       	ldi	r24, 0x60	; 96
- 664:	90 e0       	ldi	r25, 0x00	; 0
- 666:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
+ 6d8:	81 e6       	ldi	r24, 0x61	; 97
+ 6da:	90 e0       	ldi	r25, 0x00	; 0
+ 6dc:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
 							if (led_status ==1)
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 1 is On");
 								LCD_voidSendCommand(Write_SecondLine);
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
 								while(local_lightStatus== KPD_Not_Pressed)
- 66a:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 66e:	8f 3f       	cpi	r24, 0xFF	; 255
- 670:	c1 f3       	breq	.-16     	; 0x662 <KPD_Interface+0xc2>
+ 6e0:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <local_lightStatus>
+ 6e4:	8f 3f       	cpi	r24, 0xFF	; 255
+ 6e6:	c1 f3       	breq	.-16     	; 0x6d8 <KPD_Interface+0x100>
 								{
 									KPD_voidGetValue(&local_lightStatus);
 								}
 									if (local_lightStatus=='1')
- 672:	81 33       	cpi	r24, 0x31	; 49
- 674:	29 f4       	brne	.+10     	; 0x680 <KPD_Interface+0xe0>
+ 6e8:	81 33       	cpi	r24, 0x31	; 49
+ 6ea:	29 f4       	brne	.+10     	; 0x6f6 <KPD_Interface+0x11e>
 									{
 									LED_voidOff(DIO_PORTA,DIO_PIN0,LED_FORWARD_CONNECTION);
- 676:	41 e0       	ldi	r20, 0x01	; 1
- 678:	60 e0       	ldi	r22, 0x00	; 0
- 67a:	80 e0       	ldi	r24, 0x00	; 0
- 67c:	0e 94 a6 02 	call	0x54c	; 0x54c <LED_voidOff>
+ 6ec:	41 e0       	ldi	r20, 0x01	; 1
+ 6ee:	60 e0       	ldi	r22, 0x00	; 0
+ 6f0:	80 e0       	ldi	r24, 0x00	; 0
+ 6f2:	0e 94 a6 02 	call	0x54c	; 0x54c <LED_voidOff>
 									}
 								Reset_AllKPDValues();
- 680:	0e 94 c8 02 	call	0x590	; 0x590 <Reset_AllKPDValues>
-								HomeScreen();
- 684:	0e 94 00 05 	call	0xa00	; 0xa00 <HomeScreen>
- 688:	b5 c1       	rjmp	.+874    	; 0x9f4 <__stack+0x195>
+ 6f6:	0e 94 e4 02 	call	0x5c8	; 0x5c8 <Reset_AllKPDValues>
+ 6fa:	cb c1       	rjmp	.+918    	; 0xa92 <__stack+0x233>
+								//HomeScreen();
 								
 								
 							}
 							else if (led_status ==0)
- 68a:	81 11       	cpse	r24, r1
- 68c:	b3 c1       	rjmp	.+870    	; 0x9f4 <__stack+0x195>
+ 6fc:	81 11       	cpse	r24, r1
+ 6fe:	c9 c1       	rjmp	.+914    	; 0xa92 <__stack+0x233>
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 1 is OFF");
- 68e:	86 ee       	ldi	r24, 0xE6	; 230
- 690:	90 e0       	ldi	r25, 0x00	; 0
- 692:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 700:	8f e0       	ldi	r24, 0x0F	; 15
+ 702:	91 e0       	ldi	r25, 0x01	; 1
+ 704:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								LCD_voidSendCommand(Write_SecondLine);
- 696:	80 ec       	ldi	r24, 0xC0	; 192
- 698:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ 708:	80 ec       	ldi	r24, 0xC0	; 192
+ 70a:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
- 69c:	85 ef       	ldi	r24, 0xF5	; 245
- 69e:	90 e0       	ldi	r25, 0x00	; 0
- 6a0:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 70e:	8e e1       	ldi	r24, 0x1E	; 30
+ 710:	91 e0       	ldi	r25, 0x01	; 1
+ 712:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								while(local_lightStatus== KPD_Not_Pressed)
- 6a4:	04 c0       	rjmp	.+8      	; 0x6ae <KPD_Interface+0x10e>
+ 716:	04 c0       	rjmp	.+8      	; 0x720 <KPD_Interface+0x148>
 								{
 								KPD_voidGetValue(&local_lightStatus);
- 6a6:	80 e6       	ldi	r24, 0x60	; 96
- 6a8:	90 e0       	ldi	r25, 0x00	; 0
- 6aa:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
+ 718:	81 e6       	ldi	r24, 0x61	; 97
+ 71a:	90 e0       	ldi	r25, 0x00	; 0
+ 71c:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
 							else if (led_status ==0)
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 1 is OFF");
 								LCD_voidSendCommand(Write_SecondLine);
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
 								while(local_lightStatus== KPD_Not_Pressed)
- 6ae:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 6b2:	8f 3f       	cpi	r24, 0xFF	; 255
- 6b4:	c1 f3       	breq	.-16     	; 0x6a6 <KPD_Interface+0x106>
+ 720:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <local_lightStatus>
+ 724:	8f 3f       	cpi	r24, 0xFF	; 255
+ 726:	c1 f3       	breq	.-16     	; 0x718 <KPD_Interface+0x140>
 								{
 								KPD_voidGetValue(&local_lightStatus);
 								}
 								if (local_lightStatus=='1')
- 6b6:	81 33       	cpi	r24, 0x31	; 49
- 6b8:	29 f4       	brne	.+10     	; 0x6c4 <KPD_Interface+0x124>
+ 728:	81 33       	cpi	r24, 0x31	; 49
+ 72a:	29 f4       	brne	.+10     	; 0x736 <KPD_Interface+0x15e>
 									{
 										LED_voidOn(DIO_PORTA,DIO_PIN0,LED_FORWARD_CONNECTION);
- 6ba:	41 e0       	ldi	r20, 0x01	; 1
- 6bc:	60 e0       	ldi	r22, 0x00	; 0
- 6be:	80 e0       	ldi	r24, 0x00	; 0
- 6c0:	0e 94 99 02 	call	0x532	; 0x532 <LED_voidOn>
+ 72c:	41 e0       	ldi	r20, 0x01	; 1
+ 72e:	60 e0       	ldi	r22, 0x00	; 0
+ 730:	80 e0       	ldi	r24, 0x00	; 0
+ 732:	0e 94 99 02 	call	0x532	; 0x532 <LED_voidOn>
 									}
 								Reset_AllKPDValues();
- 6c4:	0e 94 c8 02 	call	0x590	; 0x590 <Reset_AllKPDValues>
-								HomeScreen();
- 6c8:	0e 94 00 05 	call	0xa00	; 0xa00 <HomeScreen>
- 6cc:	93 c1       	rjmp	.+806    	; 0x9f4 <__stack+0x195>
+ 736:	0e 94 e4 02 	call	0x5c8	; 0x5c8 <Reset_AllKPDValues>
+ 73a:	ab c1       	rjmp	.+854    	; 0xa92 <__stack+0x233>
 								
 							}
 							
 						}
 						
 											else if (local_lightNum=='2')
- 6ce:	82 33       	cpi	r24, 0x32	; 50
- 6d0:	09 f0       	breq	.+2      	; 0x6d4 <KPD_Interface+0x134>
- 6d2:	50 c0       	rjmp	.+160    	; 0x774 <KPD_Interface+0x1d4>
+ 73c:	82 33       	cpi	r24, 0x32	; 50
+ 73e:	09 f0       	breq	.+2      	; 0x742 <KPD_Interface+0x16a>
+ 740:	4c c0       	rjmp	.+152    	; 0x7da <KPD_Interface+0x202>
 						{
 							DIO_voidGetPinValue(DIO_PORTA,DIO_PIN1,&led_status);
- 6d4:	4e ee       	ldi	r20, 0xEE	; 238
- 6d6:	51 e0       	ldi	r21, 0x01	; 1
- 6d8:	61 e0       	ldi	r22, 0x01	; 1
- 6da:	80 e0       	ldi	r24, 0x00	; 0
- 6dc:	0e 94 5c 06 	call	0xcb8	; 0xcb8 <DIO_voidGetPinValue>
+ 742:	4e ee       	ldi	r20, 0xEE	; 238
+ 744:	51 e0       	ldi	r21, 0x01	; 1
+ 746:	61 e0       	ldi	r22, 0x01	; 1
+ 748:	80 e0       	ldi	r24, 0x00	; 0
+ 74a:	0e 94 6f 06 	call	0xcde	; 0xcde <DIO_voidGetPinValue>
 							LCD_voidClear();
- 6e0:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
+ 74e:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
 							if (led_status ==1)
- 6e4:	80 91 ee 01 	lds	r24, 0x01EE	; 0x8001ee <__data_end>
- 6e8:	81 30       	cpi	r24, 0x01	; 1
- 6ea:	09 f5       	brne	.+66     	; 0x72e <KPD_Interface+0x18e>
+ 752:	80 91 ee 01 	lds	r24, 0x01EE	; 0x8001ee <__data_end>
+ 756:	81 30       	cpi	r24, 0x01	; 1
+ 758:	f9 f4       	brne	.+62     	; 0x798 <KPD_Interface+0x1c0>
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 2 is On");
- 6ec:	85 e0       	ldi	r24, 0x05	; 5
- 6ee:	91 e0       	ldi	r25, 0x01	; 1
- 6f0:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 75a:	8e e2       	ldi	r24, 0x2E	; 46
+ 75c:	91 e0       	ldi	r25, 0x01	; 1
+ 75e:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								LCD_voidSendCommand(Write_SecondLine);
- 6f4:	80 ec       	ldi	r24, 0xC0	; 192
- 6f6:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ 762:	80 ec       	ldi	r24, 0xC0	; 192
+ 764:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
- 6fa:	85 ed       	ldi	r24, 0xD5	; 213
- 6fc:	90 e0       	ldi	r25, 0x00	; 0
- 6fe:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 768:	8e ef       	ldi	r24, 0xFE	; 254
+ 76a:	90 e0       	ldi	r25, 0x00	; 0
+ 76c:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								while(local_lightStatus== KPD_Not_Pressed)
- 702:	04 c0       	rjmp	.+8      	; 0x70c <KPD_Interface+0x16c>
+ 770:	04 c0       	rjmp	.+8      	; 0x77a <KPD_Interface+0x1a2>
 								{
 									KPD_voidGetValue(&local_lightStatus);
- 704:	80 e6       	ldi	r24, 0x60	; 96
- 706:	90 e0       	ldi	r25, 0x00	; 0
- 708:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
+ 772:	81 e6       	ldi	r24, 0x61	; 97
+ 774:	90 e0       	ldi	r25, 0x00	; 0
+ 776:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
 							if (led_status ==1)
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 2 is On");
 								LCD_voidSendCommand(Write_SecondLine);
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
 								while(local_lightStatus== KPD_Not_Pressed)
- 70c:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 710:	8f 3f       	cpi	r24, 0xFF	; 255
- 712:	c1 f3       	breq	.-16     	; 0x704 <KPD_Interface+0x164>
+ 77a:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <local_lightStatus>
+ 77e:	8f 3f       	cpi	r24, 0xFF	; 255
+ 780:	c1 f3       	breq	.-16     	; 0x772 <KPD_Interface+0x19a>
 								{
 									KPD_voidGetValue(&local_lightStatus);
 								}
 									if (local_lightStatus=='1')
- 714:	81 33       	cpi	r24, 0x31	; 49
- 716:	29 f4       	brne	.+10     	; 0x722 <KPD_Interface+0x182>
+ 782:	81 33       	cpi	r24, 0x31	; 49
+ 784:	29 f4       	brne	.+10     	; 0x790 <KPD_Interface+0x1b8>
 									{
 									LED_voidOff(DIO_PORTA,DIO_PIN1,LED_FORWARD_CONNECTION);
- 718:	41 e0       	ldi	r20, 0x01	; 1
- 71a:	61 e0       	ldi	r22, 0x01	; 1
- 71c:	80 e0       	ldi	r24, 0x00	; 0
- 71e:	0e 94 a6 02 	call	0x54c	; 0x54c <LED_voidOff>
+ 786:	41 e0       	ldi	r20, 0x01	; 1
+ 788:	61 e0       	ldi	r22, 0x01	; 1
+ 78a:	80 e0       	ldi	r24, 0x00	; 0
+ 78c:	0e 94 a6 02 	call	0x54c	; 0x54c <LED_voidOff>
 									}
 								local_lightStatus=KPD_Not_Pressed;
- 722:	8f ef       	ldi	r24, 0xFF	; 255
- 724:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
-								HomeScreen();
- 728:	0e 94 00 05 	call	0xa00	; 0xa00 <HomeScreen>
- 72c:	63 c1       	rjmp	.+710    	; 0x9f4 <__stack+0x195>
+ 790:	8f ef       	ldi	r24, 0xFF	; 255
+ 792:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <local_lightStatus>
+ 796:	7d c1       	rjmp	.+762    	; 0xa92 <__stack+0x233>
+								//HomeScreen();
 
 							}
 							else if (led_status ==0)
- 72e:	81 11       	cpse	r24, r1
- 730:	61 c1       	rjmp	.+706    	; 0x9f4 <__stack+0x195>
+ 798:	81 11       	cpse	r24, r1
+ 79a:	7b c1       	rjmp	.+758    	; 0xa92 <__stack+0x233>
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 2 is OFF");
- 732:	83 e1       	ldi	r24, 0x13	; 19
- 734:	91 e0       	ldi	r25, 0x01	; 1
- 736:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 79c:	8c e3       	ldi	r24, 0x3C	; 60
+ 79e:	91 e0       	ldi	r25, 0x01	; 1
+ 7a0:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								LCD_voidSendCommand(Write_SecondLine);
- 73a:	80 ec       	ldi	r24, 0xC0	; 192
- 73c:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ 7a4:	80 ec       	ldi	r24, 0xC0	; 192
+ 7a6:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
- 740:	85 ef       	ldi	r24, 0xF5	; 245
- 742:	90 e0       	ldi	r25, 0x00	; 0
- 744:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 7aa:	8e e1       	ldi	r24, 0x1E	; 30
+ 7ac:	91 e0       	ldi	r25, 0x01	; 1
+ 7ae:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								while(local_lightStatus== KPD_Not_Pressed)
- 748:	04 c0       	rjmp	.+8      	; 0x752 <KPD_Interface+0x1b2>
+ 7b2:	04 c0       	rjmp	.+8      	; 0x7bc <KPD_Interface+0x1e4>
 								{
 								KPD_voidGetValue(&local_lightStatus);
- 74a:	80 e6       	ldi	r24, 0x60	; 96
- 74c:	90 e0       	ldi	r25, 0x00	; 0
- 74e:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
+ 7b4:	81 e6       	ldi	r24, 0x61	; 97
+ 7b6:	90 e0       	ldi	r25, 0x00	; 0
+ 7b8:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
 							else if (led_status ==0)
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 2 is OFF");
 								LCD_voidSendCommand(Write_SecondLine);
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
 								while(local_lightStatus== KPD_Not_Pressed)
- 752:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 756:	8f 3f       	cpi	r24, 0xFF	; 255
- 758:	c1 f3       	breq	.-16     	; 0x74a <KPD_Interface+0x1aa>
+ 7bc:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <local_lightStatus>
+ 7c0:	8f 3f       	cpi	r24, 0xFF	; 255
+ 7c2:	c1 f3       	breq	.-16     	; 0x7b4 <KPD_Interface+0x1dc>
 								{
 								KPD_voidGetValue(&local_lightStatus);
 								}
 								if (local_lightStatus=='1')
- 75a:	81 33       	cpi	r24, 0x31	; 49
- 75c:	29 f4       	brne	.+10     	; 0x768 <KPD_Interface+0x1c8>
+ 7c4:	81 33       	cpi	r24, 0x31	; 49
+ 7c6:	29 f4       	brne	.+10     	; 0x7d2 <KPD_Interface+0x1fa>
 									{
 										LED_voidOn(DIO_PORTA,DIO_PIN1,LED_FORWARD_CONNECTION);
- 75e:	41 e0       	ldi	r20, 0x01	; 1
- 760:	61 e0       	ldi	r22, 0x01	; 1
- 762:	80 e0       	ldi	r24, 0x00	; 0
- 764:	0e 94 99 02 	call	0x532	; 0x532 <LED_voidOn>
+ 7c8:	41 e0       	ldi	r20, 0x01	; 1
+ 7ca:	61 e0       	ldi	r22, 0x01	; 1
+ 7cc:	80 e0       	ldi	r24, 0x00	; 0
+ 7ce:	0e 94 99 02 	call	0x532	; 0x532 <LED_voidOn>
 									}
 								local_lightStatus=KPD_Not_Pressed;
- 768:	8f ef       	ldi	r24, 0xFF	; 255
- 76a:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
-								HomeScreen();
- 76e:	0e 94 00 05 	call	0xa00	; 0xa00 <HomeScreen>
- 772:	40 c1       	rjmp	.+640    	; 0x9f4 <__stack+0x195>
+ 7d2:	8f ef       	ldi	r24, 0xFF	; 255
+ 7d4:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <local_lightStatus>
+ 7d8:	5c c1       	rjmp	.+696    	; 0xa92 <__stack+0x233>
+								//HomeScreen();
 							}
 							
 						}
 											else if (local_lightNum=='3')
- 774:	83 33       	cpi	r24, 0x33	; 51
- 776:	09 f0       	breq	.+2      	; 0x77a <KPD_Interface+0x1da>
- 778:	50 c0       	rjmp	.+160    	; 0x81a <__DATA_REGION_LENGTH__+0x1a>
+ 7da:	83 33       	cpi	r24, 0x33	; 51
+ 7dc:	09 f0       	breq	.+2      	; 0x7e0 <KPD_Interface+0x208>
+ 7de:	4c c0       	rjmp	.+152    	; 0x878 <__stack+0x19>
 						{
 							DIO_voidGetPinValue(DIO_PORTA,DIO_PIN2,&led_status);
- 77a:	4e ee       	ldi	r20, 0xEE	; 238
- 77c:	51 e0       	ldi	r21, 0x01	; 1
- 77e:	62 e0       	ldi	r22, 0x02	; 2
- 780:	80 e0       	ldi	r24, 0x00	; 0
- 782:	0e 94 5c 06 	call	0xcb8	; 0xcb8 <DIO_voidGetPinValue>
+ 7e0:	4e ee       	ldi	r20, 0xEE	; 238
+ 7e2:	51 e0       	ldi	r21, 0x01	; 1
+ 7e4:	62 e0       	ldi	r22, 0x02	; 2
+ 7e6:	80 e0       	ldi	r24, 0x00	; 0
+ 7e8:	0e 94 6f 06 	call	0xcde	; 0xcde <DIO_voidGetPinValue>
 							LCD_voidClear();
- 786:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
+ 7ec:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
 							if (led_status ==1)
- 78a:	80 91 ee 01 	lds	r24, 0x01EE	; 0x8001ee <__data_end>
- 78e:	81 30       	cpi	r24, 0x01	; 1
- 790:	09 f5       	brne	.+66     	; 0x7d4 <KPD_Interface+0x234>
+ 7f0:	80 91 ee 01 	lds	r24, 0x01EE	; 0x8001ee <__data_end>
+ 7f4:	81 30       	cpi	r24, 0x01	; 1
+ 7f6:	f9 f4       	brne	.+62     	; 0x836 <__DATA_REGION_LENGTH__+0x36>
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 3 is On");
- 792:	82 e2       	ldi	r24, 0x22	; 34
- 794:	91 e0       	ldi	r25, 0x01	; 1
- 796:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 7f8:	8b e4       	ldi	r24, 0x4B	; 75
+ 7fa:	91 e0       	ldi	r25, 0x01	; 1
+ 7fc:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								LCD_voidSendCommand(Write_SecondLine);
- 79a:	80 ec       	ldi	r24, 0xC0	; 192
- 79c:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ 800:	80 ec       	ldi	r24, 0xC0	; 192
+ 802:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
- 7a0:	85 ed       	ldi	r24, 0xD5	; 213
- 7a2:	90 e0       	ldi	r25, 0x00	; 0
- 7a4:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 806:	8e ef       	ldi	r24, 0xFE	; 254
+ 808:	90 e0       	ldi	r25, 0x00	; 0
+ 80a:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								while(local_lightStatus== KPD_Not_Pressed)
- 7a8:	04 c0       	rjmp	.+8      	; 0x7b2 <KPD_Interface+0x212>
+ 80e:	04 c0       	rjmp	.+8      	; 0x818 <__DATA_REGION_LENGTH__+0x18>
 								{
 									KPD_voidGetValue(&local_lightStatus);
- 7aa:	80 e6       	ldi	r24, 0x60	; 96
- 7ac:	90 e0       	ldi	r25, 0x00	; 0
- 7ae:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
+ 810:	81 e6       	ldi	r24, 0x61	; 97
+ 812:	90 e0       	ldi	r25, 0x00	; 0
+ 814:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
 							if (led_status ==1)
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 3 is On");
 								LCD_voidSendCommand(Write_SecondLine);
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
 								while(local_lightStatus== KPD_Not_Pressed)
- 7b2:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 7b6:	8f 3f       	cpi	r24, 0xFF	; 255
- 7b8:	c1 f3       	breq	.-16     	; 0x7aa <KPD_Interface+0x20a>
+ 818:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <local_lightStatus>
+ 81c:	8f 3f       	cpi	r24, 0xFF	; 255
+ 81e:	c1 f3       	breq	.-16     	; 0x810 <__DATA_REGION_LENGTH__+0x10>
 								{
 									KPD_voidGetValue(&local_lightStatus);
 								}
 								
 									if (local_lightStatus=='1')
- 7ba:	81 33       	cpi	r24, 0x31	; 49
- 7bc:	29 f4       	brne	.+10     	; 0x7c8 <KPD_Interface+0x228>
+ 820:	81 33       	cpi	r24, 0x31	; 49
+ 822:	29 f4       	brne	.+10     	; 0x82e <__DATA_REGION_LENGTH__+0x2e>
 									{
 									LED_voidOff(DIO_PORTA,DIO_PIN2,LED_FORWARD_CONNECTION);
- 7be:	41 e0       	ldi	r20, 0x01	; 1
- 7c0:	62 e0       	ldi	r22, 0x02	; 2
- 7c2:	80 e0       	ldi	r24, 0x00	; 0
- 7c4:	0e 94 a6 02 	call	0x54c	; 0x54c <LED_voidOff>
+ 824:	41 e0       	ldi	r20, 0x01	; 1
+ 826:	62 e0       	ldi	r22, 0x02	; 2
+ 828:	80 e0       	ldi	r24, 0x00	; 0
+ 82a:	0e 94 a6 02 	call	0x54c	; 0x54c <LED_voidOff>
 									}
 								local_lightStatus=KPD_Not_Pressed;
- 7c8:	8f ef       	ldi	r24, 0xFF	; 255
- 7ca:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
-								HomeScreen();
- 7ce:	0e 94 00 05 	call	0xa00	; 0xa00 <HomeScreen>
- 7d2:	10 c1       	rjmp	.+544    	; 0x9f4 <__stack+0x195>
+ 82e:	8f ef       	ldi	r24, 0xFF	; 255
+ 830:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <local_lightStatus>
+ 834:	2e c1       	rjmp	.+604    	; 0xa92 <__stack+0x233>
+								//HomeScreen();
 							}
 							else if (led_status ==0)
- 7d4:	81 11       	cpse	r24, r1
- 7d6:	0e c1       	rjmp	.+540    	; 0x9f4 <__stack+0x195>
+ 836:	81 11       	cpse	r24, r1
+ 838:	2c c1       	rjmp	.+600    	; 0xa92 <__stack+0x233>
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 3 is OFF");
- 7d8:	80 e3       	ldi	r24, 0x30	; 48
- 7da:	91 e0       	ldi	r25, 0x01	; 1
- 7dc:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 83a:	89 e5       	ldi	r24, 0x59	; 89
+ 83c:	91 e0       	ldi	r25, 0x01	; 1
+ 83e:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								LCD_voidSendCommand(Write_SecondLine);
- 7e0:	80 ec       	ldi	r24, 0xC0	; 192
- 7e2:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ 842:	80 ec       	ldi	r24, 0xC0	; 192
+ 844:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
- 7e6:	85 ef       	ldi	r24, 0xF5	; 245
- 7e8:	90 e0       	ldi	r25, 0x00	; 0
- 7ea:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 848:	8e e1       	ldi	r24, 0x1E	; 30
+ 84a:	91 e0       	ldi	r25, 0x01	; 1
+ 84c:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								while(local_lightStatus== KPD_Not_Pressed)
- 7ee:	04 c0       	rjmp	.+8      	; 0x7f8 <KPD_Interface+0x258>
+ 850:	04 c0       	rjmp	.+8      	; 0x85a <__DATA_REGION_LENGTH__+0x5a>
 								{
 								KPD_voidGetValue(&local_lightStatus);
- 7f0:	80 e6       	ldi	r24, 0x60	; 96
- 7f2:	90 e0       	ldi	r25, 0x00	; 0
- 7f4:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
+ 852:	81 e6       	ldi	r24, 0x61	; 97
+ 854:	90 e0       	ldi	r25, 0x00	; 0
+ 856:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
 							else if (led_status ==0)
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 3 is OFF");
 								LCD_voidSendCommand(Write_SecondLine);
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
 								while(local_lightStatus== KPD_Not_Pressed)
- 7f8:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 7fc:	8f 3f       	cpi	r24, 0xFF	; 255
- 7fe:	c1 f3       	breq	.-16     	; 0x7f0 <KPD_Interface+0x250>
+ 85a:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <local_lightStatus>
+ 85e:	8f 3f       	cpi	r24, 0xFF	; 255
+ 860:	c1 f3       	breq	.-16     	; 0x852 <__DATA_REGION_LENGTH__+0x52>
 								{
 								KPD_voidGetValue(&local_lightStatus);
 								}
 								
 								if (local_lightStatus=='1')
- 800:	81 33       	cpi	r24, 0x31	; 49
- 802:	29 f4       	brne	.+10     	; 0x80e <__DATA_REGION_LENGTH__+0xe>
+ 862:	81 33       	cpi	r24, 0x31	; 49
+ 864:	29 f4       	brne	.+10     	; 0x870 <__stack+0x11>
 									{
 										LED_voidOn(DIO_PORTA,DIO_PIN2,LED_FORWARD_CONNECTION);
- 804:	41 e0       	ldi	r20, 0x01	; 1
- 806:	62 e0       	ldi	r22, 0x02	; 2
- 808:	80 e0       	ldi	r24, 0x00	; 0
- 80a:	0e 94 99 02 	call	0x532	; 0x532 <LED_voidOn>
+ 866:	41 e0       	ldi	r20, 0x01	; 1
+ 868:	62 e0       	ldi	r22, 0x02	; 2
+ 86a:	80 e0       	ldi	r24, 0x00	; 0
+ 86c:	0e 94 99 02 	call	0x532	; 0x532 <LED_voidOn>
 									}
 								local_lightStatus=KPD_Not_Pressed;
- 80e:	8f ef       	ldi	r24, 0xFF	; 255
- 810:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
-								HomeScreen();
- 814:	0e 94 00 05 	call	0xa00	; 0xa00 <HomeScreen>
- 818:	ed c0       	rjmp	.+474    	; 0x9f4 <__stack+0x195>
+ 870:	8f ef       	ldi	r24, 0xFF	; 255
+ 872:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <local_lightStatus>
+ 876:	0d c1       	rjmp	.+538    	; 0xa92 <__stack+0x233>
+								//HomeScreen();
 							}
 
 						}
 											else if (local_lightNum=='4')
- 81a:	84 33       	cpi	r24, 0x34	; 52
- 81c:	09 f0       	breq	.+2      	; 0x820 <__DATA_REGION_LENGTH__+0x20>
- 81e:	50 c0       	rjmp	.+160    	; 0x8c0 <__stack+0x61>
+ 878:	84 33       	cpi	r24, 0x34	; 52
+ 87a:	09 f0       	breq	.+2      	; 0x87e <__stack+0x1f>
+ 87c:	4c c0       	rjmp	.+152    	; 0x916 <__stack+0xb7>
 						{
 							DIO_voidGetPinValue(DIO_PORTA,DIO_PIN3,&led_status);
- 820:	4e ee       	ldi	r20, 0xEE	; 238
- 822:	51 e0       	ldi	r21, 0x01	; 1
- 824:	63 e0       	ldi	r22, 0x03	; 3
- 826:	80 e0       	ldi	r24, 0x00	; 0
- 828:	0e 94 5c 06 	call	0xcb8	; 0xcb8 <DIO_voidGetPinValue>
+ 87e:	4e ee       	ldi	r20, 0xEE	; 238
+ 880:	51 e0       	ldi	r21, 0x01	; 1
+ 882:	63 e0       	ldi	r22, 0x03	; 3
+ 884:	80 e0       	ldi	r24, 0x00	; 0
+ 886:	0e 94 6f 06 	call	0xcde	; 0xcde <DIO_voidGetPinValue>
 							LCD_voidClear();
- 82c:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
+ 88a:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
 							if (led_status ==1)
- 830:	80 91 ee 01 	lds	r24, 0x01EE	; 0x8001ee <__data_end>
- 834:	81 30       	cpi	r24, 0x01	; 1
- 836:	09 f5       	brne	.+66     	; 0x87a <__stack+0x1b>
+ 88e:	80 91 ee 01 	lds	r24, 0x01EE	; 0x8001ee <__data_end>
+ 892:	81 30       	cpi	r24, 0x01	; 1
+ 894:	f9 f4       	brne	.+62     	; 0x8d4 <__stack+0x75>
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 4 is On");
- 838:	8f e3       	ldi	r24, 0x3F	; 63
- 83a:	91 e0       	ldi	r25, 0x01	; 1
- 83c:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 896:	88 e6       	ldi	r24, 0x68	; 104
+ 898:	91 e0       	ldi	r25, 0x01	; 1
+ 89a:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								LCD_voidSendCommand(Write_SecondLine);
- 840:	80 ec       	ldi	r24, 0xC0	; 192
- 842:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ 89e:	80 ec       	ldi	r24, 0xC0	; 192
+ 8a0:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
- 846:	85 ed       	ldi	r24, 0xD5	; 213
- 848:	90 e0       	ldi	r25, 0x00	; 0
- 84a:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 8a4:	8e ef       	ldi	r24, 0xFE	; 254
+ 8a6:	90 e0       	ldi	r25, 0x00	; 0
+ 8a8:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								while(local_lightStatus== KPD_Not_Pressed)
- 84e:	04 c0       	rjmp	.+8      	; 0x858 <__DATA_REGION_LENGTH__+0x58>
+ 8ac:	04 c0       	rjmp	.+8      	; 0x8b6 <__stack+0x57>
 								{
 									KPD_voidGetValue(&local_lightStatus);
- 850:	80 e6       	ldi	r24, 0x60	; 96
- 852:	90 e0       	ldi	r25, 0x00	; 0
- 854:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
+ 8ae:	81 e6       	ldi	r24, 0x61	; 97
+ 8b0:	90 e0       	ldi	r25, 0x00	; 0
+ 8b2:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
 							if (led_status ==1)
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 4 is On");
 								LCD_voidSendCommand(Write_SecondLine);
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
 								while(local_lightStatus== KPD_Not_Pressed)
- 858:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 85c:	8f 3f       	cpi	r24, 0xFF	; 255
- 85e:	c1 f3       	breq	.-16     	; 0x850 <__DATA_REGION_LENGTH__+0x50>
+ 8b6:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <local_lightStatus>
+ 8ba:	8f 3f       	cpi	r24, 0xFF	; 255
+ 8bc:	c1 f3       	breq	.-16     	; 0x8ae <__stack+0x4f>
 								{
 									KPD_voidGetValue(&local_lightStatus);
 								}
 								
 									if (local_lightStatus=='1')
- 860:	81 33       	cpi	r24, 0x31	; 49
- 862:	29 f4       	brne	.+10     	; 0x86e <__stack+0xf>
+ 8be:	81 33       	cpi	r24, 0x31	; 49
+ 8c0:	29 f4       	brne	.+10     	; 0x8cc <__stack+0x6d>
 									{
 									LED_voidOff(DIO_PORTA,DIO_PIN3,LED_FORWARD_CONNECTION);
- 864:	41 e0       	ldi	r20, 0x01	; 1
- 866:	63 e0       	ldi	r22, 0x03	; 3
- 868:	80 e0       	ldi	r24, 0x00	; 0
- 86a:	0e 94 a6 02 	call	0x54c	; 0x54c <LED_voidOff>
+ 8c2:	41 e0       	ldi	r20, 0x01	; 1
+ 8c4:	63 e0       	ldi	r22, 0x03	; 3
+ 8c6:	80 e0       	ldi	r24, 0x00	; 0
+ 8c8:	0e 94 a6 02 	call	0x54c	; 0x54c <LED_voidOff>
 									}
 								local_lightStatus=KPD_Not_Pressed;
- 86e:	8f ef       	ldi	r24, 0xFF	; 255
- 870:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
-								HomeScreen();
- 874:	0e 94 00 05 	call	0xa00	; 0xa00 <HomeScreen>
- 878:	bd c0       	rjmp	.+378    	; 0x9f4 <__stack+0x195>
+ 8cc:	8f ef       	ldi	r24, 0xFF	; 255
+ 8ce:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <local_lightStatus>
+ 8d2:	df c0       	rjmp	.+446    	; 0xa92 <__stack+0x233>
+								//HomeScreen();
 							}
 							else if (led_status ==0)
- 87a:	81 11       	cpse	r24, r1
- 87c:	bb c0       	rjmp	.+374    	; 0x9f4 <__stack+0x195>
+ 8d4:	81 11       	cpse	r24, r1
+ 8d6:	dd c0       	rjmp	.+442    	; 0xa92 <__stack+0x233>
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 4 is OFF");
- 87e:	8d e4       	ldi	r24, 0x4D	; 77
- 880:	91 e0       	ldi	r25, 0x01	; 1
- 882:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 8d8:	86 e7       	ldi	r24, 0x76	; 118
+ 8da:	91 e0       	ldi	r25, 0x01	; 1
+ 8dc:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								LCD_voidSendCommand(Write_SecondLine);
- 886:	80 ec       	ldi	r24, 0xC0	; 192
- 888:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ 8e0:	80 ec       	ldi	r24, 0xC0	; 192
+ 8e2:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
- 88c:	85 ef       	ldi	r24, 0xF5	; 245
- 88e:	90 e0       	ldi	r25, 0x00	; 0
- 890:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 8e6:	8e e1       	ldi	r24, 0x1E	; 30
+ 8e8:	91 e0       	ldi	r25, 0x01	; 1
+ 8ea:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								while(local_lightStatus== KPD_Not_Pressed)
- 894:	04 c0       	rjmp	.+8      	; 0x89e <__stack+0x3f>
+ 8ee:	04 c0       	rjmp	.+8      	; 0x8f8 <__stack+0x99>
 								{
 								KPD_voidGetValue(&local_lightStatus);
- 896:	80 e6       	ldi	r24, 0x60	; 96
- 898:	90 e0       	ldi	r25, 0x00	; 0
- 89a:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
+ 8f0:	81 e6       	ldi	r24, 0x61	; 97
+ 8f2:	90 e0       	ldi	r25, 0x00	; 0
+ 8f4:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
 							else if (led_status ==0)
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 4 is OFF");
 								LCD_voidSendCommand(Write_SecondLine);
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
 								while(local_lightStatus== KPD_Not_Pressed)
- 89e:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 8a2:	8f 3f       	cpi	r24, 0xFF	; 255
- 8a4:	c1 f3       	breq	.-16     	; 0x896 <__stack+0x37>
+ 8f8:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <local_lightStatus>
+ 8fc:	8f 3f       	cpi	r24, 0xFF	; 255
+ 8fe:	c1 f3       	breq	.-16     	; 0x8f0 <__stack+0x91>
 								{
 								KPD_voidGetValue(&local_lightStatus);
 								}
 								
 								if (local_lightStatus=='1')
- 8a6:	81 33       	cpi	r24, 0x31	; 49
- 8a8:	29 f4       	brne	.+10     	; 0x8b4 <__stack+0x55>
+ 900:	81 33       	cpi	r24, 0x31	; 49
+ 902:	29 f4       	brne	.+10     	; 0x90e <__stack+0xaf>
 									{
 										LED_voidOn(DIO_PORTA,DIO_PIN3,LED_FORWARD_CONNECTION);
- 8aa:	41 e0       	ldi	r20, 0x01	; 1
- 8ac:	63 e0       	ldi	r22, 0x03	; 3
- 8ae:	80 e0       	ldi	r24, 0x00	; 0
- 8b0:	0e 94 99 02 	call	0x532	; 0x532 <LED_voidOn>
+ 904:	41 e0       	ldi	r20, 0x01	; 1
+ 906:	63 e0       	ldi	r22, 0x03	; 3
+ 908:	80 e0       	ldi	r24, 0x00	; 0
+ 90a:	0e 94 99 02 	call	0x532	; 0x532 <LED_voidOn>
 									}
 								local_lightStatus=KPD_Not_Pressed;
- 8b4:	8f ef       	ldi	r24, 0xFF	; 255
- 8b6:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
-								HomeScreen();
- 8ba:	0e 94 00 05 	call	0xa00	; 0xa00 <HomeScreen>
- 8be:	9a c0       	rjmp	.+308    	; 0x9f4 <__stack+0x195>
+ 90e:	8f ef       	ldi	r24, 0xFF	; 255
+ 910:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <local_lightStatus>
+ 914:	be c0       	rjmp	.+380    	; 0xa92 <__stack+0x233>
+								//HomeScreen();
 							}
 							
 						}
 											else if (local_lightNum=='5')
- 8c0:	85 33       	cpi	r24, 0x35	; 53
- 8c2:	09 f0       	breq	.+2      	; 0x8c6 <__stack+0x67>
- 8c4:	50 c0       	rjmp	.+160    	; 0x966 <__stack+0x107>
+ 916:	85 33       	cpi	r24, 0x35	; 53
+ 918:	09 f0       	breq	.+2      	; 0x91c <__stack+0xbd>
+ 91a:	4c c0       	rjmp	.+152    	; 0x9b4 <__stack+0x155>
 						{
 							DIO_voidGetPinValue(DIO_PORTD,DIO_PIN2,&led_status);
- 8c6:	4e ee       	ldi	r20, 0xEE	; 238
- 8c8:	51 e0       	ldi	r21, 0x01	; 1
- 8ca:	62 e0       	ldi	r22, 0x02	; 2
- 8cc:	83 e0       	ldi	r24, 0x03	; 3
- 8ce:	0e 94 5c 06 	call	0xcb8	; 0xcb8 <DIO_voidGetPinValue>
+ 91c:	4e ee       	ldi	r20, 0xEE	; 238
+ 91e:	51 e0       	ldi	r21, 0x01	; 1
+ 920:	62 e0       	ldi	r22, 0x02	; 2
+ 922:	83 e0       	ldi	r24, 0x03	; 3
+ 924:	0e 94 6f 06 	call	0xcde	; 0xcde <DIO_voidGetPinValue>
 							LCD_voidClear();
- 8d2:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
+ 928:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
 							if (led_status ==1)
- 8d6:	80 91 ee 01 	lds	r24, 0x01EE	; 0x8001ee <__data_end>
- 8da:	81 30       	cpi	r24, 0x01	; 1
- 8dc:	09 f5       	brne	.+66     	; 0x920 <__stack+0xc1>
+ 92c:	80 91 ee 01 	lds	r24, 0x01EE	; 0x8001ee <__data_end>
+ 930:	81 30       	cpi	r24, 0x01	; 1
+ 932:	f9 f4       	brne	.+62     	; 0x972 <__stack+0x113>
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 5 is On");
- 8de:	8c e5       	ldi	r24, 0x5C	; 92
- 8e0:	91 e0       	ldi	r25, 0x01	; 1
- 8e2:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 934:	85 e8       	ldi	r24, 0x85	; 133
+ 936:	91 e0       	ldi	r25, 0x01	; 1
+ 938:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								LCD_voidSendCommand(Write_SecondLine);
- 8e6:	80 ec       	ldi	r24, 0xC0	; 192
- 8e8:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ 93c:	80 ec       	ldi	r24, 0xC0	; 192
+ 93e:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
- 8ec:	85 ed       	ldi	r24, 0xD5	; 213
- 8ee:	90 e0       	ldi	r25, 0x00	; 0
- 8f0:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 942:	8e ef       	ldi	r24, 0xFE	; 254
+ 944:	90 e0       	ldi	r25, 0x00	; 0
+ 946:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								while(local_lightStatus== KPD_Not_Pressed)
- 8f4:	04 c0       	rjmp	.+8      	; 0x8fe <__stack+0x9f>
+ 94a:	04 c0       	rjmp	.+8      	; 0x954 <__stack+0xf5>
 								{
 									KPD_voidGetValue(&local_lightStatus);
- 8f6:	80 e6       	ldi	r24, 0x60	; 96
- 8f8:	90 e0       	ldi	r25, 0x00	; 0
- 8fa:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
+ 94c:	81 e6       	ldi	r24, 0x61	; 97
+ 94e:	90 e0       	ldi	r25, 0x00	; 0
+ 950:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
 							if (led_status ==1)
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 5 is On");
 								LCD_voidSendCommand(Write_SecondLine);
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
 								while(local_lightStatus== KPD_Not_Pressed)
- 8fe:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 902:	8f 3f       	cpi	r24, 0xFF	; 255
- 904:	c1 f3       	breq	.-16     	; 0x8f6 <__stack+0x97>
+ 954:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <local_lightStatus>
+ 958:	8f 3f       	cpi	r24, 0xFF	; 255
+ 95a:	c1 f3       	breq	.-16     	; 0x94c <__stack+0xed>
 								{
 									KPD_voidGetValue(&local_lightStatus);
 								}
 								
 									if (local_lightStatus=='1')
- 906:	81 33       	cpi	r24, 0x31	; 49
- 908:	29 f4       	brne	.+10     	; 0x914 <__stack+0xb5>
+ 95c:	81 33       	cpi	r24, 0x31	; 49
+ 95e:	29 f4       	brne	.+10     	; 0x96a <__stack+0x10b>
 									{
 									LED_voidOff(DIO_PORTD,DIO_PIN2,LED_FORWARD_CONNECTION);
- 90a:	41 e0       	ldi	r20, 0x01	; 1
- 90c:	62 e0       	ldi	r22, 0x02	; 2
- 90e:	83 e0       	ldi	r24, 0x03	; 3
- 910:	0e 94 a6 02 	call	0x54c	; 0x54c <LED_voidOff>
+ 960:	41 e0       	ldi	r20, 0x01	; 1
+ 962:	62 e0       	ldi	r22, 0x02	; 2
+ 964:	83 e0       	ldi	r24, 0x03	; 3
+ 966:	0e 94 a6 02 	call	0x54c	; 0x54c <LED_voidOff>
 									}
 								local_lightStatus=KPD_Not_Pressed;
- 914:	8f ef       	ldi	r24, 0xFF	; 255
- 916:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
-								HomeScreen();
- 91a:	0e 94 00 05 	call	0xa00	; 0xa00 <HomeScreen>
- 91e:	6a c0       	rjmp	.+212    	; 0x9f4 <__stack+0x195>
+ 96a:	8f ef       	ldi	r24, 0xFF	; 255
+ 96c:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <local_lightStatus>
+ 970:	90 c0       	rjmp	.+288    	; 0xa92 <__stack+0x233>
+								//HomeScreen();
 							}
 							else if (led_status ==0)
- 920:	81 11       	cpse	r24, r1
- 922:	68 c0       	rjmp	.+208    	; 0x9f4 <__stack+0x195>
+ 972:	81 11       	cpse	r24, r1
+ 974:	8e c0       	rjmp	.+284    	; 0xa92 <__stack+0x233>
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 5 is OFF");
- 924:	8a e6       	ldi	r24, 0x6A	; 106
- 926:	91 e0       	ldi	r25, 0x01	; 1
- 928:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 976:	83 e9       	ldi	r24, 0x93	; 147
+ 978:	91 e0       	ldi	r25, 0x01	; 1
+ 97a:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								LCD_voidSendCommand(Write_SecondLine);
- 92c:	80 ec       	ldi	r24, 0xC0	; 192
- 92e:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ 97e:	80 ec       	ldi	r24, 0xC0	; 192
+ 980:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
- 932:	85 ef       	ldi	r24, 0xF5	; 245
- 934:	90 e0       	ldi	r25, 0x00	; 0
- 936:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 984:	8e e1       	ldi	r24, 0x1E	; 30
+ 986:	91 e0       	ldi	r25, 0x01	; 1
+ 988:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								while(local_lightStatus== KPD_Not_Pressed)
- 93a:	04 c0       	rjmp	.+8      	; 0x944 <__stack+0xe5>
+ 98c:	04 c0       	rjmp	.+8      	; 0x996 <__stack+0x137>
 								{
 								KPD_voidGetValue(&local_lightStatus);
- 93c:	80 e6       	ldi	r24, 0x60	; 96
- 93e:	90 e0       	ldi	r25, 0x00	; 0
- 940:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
+ 98e:	81 e6       	ldi	r24, 0x61	; 97
+ 990:	90 e0       	ldi	r25, 0x00	; 0
+ 992:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
 							else if (led_status ==0)
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 5 is OFF");
 								LCD_voidSendCommand(Write_SecondLine);
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
 								while(local_lightStatus== KPD_Not_Pressed)
- 944:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 948:	8f 3f       	cpi	r24, 0xFF	; 255
- 94a:	c1 f3       	breq	.-16     	; 0x93c <__stack+0xdd>
+ 996:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <local_lightStatus>
+ 99a:	8f 3f       	cpi	r24, 0xFF	; 255
+ 99c:	c1 f3       	breq	.-16     	; 0x98e <__stack+0x12f>
 								{
 								KPD_voidGetValue(&local_lightStatus);
 								}
 								
 								if (local_lightStatus=='1')
- 94c:	81 33       	cpi	r24, 0x31	; 49
- 94e:	29 f4       	brne	.+10     	; 0x95a <__stack+0xfb>
+ 99e:	81 33       	cpi	r24, 0x31	; 49
+ 9a0:	29 f4       	brne	.+10     	; 0x9ac <__stack+0x14d>
 									{
 										LED_voidOn(DIO_PORTD,DIO_PIN2,LED_FORWARD_CONNECTION);
- 950:	41 e0       	ldi	r20, 0x01	; 1
- 952:	62 e0       	ldi	r22, 0x02	; 2
- 954:	83 e0       	ldi	r24, 0x03	; 3
- 956:	0e 94 99 02 	call	0x532	; 0x532 <LED_voidOn>
+ 9a2:	41 e0       	ldi	r20, 0x01	; 1
+ 9a4:	62 e0       	ldi	r22, 0x02	; 2
+ 9a6:	83 e0       	ldi	r24, 0x03	; 3
+ 9a8:	0e 94 99 02 	call	0x532	; 0x532 <LED_voidOn>
 									}
 								local_lightStatus=KPD_Not_Pressed;
- 95a:	8f ef       	ldi	r24, 0xFF	; 255
- 95c:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
-								HomeScreen();
- 960:	0e 94 00 05 	call	0xa00	; 0xa00 <HomeScreen>
- 964:	47 c0       	rjmp	.+142    	; 0x9f4 <__stack+0x195>
+ 9ac:	8f ef       	ldi	r24, 0xFF	; 255
+ 9ae:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <local_lightStatus>
+ 9b2:	6f c0       	rjmp	.+222    	; 0xa92 <__stack+0x233>
 							}
 							
 							
 						}
 						//if the user choose light 6 (DIMMER LED)
 											else if (local_lightNum=='6')
- 966:	86 33       	cpi	r24, 0x36	; 54
- 968:	01 f5       	brne	.+64     	; 0x9aa <__stack+0x14b>
+ 9b4:	86 33       	cpi	r24, 0x36	; 54
+ 9b6:	01 f5       	brne	.+64     	; 0x9f8 <__stack+0x199>
 						{
 							LCD_voidClear();
- 96a:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
+ 9b8:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
 							if (led_status ==1)
- 96e:	80 91 ee 01 	lds	r24, 0x01EE	; 0x8001ee <__data_end>
- 972:	81 30       	cpi	r24, 0x01	; 1
- 974:	61 f4       	brne	.+24     	; 0x98e <__stack+0x12f>
+ 9bc:	80 91 ee 01 	lds	r24, 0x01EE	; 0x8001ee <__data_end>
+ 9c0:	81 30       	cpi	r24, 0x01	; 1
+ 9c2:	61 f4       	brne	.+24     	; 0x9dc <__stack+0x17d>
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 6 is On");
- 976:	89 e7       	ldi	r24, 0x79	; 121
- 978:	91 e0       	ldi	r25, 0x01	; 1
- 97a:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 9c4:	82 ea       	ldi	r24, 0xA2	; 162
+ 9c6:	91 e0       	ldi	r25, 0x01	; 1
+ 9c8:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								LCD_voidSendCommand(Write_SecondLine);
- 97e:	80 ec       	ldi	r24, 0xC0	; 192
- 980:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ 9cc:	80 ec       	ldi	r24, 0xC0	; 192
+ 9ce:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It Off");
- 984:	85 ed       	ldi	r24, 0xD5	; 213
- 986:	90 e0       	ldi	r25, 0x00	; 0
- 988:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
- 98c:	33 c0       	rjmp	.+102    	; 0x9f4 <__stack+0x195>
+ 9d2:	8e ef       	ldi	r24, 0xFE	; 254
+ 9d4:	90 e0       	ldi	r25, 0x00	; 0
+ 9d6:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 9da:	5b c0       	rjmp	.+182    	; 0xa92 <__stack+0x233>
 							}
 							else if (led_status ==0)
- 98e:	81 11       	cpse	r24, r1
- 990:	31 c0       	rjmp	.+98     	; 0x9f4 <__stack+0x195>
+ 9dc:	81 11       	cpse	r24, r1
+ 9de:	59 c0       	rjmp	.+178    	; 0xa92 <__stack+0x233>
 							{
 								LCD_voidDisplayStringDelay((u8*)"Light 6 is OFF");
- 992:	87 e8       	ldi	r24, 0x87	; 135
- 994:	91 e0       	ldi	r25, 0x01	; 1
- 996:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 9e0:	80 eb       	ldi	r24, 0xB0	; 176
+ 9e2:	91 e0       	ldi	r25, 0x01	; 1
+ 9e4:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								LCD_voidSendCommand(Write_SecondLine);
- 99a:	80 ec       	ldi	r24, 0xC0	; 192
- 99c:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ 9e8:	80 ec       	ldi	r24, 0xC0	; 192
+ 9ea:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 								LCD_voidDisplayStringDelay((u8*)"1-To Turn It On");
- 9a0:	85 ef       	ldi	r24, 0xF5	; 245
- 9a2:	90 e0       	ldi	r25, 0x00	; 0
- 9a4:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
- 9a8:	25 c0       	rjmp	.+74     	; 0x9f4 <__stack+0x195>
+ 9ee:	8e e1       	ldi	r24, 0x1E	; 30
+ 9f0:	91 e0       	ldi	r25, 0x01	; 1
+ 9f2:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ 9f6:	4d c0       	rjmp	.+154    	; 0xa92 <__stack+0x233>
 							}
 							
 						}
-											else 
+											else if (local_lightNum=='0')			
+ 9f8:	80 33       	cpi	r24, 0x30	; 48
+ 9fa:	31 f5       	brne	.+76     	; 0xa48 <__stack+0x1e9>
 							{
 								LCD_voidClear();
- 9aa:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
+ 9fc:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
 								LCD_voidDisplayStringDelay((u8*)"  Invalid Input");
- 9ae:	86 e9       	ldi	r24, 0x96	; 150
- 9b0:	91 e0       	ldi	r25, 0x01	; 1
- 9b2:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
- 9b6:	2f ef       	ldi	r18, 0xFF	; 255
- 9b8:	83 ed       	ldi	r24, 0xD3	; 211
- 9ba:	90 e3       	ldi	r25, 0x30	; 48
- 9bc:	21 50       	subi	r18, 0x01	; 1
- 9be:	80 40       	sbci	r24, 0x00	; 0
- 9c0:	90 40       	sbci	r25, 0x00	; 0
- 9c2:	e1 f7       	brne	.-8      	; 0x9bc <__stack+0x15d>
- 9c4:	00 c0       	rjmp	.+0      	; 0x9c6 <__stack+0x167>
- 9c6:	00 00       	nop
+ a00:	8f eb       	ldi	r24, 0xBF	; 191
+ a02:	91 e0       	ldi	r25, 0x01	; 1
+ a04:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ a08:	2f ef       	ldi	r18, 0xFF	; 255
+ a0a:	83 ed       	ldi	r24, 0xD3	; 211
+ a0c:	90 e3       	ldi	r25, 0x30	; 48
+ a0e:	21 50       	subi	r18, 0x01	; 1
+ a10:	80 40       	sbci	r24, 0x00	; 0
+ a12:	90 40       	sbci	r25, 0x00	; 0
+ a14:	e1 f7       	brne	.-8      	; 0xa0e <__stack+0x1af>
+ a16:	00 c0       	rjmp	.+0      	; 0xa18 <__stack+0x1b9>
+ a18:	00 00       	nop
 								_delay_ms(1000);
 								LCD_voidClear();
- 9c8:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
+ a1a:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
 								LCD_voidDisplayStringDelay((u8*)"  please choose ");
- 9cc:	86 ea       	ldi	r24, 0xA6	; 166
- 9ce:	91 e0       	ldi	r25, 0x01	; 1
- 9d0:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ a1e:	8f ec       	ldi	r24, 0xCF	; 207
+ a20:	91 e0       	ldi	r25, 0x01	; 1
+ a22:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
 								LCD_voidSendCommand(Write_SecondLine);
- 9d4:	80 ec       	ldi	r24, 0xC0	; 192
- 9d6:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+ a26:	80 ec       	ldi	r24, 0xC0	; 192
+ a28:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
 								LCD_voidDisplayStringDelay((u8*)"  from 1 to 6");
- 9da:	87 eb       	ldi	r24, 0xB7	; 183
- 9dc:	91 e0       	ldi	r25, 0x01	; 1
- 9de:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
- 9e2:	2f ef       	ldi	r18, 0xFF	; 255
- 9e4:	83 ed       	ldi	r24, 0xD3	; 211
- 9e6:	90 e3       	ldi	r25, 0x30	; 48
- 9e8:	21 50       	subi	r18, 0x01	; 1
- 9ea:	80 40       	sbci	r24, 0x00	; 0
- 9ec:	90 40       	sbci	r25, 0x00	; 0
- 9ee:	e1 f7       	brne	.-8      	; 0x9e8 <__stack+0x189>
- 9f0:	00 c0       	rjmp	.+0      	; 0x9f2 <__stack+0x193>
- 9f2:	00 00       	nop
-								//clear the local_lightNum to get the light number again
-								local_lightNum = KPD_Not_Pressed;
-								// go to the beginning of the loop to get the light number again
+ a2c:	80 ee       	ldi	r24, 0xE0	; 224
+ a2e:	91 e0       	ldi	r25, 0x01	; 1
+ a30:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ a34:	2f ef       	ldi	r18, 0xFF	; 255
+ a36:	83 ed       	ldi	r24, 0xD3	; 211
+ a38:	90 e3       	ldi	r25, 0x30	; 48
+ a3a:	21 50       	subi	r18, 0x01	; 1
+ a3c:	80 40       	sbci	r24, 0x00	; 0
+ a3e:	90 40       	sbci	r25, 0x00	; 0
+ a40:	e1 f7       	brne	.-8      	; 0xa3a <__stack+0x1db>
+ a42:	00 c0       	rjmp	.+0      	; 0xa44 <__stack+0x1e5>
+ a44:	00 00       	nop
+ a46:	25 c0       	rjmp	.+74     	; 0xa92 <__stack+0x233>
+								// local_lightNum = KPD_Not_Pressed;
 							
 							}
+								else			
+							{
+								LCD_voidClear();
+ a48:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
+								LCD_voidDisplayStringDelay((u8*)"  Invalid Input");
+ a4c:	8f eb       	ldi	r24, 0xBF	; 191
+ a4e:	91 e0       	ldi	r25, 0x01	; 1
+ a50:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ a54:	2f ef       	ldi	r18, 0xFF	; 255
+ a56:	83 ed       	ldi	r24, 0xD3	; 211
+ a58:	90 e3       	ldi	r25, 0x30	; 48
+ a5a:	21 50       	subi	r18, 0x01	; 1
+ a5c:	80 40       	sbci	r24, 0x00	; 0
+ a5e:	90 40       	sbci	r25, 0x00	; 0
+ a60:	e1 f7       	brne	.-8      	; 0xa5a <__stack+0x1fb>
+ a62:	00 c0       	rjmp	.+0      	; 0xa64 <__stack+0x205>
+ a64:	00 00       	nop
+								_delay_ms(1000);
+								LCD_voidClear();
+ a66:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
+								LCD_voidDisplayStringDelay((u8*)"  please choose ");
+ a6a:	8f ec       	ldi	r24, 0xCF	; 207
+ a6c:	91 e0       	ldi	r25, 0x01	; 1
+ a6e:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+								LCD_voidSendCommand(Write_SecondLine);
+ a72:	80 ec       	ldi	r24, 0xC0	; 192
+ a74:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
+								LCD_voidDisplayStringDelay((u8*)"  from 1 to 6");
+ a78:	80 ee       	ldi	r24, 0xE0	; 224
+ a7a:	91 e0       	ldi	r25, 0x01	; 1
+ a7c:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
+ a80:	2f ef       	ldi	r18, 0xFF	; 255
+ a82:	83 ed       	ldi	r24, 0xD3	; 211
+ a84:	90 e3       	ldi	r25, 0x30	; 48
+ a86:	21 50       	subi	r18, 0x01	; 1
+ a88:	80 40       	sbci	r24, 0x00	; 0
+ a8a:	90 40       	sbci	r25, 0x00	; 0
+ a8c:	e1 f7       	brne	.-8      	; 0xa86 <__stack+0x227>
+ a8e:	00 c0       	rjmp	.+0      	; 0xa90 <__stack+0x231>
+ a90:	00 00       	nop
+								_delay_ms(1000);
+							
+							
+							}
+							
 							local_lightNum =KPD_Not_Pressed;
- 9f4:	8f ef       	ldi	r24, 0xFF	; 255
- 9f6:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <local_lightNum>
+ a92:	8f ef       	ldi	r24, 0xFF	; 255
+ a94:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <local_lightNum>
 							Local_copyKPDValue=KPD_Not_Pressed;
- 9fa:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <Local_copyKPDValue>
- 9fe:	08 95       	ret
+ a98:	80 93 63 00 	sts	0x0063, r24	; 0x800063 <Local_copyKPDValue>
+							break;	
+ a9c:	9d cd       	rjmp	.-1222   	; 0x5d8 <KPD_Interface>
 
-00000a00 <HomeScreen>:
-}
-
-
-void HomeScreen()
-{
-	LCD_voidClear();
- a00:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
-	LCD_voidDisplayString((u8*)"1-AC 2-light");
- a04:	85 ec       	ldi	r24, 0xC5	; 197
- a06:	91 e0       	ldi	r25, 0x01	; 1
- a08:	0e 94 2f 02 	call	0x45e	; 0x45e <LCD_voidDisplayString>
-	LCD_voidSendCommand(Write_SecondLine);
- a0c:	80 ec       	ldi	r24, 0xC0	; 192
- a0e:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
-	LCD_voidDisplayString((u8*)"3-temperature");
- a12:	82 ed       	ldi	r24, 0xD2	; 210
- a14:	91 e0       	ldi	r25, 0x01	; 1
- a16:	0e 94 2f 02 	call	0x45e	; 0x45e <LCD_voidDisplayString>
-	Reset_AllKPDValues();
- a1a:	0e 94 c8 02 	call	0x590	; 0x590 <Reset_AllKPDValues>
-	TMR0clear_flag();
- a1e:	0e 94 04 07 	call	0xe08	; 0xe08 <TMR0clear_flag>
-	KPD_Interface();
- a22:	0e 94 d0 02 	call	0x5a0	; 0x5a0 <KPD_Interface>
- a26:	08 95       	ret
-
-00000a28 <main>:
-	u8 led_status =0;
+00000a9e <main>:
+	u8 local_KPDIdleValue = KPD_Not_Pressed;
 
 int main(void)
 {
 	/*enable global interrupt*/
 	GI_voidEnable();
- a28:	0e 94 cf 06 	call	0xd9e	; 0xd9e <GI_voidEnable>
+ a9e:	0e 94 e2 06 	call	0xdc4	; 0xdc4 <GI_voidEnable>
 	/*intializing timer by selecting mode and enable timer interrupt overflow and saving perload values*/
 	TMR0_voidInit();
- a2c:	0e 94 d3 06 	call	0xda6	; 0xda6 <TMR0_voidInit>
+ aa2:	0e 94 e6 06 	call	0xdcc	; 0xdcc <TMR0_voidInit>
 	//initialize the LEDs(1-5)
 	LED_voidInit(DIO_PORTA,DIO_PIN0);
- a30:	60 e0       	ldi	r22, 0x00	; 0
- a32:	80 e0       	ldi	r24, 0x00	; 0
- a34:	0e 94 95 02 	call	0x52a	; 0x52a <LED_voidInit>
+ aa6:	60 e0       	ldi	r22, 0x00	; 0
+ aa8:	80 e0       	ldi	r24, 0x00	; 0
+ aaa:	0e 94 95 02 	call	0x52a	; 0x52a <LED_voidInit>
 	LED_voidInit(DIO_PORTA,DIO_PIN1);
- a38:	61 e0       	ldi	r22, 0x01	; 1
- a3a:	80 e0       	ldi	r24, 0x00	; 0
- a3c:	0e 94 95 02 	call	0x52a	; 0x52a <LED_voidInit>
+ aae:	61 e0       	ldi	r22, 0x01	; 1
+ ab0:	80 e0       	ldi	r24, 0x00	; 0
+ ab2:	0e 94 95 02 	call	0x52a	; 0x52a <LED_voidInit>
 	LED_voidInit(DIO_PORTA,DIO_PIN2);
- a40:	62 e0       	ldi	r22, 0x02	; 2
- a42:	80 e0       	ldi	r24, 0x00	; 0
- a44:	0e 94 95 02 	call	0x52a	; 0x52a <LED_voidInit>
+ ab6:	62 e0       	ldi	r22, 0x02	; 2
+ ab8:	80 e0       	ldi	r24, 0x00	; 0
+ aba:	0e 94 95 02 	call	0x52a	; 0x52a <LED_voidInit>
 	LED_voidInit(DIO_PORTA,DIO_PIN3);
- a48:	63 e0       	ldi	r22, 0x03	; 3
- a4a:	80 e0       	ldi	r24, 0x00	; 0
- a4c:	0e 94 95 02 	call	0x52a	; 0x52a <LED_voidInit>
+ abe:	63 e0       	ldi	r22, 0x03	; 3
+ ac0:	80 e0       	ldi	r24, 0x00	; 0
+ ac2:	0e 94 95 02 	call	0x52a	; 0x52a <LED_voidInit>
 	LED_voidInit(DIO_PORTD,DIO_PIN2);
- a50:	62 e0       	ldi	r22, 0x02	; 2
- a52:	83 e0       	ldi	r24, 0x03	; 3
- a54:	0e 94 95 02 	call	0x52a	; 0x52a <LED_voidInit>
+ ac6:	62 e0       	ldi	r22, 0x02	; 2
+ ac8:	83 e0       	ldi	r24, 0x03	; 3
+ aca:	0e 94 95 02 	call	0x52a	; 0x52a <LED_voidInit>
 	//initialize the LCD
     LCD_voidInit();
- a58:	0e 94 97 01 	call	0x32e	; 0x32e <LCD_voidInit>
+ ace:	0e 94 97 01 	call	0x32e	; 0x32e <LCD_voidInit>
 	//initialize the KPD
 	KPD_voidInit();
- a5c:	0e 94 49 00 	call	0x92	; 0x92 <KPD_voidInit>
+ ad2:	0e 94 49 00 	call	0x92	; 0x92 <KPD_voidInit>
 	//display the welcome screen
 	WelcomeScreen();
- a60:	0e 94 b3 02 	call	0x566	; 0x566 <WelcomeScreen>
+ ad6:	0e 94 cf 02 	call	0x59e	; 0x59e <WelcomeScreen>
 	//display the home screen
-	HomeScreen();
- a64:	0e 94 00 05 	call	0xa00	; 0xa00 <HomeScreen>
+	// //HomeScreen();
+	//kpd interface
+	KPD_Interface();
+ ada:	0e 94 ec 02 	call	0x5d8	; 0x5d8 <KPD_Interface>
 
-	//local variables
-
-	
-	
-}
- a68:	80 e0       	ldi	r24, 0x00	; 0
- a6a:	90 e0       	ldi	r25, 0x00	; 0
- a6c:	08 95       	ret
-
-00000a6e <LCD_DisplayTemp>:
-	
-}
-
-
-void LCD_DisplayTemp()
-{
- a6e:	cf 93       	push	r28
- a70:	df 93       	push	r29
- a72:	1f 92       	push	r1
- a74:	cd b7       	in	r28, 0x3d	; 61
- a76:	de b7       	in	r29, 0x3e	; 62
-	u8 local_KPDIdleValue = KPD_Not_Pressed;
- a78:	8f ef       	ldi	r24, 0xFF	; 255
- a7a:	89 83       	std	Y+1, r24	; 0x01
-	
-	// TMR0_voidStop();
-	 LCD_voidClear();
- a7c:	0e 94 64 02 	call	0x4c8	; 0x4c8 <LCD_voidClear>
-	LCD_voidDisplayStringDelay((u8*)"Temp: 30c");
- a80:	80 ea       	ldi	r24, 0xA0	; 160
- a82:	90 e0       	ldi	r25, 0x00	; 0
- a84:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
-	LCD_voidSendCommand(Write_SecondLine);
- a88:	80 ec       	ldi	r24, 0xC0	; 192
- a8a:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_voidSendCommand>
-	LCD_voidDisplayStringDelay((u8*)"0-go to home");
- a8e:	80 ee       	ldi	r24, 0xE0	; 224
- a90:	91 e0       	ldi	r25, 0x01	; 1
- a92:	0e 94 45 02 	call	0x48a	; 0x48a <LCD_voidDisplayStringDelay>
-		do {
-		KPD_voidGetValue(&local_KPDIdleValue);
- a96:	ce 01       	movw	r24, r28
- a98:	01 96       	adiw	r24, 0x01	; 1
- a9a:	0e 94 7d 00 	call	0xfa	; 0xfa <KPD_voidGetValue>
-	} while (local_KPDIdleValue != '0');
- a9e:	89 81       	ldd	r24, Y+1	; 0x01
- aa0:	80 33       	cpi	r24, 0x30	; 48
- aa2:	c9 f7       	brne	.-14     	; 0xa96 <LCD_DisplayTemp+0x28>
-	TMR0clear_flag();
- aa4:	0e 94 04 07 	call	0xe08	; 0xe08 <TMR0clear_flag>
-	TMR0_voidStop();
- aa8:	0e 94 f3 06 	call	0xde6	; 0xde6 <TMR0_voidStop>
-	HomeScreen();
- aac:	0e 94 00 05 	call	0xa00	; 0xa00 <HomeScreen>
-
-	
-}
- ab0:	0f 90       	pop	r0
- ab2:	df 91       	pop	r29
- ab4:	cf 91       	pop	r28
- ab6:	08 95       	ret
-
-00000ab8 <DIO_voidSetPinDirection>:
+00000ade <DIO_voidSetPinDirection>:
 			case DIO_PORTC:
 			TOG_BIT(PORTC_REG,copy_u8PinId);
 			break;
 			
 			case DIO_PORTD:
 			TOG_BIT(PORTD_REG,copy_u8PinId);
- ab8:	84 30       	cpi	r24, 0x04	; 4
- aba:	08 f0       	brcs	.+2      	; 0xabe <DIO_voidSetPinDirection+0x6>
- abc:	7c c0       	rjmp	.+248    	; 0xbb6 <DIO_voidSetPinDirection+0xfe>
- abe:	68 30       	cpi	r22, 0x08	; 8
- ac0:	08 f0       	brcs	.+2      	; 0xac4 <DIO_voidSetPinDirection+0xc>
- ac2:	79 c0       	rjmp	.+242    	; 0xbb6 <DIO_voidSetPinDirection+0xfe>
- ac4:	42 30       	cpi	r20, 0x02	; 2
- ac6:	08 f0       	brcs	.+2      	; 0xaca <DIO_voidSetPinDirection+0x12>
- ac8:	76 c0       	rjmp	.+236    	; 0xbb6 <DIO_voidSetPinDirection+0xfe>
- aca:	81 30       	cpi	r24, 0x01	; 1
- acc:	19 f1       	breq	.+70     	; 0xb14 <DIO_voidSetPinDirection+0x5c>
- ace:	30 f0       	brcs	.+12     	; 0xadc <DIO_voidSetPinDirection+0x24>
- ad0:	82 30       	cpi	r24, 0x02	; 2
- ad2:	e1 f1       	breq	.+120    	; 0xb4c <DIO_voidSetPinDirection+0x94>
- ad4:	83 30       	cpi	r24, 0x03	; 3
- ad6:	09 f4       	brne	.+2      	; 0xada <DIO_voidSetPinDirection+0x22>
- ad8:	54 c0       	rjmp	.+168    	; 0xb82 <DIO_voidSetPinDirection+0xca>
- ada:	08 95       	ret
- adc:	44 23       	and	r20, r20
- ade:	71 f0       	breq	.+28     	; 0xafc <DIO_voidSetPinDirection+0x44>
- ae0:	41 30       	cpi	r20, 0x01	; 1
- ae2:	09 f0       	breq	.+2      	; 0xae6 <DIO_voidSetPinDirection+0x2e>
- ae4:	68 c0       	rjmp	.+208    	; 0xbb6 <DIO_voidSetPinDirection+0xfe>
- ae6:	2a b3       	in	r18, 0x1a	; 26
- ae8:	81 e0       	ldi	r24, 0x01	; 1
- aea:	90 e0       	ldi	r25, 0x00	; 0
- aec:	02 c0       	rjmp	.+4      	; 0xaf2 <DIO_voidSetPinDirection+0x3a>
- aee:	88 0f       	add	r24, r24
- af0:	99 1f       	adc	r25, r25
- af2:	6a 95       	dec	r22
- af4:	e2 f7       	brpl	.-8      	; 0xaee <DIO_voidSetPinDirection+0x36>
- af6:	82 2b       	or	r24, r18
- af8:	8a bb       	out	0x1a, r24	; 26
- afa:	08 95       	ret
- afc:	2a b3       	in	r18, 0x1a	; 26
- afe:	81 e0       	ldi	r24, 0x01	; 1
- b00:	90 e0       	ldi	r25, 0x00	; 0
- b02:	02 c0       	rjmp	.+4      	; 0xb08 <DIO_voidSetPinDirection+0x50>
- b04:	88 0f       	add	r24, r24
- b06:	99 1f       	adc	r25, r25
- b08:	6a 95       	dec	r22
- b0a:	e2 f7       	brpl	.-8      	; 0xb04 <DIO_voidSetPinDirection+0x4c>
- b0c:	80 95       	com	r24
- b0e:	82 23       	and	r24, r18
- b10:	8a bb       	out	0x1a, r24	; 26
- b12:	08 95       	ret
- b14:	44 23       	and	r20, r20
- b16:	71 f0       	breq	.+28     	; 0xb34 <DIO_voidSetPinDirection+0x7c>
- b18:	41 30       	cpi	r20, 0x01	; 1
- b1a:	09 f0       	breq	.+2      	; 0xb1e <DIO_voidSetPinDirection+0x66>
- b1c:	4c c0       	rjmp	.+152    	; 0xbb6 <DIO_voidSetPinDirection+0xfe>
- b1e:	27 b3       	in	r18, 0x17	; 23
- b20:	81 e0       	ldi	r24, 0x01	; 1
- b22:	90 e0       	ldi	r25, 0x00	; 0
- b24:	02 c0       	rjmp	.+4      	; 0xb2a <DIO_voidSetPinDirection+0x72>
- b26:	88 0f       	add	r24, r24
- b28:	99 1f       	adc	r25, r25
- b2a:	6a 95       	dec	r22
- b2c:	e2 f7       	brpl	.-8      	; 0xb26 <DIO_voidSetPinDirection+0x6e>
- b2e:	82 2b       	or	r24, r18
- b30:	87 bb       	out	0x17, r24	; 23
- b32:	08 95       	ret
- b34:	27 b3       	in	r18, 0x17	; 23
- b36:	81 e0       	ldi	r24, 0x01	; 1
- b38:	90 e0       	ldi	r25, 0x00	; 0
- b3a:	02 c0       	rjmp	.+4      	; 0xb40 <DIO_voidSetPinDirection+0x88>
- b3c:	88 0f       	add	r24, r24
- b3e:	99 1f       	adc	r25, r25
- b40:	6a 95       	dec	r22
- b42:	e2 f7       	brpl	.-8      	; 0xb3c <DIO_voidSetPinDirection+0x84>
- b44:	80 95       	com	r24
- b46:	82 23       	and	r24, r18
- b48:	87 bb       	out	0x17, r24	; 23
- b4a:	08 95       	ret
- b4c:	44 23       	and	r20, r20
- b4e:	69 f0       	breq	.+26     	; 0xb6a <DIO_voidSetPinDirection+0xb2>
- b50:	41 30       	cpi	r20, 0x01	; 1
- b52:	89 f5       	brne	.+98     	; 0xbb6 <DIO_voidSetPinDirection+0xfe>
- b54:	24 b3       	in	r18, 0x14	; 20
- b56:	81 e0       	ldi	r24, 0x01	; 1
- b58:	90 e0       	ldi	r25, 0x00	; 0
- b5a:	02 c0       	rjmp	.+4      	; 0xb60 <DIO_voidSetPinDirection+0xa8>
- b5c:	88 0f       	add	r24, r24
- b5e:	99 1f       	adc	r25, r25
- b60:	6a 95       	dec	r22
- b62:	e2 f7       	brpl	.-8      	; 0xb5c <DIO_voidSetPinDirection+0xa4>
- b64:	82 2b       	or	r24, r18
- b66:	84 bb       	out	0x14, r24	; 20
- b68:	08 95       	ret
- b6a:	24 b3       	in	r18, 0x14	; 20
- b6c:	81 e0       	ldi	r24, 0x01	; 1
- b6e:	90 e0       	ldi	r25, 0x00	; 0
- b70:	02 c0       	rjmp	.+4      	; 0xb76 <DIO_voidSetPinDirection+0xbe>
- b72:	88 0f       	add	r24, r24
- b74:	99 1f       	adc	r25, r25
- b76:	6a 95       	dec	r22
- b78:	e2 f7       	brpl	.-8      	; 0xb72 <DIO_voidSetPinDirection+0xba>
- b7a:	80 95       	com	r24
- b7c:	82 23       	and	r24, r18
- b7e:	84 bb       	out	0x14, r24	; 20
- b80:	08 95       	ret
- b82:	44 23       	and	r20, r20
- b84:	69 f0       	breq	.+26     	; 0xba0 <DIO_voidSetPinDirection+0xe8>
- b86:	41 30       	cpi	r20, 0x01	; 1
- b88:	b1 f4       	brne	.+44     	; 0xbb6 <DIO_voidSetPinDirection+0xfe>
- b8a:	21 b3       	in	r18, 0x11	; 17
- b8c:	81 e0       	ldi	r24, 0x01	; 1
- b8e:	90 e0       	ldi	r25, 0x00	; 0
- b90:	02 c0       	rjmp	.+4      	; 0xb96 <DIO_voidSetPinDirection+0xde>
- b92:	88 0f       	add	r24, r24
- b94:	99 1f       	adc	r25, r25
- b96:	6a 95       	dec	r22
- b98:	e2 f7       	brpl	.-8      	; 0xb92 <DIO_voidSetPinDirection+0xda>
- b9a:	82 2b       	or	r24, r18
- b9c:	81 bb       	out	0x11, r24	; 17
- b9e:	08 95       	ret
- ba0:	21 b3       	in	r18, 0x11	; 17
- ba2:	81 e0       	ldi	r24, 0x01	; 1
- ba4:	90 e0       	ldi	r25, 0x00	; 0
- ba6:	02 c0       	rjmp	.+4      	; 0xbac <DIO_voidSetPinDirection+0xf4>
- ba8:	88 0f       	add	r24, r24
- baa:	99 1f       	adc	r25, r25
- bac:	6a 95       	dec	r22
- bae:	e2 f7       	brpl	.-8      	; 0xba8 <DIO_voidSetPinDirection+0xf0>
- bb0:	80 95       	com	r24
- bb2:	82 23       	and	r24, r18
- bb4:	81 bb       	out	0x11, r24	; 17
- bb6:	08 95       	ret
+ ade:	84 30       	cpi	r24, 0x04	; 4
+ ae0:	08 f0       	brcs	.+2      	; 0xae4 <DIO_voidSetPinDirection+0x6>
+ ae2:	7c c0       	rjmp	.+248    	; 0xbdc <DIO_voidSetPinDirection+0xfe>
+ ae4:	68 30       	cpi	r22, 0x08	; 8
+ ae6:	08 f0       	brcs	.+2      	; 0xaea <DIO_voidSetPinDirection+0xc>
+ ae8:	79 c0       	rjmp	.+242    	; 0xbdc <DIO_voidSetPinDirection+0xfe>
+ aea:	42 30       	cpi	r20, 0x02	; 2
+ aec:	08 f0       	brcs	.+2      	; 0xaf0 <DIO_voidSetPinDirection+0x12>
+ aee:	76 c0       	rjmp	.+236    	; 0xbdc <DIO_voidSetPinDirection+0xfe>
+ af0:	81 30       	cpi	r24, 0x01	; 1
+ af2:	19 f1       	breq	.+70     	; 0xb3a <DIO_voidSetPinDirection+0x5c>
+ af4:	30 f0       	brcs	.+12     	; 0xb02 <DIO_voidSetPinDirection+0x24>
+ af6:	82 30       	cpi	r24, 0x02	; 2
+ af8:	e1 f1       	breq	.+120    	; 0xb72 <DIO_voidSetPinDirection+0x94>
+ afa:	83 30       	cpi	r24, 0x03	; 3
+ afc:	09 f4       	brne	.+2      	; 0xb00 <DIO_voidSetPinDirection+0x22>
+ afe:	54 c0       	rjmp	.+168    	; 0xba8 <DIO_voidSetPinDirection+0xca>
+ b00:	08 95       	ret
+ b02:	44 23       	and	r20, r20
+ b04:	71 f0       	breq	.+28     	; 0xb22 <DIO_voidSetPinDirection+0x44>
+ b06:	41 30       	cpi	r20, 0x01	; 1
+ b08:	09 f0       	breq	.+2      	; 0xb0c <DIO_voidSetPinDirection+0x2e>
+ b0a:	68 c0       	rjmp	.+208    	; 0xbdc <DIO_voidSetPinDirection+0xfe>
+ b0c:	2a b3       	in	r18, 0x1a	; 26
+ b0e:	81 e0       	ldi	r24, 0x01	; 1
+ b10:	90 e0       	ldi	r25, 0x00	; 0
+ b12:	02 c0       	rjmp	.+4      	; 0xb18 <DIO_voidSetPinDirection+0x3a>
+ b14:	88 0f       	add	r24, r24
+ b16:	99 1f       	adc	r25, r25
+ b18:	6a 95       	dec	r22
+ b1a:	e2 f7       	brpl	.-8      	; 0xb14 <DIO_voidSetPinDirection+0x36>
+ b1c:	82 2b       	or	r24, r18
+ b1e:	8a bb       	out	0x1a, r24	; 26
+ b20:	08 95       	ret
+ b22:	2a b3       	in	r18, 0x1a	; 26
+ b24:	81 e0       	ldi	r24, 0x01	; 1
+ b26:	90 e0       	ldi	r25, 0x00	; 0
+ b28:	02 c0       	rjmp	.+4      	; 0xb2e <DIO_voidSetPinDirection+0x50>
+ b2a:	88 0f       	add	r24, r24
+ b2c:	99 1f       	adc	r25, r25
+ b2e:	6a 95       	dec	r22
+ b30:	e2 f7       	brpl	.-8      	; 0xb2a <DIO_voidSetPinDirection+0x4c>
+ b32:	80 95       	com	r24
+ b34:	82 23       	and	r24, r18
+ b36:	8a bb       	out	0x1a, r24	; 26
+ b38:	08 95       	ret
+ b3a:	44 23       	and	r20, r20
+ b3c:	71 f0       	breq	.+28     	; 0xb5a <DIO_voidSetPinDirection+0x7c>
+ b3e:	41 30       	cpi	r20, 0x01	; 1
+ b40:	09 f0       	breq	.+2      	; 0xb44 <DIO_voidSetPinDirection+0x66>
+ b42:	4c c0       	rjmp	.+152    	; 0xbdc <DIO_voidSetPinDirection+0xfe>
+ b44:	27 b3       	in	r18, 0x17	; 23
+ b46:	81 e0       	ldi	r24, 0x01	; 1
+ b48:	90 e0       	ldi	r25, 0x00	; 0
+ b4a:	02 c0       	rjmp	.+4      	; 0xb50 <DIO_voidSetPinDirection+0x72>
+ b4c:	88 0f       	add	r24, r24
+ b4e:	99 1f       	adc	r25, r25
+ b50:	6a 95       	dec	r22
+ b52:	e2 f7       	brpl	.-8      	; 0xb4c <DIO_voidSetPinDirection+0x6e>
+ b54:	82 2b       	or	r24, r18
+ b56:	87 bb       	out	0x17, r24	; 23
+ b58:	08 95       	ret
+ b5a:	27 b3       	in	r18, 0x17	; 23
+ b5c:	81 e0       	ldi	r24, 0x01	; 1
+ b5e:	90 e0       	ldi	r25, 0x00	; 0
+ b60:	02 c0       	rjmp	.+4      	; 0xb66 <DIO_voidSetPinDirection+0x88>
+ b62:	88 0f       	add	r24, r24
+ b64:	99 1f       	adc	r25, r25
+ b66:	6a 95       	dec	r22
+ b68:	e2 f7       	brpl	.-8      	; 0xb62 <DIO_voidSetPinDirection+0x84>
+ b6a:	80 95       	com	r24
+ b6c:	82 23       	and	r24, r18
+ b6e:	87 bb       	out	0x17, r24	; 23
+ b70:	08 95       	ret
+ b72:	44 23       	and	r20, r20
+ b74:	69 f0       	breq	.+26     	; 0xb90 <DIO_voidSetPinDirection+0xb2>
+ b76:	41 30       	cpi	r20, 0x01	; 1
+ b78:	89 f5       	brne	.+98     	; 0xbdc <DIO_voidSetPinDirection+0xfe>
+ b7a:	24 b3       	in	r18, 0x14	; 20
+ b7c:	81 e0       	ldi	r24, 0x01	; 1
+ b7e:	90 e0       	ldi	r25, 0x00	; 0
+ b80:	02 c0       	rjmp	.+4      	; 0xb86 <DIO_voidSetPinDirection+0xa8>
+ b82:	88 0f       	add	r24, r24
+ b84:	99 1f       	adc	r25, r25
+ b86:	6a 95       	dec	r22
+ b88:	e2 f7       	brpl	.-8      	; 0xb82 <DIO_voidSetPinDirection+0xa4>
+ b8a:	82 2b       	or	r24, r18
+ b8c:	84 bb       	out	0x14, r24	; 20
+ b8e:	08 95       	ret
+ b90:	24 b3       	in	r18, 0x14	; 20
+ b92:	81 e0       	ldi	r24, 0x01	; 1
+ b94:	90 e0       	ldi	r25, 0x00	; 0
+ b96:	02 c0       	rjmp	.+4      	; 0xb9c <DIO_voidSetPinDirection+0xbe>
+ b98:	88 0f       	add	r24, r24
+ b9a:	99 1f       	adc	r25, r25
+ b9c:	6a 95       	dec	r22
+ b9e:	e2 f7       	brpl	.-8      	; 0xb98 <DIO_voidSetPinDirection+0xba>
+ ba0:	80 95       	com	r24
+ ba2:	82 23       	and	r24, r18
+ ba4:	84 bb       	out	0x14, r24	; 20
+ ba6:	08 95       	ret
+ ba8:	44 23       	and	r20, r20
+ baa:	69 f0       	breq	.+26     	; 0xbc6 <DIO_voidSetPinDirection+0xe8>
+ bac:	41 30       	cpi	r20, 0x01	; 1
+ bae:	b1 f4       	brne	.+44     	; 0xbdc <DIO_voidSetPinDirection+0xfe>
+ bb0:	21 b3       	in	r18, 0x11	; 17
+ bb2:	81 e0       	ldi	r24, 0x01	; 1
+ bb4:	90 e0       	ldi	r25, 0x00	; 0
+ bb6:	02 c0       	rjmp	.+4      	; 0xbbc <DIO_voidSetPinDirection+0xde>
+ bb8:	88 0f       	add	r24, r24
+ bba:	99 1f       	adc	r25, r25
+ bbc:	6a 95       	dec	r22
+ bbe:	e2 f7       	brpl	.-8      	; 0xbb8 <DIO_voidSetPinDirection+0xda>
+ bc0:	82 2b       	or	r24, r18
+ bc2:	81 bb       	out	0x11, r24	; 17
+ bc4:	08 95       	ret
+ bc6:	21 b3       	in	r18, 0x11	; 17
+ bc8:	81 e0       	ldi	r24, 0x01	; 1
+ bca:	90 e0       	ldi	r25, 0x00	; 0
+ bcc:	02 c0       	rjmp	.+4      	; 0xbd2 <DIO_voidSetPinDirection+0xf4>
+ bce:	88 0f       	add	r24, r24
+ bd0:	99 1f       	adc	r25, r25
+ bd2:	6a 95       	dec	r22
+ bd4:	e2 f7       	brpl	.-8      	; 0xbce <DIO_voidSetPinDirection+0xf0>
+ bd6:	80 95       	com	r24
+ bd8:	82 23       	and	r24, r18
+ bda:	81 bb       	out	0x11, r24	; 17
+ bdc:	08 95       	ret
 
-00000bb8 <DIO_voidSetPinValue>:
- bb8:	84 30       	cpi	r24, 0x04	; 4
- bba:	08 f0       	brcs	.+2      	; 0xbbe <DIO_voidSetPinValue+0x6>
- bbc:	7c c0       	rjmp	.+248    	; 0xcb6 <DIO_voidSetPinValue+0xfe>
- bbe:	68 30       	cpi	r22, 0x08	; 8
- bc0:	08 f0       	brcs	.+2      	; 0xbc4 <DIO_voidSetPinValue+0xc>
- bc2:	79 c0       	rjmp	.+242    	; 0xcb6 <DIO_voidSetPinValue+0xfe>
- bc4:	42 30       	cpi	r20, 0x02	; 2
- bc6:	08 f0       	brcs	.+2      	; 0xbca <DIO_voidSetPinValue+0x12>
- bc8:	76 c0       	rjmp	.+236    	; 0xcb6 <DIO_voidSetPinValue+0xfe>
- bca:	81 30       	cpi	r24, 0x01	; 1
- bcc:	19 f1       	breq	.+70     	; 0xc14 <DIO_voidSetPinValue+0x5c>
- bce:	30 f0       	brcs	.+12     	; 0xbdc <DIO_voidSetPinValue+0x24>
- bd0:	82 30       	cpi	r24, 0x02	; 2
- bd2:	e1 f1       	breq	.+120    	; 0xc4c <DIO_voidSetPinValue+0x94>
- bd4:	83 30       	cpi	r24, 0x03	; 3
- bd6:	09 f4       	brne	.+2      	; 0xbda <DIO_voidSetPinValue+0x22>
- bd8:	54 c0       	rjmp	.+168    	; 0xc82 <DIO_voidSetPinValue+0xca>
- bda:	08 95       	ret
- bdc:	44 23       	and	r20, r20
- bde:	71 f0       	breq	.+28     	; 0xbfc <DIO_voidSetPinValue+0x44>
- be0:	41 30       	cpi	r20, 0x01	; 1
- be2:	09 f0       	breq	.+2      	; 0xbe6 <DIO_voidSetPinValue+0x2e>
- be4:	68 c0       	rjmp	.+208    	; 0xcb6 <DIO_voidSetPinValue+0xfe>
- be6:	2b b3       	in	r18, 0x1b	; 27
- be8:	81 e0       	ldi	r24, 0x01	; 1
- bea:	90 e0       	ldi	r25, 0x00	; 0
- bec:	02 c0       	rjmp	.+4      	; 0xbf2 <DIO_voidSetPinValue+0x3a>
- bee:	88 0f       	add	r24, r24
- bf0:	99 1f       	adc	r25, r25
- bf2:	6a 95       	dec	r22
- bf4:	e2 f7       	brpl	.-8      	; 0xbee <DIO_voidSetPinValue+0x36>
- bf6:	82 2b       	or	r24, r18
- bf8:	8b bb       	out	0x1b, r24	; 27
- bfa:	08 95       	ret
- bfc:	2b b3       	in	r18, 0x1b	; 27
- bfe:	81 e0       	ldi	r24, 0x01	; 1
- c00:	90 e0       	ldi	r25, 0x00	; 0
- c02:	02 c0       	rjmp	.+4      	; 0xc08 <DIO_voidSetPinValue+0x50>
- c04:	88 0f       	add	r24, r24
- c06:	99 1f       	adc	r25, r25
- c08:	6a 95       	dec	r22
- c0a:	e2 f7       	brpl	.-8      	; 0xc04 <DIO_voidSetPinValue+0x4c>
- c0c:	80 95       	com	r24
- c0e:	82 23       	and	r24, r18
- c10:	8b bb       	out	0x1b, r24	; 27
- c12:	08 95       	ret
- c14:	44 23       	and	r20, r20
- c16:	71 f0       	breq	.+28     	; 0xc34 <DIO_voidSetPinValue+0x7c>
- c18:	41 30       	cpi	r20, 0x01	; 1
- c1a:	09 f0       	breq	.+2      	; 0xc1e <DIO_voidSetPinValue+0x66>
- c1c:	4c c0       	rjmp	.+152    	; 0xcb6 <DIO_voidSetPinValue+0xfe>
- c1e:	28 b3       	in	r18, 0x18	; 24
- c20:	81 e0       	ldi	r24, 0x01	; 1
- c22:	90 e0       	ldi	r25, 0x00	; 0
- c24:	02 c0       	rjmp	.+4      	; 0xc2a <DIO_voidSetPinValue+0x72>
- c26:	88 0f       	add	r24, r24
- c28:	99 1f       	adc	r25, r25
- c2a:	6a 95       	dec	r22
- c2c:	e2 f7       	brpl	.-8      	; 0xc26 <DIO_voidSetPinValue+0x6e>
- c2e:	82 2b       	or	r24, r18
- c30:	88 bb       	out	0x18, r24	; 24
- c32:	08 95       	ret
- c34:	28 b3       	in	r18, 0x18	; 24
- c36:	81 e0       	ldi	r24, 0x01	; 1
- c38:	90 e0       	ldi	r25, 0x00	; 0
- c3a:	02 c0       	rjmp	.+4      	; 0xc40 <DIO_voidSetPinValue+0x88>
- c3c:	88 0f       	add	r24, r24
- c3e:	99 1f       	adc	r25, r25
- c40:	6a 95       	dec	r22
- c42:	e2 f7       	brpl	.-8      	; 0xc3c <DIO_voidSetPinValue+0x84>
- c44:	80 95       	com	r24
- c46:	82 23       	and	r24, r18
- c48:	88 bb       	out	0x18, r24	; 24
- c4a:	08 95       	ret
- c4c:	44 23       	and	r20, r20
- c4e:	69 f0       	breq	.+26     	; 0xc6a <DIO_voidSetPinValue+0xb2>
- c50:	41 30       	cpi	r20, 0x01	; 1
- c52:	89 f5       	brne	.+98     	; 0xcb6 <DIO_voidSetPinValue+0xfe>
- c54:	25 b3       	in	r18, 0x15	; 21
- c56:	81 e0       	ldi	r24, 0x01	; 1
- c58:	90 e0       	ldi	r25, 0x00	; 0
- c5a:	02 c0       	rjmp	.+4      	; 0xc60 <DIO_voidSetPinValue+0xa8>
- c5c:	88 0f       	add	r24, r24
- c5e:	99 1f       	adc	r25, r25
- c60:	6a 95       	dec	r22
- c62:	e2 f7       	brpl	.-8      	; 0xc5c <DIO_voidSetPinValue+0xa4>
- c64:	82 2b       	or	r24, r18
- c66:	85 bb       	out	0x15, r24	; 21
- c68:	08 95       	ret
- c6a:	25 b3       	in	r18, 0x15	; 21
- c6c:	81 e0       	ldi	r24, 0x01	; 1
- c6e:	90 e0       	ldi	r25, 0x00	; 0
- c70:	02 c0       	rjmp	.+4      	; 0xc76 <DIO_voidSetPinValue+0xbe>
- c72:	88 0f       	add	r24, r24
- c74:	99 1f       	adc	r25, r25
- c76:	6a 95       	dec	r22
- c78:	e2 f7       	brpl	.-8      	; 0xc72 <DIO_voidSetPinValue+0xba>
- c7a:	80 95       	com	r24
- c7c:	82 23       	and	r24, r18
- c7e:	85 bb       	out	0x15, r24	; 21
- c80:	08 95       	ret
- c82:	44 23       	and	r20, r20
- c84:	69 f0       	breq	.+26     	; 0xca0 <DIO_voidSetPinValue+0xe8>
- c86:	41 30       	cpi	r20, 0x01	; 1
- c88:	b1 f4       	brne	.+44     	; 0xcb6 <DIO_voidSetPinValue+0xfe>
- c8a:	22 b3       	in	r18, 0x12	; 18
- c8c:	81 e0       	ldi	r24, 0x01	; 1
- c8e:	90 e0       	ldi	r25, 0x00	; 0
- c90:	02 c0       	rjmp	.+4      	; 0xc96 <DIO_voidSetPinValue+0xde>
- c92:	88 0f       	add	r24, r24
- c94:	99 1f       	adc	r25, r25
- c96:	6a 95       	dec	r22
- c98:	e2 f7       	brpl	.-8      	; 0xc92 <DIO_voidSetPinValue+0xda>
- c9a:	82 2b       	or	r24, r18
- c9c:	82 bb       	out	0x12, r24	; 18
- c9e:	08 95       	ret
- ca0:	22 b3       	in	r18, 0x12	; 18
- ca2:	81 e0       	ldi	r24, 0x01	; 1
- ca4:	90 e0       	ldi	r25, 0x00	; 0
- ca6:	02 c0       	rjmp	.+4      	; 0xcac <DIO_voidSetPinValue+0xf4>
- ca8:	88 0f       	add	r24, r24
- caa:	99 1f       	adc	r25, r25
- cac:	6a 95       	dec	r22
- cae:	e2 f7       	brpl	.-8      	; 0xca8 <DIO_voidSetPinValue+0xf0>
- cb0:	80 95       	com	r24
- cb2:	82 23       	and	r24, r18
- cb4:	82 bb       	out	0x12, r24	; 18
- cb6:	08 95       	ret
+00000bde <DIO_voidSetPinValue>:
+ bde:	84 30       	cpi	r24, 0x04	; 4
+ be0:	08 f0       	brcs	.+2      	; 0xbe4 <DIO_voidSetPinValue+0x6>
+ be2:	7c c0       	rjmp	.+248    	; 0xcdc <DIO_voidSetPinValue+0xfe>
+ be4:	68 30       	cpi	r22, 0x08	; 8
+ be6:	08 f0       	brcs	.+2      	; 0xbea <DIO_voidSetPinValue+0xc>
+ be8:	79 c0       	rjmp	.+242    	; 0xcdc <DIO_voidSetPinValue+0xfe>
+ bea:	42 30       	cpi	r20, 0x02	; 2
+ bec:	08 f0       	brcs	.+2      	; 0xbf0 <DIO_voidSetPinValue+0x12>
+ bee:	76 c0       	rjmp	.+236    	; 0xcdc <DIO_voidSetPinValue+0xfe>
+ bf0:	81 30       	cpi	r24, 0x01	; 1
+ bf2:	19 f1       	breq	.+70     	; 0xc3a <DIO_voidSetPinValue+0x5c>
+ bf4:	30 f0       	brcs	.+12     	; 0xc02 <DIO_voidSetPinValue+0x24>
+ bf6:	82 30       	cpi	r24, 0x02	; 2
+ bf8:	e1 f1       	breq	.+120    	; 0xc72 <DIO_voidSetPinValue+0x94>
+ bfa:	83 30       	cpi	r24, 0x03	; 3
+ bfc:	09 f4       	brne	.+2      	; 0xc00 <DIO_voidSetPinValue+0x22>
+ bfe:	54 c0       	rjmp	.+168    	; 0xca8 <DIO_voidSetPinValue+0xca>
+ c00:	08 95       	ret
+ c02:	44 23       	and	r20, r20
+ c04:	71 f0       	breq	.+28     	; 0xc22 <DIO_voidSetPinValue+0x44>
+ c06:	41 30       	cpi	r20, 0x01	; 1
+ c08:	09 f0       	breq	.+2      	; 0xc0c <DIO_voidSetPinValue+0x2e>
+ c0a:	68 c0       	rjmp	.+208    	; 0xcdc <DIO_voidSetPinValue+0xfe>
+ c0c:	2b b3       	in	r18, 0x1b	; 27
+ c0e:	81 e0       	ldi	r24, 0x01	; 1
+ c10:	90 e0       	ldi	r25, 0x00	; 0
+ c12:	02 c0       	rjmp	.+4      	; 0xc18 <DIO_voidSetPinValue+0x3a>
+ c14:	88 0f       	add	r24, r24
+ c16:	99 1f       	adc	r25, r25
+ c18:	6a 95       	dec	r22
+ c1a:	e2 f7       	brpl	.-8      	; 0xc14 <DIO_voidSetPinValue+0x36>
+ c1c:	82 2b       	or	r24, r18
+ c1e:	8b bb       	out	0x1b, r24	; 27
+ c20:	08 95       	ret
+ c22:	2b b3       	in	r18, 0x1b	; 27
+ c24:	81 e0       	ldi	r24, 0x01	; 1
+ c26:	90 e0       	ldi	r25, 0x00	; 0
+ c28:	02 c0       	rjmp	.+4      	; 0xc2e <DIO_voidSetPinValue+0x50>
+ c2a:	88 0f       	add	r24, r24
+ c2c:	99 1f       	adc	r25, r25
+ c2e:	6a 95       	dec	r22
+ c30:	e2 f7       	brpl	.-8      	; 0xc2a <DIO_voidSetPinValue+0x4c>
+ c32:	80 95       	com	r24
+ c34:	82 23       	and	r24, r18
+ c36:	8b bb       	out	0x1b, r24	; 27
+ c38:	08 95       	ret
+ c3a:	44 23       	and	r20, r20
+ c3c:	71 f0       	breq	.+28     	; 0xc5a <DIO_voidSetPinValue+0x7c>
+ c3e:	41 30       	cpi	r20, 0x01	; 1
+ c40:	09 f0       	breq	.+2      	; 0xc44 <DIO_voidSetPinValue+0x66>
+ c42:	4c c0       	rjmp	.+152    	; 0xcdc <DIO_voidSetPinValue+0xfe>
+ c44:	28 b3       	in	r18, 0x18	; 24
+ c46:	81 e0       	ldi	r24, 0x01	; 1
+ c48:	90 e0       	ldi	r25, 0x00	; 0
+ c4a:	02 c0       	rjmp	.+4      	; 0xc50 <DIO_voidSetPinValue+0x72>
+ c4c:	88 0f       	add	r24, r24
+ c4e:	99 1f       	adc	r25, r25
+ c50:	6a 95       	dec	r22
+ c52:	e2 f7       	brpl	.-8      	; 0xc4c <DIO_voidSetPinValue+0x6e>
+ c54:	82 2b       	or	r24, r18
+ c56:	88 bb       	out	0x18, r24	; 24
+ c58:	08 95       	ret
+ c5a:	28 b3       	in	r18, 0x18	; 24
+ c5c:	81 e0       	ldi	r24, 0x01	; 1
+ c5e:	90 e0       	ldi	r25, 0x00	; 0
+ c60:	02 c0       	rjmp	.+4      	; 0xc66 <DIO_voidSetPinValue+0x88>
+ c62:	88 0f       	add	r24, r24
+ c64:	99 1f       	adc	r25, r25
+ c66:	6a 95       	dec	r22
+ c68:	e2 f7       	brpl	.-8      	; 0xc62 <DIO_voidSetPinValue+0x84>
+ c6a:	80 95       	com	r24
+ c6c:	82 23       	and	r24, r18
+ c6e:	88 bb       	out	0x18, r24	; 24
+ c70:	08 95       	ret
+ c72:	44 23       	and	r20, r20
+ c74:	69 f0       	breq	.+26     	; 0xc90 <DIO_voidSetPinValue+0xb2>
+ c76:	41 30       	cpi	r20, 0x01	; 1
+ c78:	89 f5       	brne	.+98     	; 0xcdc <DIO_voidSetPinValue+0xfe>
+ c7a:	25 b3       	in	r18, 0x15	; 21
+ c7c:	81 e0       	ldi	r24, 0x01	; 1
+ c7e:	90 e0       	ldi	r25, 0x00	; 0
+ c80:	02 c0       	rjmp	.+4      	; 0xc86 <DIO_voidSetPinValue+0xa8>
+ c82:	88 0f       	add	r24, r24
+ c84:	99 1f       	adc	r25, r25
+ c86:	6a 95       	dec	r22
+ c88:	e2 f7       	brpl	.-8      	; 0xc82 <DIO_voidSetPinValue+0xa4>
+ c8a:	82 2b       	or	r24, r18
+ c8c:	85 bb       	out	0x15, r24	; 21
+ c8e:	08 95       	ret
+ c90:	25 b3       	in	r18, 0x15	; 21
+ c92:	81 e0       	ldi	r24, 0x01	; 1
+ c94:	90 e0       	ldi	r25, 0x00	; 0
+ c96:	02 c0       	rjmp	.+4      	; 0xc9c <DIO_voidSetPinValue+0xbe>
+ c98:	88 0f       	add	r24, r24
+ c9a:	99 1f       	adc	r25, r25
+ c9c:	6a 95       	dec	r22
+ c9e:	e2 f7       	brpl	.-8      	; 0xc98 <DIO_voidSetPinValue+0xba>
+ ca0:	80 95       	com	r24
+ ca2:	82 23       	and	r24, r18
+ ca4:	85 bb       	out	0x15, r24	; 21
+ ca6:	08 95       	ret
+ ca8:	44 23       	and	r20, r20
+ caa:	69 f0       	breq	.+26     	; 0xcc6 <DIO_voidSetPinValue+0xe8>
+ cac:	41 30       	cpi	r20, 0x01	; 1
+ cae:	b1 f4       	brne	.+44     	; 0xcdc <DIO_voidSetPinValue+0xfe>
+ cb0:	22 b3       	in	r18, 0x12	; 18
+ cb2:	81 e0       	ldi	r24, 0x01	; 1
+ cb4:	90 e0       	ldi	r25, 0x00	; 0
+ cb6:	02 c0       	rjmp	.+4      	; 0xcbc <DIO_voidSetPinValue+0xde>
+ cb8:	88 0f       	add	r24, r24
+ cba:	99 1f       	adc	r25, r25
+ cbc:	6a 95       	dec	r22
+ cbe:	e2 f7       	brpl	.-8      	; 0xcb8 <DIO_voidSetPinValue+0xda>
+ cc0:	82 2b       	or	r24, r18
+ cc2:	82 bb       	out	0x12, r24	; 18
+ cc4:	08 95       	ret
+ cc6:	22 b3       	in	r18, 0x12	; 18
+ cc8:	81 e0       	ldi	r24, 0x01	; 1
+ cca:	90 e0       	ldi	r25, 0x00	; 0
+ ccc:	02 c0       	rjmp	.+4      	; 0xcd2 <DIO_voidSetPinValue+0xf4>
+ cce:	88 0f       	add	r24, r24
+ cd0:	99 1f       	adc	r25, r25
+ cd2:	6a 95       	dec	r22
+ cd4:	e2 f7       	brpl	.-8      	; 0xcce <DIO_voidSetPinValue+0xf0>
+ cd6:	80 95       	com	r24
+ cd8:	82 23       	and	r24, r18
+ cda:	82 bb       	out	0x12, r24	; 18
+ cdc:	08 95       	ret
 
-00000cb8 <DIO_voidGetPinValue>:
- cb8:	84 30       	cpi	r24, 0x04	; 4
- cba:	c0 f5       	brcc	.+112    	; 0xd2c <DIO_voidGetPinValue+0x74>
- cbc:	68 30       	cpi	r22, 0x08	; 8
- cbe:	b0 f5       	brcc	.+108    	; 0xd2c <DIO_voidGetPinValue+0x74>
- cc0:	41 15       	cp	r20, r1
- cc2:	51 05       	cpc	r21, r1
- cc4:	99 f1       	breq	.+102    	; 0xd2c <DIO_voidGetPinValue+0x74>
- cc6:	81 30       	cpi	r24, 0x01	; 1
- cc8:	89 f0       	breq	.+34     	; 0xcec <DIO_voidGetPinValue+0x34>
- cca:	28 f0       	brcs	.+10     	; 0xcd6 <DIO_voidGetPinValue+0x1e>
- ccc:	82 30       	cpi	r24, 0x02	; 2
- cce:	c9 f0       	breq	.+50     	; 0xd02 <DIO_voidGetPinValue+0x4a>
- cd0:	83 30       	cpi	r24, 0x03	; 3
- cd2:	11 f1       	breq	.+68     	; 0xd18 <DIO_voidGetPinValue+0x60>
- cd4:	08 95       	ret
- cd6:	89 b3       	in	r24, 0x19	; 25
- cd8:	90 e0       	ldi	r25, 0x00	; 0
- cda:	02 c0       	rjmp	.+4      	; 0xce0 <DIO_voidGetPinValue+0x28>
- cdc:	95 95       	asr	r25
- cde:	87 95       	ror	r24
- ce0:	6a 95       	dec	r22
- ce2:	e2 f7       	brpl	.-8      	; 0xcdc <DIO_voidGetPinValue+0x24>
- ce4:	81 70       	andi	r24, 0x01	; 1
- ce6:	fa 01       	movw	r30, r20
- ce8:	80 83       	st	Z, r24
- cea:	08 95       	ret
- cec:	86 b3       	in	r24, 0x16	; 22
- cee:	90 e0       	ldi	r25, 0x00	; 0
- cf0:	02 c0       	rjmp	.+4      	; 0xcf6 <DIO_voidGetPinValue+0x3e>
- cf2:	95 95       	asr	r25
- cf4:	87 95       	ror	r24
- cf6:	6a 95       	dec	r22
- cf8:	e2 f7       	brpl	.-8      	; 0xcf2 <DIO_voidGetPinValue+0x3a>
- cfa:	81 70       	andi	r24, 0x01	; 1
- cfc:	fa 01       	movw	r30, r20
- cfe:	80 83       	st	Z, r24
- d00:	08 95       	ret
- d02:	83 b3       	in	r24, 0x13	; 19
- d04:	90 e0       	ldi	r25, 0x00	; 0
- d06:	02 c0       	rjmp	.+4      	; 0xd0c <DIO_voidGetPinValue+0x54>
- d08:	95 95       	asr	r25
- d0a:	87 95       	ror	r24
- d0c:	6a 95       	dec	r22
- d0e:	e2 f7       	brpl	.-8      	; 0xd08 <DIO_voidGetPinValue+0x50>
- d10:	81 70       	andi	r24, 0x01	; 1
- d12:	fa 01       	movw	r30, r20
- d14:	80 83       	st	Z, r24
- d16:	08 95       	ret
- d18:	80 b3       	in	r24, 0x10	; 16
- d1a:	90 e0       	ldi	r25, 0x00	; 0
- d1c:	02 c0       	rjmp	.+4      	; 0xd22 <DIO_voidGetPinValue+0x6a>
- d1e:	95 95       	asr	r25
- d20:	87 95       	ror	r24
- d22:	6a 95       	dec	r22
- d24:	e2 f7       	brpl	.-8      	; 0xd1e <DIO_voidGetPinValue+0x66>
- d26:	81 70       	andi	r24, 0x01	; 1
- d28:	fa 01       	movw	r30, r20
- d2a:	80 83       	st	Z, r24
- d2c:	08 95       	ret
+00000cde <DIO_voidGetPinValue>:
+ cde:	84 30       	cpi	r24, 0x04	; 4
+ ce0:	c0 f5       	brcc	.+112    	; 0xd52 <DIO_voidGetPinValue+0x74>
+ ce2:	68 30       	cpi	r22, 0x08	; 8
+ ce4:	b0 f5       	brcc	.+108    	; 0xd52 <DIO_voidGetPinValue+0x74>
+ ce6:	41 15       	cp	r20, r1
+ ce8:	51 05       	cpc	r21, r1
+ cea:	99 f1       	breq	.+102    	; 0xd52 <DIO_voidGetPinValue+0x74>
+ cec:	81 30       	cpi	r24, 0x01	; 1
+ cee:	89 f0       	breq	.+34     	; 0xd12 <DIO_voidGetPinValue+0x34>
+ cf0:	28 f0       	brcs	.+10     	; 0xcfc <DIO_voidGetPinValue+0x1e>
+ cf2:	82 30       	cpi	r24, 0x02	; 2
+ cf4:	c9 f0       	breq	.+50     	; 0xd28 <DIO_voidGetPinValue+0x4a>
+ cf6:	83 30       	cpi	r24, 0x03	; 3
+ cf8:	11 f1       	breq	.+68     	; 0xd3e <DIO_voidGetPinValue+0x60>
+ cfa:	08 95       	ret
+ cfc:	89 b3       	in	r24, 0x19	; 25
+ cfe:	90 e0       	ldi	r25, 0x00	; 0
+ d00:	02 c0       	rjmp	.+4      	; 0xd06 <DIO_voidGetPinValue+0x28>
+ d02:	95 95       	asr	r25
+ d04:	87 95       	ror	r24
+ d06:	6a 95       	dec	r22
+ d08:	e2 f7       	brpl	.-8      	; 0xd02 <DIO_voidGetPinValue+0x24>
+ d0a:	81 70       	andi	r24, 0x01	; 1
+ d0c:	fa 01       	movw	r30, r20
+ d0e:	80 83       	st	Z, r24
+ d10:	08 95       	ret
+ d12:	86 b3       	in	r24, 0x16	; 22
+ d14:	90 e0       	ldi	r25, 0x00	; 0
+ d16:	02 c0       	rjmp	.+4      	; 0xd1c <DIO_voidGetPinValue+0x3e>
+ d18:	95 95       	asr	r25
+ d1a:	87 95       	ror	r24
+ d1c:	6a 95       	dec	r22
+ d1e:	e2 f7       	brpl	.-8      	; 0xd18 <DIO_voidGetPinValue+0x3a>
+ d20:	81 70       	andi	r24, 0x01	; 1
+ d22:	fa 01       	movw	r30, r20
+ d24:	80 83       	st	Z, r24
+ d26:	08 95       	ret
+ d28:	83 b3       	in	r24, 0x13	; 19
+ d2a:	90 e0       	ldi	r25, 0x00	; 0
+ d2c:	02 c0       	rjmp	.+4      	; 0xd32 <DIO_voidGetPinValue+0x54>
+ d2e:	95 95       	asr	r25
+ d30:	87 95       	ror	r24
+ d32:	6a 95       	dec	r22
+ d34:	e2 f7       	brpl	.-8      	; 0xd2e <DIO_voidGetPinValue+0x50>
+ d36:	81 70       	andi	r24, 0x01	; 1
+ d38:	fa 01       	movw	r30, r20
+ d3a:	80 83       	st	Z, r24
+ d3c:	08 95       	ret
+ d3e:	80 b3       	in	r24, 0x10	; 16
+ d40:	90 e0       	ldi	r25, 0x00	; 0
+ d42:	02 c0       	rjmp	.+4      	; 0xd48 <DIO_voidGetPinValue+0x6a>
+ d44:	95 95       	asr	r25
+ d46:	87 95       	ror	r24
+ d48:	6a 95       	dec	r22
+ d4a:	e2 f7       	brpl	.-8      	; 0xd44 <DIO_voidGetPinValue+0x66>
+ d4c:	81 70       	andi	r24, 0x01	; 1
+ d4e:	fa 01       	movw	r30, r20
+ d50:	80 83       	st	Z, r24
+ d52:	08 95       	ret
 
-00000d2e <DIO_voidActivePinInPullUpResistance>:
+00000d54 <DIO_voidActivePinInPullUpResistance>:
 }
 
 
 void DIO_voidActivePinInPullUpResistance(u8 copy_u8PortId, u8 copy_u8PinId)
 {
 	if((copy_u8PortId<4)&&(copy_u8PinId<8))
- d2e:	84 30       	cpi	r24, 0x04	; 4
- d30:	a8 f5       	brcc	.+106    	; 0xd9c <DIO_voidActivePinInPullUpResistance+0x6e>
- d32:	68 30       	cpi	r22, 0x08	; 8
- d34:	98 f5       	brcc	.+102    	; 0xd9c <DIO_voidActivePinInPullUpResistance+0x6e>
+ d54:	84 30       	cpi	r24, 0x04	; 4
+ d56:	a8 f5       	brcc	.+106    	; 0xdc2 <DIO_voidActivePinInPullUpResistance+0x6e>
+ d58:	68 30       	cpi	r22, 0x08	; 8
+ d5a:	98 f5       	brcc	.+102    	; 0xdc2 <DIO_voidActivePinInPullUpResistance+0x6e>
 	{
 		switch(copy_u8PortId)
- d36:	81 30       	cpi	r24, 0x01	; 1
- d38:	89 f0       	breq	.+34     	; 0xd5c <DIO_voidActivePinInPullUpResistance+0x2e>
- d3a:	28 f0       	brcs	.+10     	; 0xd46 <DIO_voidActivePinInPullUpResistance+0x18>
- d3c:	82 30       	cpi	r24, 0x02	; 2
- d3e:	c9 f0       	breq	.+50     	; 0xd72 <DIO_voidActivePinInPullUpResistance+0x44>
- d40:	83 30       	cpi	r24, 0x03	; 3
- d42:	11 f1       	breq	.+68     	; 0xd88 <DIO_voidActivePinInPullUpResistance+0x5a>
- d44:	08 95       	ret
+ d5c:	81 30       	cpi	r24, 0x01	; 1
+ d5e:	89 f0       	breq	.+34     	; 0xd82 <DIO_voidActivePinInPullUpResistance+0x2e>
+ d60:	28 f0       	brcs	.+10     	; 0xd6c <DIO_voidActivePinInPullUpResistance+0x18>
+ d62:	82 30       	cpi	r24, 0x02	; 2
+ d64:	c9 f0       	breq	.+50     	; 0xd98 <DIO_voidActivePinInPullUpResistance+0x44>
+ d66:	83 30       	cpi	r24, 0x03	; 3
+ d68:	11 f1       	breq	.+68     	; 0xdae <DIO_voidActivePinInPullUpResistance+0x5a>
+ d6a:	08 95       	ret
 		{
 			case DIO_PORTA:
 			SET_BIT(PORTA_REG,copy_u8PinId);
- d46:	2b b3       	in	r18, 0x1b	; 27
- d48:	81 e0       	ldi	r24, 0x01	; 1
- d4a:	90 e0       	ldi	r25, 0x00	; 0
- d4c:	02 c0       	rjmp	.+4      	; 0xd52 <DIO_voidActivePinInPullUpResistance+0x24>
- d4e:	88 0f       	add	r24, r24
- d50:	99 1f       	adc	r25, r25
- d52:	6a 95       	dec	r22
- d54:	e2 f7       	brpl	.-8      	; 0xd4e <DIO_voidActivePinInPullUpResistance+0x20>
- d56:	82 2b       	or	r24, r18
- d58:	8b bb       	out	0x1b, r24	; 27
+ d6c:	2b b3       	in	r18, 0x1b	; 27
+ d6e:	81 e0       	ldi	r24, 0x01	; 1
+ d70:	90 e0       	ldi	r25, 0x00	; 0
+ d72:	02 c0       	rjmp	.+4      	; 0xd78 <DIO_voidActivePinInPullUpResistance+0x24>
+ d74:	88 0f       	add	r24, r24
+ d76:	99 1f       	adc	r25, r25
+ d78:	6a 95       	dec	r22
+ d7a:	e2 f7       	brpl	.-8      	; 0xd74 <DIO_voidActivePinInPullUpResistance+0x20>
+ d7c:	82 2b       	or	r24, r18
+ d7e:	8b bb       	out	0x1b, r24	; 27
 			break;
- d5a:	08 95       	ret
+ d80:	08 95       	ret
 			
 			case DIO_PORTB:
 			SET_BIT(PORTB_REG,copy_u8PinId);
- d5c:	28 b3       	in	r18, 0x18	; 24
- d5e:	81 e0       	ldi	r24, 0x01	; 1
- d60:	90 e0       	ldi	r25, 0x00	; 0
- d62:	02 c0       	rjmp	.+4      	; 0xd68 <DIO_voidActivePinInPullUpResistance+0x3a>
- d64:	88 0f       	add	r24, r24
- d66:	99 1f       	adc	r25, r25
- d68:	6a 95       	dec	r22
- d6a:	e2 f7       	brpl	.-8      	; 0xd64 <DIO_voidActivePinInPullUpResistance+0x36>
- d6c:	82 2b       	or	r24, r18
- d6e:	88 bb       	out	0x18, r24	; 24
+ d82:	28 b3       	in	r18, 0x18	; 24
+ d84:	81 e0       	ldi	r24, 0x01	; 1
+ d86:	90 e0       	ldi	r25, 0x00	; 0
+ d88:	02 c0       	rjmp	.+4      	; 0xd8e <DIO_voidActivePinInPullUpResistance+0x3a>
+ d8a:	88 0f       	add	r24, r24
+ d8c:	99 1f       	adc	r25, r25
+ d8e:	6a 95       	dec	r22
+ d90:	e2 f7       	brpl	.-8      	; 0xd8a <DIO_voidActivePinInPullUpResistance+0x36>
+ d92:	82 2b       	or	r24, r18
+ d94:	88 bb       	out	0x18, r24	; 24
 			break;
- d70:	08 95       	ret
+ d96:	08 95       	ret
 			
 			case DIO_PORTC:
 			SET_BIT(PORTC_REG,copy_u8PinId);
- d72:	25 b3       	in	r18, 0x15	; 21
- d74:	81 e0       	ldi	r24, 0x01	; 1
- d76:	90 e0       	ldi	r25, 0x00	; 0
- d78:	02 c0       	rjmp	.+4      	; 0xd7e <DIO_voidActivePinInPullUpResistance+0x50>
- d7a:	88 0f       	add	r24, r24
- d7c:	99 1f       	adc	r25, r25
- d7e:	6a 95       	dec	r22
- d80:	e2 f7       	brpl	.-8      	; 0xd7a <DIO_voidActivePinInPullUpResistance+0x4c>
- d82:	82 2b       	or	r24, r18
- d84:	85 bb       	out	0x15, r24	; 21
+ d98:	25 b3       	in	r18, 0x15	; 21
+ d9a:	81 e0       	ldi	r24, 0x01	; 1
+ d9c:	90 e0       	ldi	r25, 0x00	; 0
+ d9e:	02 c0       	rjmp	.+4      	; 0xda4 <DIO_voidActivePinInPullUpResistance+0x50>
+ da0:	88 0f       	add	r24, r24
+ da2:	99 1f       	adc	r25, r25
+ da4:	6a 95       	dec	r22
+ da6:	e2 f7       	brpl	.-8      	; 0xda0 <DIO_voidActivePinInPullUpResistance+0x4c>
+ da8:	82 2b       	or	r24, r18
+ daa:	85 bb       	out	0x15, r24	; 21
 			break;
- d86:	08 95       	ret
+ dac:	08 95       	ret
 			
 			case DIO_PORTD:
 			SET_BIT(PORTD_REG,copy_u8PinId);
- d88:	22 b3       	in	r18, 0x12	; 18
- d8a:	81 e0       	ldi	r24, 0x01	; 1
- d8c:	90 e0       	ldi	r25, 0x00	; 0
- d8e:	02 c0       	rjmp	.+4      	; 0xd94 <DIO_voidActivePinInPullUpResistance+0x66>
- d90:	88 0f       	add	r24, r24
- d92:	99 1f       	adc	r25, r25
- d94:	6a 95       	dec	r22
- d96:	e2 f7       	brpl	.-8      	; 0xd90 <DIO_voidActivePinInPullUpResistance+0x62>
- d98:	82 2b       	or	r24, r18
- d9a:	82 bb       	out	0x12, r24	; 18
- d9c:	08 95       	ret
+ dae:	22 b3       	in	r18, 0x12	; 18
+ db0:	81 e0       	ldi	r24, 0x01	; 1
+ db2:	90 e0       	ldi	r25, 0x00	; 0
+ db4:	02 c0       	rjmp	.+4      	; 0xdba <DIO_voidActivePinInPullUpResistance+0x66>
+ db6:	88 0f       	add	r24, r24
+ db8:	99 1f       	adc	r25, r25
+ dba:	6a 95       	dec	r22
+ dbc:	e2 f7       	brpl	.-8      	; 0xdb6 <DIO_voidActivePinInPullUpResistance+0x62>
+ dbe:	82 2b       	or	r24, r18
+ dc0:	82 bb       	out	0x12, r24	; 18
+ dc2:	08 95       	ret
 
-00000d9e <GI_voidEnable>:
+00000dc4 <GI_voidEnable>:
 #include"GI_register.h"
 
 
 void GI_voidEnable(void)
 {
 	SET_BIT(SREG_REG,I);
- d9e:	8f b7       	in	r24, 0x3f	; 63
- da0:	80 68       	ori	r24, 0x80	; 128
- da2:	8f bf       	out	0x3f, r24	; 63
- da4:	08 95       	ret
+ dc4:	8f b7       	in	r24, 0x3f	; 63
+ dc6:	80 68       	ori	r24, 0x80	; 128
+ dc8:	8f bf       	out	0x3f, r24	; 63
+ dca:	08 95       	ret
 
-00000da6 <TMR0_voidInit>:
+00000dcc <TMR0_voidInit>:
 void TMR0_SetCallBackOVF(void (*copy_pFunAction)(void))
 {
 	if(copy_pFunAction != NULL)
 	{
 		
 		PRV_pFunCallBackOVF=copy_pFunAction;
- da6:	83 b7       	in	r24, 0x33	; 51
- da8:	8f 7b       	andi	r24, 0xBF	; 191
- daa:	83 bf       	out	0x33, r24	; 51
- dac:	83 b7       	in	r24, 0x33	; 51
- dae:	88 60       	ori	r24, 0x08	; 8
- db0:	83 bf       	out	0x33, r24	; 51
- db2:	83 b7       	in	r24, 0x33	; 51
- db4:	8f 7e       	andi	r24, 0xEF	; 239
- db6:	83 bf       	out	0x33, r24	; 51
- db8:	83 b7       	in	r24, 0x33	; 51
- dba:	8f 7d       	andi	r24, 0xDF	; 223
- dbc:	83 bf       	out	0x33, r24	; 51
- dbe:	89 b7       	in	r24, 0x39	; 57
- dc0:	82 60       	ori	r24, 0x02	; 2
- dc2:	89 bf       	out	0x39, r24	; 57
- dc4:	89 ef       	ldi	r24, 0xF9	; 249
- dc6:	8c bf       	out	0x3c, r24	; 60
- dc8:	08 95       	ret
+ dcc:	83 b7       	in	r24, 0x33	; 51
+ dce:	8f 7b       	andi	r24, 0xBF	; 191
+ dd0:	83 bf       	out	0x33, r24	; 51
+ dd2:	83 b7       	in	r24, 0x33	; 51
+ dd4:	88 60       	ori	r24, 0x08	; 8
+ dd6:	83 bf       	out	0x33, r24	; 51
+ dd8:	83 b7       	in	r24, 0x33	; 51
+ dda:	8f 7e       	andi	r24, 0xEF	; 239
+ ddc:	83 bf       	out	0x33, r24	; 51
+ dde:	83 b7       	in	r24, 0x33	; 51
+ de0:	8f 7d       	andi	r24, 0xDF	; 223
+ de2:	83 bf       	out	0x33, r24	; 51
+ de4:	89 b7       	in	r24, 0x39	; 57
+ de6:	82 60       	ori	r24, 0x02	; 2
+ de8:	89 bf       	out	0x39, r24	; 57
+ dea:	89 ef       	ldi	r24, 0xF9	; 249
+ dec:	8c bf       	out	0x3c, r24	; 60
+ dee:	08 95       	ret
 
-00000dca <TMR0_voidStart>:
- dca:	83 b7       	in	r24, 0x33	; 51
- dcc:	81 60       	ori	r24, 0x01	; 1
- dce:	83 bf       	out	0x33, r24	; 51
- dd0:	83 b7       	in	r24, 0x33	; 51
- dd2:	82 60       	ori	r24, 0x02	; 2
- dd4:	83 bf       	out	0x33, r24	; 51
- dd6:	83 b7       	in	r24, 0x33	; 51
- dd8:	8b 7f       	andi	r24, 0xFB	; 251
- dda:	83 bf       	out	0x33, r24	; 51
- ddc:	10 92 f0 01 	sts	0x01F0, r1	; 0x8001f0 <local_u16Counter+0x1>
- de0:	10 92 ef 01 	sts	0x01EF, r1	; 0x8001ef <local_u16Counter>
- de4:	08 95       	ret
+00000df0 <TMR0_voidStart>:
+ df0:	83 b7       	in	r24, 0x33	; 51
+ df2:	81 60       	ori	r24, 0x01	; 1
+ df4:	83 bf       	out	0x33, r24	; 51
+ df6:	83 b7       	in	r24, 0x33	; 51
+ df8:	82 60       	ori	r24, 0x02	; 2
+ dfa:	83 bf       	out	0x33, r24	; 51
+ dfc:	83 b7       	in	r24, 0x33	; 51
+ dfe:	8b 7f       	andi	r24, 0xFB	; 251
+ e00:	83 bf       	out	0x33, r24	; 51
+ e02:	10 92 f0 01 	sts	0x01F0, r1	; 0x8001f0 <local_u16Counter+0x1>
+ e06:	10 92 ef 01 	sts	0x01EF, r1	; 0x8001ef <local_u16Counter>
+ e0a:	08 95       	ret
 
-00000de6 <TMR0_voidStop>:
- de6:	83 b7       	in	r24, 0x33	; 51
- de8:	8e 7f       	andi	r24, 0xFE	; 254
- dea:	83 bf       	out	0x33, r24	; 51
- dec:	83 b7       	in	r24, 0x33	; 51
- dee:	8d 7f       	andi	r24, 0xFD	; 253
- df0:	83 bf       	out	0x33, r24	; 51
- df2:	83 b7       	in	r24, 0x33	; 51
- df4:	8b 7f       	andi	r24, 0xFB	; 251
- df6:	83 bf       	out	0x33, r24	; 51
- df8:	08 95       	ret
+00000e0c <TMR0_voidStop>:
+ e0c:	83 b7       	in	r24, 0x33	; 51
+ e0e:	8e 7f       	andi	r24, 0xFE	; 254
+ e10:	83 bf       	out	0x33, r24	; 51
+ e12:	83 b7       	in	r24, 0x33	; 51
+ e14:	8d 7f       	andi	r24, 0xFD	; 253
+ e16:	83 bf       	out	0x33, r24	; 51
+ e18:	83 b7       	in	r24, 0x33	; 51
+ e1a:	8b 7f       	andi	r24, 0xFB	; 251
+ e1c:	83 bf       	out	0x33, r24	; 51
+ e1e:	08 95       	ret
 
-00000dfa <TMR0_SetCallBackCTC>:
+00000e20 <TMR0_SetCallBackCTC>:
 	}
 }
 
 void TMR0_SetCallBackCTC(void (*copy_pFunAction)(void))
 {
 	if(copy_pFunAction != NULL)
- dfa:	00 97       	sbiw	r24, 0x00	; 0
- dfc:	21 f0       	breq	.+8      	; 0xe06 <TMR0_SetCallBackCTC+0xc>
+ e20:	00 97       	sbiw	r24, 0x00	; 0
+ e22:	21 f0       	breq	.+8      	; 0xe2c <TMR0_SetCallBackCTC+0xc>
 	{
 		
 		PRV_pFunCallBackCTC=copy_pFunAction;
- dfe:	90 93 f2 01 	sts	0x01F2, r25	; 0x8001f2 <PRV_pFunCallBackCTC+0x1>
- e02:	80 93 f1 01 	sts	0x01F1, r24	; 0x8001f1 <PRV_pFunCallBackCTC>
- e06:	08 95       	ret
+ e24:	90 93 f2 01 	sts	0x01F2, r25	; 0x8001f2 <PRV_pFunCallBackCTC+0x1>
+ e28:	80 93 f1 01 	sts	0x01F1, r24	; 0x8001f1 <PRV_pFunCallBackCTC>
+ e2c:	08 95       	ret
 
-00000e08 <TMR0clear_flag>:
+00000e2e <TMR0clear_flag>:
 }
 
 void TMR0clear_flag(void)
 {
 	// SET_BIT(TIFR_REG,OCF0);
 	TIFR_REG |= (1 << OCF0); 
- e08:	88 b7       	in	r24, 0x38	; 56
- e0a:	82 60       	ori	r24, 0x02	; 2
- e0c:	88 bf       	out	0x38, r24	; 56
+ e2e:	88 b7       	in	r24, 0x38	; 56
+ e30:	82 60       	ori	r24, 0x02	; 2
+ e32:	88 bf       	out	0x38, r24	; 56
 	SET_BIT(TIFR_REG,TOV0);
- e0e:	88 b7       	in	r24, 0x38	; 56
- e10:	81 60       	ori	r24, 0x01	; 1
- e12:	88 bf       	out	0x38, r24	; 56
- e14:	08 95       	ret
+ e34:	88 b7       	in	r24, 0x38	; 56
+ e36:	81 60       	ori	r24, 0x01	; 1
+ e38:	88 bf       	out	0x38, r24	; 56
+ e3a:	08 95       	ret
 
-00000e16 <__vector_11>:
+00000e3c <__vector_11>:
 
 
 
 void __vector_11(void)__attribute__((signal));
 void __vector_11(void)
 {
- e16:	1f 92       	push	r1
- e18:	0f 92       	push	r0
- e1a:	0f b6       	in	r0, 0x3f	; 63
- e1c:	0f 92       	push	r0
- e1e:	11 24       	eor	r1, r1
- e20:	2f 93       	push	r18
- e22:	3f 93       	push	r19
- e24:	4f 93       	push	r20
- e26:	5f 93       	push	r21
- e28:	6f 93       	push	r22
- e2a:	7f 93       	push	r23
- e2c:	8f 93       	push	r24
- e2e:	9f 93       	push	r25
- e30:	af 93       	push	r26
- e32:	bf 93       	push	r27
- e34:	ef 93       	push	r30
- e36:	ff 93       	push	r31
+ e3c:	1f 92       	push	r1
+ e3e:	0f 92       	push	r0
+ e40:	0f b6       	in	r0, 0x3f	; 63
+ e42:	0f 92       	push	r0
+ e44:	11 24       	eor	r1, r1
+ e46:	2f 93       	push	r18
+ e48:	3f 93       	push	r19
+ e4a:	4f 93       	push	r20
+ e4c:	5f 93       	push	r21
+ e4e:	6f 93       	push	r22
+ e50:	7f 93       	push	r23
+ e52:	8f 93       	push	r24
+ e54:	9f 93       	push	r25
+ e56:	af 93       	push	r26
+ e58:	bf 93       	push	r27
+ e5a:	ef 93       	push	r30
+ e5c:	ff 93       	push	r31
 	
 	
 	local_u16Counter++;
- e38:	80 91 ef 01 	lds	r24, 0x01EF	; 0x8001ef <local_u16Counter>
- e3c:	90 91 f0 01 	lds	r25, 0x01F0	; 0x8001f0 <local_u16Counter+0x1>
- e40:	01 96       	adiw	r24, 0x01	; 1
- e42:	90 93 f0 01 	sts	0x01F0, r25	; 0x8001f0 <local_u16Counter+0x1>
- e46:	80 93 ef 01 	sts	0x01EF, r24	; 0x8001ef <local_u16Counter>
+ e5e:	80 91 ef 01 	lds	r24, 0x01EF	; 0x8001ef <local_u16Counter>
+ e62:	90 91 f0 01 	lds	r25, 0x01F0	; 0x8001f0 <local_u16Counter+0x1>
+ e66:	01 96       	adiw	r24, 0x01	; 1
+ e68:	90 93 f0 01 	sts	0x01F0, r25	; 0x8001f0 <local_u16Counter+0x1>
+ e6c:	80 93 ef 01 	sts	0x01EF, r24	; 0x8001ef <local_u16Counter>
 	
 	if(local_u16Counter==TMR0_OVERFLOW_COUNTER)
- e4a:	88 3e       	cpi	r24, 0xE8	; 232
- e4c:	93 40       	sbci	r25, 0x03	; 3
- e4e:	69 f4       	brne	.+26     	; 0xe6a <__vector_11+0x54>
+ e70:	88 3e       	cpi	r24, 0xE8	; 232
+ e72:	93 40       	sbci	r25, 0x03	; 3
+ e74:	69 f4       	brne	.+26     	; 0xe90 <__vector_11+0x54>
 	{
 		/*put preload value in timer register*/
 		TCNT0_REG=TMR0_PRELOAD_VALUE;
- e50:	81 e7       	ldi	r24, 0x71	; 113
- e52:	82 bf       	out	0x32, r24	; 50
+ e76:	81 e7       	ldi	r24, 0x71	; 113
+ e78:	82 bf       	out	0x32, r24	; 50
 		
 		/*CLR counter*/
 		local_u16Counter=0;
- e54:	10 92 f0 01 	sts	0x01F0, r1	; 0x8001f0 <local_u16Counter+0x1>
- e58:	10 92 ef 01 	sts	0x01EF, r1	; 0x8001ef <local_u16Counter>
+ e7a:	10 92 f0 01 	sts	0x01F0, r1	; 0x8001f0 <local_u16Counter+0x1>
+ e7e:	10 92 ef 01 	sts	0x01EF, r1	; 0x8001ef <local_u16Counter>
 		
 		if(PRV_pFunCallBackOVF != NULL)
- e5c:	e0 91 f3 01 	lds	r30, 0x01F3	; 0x8001f3 <PRV_pFunCallBackOVF>
- e60:	f0 91 f4 01 	lds	r31, 0x01F4	; 0x8001f4 <PRV_pFunCallBackOVF+0x1>
- e64:	30 97       	sbiw	r30, 0x00	; 0
- e66:	09 f0       	breq	.+2      	; 0xe6a <__vector_11+0x54>
+ e82:	e0 91 f3 01 	lds	r30, 0x01F3	; 0x8001f3 <PRV_pFunCallBackOVF>
+ e86:	f0 91 f4 01 	lds	r31, 0x01F4	; 0x8001f4 <PRV_pFunCallBackOVF+0x1>
+ e8a:	30 97       	sbiw	r30, 0x00	; 0
+ e8c:	09 f0       	breq	.+2      	; 0xe90 <__vector_11+0x54>
 		{
 			/*execute action*/
 			PRV_pFunCallBackOVF();
- e68:	09 95       	icall
+ e8e:	09 95       	icall
 		else
 		{
 				//error state
 		}
 	}
 }
- e6a:	ff 91       	pop	r31
- e6c:	ef 91       	pop	r30
- e6e:	bf 91       	pop	r27
- e70:	af 91       	pop	r26
- e72:	9f 91       	pop	r25
- e74:	8f 91       	pop	r24
- e76:	7f 91       	pop	r23
- e78:	6f 91       	pop	r22
- e7a:	5f 91       	pop	r21
- e7c:	4f 91       	pop	r20
- e7e:	3f 91       	pop	r19
- e80:	2f 91       	pop	r18
- e82:	0f 90       	pop	r0
- e84:	0f be       	out	0x3f, r0	; 63
- e86:	0f 90       	pop	r0
- e88:	1f 90       	pop	r1
- e8a:	18 95       	reti
+ e90:	ff 91       	pop	r31
+ e92:	ef 91       	pop	r30
+ e94:	bf 91       	pop	r27
+ e96:	af 91       	pop	r26
+ e98:	9f 91       	pop	r25
+ e9a:	8f 91       	pop	r24
+ e9c:	7f 91       	pop	r23
+ e9e:	6f 91       	pop	r22
+ ea0:	5f 91       	pop	r21
+ ea2:	4f 91       	pop	r20
+ ea4:	3f 91       	pop	r19
+ ea6:	2f 91       	pop	r18
+ ea8:	0f 90       	pop	r0
+ eaa:	0f be       	out	0x3f, r0	; 63
+ eac:	0f 90       	pop	r0
+ eae:	1f 90       	pop	r1
+ eb0:	18 95       	reti
 
-00000e8c <__vector_10>:
+00000eb2 <__vector_10>:
 
 void __vector_10(void)__attribute__((signal));
 void __vector_10(void)
 {
- e8c:	1f 92       	push	r1
- e8e:	0f 92       	push	r0
- e90:	0f b6       	in	r0, 0x3f	; 63
- e92:	0f 92       	push	r0
- e94:	11 24       	eor	r1, r1
- e96:	2f 93       	push	r18
- e98:	3f 93       	push	r19
- e9a:	4f 93       	push	r20
- e9c:	5f 93       	push	r21
- e9e:	6f 93       	push	r22
- ea0:	7f 93       	push	r23
- ea2:	8f 93       	push	r24
- ea4:	9f 93       	push	r25
- ea6:	af 93       	push	r26
- ea8:	bf 93       	push	r27
- eaa:	ef 93       	push	r30
- eac:	ff 93       	push	r31
+ eb2:	1f 92       	push	r1
+ eb4:	0f 92       	push	r0
+ eb6:	0f b6       	in	r0, 0x3f	; 63
+ eb8:	0f 92       	push	r0
+ eba:	11 24       	eor	r1, r1
+ ebc:	2f 93       	push	r18
+ ebe:	3f 93       	push	r19
+ ec0:	4f 93       	push	r20
+ ec2:	5f 93       	push	r21
+ ec4:	6f 93       	push	r22
+ ec6:	7f 93       	push	r23
+ ec8:	8f 93       	push	r24
+ eca:	9f 93       	push	r25
+ ecc:	af 93       	push	r26
+ ece:	bf 93       	push	r27
+ ed0:	ef 93       	push	r30
+ ed2:	ff 93       	push	r31
 	
 
 	
 	local_u16Counter++;
- eae:	80 91 ef 01 	lds	r24, 0x01EF	; 0x8001ef <local_u16Counter>
- eb2:	90 91 f0 01 	lds	r25, 0x01F0	; 0x8001f0 <local_u16Counter+0x1>
- eb6:	01 96       	adiw	r24, 0x01	; 1
- eb8:	90 93 f0 01 	sts	0x01F0, r25	; 0x8001f0 <local_u16Counter+0x1>
- ebc:	80 93 ef 01 	sts	0x01EF, r24	; 0x8001ef <local_u16Counter>
+ ed4:	80 91 ef 01 	lds	r24, 0x01EF	; 0x8001ef <local_u16Counter>
+ ed8:	90 91 f0 01 	lds	r25, 0x01F0	; 0x8001f0 <local_u16Counter+0x1>
+ edc:	01 96       	adiw	r24, 0x01	; 1
+ ede:	90 93 f0 01 	sts	0x01F0, r25	; 0x8001f0 <local_u16Counter+0x1>
+ ee2:	80 93 ef 01 	sts	0x01EF, r24	; 0x8001ef <local_u16Counter>
 	
 	if(local_u16Counter==TMR0_CTC_COUNTER)
- ec0:	88 38       	cpi	r24, 0x88	; 136
- ec2:	93 41       	sbci	r25, 0x13	; 19
- ec4:	69 f4       	brne	.+26     	; 0xee0 <__vector_10+0x54>
+ ee6:	88 38       	cpi	r24, 0x88	; 136
+ ee8:	93 41       	sbci	r25, 0x13	; 19
+ eea:	69 f4       	brne	.+26     	; 0xf06 <__vector_10+0x54>
 	{
 		
 		/*CLR counter*/
 		local_u16Counter=0;
- ec6:	10 92 f0 01 	sts	0x01F0, r1	; 0x8001f0 <local_u16Counter+0x1>
- eca:	10 92 ef 01 	sts	0x01EF, r1	; 0x8001ef <local_u16Counter>
+ eec:	10 92 f0 01 	sts	0x01F0, r1	; 0x8001f0 <local_u16Counter+0x1>
+ ef0:	10 92 ef 01 	sts	0x01EF, r1	; 0x8001ef <local_u16Counter>
 		
 		if(PRV_pFunCallBackCTC != NULL)
- ece:	e0 91 f1 01 	lds	r30, 0x01F1	; 0x8001f1 <PRV_pFunCallBackCTC>
- ed2:	f0 91 f2 01 	lds	r31, 0x01F2	; 0x8001f2 <PRV_pFunCallBackCTC+0x1>
- ed6:	30 97       	sbiw	r30, 0x00	; 0
- ed8:	19 f0       	breq	.+6      	; 0xee0 <__vector_10+0x54>
+ ef4:	e0 91 f1 01 	lds	r30, 0x01F1	; 0x8001f1 <PRV_pFunCallBackCTC>
+ ef8:	f0 91 f2 01 	lds	r31, 0x01F2	; 0x8001f2 <PRV_pFunCallBackCTC+0x1>
+ efc:	30 97       	sbiw	r30, 0x00	; 0
+ efe:	19 f0       	breq	.+6      	; 0xf06 <__vector_10+0x54>
 		{
 			/*execute action*/
 			PRV_pFunCallBackCTC();
- eda:	09 95       	icall
+ f00:	09 95       	icall
 			TMR0clear_flag();
- edc:	0e 94 04 07 	call	0xe08	; 0xe08 <TMR0clear_flag>
+ f02:	0e 94 17 07 	call	0xe2e	; 0xe2e <TMR0clear_flag>
 		{
 				//error state
 		}
 	}
 	
- ee0:	ff 91       	pop	r31
- ee2:	ef 91       	pop	r30
- ee4:	bf 91       	pop	r27
- ee6:	af 91       	pop	r26
- ee8:	9f 91       	pop	r25
- eea:	8f 91       	pop	r24
- eec:	7f 91       	pop	r23
- eee:	6f 91       	pop	r22
- ef0:	5f 91       	pop	r21
- ef2:	4f 91       	pop	r20
- ef4:	3f 91       	pop	r19
- ef6:	2f 91       	pop	r18
- ef8:	0f 90       	pop	r0
- efa:	0f be       	out	0x3f, r0	; 63
- efc:	0f 90       	pop	r0
- efe:	1f 90       	pop	r1
- f00:	18 95       	reti
+ f06:	ff 91       	pop	r31
+ f08:	ef 91       	pop	r30
+ f0a:	bf 91       	pop	r27
+ f0c:	af 91       	pop	r26
+ f0e:	9f 91       	pop	r25
+ f10:	8f 91       	pop	r24
+ f12:	7f 91       	pop	r23
+ f14:	6f 91       	pop	r22
+ f16:	5f 91       	pop	r21
+ f18:	4f 91       	pop	r20
+ f1a:	3f 91       	pop	r19
+ f1c:	2f 91       	pop	r18
+ f1e:	0f 90       	pop	r0
+ f20:	0f be       	out	0x3f, r0	; 63
+ f22:	0f 90       	pop	r0
+ f24:	1f 90       	pop	r1
+ f26:	18 95       	reti
 
-00000f02 <_exit>:
- f02:	f8 94       	cli
+00000f28 <_exit>:
+ f28:	f8 94       	cli
 
-00000f04 <__stop_program>:
- f04:	ff cf       	rjmp	.-2      	; 0xf04 <__stop_program>
+00000f2a <__stop_program>:
+ f2a:	ff cf       	rjmp	.-2      	; 0xf2a <__stop_program>

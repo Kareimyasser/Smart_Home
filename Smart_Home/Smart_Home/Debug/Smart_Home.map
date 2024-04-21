@@ -245,7 +245,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xf06
+.text           0x00000000      0xf2c
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -360,64 +360,61 @@ END GROUP
  .text.LED_voidOff
                 0x0000054c       0x1a HAL/LED/src/LED_program.o
                 0x0000054c                LED_voidOff
- .text.WelcomeScreen
-                0x00000566       0x2a main.o
-                0x00000566                WelcomeScreen
- .text.Reset_AllKPDValues
-                0x00000590       0x10 main.o
-                0x00000590                Reset_AllKPDValues
- .text.KPD_Interface
-                0x000005a0      0x460 main.o
-                0x000005a0                KPD_Interface
- .text.HomeScreen
-                0x00000a00       0x28 main.o
-                0x00000a00                HomeScreen
- .text.main     0x00000a28       0x46 main.o
-                0x00000a28                main
  .text.LCD_DisplayTemp
-                0x00000a6e       0x4a main.o
-                0x00000a6e                LCD_DisplayTemp
+                0x00000566       0x38 main.o
+                0x00000566                LCD_DisplayTemp
+ .text.WelcomeScreen
+                0x0000059e       0x2a main.o
+                0x0000059e                WelcomeScreen
+ .text.Reset_AllKPDValues
+                0x000005c8       0x10 main.o
+                0x000005c8                Reset_AllKPDValues
+ .text.KPD_Interface
+                0x000005d8      0x4c6 main.o
+                0x000005d8                KPD_Interface
+ .text.main     0x00000a9e       0x40 main.o
+                0x00000a9e                main
  .text.DIO_voidSetPinDirection
-                0x00000ab8      0x100 MCAL/DIO/src/DIO_program.o
-                0x00000ab8                DIO_voidSetPinDirection
+                0x00000ade      0x100 MCAL/DIO/src/DIO_program.o
+                0x00000ade                DIO_voidSetPinDirection
  .text.DIO_voidSetPinValue
-                0x00000bb8      0x100 MCAL/DIO/src/DIO_program.o
-                0x00000bb8                DIO_voidSetPinValue
+                0x00000bde      0x100 MCAL/DIO/src/DIO_program.o
+                0x00000bde                DIO_voidSetPinValue
  .text.DIO_voidGetPinValue
-                0x00000cb8       0x76 MCAL/DIO/src/DIO_program.o
-                0x00000cb8                DIO_voidGetPinValue
+                0x00000cde       0x76 MCAL/DIO/src/DIO_program.o
+                0x00000cde                DIO_voidGetPinValue
  .text.DIO_voidActivePinInPullUpResistance
-                0x00000d2e       0x70 MCAL/DIO/src/DIO_program.o
-                0x00000d2e                DIO_voidActivePinInPullUpResistance
+                0x00000d54       0x70 MCAL/DIO/src/DIO_program.o
+                0x00000d54                DIO_voidActivePinInPullUpResistance
  .text.GI_voidEnable
-                0x00000d9e        0x8 MCAL/GI/src/GI_program.o
-                0x00000d9e                GI_voidEnable
+                0x00000dc4        0x8 MCAL/GI/src/GI_program.o
+                0x00000dc4                GI_voidEnable
  .text.TMR0_voidInit
-                0x00000da6       0x24 MCAL/TMR0/src/TMR0_program.o
-                0x00000da6                TMR0_voidInit
+                0x00000dcc       0x24 MCAL/TMR0/src/TMR0_program.o
+                0x00000dcc                TMR0_voidInit
  .text.TMR0_voidStart
-                0x00000dca       0x1c MCAL/TMR0/src/TMR0_program.o
-                0x00000dca                TMR0_voidStart
+                0x00000df0       0x1c MCAL/TMR0/src/TMR0_program.o
+                0x00000df0                TMR0_voidStart
  .text.TMR0_voidStop
-                0x00000de6       0x14 MCAL/TMR0/src/TMR0_program.o
-                0x00000de6                TMR0_voidStop
+                0x00000e0c       0x14 MCAL/TMR0/src/TMR0_program.o
+                0x00000e0c                TMR0_voidStop
  .text.TMR0_SetCallBackCTC
-                0x00000dfa        0xe MCAL/TMR0/src/TMR0_program.o
-                0x00000dfa                TMR0_SetCallBackCTC
+                0x00000e20        0xe MCAL/TMR0/src/TMR0_program.o
+                0x00000e20                TMR0_SetCallBackCTC
  .text.TMR0clear_flag
-                0x00000e08        0xe MCAL/TMR0/src/TMR0_program.o
-                0x00000e08                TMR0clear_flag
+                0x00000e2e        0xe MCAL/TMR0/src/TMR0_program.o
+                0x00000e2e                TMR0clear_flag
  .text.__vector_11
-                0x00000e16       0x76 MCAL/TMR0/src/TMR0_program.o
-                0x00000e16                __vector_11
+                0x00000e3c       0x76 MCAL/TMR0/src/TMR0_program.o
+                0x00000e3c                __vector_11
  .text.__vector_10
-                0x00000e8c       0x76 MCAL/TMR0/src/TMR0_program.o
-                0x00000e8c                __vector_10
-                0x00000f02                . = ALIGN (0x2)
+                0x00000eb2       0x76 MCAL/TMR0/src/TMR0_program.o
+                0x00000eb2                __vector_10
+                0x00000f28                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000f02        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000f02                _exit
-                0x00000f02                exit
+ .fini9         0x00000f28        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000f28                _exit
+                0x00000f28                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -436,33 +433,35 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000f02        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000f28        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000f06                _etext = .
+                0x00000f2c                _etext = .
 
-.data           0x00800060      0x18e load address 0x00000f06
+.data           0x00800060      0x18e load address 0x00000f2c
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
- .data.local_lightStatus
+ .data.local_KPDIdleValue
                 0x00800060        0x1 main.o
-                0x00800060                local_lightStatus
- .data.local_lightNum
+                0x00800060                local_KPDIdleValue
+ .data.local_lightStatus
                 0x00800061        0x1 main.o
-                0x00800061                local_lightNum
- .data.Local_copyKPDValue
+                0x00800061                local_lightStatus
+ .data.local_lightNum
                 0x00800062        0x1 main.o
-                0x00800062                Local_copyKPDValue
+                0x00800062                local_lightNum
+ .data.Local_copyKPDValue
+                0x00800063        0x1 main.o
+                0x00800063                Local_copyKPDValue
  *(.gnu.linkonce.d*)
  *(.rodata)
- .rodata        0x00800063        0xc HAL/KPD/src/KeyPad_program.o
+ .rodata        0x00800064        0xc HAL/KPD/src/KeyPad_program.o
  *(.rodata*)
  .rodata.str1.1
-                0x0080006f      0x17e main.o
+                0x00800070      0x17e main.o
                                 0x188 (size before relaxing)
  *(.gnu.linkonce.r*)
                 0x008001ee                . = ALIGN (0x2)
- *fill*         0x008001ed        0x1 
                 0x008001ee                _edata = .
                 0x008001ee                PROVIDE (__data_end, .)
 
@@ -481,8 +480,8 @@ END GROUP
                 0x008001f3        0x2 MCAL/TMR0/src/TMR0_program.o
  *(COMMON)
                 0x008001f5                PROVIDE (__bss_end, .)
-                0x00000f06                __data_load_start = LOADADDR (.data)
-                0x00001094                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000f2c                __data_load_start = LOADADDR (.data)
+                0x000010ba                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x008001f5        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -559,7 +558,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x1d8
+.debug_aranges  0x00000000      0x1d0
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x28 HAL/KPD/src/KeyPad_program.o
@@ -568,61 +567,61 @@ END GROUP
  .debug_aranges
                 0x00000090       0x38 HAL/LED/src/LED_program.o
  .debug_aranges
-                0x000000c8       0x50 main.o
+                0x000000c8       0x48 main.o
  .debug_aranges
-                0x00000118       0x40 MCAL/DIO/src/DIO_program.o
+                0x00000110       0x40 MCAL/DIO/src/DIO_program.o
  .debug_aranges
-                0x00000158       0x28 MCAL/GI/src/GI_program.o
+                0x00000150       0x28 MCAL/GI/src/GI_program.o
  .debug_aranges
-                0x00000180       0x58 MCAL/TMR0/src/TMR0_program.o
+                0x00000178       0x58 MCAL/TMR0/src/TMR0_program.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x2a6f
+.debug_info     0x00000000     0x2ade
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_info    0x000004e6      0x350 HAL/KPD/src/KeyPad_program.o
  .debug_info    0x00000836      0xdef HAL/LCD/src/LCD_PROGRAM.o
  .debug_info    0x00001625      0x20e HAL/LED/src/LED_program.o
- .debug_info    0x00001833      0xe59 main.o
- .debug_info    0x0000268c      0x1ad MCAL/DIO/src/DIO_program.o
- .debug_info    0x00002839       0x98 MCAL/GI/src/GI_program.o
- .debug_info    0x000028d1      0x19e MCAL/TMR0/src/TMR0_program.o
+ .debug_info    0x00001833      0xec8 main.o
+ .debug_info    0x000026fb      0x1ad MCAL/DIO/src/DIO_program.o
+ .debug_info    0x000028a8       0x98 MCAL/GI/src/GI_program.o
+ .debug_info    0x00002940      0x19e MCAL/TMR0/src/TMR0_program.o
 
-.debug_abbrev   0x00000000      0xb45
+.debug_abbrev   0x00000000      0xb24
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_abbrev  0x000004a3       0xe9 HAL/KPD/src/KeyPad_program.o
  .debug_abbrev  0x0000058c      0x1ef HAL/LCD/src/LCD_PROGRAM.o
  .debug_abbrev  0x0000077b       0x8d HAL/LED/src/LED_program.o
- .debug_abbrev  0x00000808      0x1a5 main.o
- .debug_abbrev  0x000009ad       0x87 MCAL/DIO/src/DIO_program.o
- .debug_abbrev  0x00000a34       0x46 MCAL/GI/src/GI_program.o
- .debug_abbrev  0x00000a7a       0xcb MCAL/TMR0/src/TMR0_program.o
+ .debug_abbrev  0x00000808      0x184 main.o
+ .debug_abbrev  0x0000098c       0x87 MCAL/DIO/src/DIO_program.o
+ .debug_abbrev  0x00000a13       0x46 MCAL/GI/src/GI_program.o
+ .debug_abbrev  0x00000a59       0xcb MCAL/TMR0/src/TMR0_program.o
 
-.debug_line     0x00000000     0x148d
+.debug_line     0x00000000     0x1488
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000116      0x175 HAL/KPD/src/KeyPad_program.o
  .debug_line    0x0000028b      0x505 HAL/LCD/src/LCD_PROGRAM.o
  .debug_line    0x00000790       0xf6 HAL/LED/src/LED_program.o
- .debug_line    0x00000886      0x73b main.o
- .debug_line    0x00000fc1      0x2a4 MCAL/DIO/src/DIO_program.o
- .debug_line    0x00001265       0x82 MCAL/GI/src/GI_program.o
- .debug_line    0x000012e7      0x1a6 MCAL/TMR0/src/TMR0_program.o
+ .debug_line    0x00000886      0x736 main.o
+ .debug_line    0x00000fbc      0x2a4 MCAL/DIO/src/DIO_program.o
+ .debug_line    0x00001260       0x82 MCAL/GI/src/GI_program.o
+ .debug_line    0x000012e2      0x1a6 MCAL/TMR0/src/TMR0_program.o
 
-.debug_frame    0x00000000      0x43c
+.debug_frame    0x00000000      0x41c
  *(.debug_frame)
  .debug_frame   0x00000000       0x80 HAL/KPD/src/KeyPad_program.o
  .debug_frame   0x00000080      0x118 HAL/LCD/src/LCD_PROGRAM.o
  .debug_frame   0x00000198       0x54 HAL/LED/src/LED_program.o
- .debug_frame   0x000001ec       0x94 main.o
- .debug_frame   0x00000280       0x64 MCAL/DIO/src/DIO_program.o
- .debug_frame   0x000002e4       0x34 MCAL/GI/src/GI_program.o
- .debug_frame   0x00000318      0x124 MCAL/TMR0/src/TMR0_program.o
+ .debug_frame   0x000001ec       0x74 main.o
+ .debug_frame   0x00000260       0x64 MCAL/DIO/src/DIO_program.o
+ .debug_frame   0x000002c4       0x34 MCAL/GI/src/GI_program.o
+ .debug_frame   0x000002f8      0x124 MCAL/TMR0/src/TMR0_program.o
 
-.debug_str      0x00000000      0x8f6
+.debug_str      0x00000000      0x8eb
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_str     0x00000196      0x260 HAL/KPD/src/KeyPad_program.o
@@ -631,23 +630,23 @@ END GROUP
                                 0x36d (size before relaxing)
  .debug_str     0x000005db       0xa1 HAL/LED/src/LED_program.o
                                 0x213 (size before relaxing)
- .debug_str     0x0000067c      0x14c main.o
-                                0x391 (size before relaxing)
- .debug_str     0x000007c8       0x6e MCAL/DIO/src/DIO_program.o
+ .debug_str     0x0000067c      0x141 main.o
+                                0x386 (size before relaxing)
+ .debug_str     0x000007bd       0x6e MCAL/DIO/src/DIO_program.o
                                 0x22f (size before relaxing)
- .debug_str     0x00000836       0x2b MCAL/GI/src/GI_program.o
+ .debug_str     0x0000082b       0x2b MCAL/GI/src/GI_program.o
                                 0x17f (size before relaxing)
- .debug_str     0x00000861       0x95 MCAL/TMR0/src/TMR0_program.o
+ .debug_str     0x00000856       0x95 MCAL/TMR0/src/TMR0_program.o
                                 0x229 (size before relaxing)
 
-.debug_loc      0x00000000     0x11a7
+.debug_loc      0x00000000     0x11ef
  *(.debug_loc)
  .debug_loc     0x00000000      0x183 HAL/KPD/src/KeyPad_program.o
  .debug_loc     0x00000183      0x8aa HAL/LCD/src/LCD_PROGRAM.o
  .debug_loc     0x00000a2d      0x1e0 HAL/LED/src/LED_program.o
- .debug_loc     0x00000c0d      0x120 main.o
- .debug_loc     0x00000d2d      0x2e4 MCAL/DIO/src/DIO_program.o
- .debug_loc     0x00001011      0x196 MCAL/TMR0/src/TMR0_program.o
+ .debug_loc     0x00000c0d      0x168 main.o
+ .debug_loc     0x00000d75      0x2e4 MCAL/DIO/src/DIO_program.o
+ .debug_loc     0x00001059      0x196 MCAL/TMR0/src/TMR0_program.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -667,15 +666,15 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x198
+.debug_ranges   0x00000000      0x190
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x18 HAL/KPD/src/KeyPad_program.o
  .debug_ranges  0x00000018       0x88 HAL/LCD/src/LCD_PROGRAM.o
  .debug_ranges  0x000000a0       0x28 HAL/LED/src/LED_program.o
- .debug_ranges  0x000000c8       0x40 main.o
- .debug_ranges  0x00000108       0x30 MCAL/DIO/src/DIO_program.o
- .debug_ranges  0x00000138       0x18 MCAL/GI/src/GI_program.o
- .debug_ranges  0x00000150       0x48 MCAL/TMR0/src/TMR0_program.o
+ .debug_ranges  0x000000c8       0x38 main.o
+ .debug_ranges  0x00000100       0x30 MCAL/DIO/src/DIO_program.o
+ .debug_ranges  0x00000130       0x18 MCAL/GI/src/GI_program.o
+ .debug_ranges  0x00000148       0x48 MCAL/TMR0/src/TMR0_program.o
 
 .debug_macro
  *(.debug_macro)

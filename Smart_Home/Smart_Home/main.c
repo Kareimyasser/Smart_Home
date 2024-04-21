@@ -15,6 +15,8 @@
 #include "DIO_INTERFACE.h"
 #include "TMR0_interface.h"
 
+#include "tmr0_register.h"
+
 //HAL
 #include "KeyPad_config.h"
 #include "KeyPad_interface.h"
@@ -25,16 +27,16 @@
 
 void LCD_DisplayTemp();
 void WelcomeScreen();
-void HomeScreen();
+// void HomeScreen();
 void action(void);
-void getKPD(void);
 void KPD_Interface(void);
 void Reset_AllKPDValues();
 
 	u8	Local_copyKPDValue=KPD_Not_Pressed;
 	u8	local_lightNum=KPD_Not_Pressed;
-	u8 local_lightStatus=KPD_Not_Pressed;
-	u8 led_status =0;
+	u8 	local_lightStatus=KPD_Not_Pressed;
+	u8 	led_status =0;
+	u8 local_KPDIdleValue = KPD_Not_Pressed;
 
 int main(void)
 {
@@ -55,23 +57,43 @@ int main(void)
 	//display the welcome screen
 	WelcomeScreen();
 	//display the home screen
-	HomeScreen();
+	// //HomeScreen();
+	//kpd interface
+	KPD_Interface();
 
 	//local variables
 
 	
 	
 }
-KPD_Interface()
+void KPD_Interface(void)
 	{
-		
+		while (1)
+		{
+
 			TMR0_SetCallBackCTC(&LCD_DisplayTemp);
+
 			TMR0_voidStart();
-			
+			LCD_voidClear();
+			LCD_voidDisplayString((u8*)"1-AC 2-light");
+			LCD_voidSendCommand(Write_SecondLine);
+			LCD_voidDisplayString((u8*)"3-temperature");
+			Reset_AllKPDValues();
+
+
 			//busy wait for KPD
 			while (Local_copyKPDValue== KPD_Not_Pressed)
 			{
-			KPD_voidGetValue(&Local_copyKPDValue);
+				if (local_KPDIdleValue=='0')
+				{
+					local_KPDIdleValue=KPD_Not_Pressed;
+					break;
+				}
+				else
+				{
+					KPD_voidGetValue(&Local_copyKPDValue);
+				}
+				
 			}
 			TMR0_voidStop();
 				switch (Local_copyKPDValue)
@@ -97,8 +119,15 @@ KPD_Interface()
 						//busy wait for KPD
 						while(local_lightNum== KPD_Not_Pressed)
 						{
-						//get KPD Light Number
-						KPD_voidGetValue(&local_lightNum);
+							if (local_KPDIdleValue=='0')
+							{
+								local_KPDIdleValue=KPD_Not_Pressed;
+								break;
+							}
+							else
+							{
+								KPD_voidGetValue(&local_lightNum);
+							}
 						}
 						TMR0_voidStop();
 												if (local_lightNum=='1')
@@ -120,7 +149,7 @@ KPD_Interface()
 									LED_voidOff(DIO_PORTA,DIO_PIN0,LED_FORWARD_CONNECTION);
 									}
 								Reset_AllKPDValues();
-								HomeScreen();
+								//HomeScreen();
 								
 								
 							}
@@ -138,7 +167,7 @@ KPD_Interface()
 										LED_voidOn(DIO_PORTA,DIO_PIN0,LED_FORWARD_CONNECTION);
 									}
 								Reset_AllKPDValues();
-								HomeScreen();
+								//HomeScreen();
 
 								
 							}
@@ -163,7 +192,7 @@ KPD_Interface()
 									LED_voidOff(DIO_PORTA,DIO_PIN1,LED_FORWARD_CONNECTION);
 									}
 								local_lightStatus=KPD_Not_Pressed;
-								HomeScreen();
+								//HomeScreen();
 
 							}
 							else if (led_status ==0)
@@ -180,7 +209,7 @@ KPD_Interface()
 										LED_voidOn(DIO_PORTA,DIO_PIN1,LED_FORWARD_CONNECTION);
 									}
 								local_lightStatus=KPD_Not_Pressed;
-								HomeScreen();
+								//HomeScreen();
 							}
 							
 						}
@@ -203,7 +232,7 @@ KPD_Interface()
 									LED_voidOff(DIO_PORTA,DIO_PIN2,LED_FORWARD_CONNECTION);
 									}
 								local_lightStatus=KPD_Not_Pressed;
-								HomeScreen();
+								//HomeScreen();
 							}
 							else if (led_status ==0)
 							{
@@ -220,7 +249,7 @@ KPD_Interface()
 										LED_voidOn(DIO_PORTA,DIO_PIN2,LED_FORWARD_CONNECTION);
 									}
 								local_lightStatus=KPD_Not_Pressed;
-								HomeScreen();
+								//HomeScreen();
 							}
 
 						}
@@ -243,7 +272,7 @@ KPD_Interface()
 									LED_voidOff(DIO_PORTA,DIO_PIN3,LED_FORWARD_CONNECTION);
 									}
 								local_lightStatus=KPD_Not_Pressed;
-								HomeScreen();
+								//HomeScreen();
 							}
 							else if (led_status ==0)
 							{
@@ -260,7 +289,7 @@ KPD_Interface()
 										LED_voidOn(DIO_PORTA,DIO_PIN3,LED_FORWARD_CONNECTION);
 									}
 								local_lightStatus=KPD_Not_Pressed;
-								HomeScreen();
+								//HomeScreen();
 							}
 							
 						}
@@ -283,7 +312,7 @@ KPD_Interface()
 									LED_voidOff(DIO_PORTD,DIO_PIN2,LED_FORWARD_CONNECTION);
 									}
 								local_lightStatus=KPD_Not_Pressed;
-								HomeScreen();
+								//HomeScreen();
 							}
 							else if (led_status ==0)
 							{
@@ -300,7 +329,7 @@ KPD_Interface()
 										LED_voidOn(DIO_PORTD,DIO_PIN2,LED_FORWARD_CONNECTION);
 									}
 								local_lightStatus=KPD_Not_Pressed;
-								HomeScreen();
+								//HomeScreen();
 							}
 							
 							
@@ -323,7 +352,7 @@ KPD_Interface()
 							}
 							
 						}
-											else 
+											else if (local_lightNum=='0')			
 							{
 								LCD_voidClear();
 								LCD_voidDisplayStringDelay((u8*)"  Invalid Input");
@@ -336,16 +365,13 @@ KPD_Interface()
 								
 								//clear the local_lightNum to get the light number again
 								local_lightNum = KPD_Not_Pressed;
-								// go to the beginning of the loop to get the light number again
 							
 							}
 							local_lightNum =KPD_Not_Pressed;
 							Local_copyKPDValue=KPD_Not_Pressed;
-							break;						
+							break;	
 				}
-
-			
-		
+		}					
 	}
 
 void WelcomeScreen()
@@ -357,22 +383,14 @@ void WelcomeScreen()
 }
 
 
-void HomeScreen()
-{
-	LCD_voidClear();
-	LCD_voidDisplayString((u8*)"1-AC 2-light");
-	LCD_voidSendCommand(Write_SecondLine);
-	LCD_voidDisplayString((u8*)"3-temperature");
-	Reset_AllKPDValues();
-	TMR0clear_flag();
-	KPD_Interface();
-	
-}
+// void HomeScreen()
+// {	
+// }
 
 
 void LCD_DisplayTemp()
 {
-	u8 local_KPDIdleValue = KPD_Not_Pressed;
+	
 	
 	// TMR0_voidStop();
 	 LCD_voidClear();
@@ -382,9 +400,12 @@ void LCD_DisplayTemp()
 		do {
 		KPD_voidGetValue(&local_KPDIdleValue);
 	} while (local_KPDIdleValue != '0');
-	TMR0clear_flag();
 	TMR0_voidStop();
-	HomeScreen();
+	TMR0clear_flag();
+	LCD_voidClear();
+	 
+	// ////HomeScreen();
+	
 
 	
 }
