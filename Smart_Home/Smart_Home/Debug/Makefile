@@ -64,7 +64,8 @@ C_SRCS +=  \
 ../main.c \
 ../MCAL/DIO/src/DIO_program.c \
 ../MCAL/GI/src/GI_program.c \
-../MCAL/TMR0/src/TMR0_program.c
+../MCAL/TMR0/src/TMR0_program.c \
+../SmartHome_Prog.c
 
 
 PREPROCESSING_SRCS += 
@@ -80,7 +81,8 @@ HAL/LED/src/LED_program.o \
 main.o \
 MCAL/DIO/src/DIO_program.o \
 MCAL/GI/src/GI_program.o \
-MCAL/TMR0/src/TMR0_program.o
+MCAL/TMR0/src/TMR0_program.o \
+SmartHome_Prog.o
 
 OBJS_AS_ARGS +=  \
 HAL/KPD/src/KeyPad_program.o \
@@ -89,7 +91,8 @@ HAL/LED/src/LED_program.o \
 main.o \
 MCAL/DIO/src/DIO_program.o \
 MCAL/GI/src/GI_program.o \
-MCAL/TMR0/src/TMR0_program.o
+MCAL/TMR0/src/TMR0_program.o \
+SmartHome_Prog.o
 
 C_DEPS +=  \
 HAL/KPD/src/KeyPad_program.d \
@@ -98,7 +101,8 @@ HAL/LED/src/LED_program.d \
 main.d \
 MCAL/DIO/src/DIO_program.d \
 MCAL/GI/src/GI_program.d \
-MCAL/TMR0/src/TMR0_program.d
+MCAL/TMR0/src/TMR0_program.d \
+SmartHome_Prog.d
 
 C_DEPS_AS_ARGS +=  \
 HAL/KPD/src/KeyPad_program.d \
@@ -107,7 +111,8 @@ HAL/LED/src/LED_program.d \
 main.d \
 MCAL/DIO/src/DIO_program.d \
 MCAL/GI/src/GI_program.d \
-MCAL/TMR0/src/TMR0_program.d
+MCAL/TMR0/src/TMR0_program.d \
+SmartHome_Prog.d
 
 OUTPUT_FILE_PATH +=Smart_Home.elf
 
@@ -166,6 +171,13 @@ MCAL/GI/src/GI_program.o: ../MCAL/GI/src/GI_program.c
 	
 
 MCAL/TMR0/src/TMR0_program.o: ../MCAL/TMR0/src/TMR0_program.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../HAL/KPD/inc" -I"../HAL/LCD/inc" -I"../MCAL/DIO/inc" -I"../UTILES_LIB" -I"../HAL/LED/inc" -I"../MCAL/TMR0/inc" -I"../MCAL/GI/inc"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./SmartHome_Prog.o: .././SmartHome_Prog.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../HAL/KPD/inc" -I"../HAL/LCD/inc" -I"../MCAL/DIO/inc" -I"../UTILES_LIB" -I"../HAL/LED/inc" -I"../MCAL/TMR0/inc" -I"../MCAL/GI/inc"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

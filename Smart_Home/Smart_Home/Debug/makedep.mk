@@ -16,3 +16,5 @@ MCAL\GI\src\GI_program.c
 
 MCAL\TMR0\src\TMR0_program.c
 
+SmartHome_Prog.c
+
