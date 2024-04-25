@@ -28,12 +28,16 @@
 #include "SERVO_interface.h"
 #include "BL_interface.h"
 
-#define HOME_MAX_NUMBER_OF_TRIALS		3
+#define HOME_MAX_NUMBER_OF_TRIALS	  			3
 #define HOME_USER_NAME_AND_PASS_MAX_LENGTh		8
-#define HOME_ADMIN		1
-#define HOME_USER		2
-#define HOME_LOCAL_ACCESS		1
-#define HOME_REMOTE_ACCESS		2
+#define HOME_MAX_NUM_OF_LOCAL_USER				15
+
+#define HOME_ADMIN								1
+#define HOME_USER								2
+#define HOME_USER_FAILED						3
+
+#define HOME_LOCAL_ACCESS						1
+#define HOME_REMOTE_ACCESS						2
 
 /*APIs prototypes*/
 void HOME_voidInit(void);
@@ -58,12 +62,21 @@ int main(void)
 	
 	u8 testusername[8]={"11111111"};
 	u8 testuserpass[8]={"22222222"};
-	u8 pCounter;	
+	u8 testadminname[8]={"99999999"};
+	u8 testadminpass[8]={"99999999"};
+	u8 usertype;	
 	
 	EEPROM_voidWritePage(16,&testusername[0]);
 	EEPROM_voidWritePage(24,&testuserpass[0]);
+	EEPROM_voidWritePage(240,&testadminname[0]);
+	EEPROM_voidWritePage(248,&testadminpass[0]);
 	
-	HOME_voidCheckUserAndPass(HOME_LOCAL_ACCESS,&pCounter);
+	HOME_voidCheckUserAndPass(HOME_LOCAL_ACCESS,&usertype);
+	LCD_voidClear();
+	LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,0);
+	LCD_voidDisplayNumber(usertype);
+	_delay_ms(1000);
+	
 	
     while (1) 
     {
@@ -88,6 +101,8 @@ void HOME_voidInit(void)
 	BL_voidInit();
 	DIO_voidSetPinDirection(DIO_PORTD,DIO_PIN1,DIO_PIN_OUTPUT);
 	DIO_voidSetPinDirection(DIO_PORTD,DIO_PIN0,DIO_PIN_INPUT);
+	
+	//check alarm 
 }
 
 void HOME_voidLocalGetUserAndPass(u8* copy_pu8LocalUserName,u8* copy_pu8LocalUserPass)
@@ -154,42 +169,55 @@ void HOME_voidLocalGetUserAndPass(u8* copy_pu8LocalUserName,u8* copy_pu8LocalUse
 
 void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserType )
 {
+														/*purpose*/
+	/*the purpose of this function is to enable user to log in the system whether locally or remotely the function take one argument
+	to define if the user want to access from local or remoter and return if the login successed or not and user type 
+	when calling this function must be followed by an alarm check function*/
+	
+														/*EEPROM MAPPING*/
 	//we have 512 byte in EEPROM consists of 64 page first 0 to 29 page for local user and password the first page for user name the followed by password
 	//page 30 &31 for admin user name and password the first page for user name the followed by password
-	//page 32 to 62 for remote user name and password the first page for user name the followed by password
+	//page 32 to 61 for remote user name and password the first page for user name the followed by password
+	//word 500 in eeprom is saved for alarm history
 	
 	
+	//validate pointer
 	if(copy_pu8UserType!=NULL)
 	{
+		//first case for local access
 		if(copy_u8AccessType==HOME_LOCAL_ACCESS)
 		{
 			u8 local_u8EnteredLocalUserName[HOME_USER_NAME_AND_PASS_MAX_LENGTh],local_u8EnteredLocalUserPass[HOME_USER_NAME_AND_PASS_MAX_LENGTh];
 			u8 local_u8StoredLocalUserName[HOME_USER_NAME_AND_PASS_MAX_LENGTh],local_u8StoredLocalUserPass[HOME_USER_NAME_AND_PASS_MAX_LENGTh];
 			u8 Local_u8TrailsCounter,Local_u8NameByteCheckCounter,Local_u8NameByteCheck=0,Local_u8PassByteCheckCounter,Local_u8PassByteCheck=0,
-			Local_u8FireAnAlarm,Local_u8PagesCounter,Local_u8WrongUserNameCounter=0,Local_u8WrongUserPassCounter=0,Local_u8LocalUserNameLocation,LocaL_u8RightEntery=0;
+			Local_u8FireAnAlarm=0,Local_u8PagesCounter,Local_u8WrongUserNameCounter=0,Local_u8WrongUserPassCounter=0,Local_u8LocalUserNameLocation,LocaL_u8RightEntery=0;
 			
+			//every user have max of 3 trials for user name and pass
 			for(Local_u8TrailsCounter=0;Local_u8TrailsCounter<HOME_MAX_NUMBER_OF_TRIALS;Local_u8TrailsCounter++)
 			{
-				Local_u8FireAnAlarm=Local_u8TrailsCounter;
+				Local_u8FireAnAlarm++;
 				Local_u8WrongUserNameCounter=0;
 				Local_u8WrongUserPassCounter=0;
+				
+				//get user name and pass from KPD & LCD
 				HOME_voidLocalGetUserAndPass(&local_u8EnteredLocalUserName,&local_u8EnteredLocalUserPass);
 				
-				//loop on all local eeprom locations
-				for(Local_u8PagesCounter=0;Local_u8PagesCounter<16;Local_u8PagesCounter++)
+				//loop on all reserved local eeprom locations
+				for(Local_u8PagesCounter=0;Local_u8PagesCounter<(HOME_MAX_NUM_OF_LOCAL_USER+1);Local_u8PagesCounter++)
 				
 				{
 					Local_u8NameByteCheck=0;
 					Local_u8PassByteCheck=0;
 					
+					//get user name and pass from eeprom for local sys
 					Local_u8LocalUserNameLocation=(2*Local_u8PagesCounter)*HOME_USER_NAME_AND_PASS_MAX_LENGTh;
 					EEPROM_voidSequentialRead(Local_u8LocalUserNameLocation,HOME_USER_NAME_AND_PASS_MAX_LENGTh,&local_u8StoredLocalUserName);
 					EEPROM_voidSequentialRead(Local_u8LocalUserNameLocation+HOME_USER_NAME_AND_PASS_MAX_LENGTh,HOME_USER_NAME_AND_PASS_MAX_LENGTh,&local_u8StoredLocalUserPass);
 					
+					//check user name which is entered by is user is the same as the one from eeprom
 					for(Local_u8NameByteCheckCounter=0;Local_u8NameByteCheckCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8NameByteCheckCounter++)
 					{
-						
-						
+							
 						if(local_u8EnteredLocalUserName[Local_u8NameByteCheckCounter]==local_u8StoredLocalUserName[Local_u8NameByteCheckCounter])
 						{
 							Local_u8NameByteCheck++;
@@ -198,15 +226,13 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserType )
 						}
 					}
 					
-				
 					
+					//if the user name is right now we can check pass
 					if(Local_u8NameByteCheck==HOME_USER_NAME_AND_PASS_MAX_LENGTh)
 					{
 						
 						for(Local_u8PassByteCheckCounter=0;Local_u8PassByteCheckCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8PassByteCheckCounter++)
 						{
-							
-							
 							
 							if(local_u8EnteredLocalUserPass[Local_u8PassByteCheckCounter]==local_u8StoredLocalUserPass[Local_u8PassByteCheckCounter])
 							{
@@ -217,12 +243,24 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserType )
 									
 						}
 						
-						
+						//if the pass right now we difine the user type(admin or user)
 						if(Local_u8PassByteCheck==HOME_USER_NAME_AND_PASS_MAX_LENGTh)
 						{
 							
-							
+
 							LocaL_u8RightEntery=1;
+							
+							//admin user name is saved at loc 240(page 30)
+							if(Local_u8PagesCounter==HOME_MAX_NUM_OF_LOCAL_USER)
+							{
+								*copy_pu8UserType=HOME_ADMIN;	
+							}
+							else
+							{
+								*copy_pu8UserType=HOME_USER;
+							
+							}
+							
 							break;
 							
 						}
@@ -244,7 +282,7 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserType )
 				
 				}
 			
-				
+				//is the entery was right dis on LCD
 				if(LocaL_u8RightEntery==1)
 				{
 					LCD_voidClear();
@@ -253,6 +291,7 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserType )
 					_delay_ms(500);
 					break;
 				}
+				//is the entery was wrong dis on LCD and hint the reason
 				else if(Local_u8WrongUserNameCounter==16)
 				{
 					LCD_voidClear();
@@ -260,10 +299,15 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserType )
 					LCD_voidDisplayString("ACCESS DENIED");
 					LCD_voidGoTOSpecificPosition(LCD_LINE_TWO,0);
 					LCD_voidDisplayString("Wrong User Name");
-					_delay_ms(1000);
-					LCD_voidGoTOSpecificPosition(LCD_LINE_TWO,0);
-					LCD_voidDisplayString("Please Try Again");	
+					//dont display this message on trial 3
+					if(Local_u8TrailsCounter!=(HOME_MAX_NUMBER_OF_TRIALS-1))
+					{	
+						_delay_ms(1000);
+						LCD_voidGoTOSpecificPosition(LCD_LINE_TWO,0);
+						LCD_voidDisplayString("Please Try Again");
+					}
 				}
+				//is the entery was wrong dis on LCD and hint the reason
 				else if(Local_u8WrongUserPassCounter!=0)
 				{
 					LCD_voidClear();
@@ -271,12 +315,22 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserType )
 					LCD_voidDisplayString("ACCESS DENIED");
 					LCD_voidGoTOSpecificPosition(LCD_LINE_TWO,0);
 					LCD_voidDisplayString("Wrong Password");
-					_delay_ms(1000);
-					LCD_voidGoTOSpecificPosition(LCD_LINE_TWO,0);
-					LCD_voidDisplayString("Please Try Again");
+					
+					//dont display this message on trial 3
+					if(Local_u8TrailsCounter!=(HOME_MAX_NUMBER_OF_TRIALS-1))
+					{
+						_delay_ms(1000);
+						LCD_voidGoTOSpecificPosition(LCD_LINE_TWO,0);
+						LCD_voidDisplayString("Please Try Again");
+					}
 				}
 				
 			
+			}
+			//check the alarm after the 3rd trial
+			if((HOME_MAX_NUMBER_OF_TRIALS==Local_u8FireAnAlarm)&&(LocaL_u8RightEntery==0))
+			{
+				*copy_pu8UserType=HOME_USER_FAILED;
 			}
 		}
 		
