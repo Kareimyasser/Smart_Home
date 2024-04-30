@@ -20,6 +20,8 @@ void	LCD_voidShiftCursor			(u8 copy_u8ShifttingDirection);
 void	LCD_voidShiftDisplay			    (u8 copy_u8ShifttingDirection);
 void	LCD_voidMoveCursor		    (u8 copy_u8LineNumber, u8 copy_u8Postion);
 
+void LCD_voidGoTOSpecificPosition(u8 copy_u8LineNumber,u8 copy_u8Position);
+
 
 
 #endif /* LCD_INTERFACE_H_ */

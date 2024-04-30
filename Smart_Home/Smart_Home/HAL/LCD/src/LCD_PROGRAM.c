@@ -263,6 +263,41 @@ void LCD_voidShiftDisplay(u8 copy_u8ShifttingDirection)
 }
 
 
+void LCD_voidGoTOSpecificPosition(u8 copy_u8LineNumber,u8 copy_u8Position)
+{
+	if(copy_u8Position<40)
+	{
+		//cmnd to return cursor to home position
+		LCD_voidSendCommand(0b00000010);
+		
+		switch(copy_u8LineNumber)
+		{
+			case LCD_LINE_ONE:
+			
+			LCD_voidSendCommand(0b10000000|copy_u8Position);
+		
+			
+			break;
+			
+			case LCD_LINE_TWO:
+
+			LCD_voidSendCommand(0b10000000|(copy_u8Position+0x40));
+
+			break;
+		}
+
+		
+	}
+	else
+	{
+		//error state
+	}
+	
+	
+	
+}
+
+
 static	void PRV_voidWriteHalfPort(u8 copy_u8Value)
 {
 	if (1== GET_BIT(copy_u8Value,0))

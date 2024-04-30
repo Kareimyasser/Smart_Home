@@ -16,6 +16,8 @@
 #include "TMR0_interface.h"
 #include "tmr0_register.h"
 #include "GI_interface.h"
+#include "PWM_interface.h"
+#include "UART_interface.h"
 
 // HAL
 #include "KeyPad_config.h"
@@ -23,18 +25,34 @@
 #include "LCD_INTERFACE.h"
 #include "LCD_CONFIG.h"
 #include "LED_interface.h"
-#include  "SmartHome.h"
+#include "BUZZER_interface.h"
+#include "EEPROM_interface.h"
+#include "SERVO_interface.h"
+#include "BL_interface.h"
+#include "SmartHome.h"
 
+extern u8 global_accessType;
 
 int main()
 {
 	APP_init();
-
 _delay_ms(1000);
+
 
 	while(1)
 	{
-		KPD_Interface();
+		if (global_accessType ==accessPermited)
+		{
+		KPD_Interface_user();
+		}
+		else if (global_accessType ==accessDenied)
+		{
+			LCD_voidDisplayString((u8*)"Access Denied");
+			break;
+		}
+		
+		
+		
 	}
 }
 

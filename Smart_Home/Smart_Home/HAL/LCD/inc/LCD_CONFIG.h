@@ -41,4 +41,10 @@
 #define Write_FirstLine					0x80
 #define Write_SecondLine				0XC0
 
+#define LCD_SHIFT_DIS_RIGHT		1
+#define LCD_SHIFT_DIS_LEFT		2
+
+#define LCD_LINE_ONE			1
+#define LCD_LINE_TWO			2
+
 #endif /* LCD_CONFIG_H_ */

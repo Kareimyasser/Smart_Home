@@ -57,89 +57,127 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
       <AvrGcc>
-        <avrgcc.common.Device>-mmcu=atmega32 -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32"</avrgcc.common.Device>
-        <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
-        <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
-        <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
-        <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
-        <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
-        <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
-        <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
-        <avrgcc.compiler.symbols.DefSymbols>
-          <ListValues>
-            <Value>NDEBUG</Value>
-          </ListValues>
-        </avrgcc.compiler.symbols.DefSymbols>
-        <avrgcc.compiler.directories.IncludePaths>
-          <ListValues>
-            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
-          </ListValues>
-        </avrgcc.compiler.directories.IncludePaths>
-        <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
-        <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
-        <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
-        <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
-        <avrgcc.linker.libraries.Libraries>
-          <ListValues>
-            <Value>libm</Value>
-          </ListValues>
-        </avrgcc.linker.libraries.Libraries>
-        <avrgcc.assembler.general.IncludePaths>
-          <ListValues>
-            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
-          </ListValues>
-        </avrgcc.assembler.general.IncludePaths>
-      </AvrGcc>
+  <avrgcc.common.Device>-mmcu=atmega32 -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32"</avrgcc.common.Device>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>NDEBUG</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+  <avrgcc.linker.libraries.Libraries>
+    <ListValues>
+      <Value>libm</Value>
+    </ListValues>
+  </avrgcc.linker.libraries.Libraries>
+  <avrgcc.linker.libraries.LibrarySearchPaths>
+    <ListValues>
+      <Value>G:\embedded\GProject\Smart_Home\project_1\project_1\HAL\BUZZER\INC</Value>
+    </ListValues>
+  </avrgcc.linker.libraries.LibrarySearchPaths>
+  <avrgcc.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
+    </ListValues>
+  </avrgcc.assembler.general.IncludePaths>
+</AvrGcc>
     </ToolchainSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <AvrGcc>
-        <avrgcc.common.Device>-mmcu=atmega32 -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32"</avrgcc.common.Device>
-        <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
-        <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
-        <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
-        <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
-        <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
-        <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
-        <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
-        <avrgcc.compiler.symbols.DefSymbols>
-          <ListValues>
-            <Value>DEBUG</Value>
-          </ListValues>
-        </avrgcc.compiler.symbols.DefSymbols>
-        <avrgcc.compiler.directories.IncludePaths>
-          <ListValues>
-            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
-            <Value>../HAL/KPD/inc</Value>
-            <Value>../HAL/LCD/inc</Value>
-            <Value>../MCAL/DIO/inc</Value>
-            <Value>../UTILES_LIB</Value>
-            <Value>../HAL/LED/inc</Value>
-            <Value>../MCAL/TMR0/inc</Value>
-            <Value>../MCAL/GI/inc</Value>
-          </ListValues>
-        </avrgcc.compiler.directories.IncludePaths>
-        <avrgcc.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcc.compiler.optimization.level>
-        <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
-        <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
-        <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
-        <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
-        <avrgcc.linker.libraries.Libraries>
-          <ListValues>
-            <Value>libm</Value>
-          </ListValues>
-        </avrgcc.linker.libraries.Libraries>
-        <avrgcc.assembler.general.IncludePaths>
-          <ListValues>
-            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
-          </ListValues>
-        </avrgcc.assembler.general.IncludePaths>
-        <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
-      </AvrGcc>
+  <avrgcc.common.Device>-mmcu=atmega32 -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32"</avrgcc.common.Device>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>DEBUG</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
+      <Value>../HAL/BL/inc</Value>
+      <Value>../HAL/BUZZER/inc</Value>
+      <Value>../HAL/EEPROM/inc</Value>
+      <Value>../HAL/KPD/inc</Value>
+      <Value>../HAL/LCD/inc</Value>
+      <Value>../HAL/LED/inc</Value>
+      <Value>../HAL/SERVO/inc</Value>
+      <Value>../MCAL/DIO/inc</Value>
+      <Value>../MCAL/GI/inc</Value>
+      <Value>../MCAL/PWM/inc</Value>
+      <Value>../MCAL/TMR0/inc</Value>
+      <Value>../MCAL/TWI/inc</Value>
+      <Value>../MCAL/UART/inc</Value>
+      <Value>../UTILES_LIB</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+  <avrgcc.linker.libraries.Libraries>
+    <ListValues>
+      <Value>libm</Value>
+    </ListValues>
+  </avrgcc.linker.libraries.Libraries>
+  <avrgcc.linker.libraries.LibrarySearchPaths>
+    <ListValues>
+      <Value>G:\embedded\GProject\Smart_Home\project_1\project_1\HAL\BUZZER\INC</Value>
+    </ListValues>
+  </avrgcc.linker.libraries.LibrarySearchPaths>
+  <avrgcc.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
+    </ListValues>
+  </avrgcc.assembler.general.IncludePaths>
+  <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
+</AvrGcc>
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="HAL\BL\inc\BL_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\BL\src\BL_program.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\BUZZER\inc\BUZZER_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\BUZZER\src\BUZZER_program.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\EEPROM\inc\EEPROM_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\EEPROM\inc\EEPROM_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\EEPROM\src\EEPROM_program.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="HAL\KPD\inc\KeyPad_config.h">
       <SubType>compile</SubType>
     </Compile>
@@ -167,6 +205,12 @@
     <Compile Include="HAL\LED\src\LED_program.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="HAL\SERVO\inc\SERVO_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\SERVO\src\SERVO_program.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -188,6 +232,21 @@
     <Compile Include="MCAL\GI\src\GI_program.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCAL\PWM\inc\PWM_config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\PWM\inc\PWM_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\PWM\inc\PWM_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\PWM\inc\PWM_register.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\PWM\src\PWM_program.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="MCAL\TMR0\inc\TMR0_config.h">
       <SubType>compile</SubType>
     </Compile>
@@ -201,6 +260,27 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL\TMR0\src\TMR0_program.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\TWI\inc\TWI_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\TWI\inc\TWI_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\TWI\inc\TWI_register.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\TWI\src\TWI_program.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\UART\inc\UART_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\UART\inc\UART_register.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\UART\src\UART_program.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="SmartHome.h">
@@ -217,16 +297,27 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="HAL" />
+    <Folder Include="HAL\BL\" />
+    <Folder Include="HAL\BL\inc" />
+    <Folder Include="HAL\BL\src" />
+    <Folder Include="HAL\BUZZER\" />
+    <Folder Include="HAL\BUZZER\inc\" />
+    <Folder Include="HAL\BUZZER\src\" />
+    <Folder Include="HAL\EEPROM\" />
+    <Folder Include="HAL\EEPROM\inc\" />
+    <Folder Include="HAL\EEPROM\src\" />
     <Folder Include="HAL\KPD" />
     <Folder Include="HAL\KPD\inc" />
     <Folder Include="HAL\KPD\src" />
     <Folder Include="HAL\LCD" />
-    <Folder Include="HAL\LCD\inc\" />
-    <Folder Include="HAL\LCD\src\" />
+    <Folder Include="HAL\LCD\inc" />
+    <Folder Include="HAL\LCD\src" />
     <Folder Include="HAL\LED" />
-    <Folder Include="HAL\LED\inc" />
-    <Folder Include="HAL\LED\src" />
+    <Folder Include="HAL\LED\inc\" />
+    <Folder Include="HAL\LED\src\" />
+    <Folder Include="HAL\SERVO" />
+    <Folder Include="HAL\SERVO\inc\" />
+    <Folder Include="HAL\SERVO\src\" />
     <Folder Include="MCAL" />
     <Folder Include="MCAL\DIO" />
     <Folder Include="MCAL\DIO\inc\" />
@@ -234,9 +325,19 @@
     <Folder Include="MCAL\GI" />
     <Folder Include="MCAL\GI\inc" />
     <Folder Include="MCAL\GI\src" />
+    <Folder Include="MCAL\PWM\inc\" />
+    <Folder Include="MCAL\PWM\src\" />
+    <Folder Include="MCAL\TWI\inc\" />
+    <Folder Include="MCAL\TWI\src\" />
+    <Folder Include="MCAL\UART" />
+    <Folder Include="MCAL\TWI" />
+    <Folder Include="MCAL\PWM" />
     <Folder Include="MCAL\TMR0" />
     <Folder Include="MCAL\TMR0\inc" />
     <Folder Include="MCAL\TMR0\src" />
+    <Folder Include="HAL" />
+    <Folder Include="MCAL\UART\inc" />
+    <Folder Include="MCAL\UART\src" />
     <Folder Include="UTILES_LIB" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
