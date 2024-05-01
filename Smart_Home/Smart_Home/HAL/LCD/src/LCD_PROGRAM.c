@@ -339,6 +339,6 @@ void LCD_voidPwdEffect()
 	//this function replaces the pwd char with * to hide pwd after
 	//some delay 
 	_delay_ms(200);
-	LCD_voidCursorShift(LEFT);
+	LCD_voidShiftCursor(Cursor_ShiftLeft);
 	LCD_voidDisplayChar('*');
 }
