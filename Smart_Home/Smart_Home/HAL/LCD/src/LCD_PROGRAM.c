@@ -333,3 +333,12 @@ static	void PRV_voidWriteHalfPort(u8 copy_u8Value)
 		DIO_voidSetPinValue(LCD_D7_PORT,LCD_D7_PIN,DIO_PIN_LOW);
 		}
 }
+
+void LCD_voidPwdEffect()
+{
+	//this function replaces the pwd char with * to hide pwd after
+	//some delay 
+	_delay_ms(200);
+	LCD_voidCursorShift(LEFT);
+	LCD_voidDisplayChar('*');
+}
