@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+APP\src\SmartHome_Prog.c
+
 HAL\BL\src\BL_program.c
 
 HAL\BUZZER\src\BUZZER_program.c
@@ -29,6 +31,4 @@ MCAL\TMR0\src\TMR0_program.c
 MCAL\TWI\src\TWI_program.c
 
 MCAL\UART\src\UART_program.c
-
-SmartHome_Prog.c
 

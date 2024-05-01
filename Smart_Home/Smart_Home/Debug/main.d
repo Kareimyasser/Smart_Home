@@ -13,7 +13,7 @@ main.d main.o: .././main.c \
  ../HAL/LCD/inc/LCD_INTERFACE.h ../HAL/LCD/inc/LCD_CONFIG.h \
  ../HAL/LED/inc/LED_interface.h ../HAL/BUZZER/inc/BUZZER_interface.h \
  ../HAL/EEPROM/inc/EEPROM_interface.h ../HAL/SERVO/inc/SERVO_interface.h \
- ../HAL/BL/inc/BL_interface.h .././SmartHome.h
+ ../HAL/BL/inc/BL_interface.h ../APP/inc/SmartHome.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
 
@@ -61,4 +61,4 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../HAL/BL/inc/BL_interface.h:
 
-.././SmartHome.h:
+../APP/inc/SmartHome.h:
