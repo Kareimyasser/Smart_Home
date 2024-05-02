@@ -39,9 +39,11 @@
 #define HOME_USER_NAME_AND_PASS_MAX_LENGTh		8
 #define HOME_MAX_NUM_OF_LOCAL_USER				15
 
-#define HOME_ADMIN								1
-#define HOME_USER								2
-#define HOME_USER_FAILED						3
+#define HOME_LOCAL_ADMIN						1
+#define HOME_LOCAL_USER							2
+#define HOME_REMOTE_ADMIN						3
+#define HOME_REMOTE_USER						4
+#define HOME_LOGIN_FAILED						5
 
 #define HOME_LOCAL_ACCESS						1
 #define HOME_REMOTE_ACCESS						2
@@ -72,20 +74,18 @@ void APP_init(void)
 	
 	u8 testusername[8]={"11111111"};
 	u8 testuserpass[8]={"22222222"};
-	u8 testadminname[8]={"99999999"};
-	u8 testadminpass[8]={"99999999"};
+	u8 testadminname[8]={"12345678"};
+	u8 testadminpass[8]={"12345678"};
 	u8 usertype;	
 	
-	EEPROM_voidWritePage(16,&testusername[0]);
-	EEPROM_voidWritePage(24,&testuserpass[0]);
+	EEPROM_voidWritePage(304,&testusername[0]);
+	EEPROM_voidWritePage(312,&testuserpass[0]);
 	EEPROM_voidWritePage(240,&testadminname[0]);
 	EEPROM_voidWritePage(248,&testadminpass[0]);
 	
-	HOME_voidCheckUserAndPass(HOME_LOCAL_ACCESS,&usertype);
-	LCD_voidClear();
-	LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,0);
-	LCD_voidDisplayNumber(usertype);
-	_delay_ms(1000);
+	HOME_voidCheckUserAndPass(HOME_REMOTE_ACCESS,&usertype);
+	
+
 
 
 
@@ -190,6 +190,84 @@ void HOME_voidLocalGetUserAndPass(u8* copy_pu8LocalUserName,u8* copy_pu8LocalUse
 }
 
 
+
+void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8RemoteUserPass)
+{
+	if((copy_pu8RemoteUserName!=NULL)&&(copy_pu8RemoteUserPass!=NULL))
+	{
+	
+		u8 Local_u8UserNameLengthCounter=0,Local_u8UserPassCounter=0;
+	
+		//dis request for use name and pass
+		BL_voidTxString	("Please Enter User Name & Password ");
+		BL_voidTxString("\n");
+	
+		//dis request for user name
+		BL_voidTxString	("User Name:");
+		BL_voidTxChar('\n');
+	
+		//loop for 8 digits user name
+		for(Local_u8UserNameLengthCounter=0;Local_u8UserNameLengthCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8UserNameLengthCounter++)
+		{
+			
+			
+			BL_voidRxChar(&copy_pu8RemoteUserName[Local_u8UserNameLengthCounter]);	
+		//if(Local_u8UserNameLengthCounter==(HOME_USER_NAME_AND_PASS_MAX_LENGTh-1))
+		//{
+		//	break;
+		//}
+			
+		}
+		BL_voidTxString("Entered User Name:");
+		//loop for 8 digits user name
+		
+		for(Local_u8UserNameLengthCounter=0;Local_u8UserNameLengthCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8UserNameLengthCounter++)
+		{
+			
+			
+			BL_voidTxChar(copy_pu8RemoteUserName[Local_u8UserNameLengthCounter]);	
+			
+		}
+		
+		BL_voidTxChar('\n');
+		
+		
+		//display request for pass
+		BL_voidTxString	("Password:");
+		BL_voidTxChar('\n');
+	
+		//loop for 8 digits user pass
+		for(Local_u8UserPassCounter=0;Local_u8UserPassCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8UserPassCounter++)
+		{
+			
+			BL_voidRxChar(&copy_pu8RemoteUserPass[Local_u8UserPassCounter]);
+			//if(Local_u8UserPassCounter==(HOME_USER_NAME_AND_PASS_MAX_LENGTh-1))
+			//{
+			//	break;
+			//}
+			
+		}
+		BL_voidTxString("Entered Pass:");
+		//loop for 8 digits user pass
+		for(Local_u8UserPassCounter=0;Local_u8UserPassCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8UserPassCounter++)
+		{
+			
+			BL_voidTxChar(copy_pu8RemoteUserPass[Local_u8UserPassCounter]);
+		
+		}
+
+		BL_voidTxChar('\n');
+	}
+	else
+	{
+		//error massage
+	}
+			
+	
+		
+}
+
+
 void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserType )
 {
 														/*purpose*/
@@ -207,13 +285,16 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserType )
 	//validate pointer
 	if(copy_pu8UserType!=NULL)
 	{
+		u8 Local_u8TrailsCounter,Local_u8NameByteCheckCounter,Local_u8NameByteCheck=0,
+		Local_u8PassByteCheckCounter,Local_u8PassByteCheck=0,Local_u8FireAnAlarm=0,Local_u8PagesCounter,
+		Local_u8WrongUserNameCounter=0,Local_u8WrongUserPassCounter=0,LocaL_u8RightEntery=0;
+		
 		//first case for local access
 		if(copy_u8AccessType==HOME_LOCAL_ACCESS)
 		{
 			u8 local_u8EnteredLocalUserName[HOME_USER_NAME_AND_PASS_MAX_LENGTh],local_u8EnteredLocalUserPass[HOME_USER_NAME_AND_PASS_MAX_LENGTh];
 			u8 local_u8StoredLocalUserName[HOME_USER_NAME_AND_PASS_MAX_LENGTh],local_u8StoredLocalUserPass[HOME_USER_NAME_AND_PASS_MAX_LENGTh];
-			u8 Local_u8TrailsCounter,Local_u8NameByteCheckCounter,Local_u8NameByteCheck=0,Local_u8PassByteCheckCounter,Local_u8PassByteCheck=0,
-			Local_u8FireAnAlarm=0,Local_u8PagesCounter,Local_u8WrongUserNameCounter=0,Local_u8WrongUserPassCounter=0,Local_u8LocalUserNameLocation,LocaL_u8RightEntery=0;
+			u8 Local_u8LocalUserNameLocation;
 			
 			//every user have max of 3 trials for user name and pass
 			for(Local_u8TrailsCounter=0;Local_u8TrailsCounter<HOME_MAX_NUMBER_OF_TRIALS;Local_u8TrailsCounter++)
@@ -276,11 +357,11 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserType )
 							//admin user name is saved at loc 240(page 30)
 							if(Local_u8PagesCounter==HOME_MAX_NUM_OF_LOCAL_USER)
 							{
-								*copy_pu8UserType=HOME_ADMIN;	
+								*copy_pu8UserType=HOME_LOCAL_ADMIN;	
 							}
 							else
 							{
-								*copy_pu8UserType=HOME_USER;
+								*copy_pu8UserType=HOME_LOCAL_USER;
 							
 							}
 							
@@ -310,9 +391,8 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserType )
 				{
 					LCD_voidClear();
 					LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,0);
-					LCD_voidDisplayString((u8 *)"ACCESS PERMITED");
+					LCD_voidDisplayString("ACCESS PERMITED");
 					_delay_ms(500);
-                    
 					break;
 				}
 				//is the entery was wrong dis on LCD and hint the reason
@@ -320,15 +400,15 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserType )
 				{
 					LCD_voidClear();
 					LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,0);
-					LCD_voidDisplayString((u8 *)"ACCESS DENIED");
+					LCD_voidDisplayString("ACCESS DENIED");
 					LCD_voidGoTOSpecificPosition(LCD_LINE_TWO,0);
-					LCD_voidDisplayString((u8 *)"Wrong User Name");
+					LCD_voidDisplayString("Wrong User Name");
 					//dont display this message on trial 3
 					if(Local_u8TrailsCounter!=(HOME_MAX_NUMBER_OF_TRIALS-1))
 					{	
 						_delay_ms(1000);
 						LCD_voidGoTOSpecificPosition(LCD_LINE_TWO,0);
-						LCD_voidDisplayString((u8 *)"Please Try Again");
+						LCD_voidDisplayString("Please Try Again");
 					}
 				}
 				//is the entery was wrong dis on LCD and hint the reason
@@ -336,16 +416,16 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserType )
 				{
 					LCD_voidClear();
 					LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,0);
-					LCD_voidDisplayString((u8 *)"ACCESS DENIED");
+					LCD_voidDisplayString("ACCESS DENIED");
 					LCD_voidGoTOSpecificPosition(LCD_LINE_TWO,0);
-					LCD_voidDisplayString((u8 *)"Wrong Password");
+					LCD_voidDisplayString("Wrong Password");
 					
 					//dont display this message on trial 3
 					if(Local_u8TrailsCounter!=(HOME_MAX_NUMBER_OF_TRIALS-1))
 					{
 						_delay_ms(1000);
 						LCD_voidGoTOSpecificPosition(LCD_LINE_TWO,0);
-						LCD_voidDisplayString((u8 *)"Please Try Again");
+						LCD_voidDisplayString("Please Try Again");
 					}
 				}
 				
@@ -354,14 +434,157 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserType )
 			//check the alarm after the 3rd trial
 			if((HOME_MAX_NUMBER_OF_TRIALS==Local_u8FireAnAlarm)&&(LocaL_u8RightEntery==0))
 			{
-				*copy_pu8UserType=HOME_USER_FAILED;
+				*copy_pu8UserType=HOME_LOGIN_FAILED;
 			}
 		}
 		
 		else if(copy_u8AccessType==HOME_REMOTE_ACCESS)
 		{
-			//implenet check in case of bl access
+			
+			u8 local_u8EnteredRemoteUserName[HOME_USER_NAME_AND_PASS_MAX_LENGTh],local_u8EnteredRemoteUserPass[HOME_USER_NAME_AND_PASS_MAX_LENGTh];
+			u8 local_u8StoredRemoteUserName[HOME_USER_NAME_AND_PASS_MAX_LENGTh],local_u8StoredRemoteUserPass[HOME_USER_NAME_AND_PASS_MAX_LENGTh];
+			u8 Local_u8RemoteUserNameLocation;
+			
+			//every user have max of 3 trials for user name and pass
+			for(Local_u8TrailsCounter=0;Local_u8TrailsCounter<HOME_MAX_NUMBER_OF_TRIALS;Local_u8TrailsCounter++)
+			{
+				
+				Local_u8FireAnAlarm++;
+				Local_u8WrongUserNameCounter=0;
+				Local_u8WrongUserPassCounter=0;
+				
+				//delete this line later
+				_delay_ms(20000);
+				
+				//get user name and pass from BL
+				HOME_voidRemoteGetUserAndPass(&local_u8EnteredRemoteUserName,&local_u8EnteredRemoteUserPass);
+				
+				//loop on every remote user
+				for(Local_u8PagesCounter=HOME_MAX_NUM_OF_LOCAL_USER;Local_u8PagesCounter<((HOME_MAX_NUM_OF_LOCAL_USER*2)+1);Local_u8PagesCounter++)
+				{
+					Local_u8NameByteCheck=0;
+					Local_u8PassByteCheck=0;
+					
+					//get user name and pass from EEPROM
+					Local_u8RemoteUserNameLocation=(2*Local_u8PagesCounter)*HOME_USER_NAME_AND_PASS_MAX_LENGTh;
+					EEPROM_voidSequentialRead(Local_u8RemoteUserNameLocation,HOME_USER_NAME_AND_PASS_MAX_LENGTh,&local_u8StoredRemoteUserName);
+					EEPROM_voidSequentialRead((Local_u8RemoteUserNameLocation+HOME_USER_NAME_AND_PASS_MAX_LENGTh),HOME_USER_NAME_AND_PASS_MAX_LENGTh,&local_u8StoredRemoteUserPass);
+					
+					//loop on every byte of user name
+					for(Local_u8NameByteCheckCounter=0;Local_u8NameByteCheckCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8NameByteCheckCounter++)
+					{
+						
+						//check the byte stored with the entered	
+						if(local_u8EnteredRemoteUserName[Local_u8NameByteCheckCounter]==local_u8StoredRemoteUserName[Local_u8NameByteCheckCounter])
+						{
+							
+							Local_u8NameByteCheck++;
+							
+							
+						}
+					
+					}
+					if(Local_u8NameByteCheck==HOME_USER_NAME_AND_PASS_MAX_LENGTh)
+					{
+						//loop on every byte of password
+						for(Local_u8PassByteCheckCounter=0;Local_u8PassByteCheckCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8PassByteCheckCounter++)
+						{
+							//check the byte stored with the entered
+							if(local_u8EnteredRemoteUserPass[Local_u8PassByteCheckCounter]==local_u8StoredRemoteUserPass[Local_u8PassByteCheckCounter])
+							{
+								Local_u8PassByteCheck++;
+								
+								
+							}
+									
+						}
+						//check the entry is right or wrong
+						if(Local_u8PassByteCheck==HOME_USER_NAME_AND_PASS_MAX_LENGTh)
+						{
+							
+
+							LocaL_u8RightEntery=1;
+							
+							//admin user name is saved at loc 240(page 30)
+							if(Local_u8PagesCounter==HOME_MAX_NUM_OF_LOCAL_USER)
+							{
+								*copy_pu8UserType=HOME_REMOTE_ADMIN;	
+							}
+							else
+							{
+								*copy_pu8UserType=HOME_REMOTE_USER;
+							
+							}
+							
+							break;
+							
+						}
+						else
+						{
+							Local_u8WrongUserPassCounter++;
+							
+							
+						}
+						
+						
+						
+						
+						
+					}
+					else
+					{
+						Local_u8WrongUserNameCounter++;
+						
+						
+						
+					}
+						
+				}
+				//case of wright entry
+				if(LocaL_u8RightEntery==1)
+				{
+					
+					BL_voidTxString	("ACCESS PERMITED");
+					BL_voidTxChar('\n');
+					break;
+				}
+				//is the entery was wrong 
+				else if(Local_u8WrongUserNameCounter==16)
+				{
+					BL_voidTxString	("ACCESS DENIED");
+					BL_voidTxChar('\n');
+					BL_voidTxString	("Wrong User Name");
+					BL_voidTxChar('\n');
+					
+					//dont display this message on trial 3
+					if(Local_u8TrailsCounter!=(HOME_MAX_NUMBER_OF_TRIALS-1))
+					{	
+						
+						BL_voidTxString	("Please Try Again");
+						BL_voidTxChar('\n');
+						
+					}
+				}
+				//is the entery was wrong dis on LCD and hint the reason
+				else if(Local_u8WrongUserPassCounter!=0)
+				{
+					BL_voidTxString	("ACCESS DENIED");
+					BL_voidTxChar('\n');
+					BL_voidTxString	("Wrong Password");
+					BL_voidTxChar('\n');
+										
+					//dont display this message on trial 3
+					if(Local_u8TrailsCounter!=(HOME_MAX_NUMBER_OF_TRIALS-1))
+					{
+						BL_voidTxString	("Please Try Again");
+						BL_voidTxChar('\n');
+					}
+				}
+				
+			}
+			
 		}
+		
 	
 	}
 	else
@@ -369,6 +592,15 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserType )
 		//error massage
 	}
 }
+
+
+
+
+
+
+
+
+
 
 
 void KPD_Interface_user(void)
