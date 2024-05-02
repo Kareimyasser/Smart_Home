@@ -18,6 +18,7 @@
 #include "GI_interface.h"
 #include "PWM_interface.h"
 #include "UART_interface.h"
+#include "ADC_interface.h"
 
 // HAL
 #include "KeyPad_config.h"

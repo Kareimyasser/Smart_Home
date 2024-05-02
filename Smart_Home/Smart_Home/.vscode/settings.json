@@ -4,6 +4,8 @@
         "servo_interface.h": "c",
         "keypad_interface.h": "c",
         "smarthome.h": "c",
-        "keypad_config.h": "c"
+        "keypad_config.h": "c",
+        "adc_interface.h": "c",
+        "adc_register.h": "c"
     }
 }

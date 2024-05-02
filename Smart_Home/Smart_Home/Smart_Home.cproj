@@ -131,6 +131,7 @@
       <Value>../MCAL/UART/inc</Value>
       <Value>../UTILES_LIB</Value>
       <Value>../APP/inc</Value>
+      <Value>../MCAL/ADC/inc</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcc.compiler.optimization.level>
@@ -219,6 +220,15 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\ADC\inc\ADC_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\ADC\inc\ADC_register.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\ADC\src\ADC_program.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL\DIO\inc\DIO_interface.h">
@@ -322,12 +332,15 @@
     <Folder Include="HAL\SERVO\inc\" />
     <Folder Include="HAL\SERVO\src\" />
     <Folder Include="MCAL" />
+    <Folder Include="MCAL\ADC\inc" />
+    <Folder Include="MCAL\ADC\src" />
     <Folder Include="MCAL\DIO" />
     <Folder Include="MCAL\DIO\inc\" />
     <Folder Include="MCAL\DIO\src\" />
     <Folder Include="MCAL\GI" />
     <Folder Include="MCAL\GI\inc" />
     <Folder Include="MCAL\GI\src" />
+    <Folder Include="MCAL\ADC" />
     <Folder Include="MCAL\PWM\inc\" />
     <Folder Include="MCAL\PWM\src\" />
     <Folder Include="MCAL\TWI\inc\" />

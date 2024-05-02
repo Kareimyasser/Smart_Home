@@ -20,6 +20,8 @@ HAL\SERVO\src\SERVO_program.c
 
 main.c
 
+MCAL\ADC\src\ADC_program.c
+
 MCAL\DIO\src\DIO_program.c
 
 MCAL\GI\src\GI_program.c

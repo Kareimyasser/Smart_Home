@@ -7,12 +7,12 @@
 
 
 /* UTILES_LIB */
-#include "../../../UTILS_LIB/STD_TYPES.h"
-#include "../../../UTILS_LIB/BIT_MATH.h"
+#include"STD_TYPES.h"
+#include"BIT_MATH.h"
 
 /* MCAL */
-#include "../../../MCAL/ADC/inc/ADC_interface.h"
-#include "../../../MCAL/ADC/inc/ADC_register.h"
+#include"ADC_interface.h"
+#include"ADC_register.h"
 
 
 void ADC_voidInit(u8 copy_u8ReferenceVoltage)

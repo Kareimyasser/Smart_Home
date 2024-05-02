@@ -18,6 +18,7 @@
 #include "GI_interface.h"
 #include "PWM_interface.h"
 #include "UART_interface.h"
+#include "ADC_interface.h"
 
 // HAL
 #include "KeyPad_config.h"
@@ -53,7 +54,7 @@ u8 led_status = 0;
 u8 local_KPDIdleValue = KPD_Not_Pressed;
 
 
-u8 global_accessType = accessDenied;
+u8 global_accessType = accessPermited;
 
 
 
@@ -62,7 +63,8 @@ void APP_init(void)
 {
     HOME_voidInit();
 	
-	
+    ADC_voidInit(ADC_REFERENCE_AVCC);
+	DIO_voidSetPinDirection(DIO_PORTA,DIO_PIN0,DIO_PIN_INPUT);
 	
     // display the welcome screen
     WelcomeScreen();
@@ -112,7 +114,7 @@ void HOME_voidInit(void)
     //intializing timer by selecting mode and enable timer interrupt overflow and saving perload values
     TMR0_voidInit();
     // initialize the LEDs(1-5)
-    LED_voidInit(DIO_PORTA, DIO_PIN0);
+    LED_voidInit(DIO_PORTD, DIO_PIN3);
     LED_voidInit(DIO_PORTA, DIO_PIN1);
     LED_voidInit(DIO_PORTA, DIO_PIN2);
     LED_voidInit(DIO_PORTA, DIO_PIN3);
@@ -653,14 +655,23 @@ void WelcomeScreen()
 
 void LCD_DisplayTemp()
 {
+    u8 local_tempValue=0;
 
     LCD_voidClear();
-    LCD_voidDisplayStringDelay((u8 *)"Temp: 30c");
-    LCD_voidSendCommand(Write_SecondLine);
-    LCD_voidDisplayStringDelay((u8 *)"0-go to home");
+
     while (local_KPDIdleValue == KPD_Not_Pressed)
     {
         KPD_voidGetValue(&local_KPDIdleValue);
+
+        ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_tempValue);
+        _delay_ms(100);
+        LCD_voidDisplayNumber(local_tempValue);
+        _delay_ms(1000);
+        LCD_voidClear();
+        // LCD_voidSendCommand(Write_SecondLine);
+        // LCD_voidDisplayStringDelay((u8 *)"0-go to home");
+        
+        
     }
     if (local_KPDIdleValue == '0')
     {
