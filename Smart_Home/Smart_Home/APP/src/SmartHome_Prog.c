@@ -55,6 +55,8 @@ u8 local_lightStatus = KPD_Not_Pressed;
 u8 led_status = 0;
 u8 local_KPDIdleValue = KPD_Not_Pressed;
 
+u8 local_temp = 0;
+
 
 u8 global_accessType = accessPermited;
 
@@ -643,6 +645,7 @@ void KPD_Interface_user(void)
             LCD_voidDisplayStringDelay((u8 *)"Room Temp: 30c");
 
             break;
+			
 
         case ('2'):
 
@@ -871,6 +874,31 @@ void KPD_Interface_user(void)
                 break;
 
             }
+			case ('3'):
+				LCD_voidClear();
+				ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
+				LCD_voidSendCommand(Write_FirstLine);
+				LCD_voidDisplayString((u8 *)"Room Temp:  ");
+				LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,11);
+				LCD_voidDisplayNumber(local_temp);
+				LCD_voidDisplayChar('c');
+				LCD_voidSendCommand(Write_SecondLine);
+				LCD_voidDisplayStringDelay((u8 *)"0-go to home");
+				while(local_KPDIdleValue==KPD_Not_Pressed)
+				{
+					KPD_voidGetValue(&local_KPDIdleValue);
+					ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
+					LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,11);
+					LCD_voidDisplayNumber(local_temp);
+				}	
+				if (local_KPDIdleValue=='0')
+				{
+					LCD_voidClear();
+				}
+			break;
+			
+
+
 
             local_lightNum = KPD_Not_Pressed;
             Local_copyKPDValue = KPD_Not_Pressed;
@@ -889,28 +917,28 @@ void WelcomeScreen()
 
 void LCD_DisplayTemp()
 {
-    u8 local_tempValue=0;
+    
 
     LCD_voidClear();
 	LCD_voidSendCommand(Write_FirstLine);
 	LCD_voidDisplayString((u8 *)"Room Temp:   c");
 	//12 adnd 13
-	    ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_tempValue);
-		LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,11);
-        _delay_ms(100);
-        LCD_voidDisplayNumber(local_tempValue);
-        _delay_ms(200);
-		LCD_voidSendCommand(Write_SecondLine);
-        LCD_voidDisplayStringDelay((u8 *)"0-go to home");
+	    // ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
+		// LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,11);
+        // _delay_ms(100);
+        // LCD_voidDisplayNumber(local_temp);
+        // _delay_ms(200);
+		// LCD_voidSendCommand(Write_SecondLine);
+        // LCD_voidDisplayStringDelay((u8 *)"0-go to home");
     while (local_KPDIdleValue == KPD_Not_Pressed)
     {
         KPD_voidGetValue(&local_KPDIdleValue);
 
-        ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_tempValue);
-		LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,11);
-        _delay_ms(100);
-        LCD_voidDisplayNumber(local_tempValue);
-        _delay_ms(100);
+        // ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
+		// LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,11);
+        // _delay_ms(100);
+        // LCD_voidDisplayNumber(local_temp);
+        // _delay_ms(100);
         
     }
     if (local_KPDIdleValue == '0')
