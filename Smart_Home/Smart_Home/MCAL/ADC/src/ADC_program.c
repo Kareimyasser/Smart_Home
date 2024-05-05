@@ -5,10 +5,11 @@
  *  Author: Kareem Hussein
  */ 
 
-
+#define F_CPU	16000000UL
 /* UTILES_LIB */
 #include"STD_TYPES.h"
 #include"BIT_MATH.h"
+#include <util/delay.h>
 
 /* MCAL */
 #include"ADC_interface.h"
@@ -69,10 +70,14 @@ void ADC_voidGetDigitalValue(u8 copy_u8ChannelNumber, u16* copy_pu16DigitalValue
 	    SET_BIT(ADCSRA_REG,ADSC);
 		// Busy Wait for ADC Flag 
 		while(0 == GET_BIT(ADCSRA_REG,ADIF));
+		u16 temp = ADC_u16_REG;
+		*copy_pu16DigitalValue = temp/4;
+		
 		//Clear Flag(write one to clear)
+
 		SET_BIT(ADCSRA_REG,ADIF);
 		
-		*copy_pu16DigitalValue = ADC_u16_REG;
+		
 	}
 	else
 	{

@@ -36,8 +36,9 @@ extern u8 global_accessType;
 
 int main()
 {
+	DIO_voidSetPinDirection(DIO_PORTA,DIO_PIN0,DIO_PIN_INPUT);
 	APP_init();
-_delay_ms(1000);
+
 
 
 	while(1)

@@ -49,7 +49,7 @@ void	LCD_voidInit(void)
 	_delay_us(45);
 	
 	// Display on off Control (DisplayOn, Cursor on, Blink on)
-	LCD_voidSendCommand(0b00001111);
+	LCD_voidSendCommand(0b00001100);
 	_delay_us(45);
 	
 	//Clear Display
