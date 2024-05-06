@@ -5,11 +5,12 @@
 #define accessDenied 0
 
 void APP_init(void);
-void LCD_DisplayTemp();
+void Idle_Action();
 void WelcomeScreen();
 void action(void);
 void KPD_Interface(void);
 void Reset_AllKPDValues();
+void Display_temp(void);
 
 
 

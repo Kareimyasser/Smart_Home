@@ -101,11 +101,19 @@ void APP_init(void)
 
 void HOME_voidInit(void)
 {
+	    // initialize the LCD
+    LCD_voidInit();
+	// initialize the PWM
+	
+
+	// initialize the EEPROM
 	EEPROM_voidInit();
 	
-    // initialize the LCD
-    LCD_voidInit();
-	
+	// initialize the Door_Servo
+	SERVO_voidInit(DIO_PORTD,DIO_PIN5);
+	// reset door angle to 0
+	SERVO_voidStartByAngle(0);
+
 	// initialize the KPD
     KPD_voidInit();
 	
@@ -123,6 +131,7 @@ void HOME_voidInit(void)
     LED_voidInit(DIO_PORTA, DIO_PIN2);
     LED_voidInit(DIO_PORTA, DIO_PIN3);
     LED_voidInit(DIO_PORTD, DIO_PIN2);
+	LED_voidInit(DIO_PORTD, DIO_PIN4);
 
 
 
@@ -612,13 +621,13 @@ void KPD_Interface_user(void)
 
         Reset_AllKPDValues();
 
-        TMR0_SetCallBackCTC(&LCD_DisplayTemp);
+        TMR0_SetCallBackCTC(&Idle_Action);
 
         TMR0_voidStart();
         LCD_voidClear();
         LCD_voidDisplayString((u8 *)"1-AC 2-light");
         LCD_voidSendCommand(Write_SecondLine);
-        LCD_voidDisplayString((u8 *)"3-temperature");
+        LCD_voidDisplayString((u8 *)"3-temp 4-Door");
         Reset_AllKPDValues();
 
         // busy wait for KPD
@@ -654,7 +663,7 @@ void KPD_Interface_user(void)
             LCD_voidSendCommand(Write_SecondLine);
             LCD_voidDisplayStringDelay((u8 *)"control(1-6)");
 
-            TMR0_SetCallBackCTC(&LCD_DisplayTemp);
+            TMR0_SetCallBackCTC(&Idle_Action);
             TMR0_voidStart();
             // busy wait for KPD
             while (local_lightNum == KPD_Not_Pressed)
@@ -687,6 +696,7 @@ void KPD_Interface_user(void)
                         LED_voidOff(DIO_PORTD, DIO_PIN3, LED_FORWARD_CONNECTION);
                     }
                     Reset_AllKPDValues();
+					break;
                 }
                 else if (led_status == 0)
                 {
@@ -707,7 +717,7 @@ void KPD_Interface_user(void)
 
             case ('2'):
 
-                DIO_voidGetPinValue(DIO_PORTA, DIO_PIN1, &led_status);
+                DIO_voidGetPinValue(DIO_PORTD, DIO_PIN4, &led_status);
                 LCD_voidClear();
                 if (led_status == 1)
                 {
@@ -720,7 +730,7 @@ void KPD_Interface_user(void)
                     }
                     if (local_lightStatus == '1')
                     {
-                        LED_voidOff(DIO_PORTA, DIO_PIN1, LED_FORWARD_CONNECTION);
+                        LED_voidOff(DIO_PORTD, DIO_PIN4, LED_FORWARD_CONNECTION);
                     }
                     local_lightStatus = KPD_Not_Pressed;
                 }
@@ -735,7 +745,7 @@ void KPD_Interface_user(void)
                     }
                     if (local_lightStatus == '1')
                     {
-                        LED_voidOn(DIO_PORTA, DIO_PIN1, LED_FORWARD_CONNECTION);
+                        LED_voidOn(DIO_PORTD, DIO_PIN4, LED_FORWARD_CONNECTION);
                     }
                     local_lightStatus = KPD_Not_Pressed;
                 }
@@ -854,16 +864,20 @@ void KPD_Interface_user(void)
                     local_lightStatus = KPD_Not_Pressed;
                 }
                 break;
-                // if the user choose light 6 (DIMMER LED)
+
+                
+			// if the user choose light 6 (DIMMER LED)
 
             case ('6'):
 
                 LCD_voidClear();
+				
                 if (led_status == 1)
                 {
                     LCD_voidDisplayStringDelay((u8 *)"Light 6 is On");
                     LCD_voidSendCommand(Write_SecondLine);
                     LCD_voidDisplayStringDelay((u8 *)"1-To Turn It Off");
+					
                 }
                 else if (led_status == 0)
                 {
@@ -872,13 +886,16 @@ void KPD_Interface_user(void)
                     LCD_voidDisplayStringDelay((u8 *)"1-To Turn It On");
                 }
                 break;
-
+		
             }
+			break;
+
 			case ('3'):
+			
 				LCD_voidClear();
-				ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
+				// ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
 				LCD_voidSendCommand(Write_FirstLine);
-				LCD_voidDisplayString((u8 *)"Room Temp:  ");
+				LCD_voidDisplayString((u8 *)"Room Temp:  c");
 				LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,11);
 				LCD_voidDisplayNumber(local_temp);
 				LCD_voidDisplayChar('c');
@@ -887,22 +904,25 @@ void KPD_Interface_user(void)
 				while(local_KPDIdleValue==KPD_Not_Pressed)
 				{
 					KPD_voidGetValue(&local_KPDIdleValue);
-					ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
-					LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,11);
-					LCD_voidDisplayNumber(local_temp);
+					Display_temp();
 				}	
 				if (local_KPDIdleValue=='0')
 				{
 					LCD_voidClear();
 				}
 			break;
+
+			case ('4'):
+			LCD_voidClear();
+			LCD_voidDisplayString("Door is opening");
+			SERVO_voidStartByAngle(90);
+			_delay_ms(10000);
+			SERVO_voidStartByAngle(0);
+
+			break;
 			
-
-
-
-            local_lightNum = KPD_Not_Pressed;
-            Local_copyKPDValue = KPD_Not_Pressed;
-            break;
+		Reset_AllKPDValues();
+        break;
         }
     
 }
@@ -915,30 +935,20 @@ void WelcomeScreen()
     _delay_ms(1000);
 }
 
-void LCD_DisplayTemp()
-{
-    
-
+void Idle_Action()
+{ 
     LCD_voidClear();
 	LCD_voidSendCommand(Write_FirstLine);
 	LCD_voidDisplayString((u8 *)"Room Temp:   c");
-	//12 adnd 13
-	    // ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
-		// LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,11);
-        // _delay_ms(100);
-        // LCD_voidDisplayNumber(local_temp);
-        // _delay_ms(200);
-		// LCD_voidSendCommand(Write_SecondLine);
-        // LCD_voidDisplayStringDelay((u8 *)"0-go to home");
+	Display_temp();
+	LCD_voidSendCommand(Write_SecondLine);
+	LCD_voidDisplayString("0-Go to Home");
+	
     while (local_KPDIdleValue == KPD_Not_Pressed)
     {
         KPD_voidGetValue(&local_KPDIdleValue);
+		Display_temp();
 
-        // ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
-		// LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,11);
-        // _delay_ms(100);
-        // LCD_voidDisplayNumber(local_temp);
-        // _delay_ms(100);
         
     }
     if (local_KPDIdleValue == '0')
@@ -950,10 +960,19 @@ void LCD_DisplayTemp()
 
 }
 
+void Display_temp(void)
+{
+	ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
+	LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,11);
+	LCD_voidDisplayNumber(local_temp);
+
+}
+
 void Reset_AllKPDValues()
 {
     Local_copyKPDValue = KPD_Not_Pressed;
     local_lightNum = KPD_Not_Pressed;
     local_lightStatus = KPD_Not_Pressed;
+	local_KPDIdleValue = KPD_Not_Pressed;
 }
 

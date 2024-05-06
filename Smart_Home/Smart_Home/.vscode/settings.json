@@ -6,6 +6,7 @@
         "smarthome.h": "c",
         "keypad_config.h": "c",
         "adc_interface.h": "c",
-        "adc_register.h": "c"
+        "adc_register.h": "c",
+        "bl_interface.h": "c"
     }
 }
