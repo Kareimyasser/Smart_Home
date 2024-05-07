@@ -69,7 +69,11 @@ void APP_init(void)
 	
     ADC_voidInit(ADC_REFERENCE_INTRNAL);
 	
+
 	
+
+
+
     // display the welcome screen
     WelcomeScreen();
 	LCD_voidClear();
@@ -104,13 +108,14 @@ void HOME_voidInit(void)
 	    // initialize the LCD
     LCD_voidInit();
 	// initialize the PWM
-	
+	PWM_voidInitChannel_1A();
+	PWM_voidInitChannel_1B();
 
 	// initialize the EEPROM
 	EEPROM_voidInit();
 	
 	// initialize the Door_Servo
-	SERVO_voidInit(DIO_PORTD,DIO_PIN5);
+	SERVO_voidInit(DIO_PORTD,DIO_PIN4);
 	// reset door angle to 0
 	SERVO_voidStartByAngle(0);
 
@@ -126,12 +131,19 @@ void HOME_voidInit(void)
     //intializing timer by selecting mode and enable timer interrupt overflow and saving perload values
     TMR0_voidInit();
     // initialize the LEDs(1-5)
+	//LED 1
     LED_voidInit(DIO_PORTD, DIO_PIN3);
-    LED_voidInit(DIO_PORTA, DIO_PIN1);
+	//LED 2
+    LED_voidInit(DIO_PORTB, DIO_PIN0);
+	//LED 3
     LED_voidInit(DIO_PORTA, DIO_PIN2);
+	//LED 4
     LED_voidInit(DIO_PORTA, DIO_PIN3);
+	//LED 5
     LED_voidInit(DIO_PORTD, DIO_PIN2);
-	LED_voidInit(DIO_PORTD, DIO_PIN4);
+	// Dimmer LED 6
+	LED_voidInit(DIO_PORTD, DIO_PIN5);
+	
 
 
 
@@ -884,6 +896,16 @@ void KPD_Interface_user(void)
                     LCD_voidDisplayStringDelay((u8 *)"Light 6 is OFF");
                     LCD_voidSendCommand(Write_SecondLine);
                     LCD_voidDisplayStringDelay((u8 *)"1-To Turn It On");
+                    while (local_lightStatus == KPD_Not_Pressed)
+                    {
+                        KPD_voidGetValue(&local_lightStatus);
+                    }
+
+                    if (local_lightStatus == '1')
+                    {
+					PWM_voidGenerateChannel_1A(1000, 10);
+                    }
+                    local_lightStatus = KPD_Not_Pressed;					
                 }
                 break;
 		

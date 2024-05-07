@@ -62,6 +62,18 @@ void PWM_voidInitChannel_1A(void)
 	
 }
 
+void PWM_voidInitChannel_1B(void)
+{
+	/*Waveform Generation Mode>>Fast PWM(channel B)*/
+	SET_BIT(TCCR1B_REG, WGM13);
+	SET_BIT(TCCR1B_REG, WGM12);
+	SET_BIT(TCCR1A_REG, WGM11);
+	CLR_BIT(TCCR1A_REG, WGM10);
+	
+	/*Compare Match Output Mode>>Clear OC1A/OC1B on compare match*/
+	SET_BIT(TCCR1A_REG,COM1B1);
+	CLR_BIT(TCCR1A_REG,COM1B0);
+}
 
 
 void PWM_voidGenerateChannel_1A(u16 copy_u16Frequency_hz,f32 copy_f32DutyCycle)
@@ -73,6 +85,31 @@ void PWM_voidGenerateChannel_1A(u16 copy_u16Frequency_hz,f32 copy_f32DutyCycle)
 		
 		/*Calculating Duty for non inverting*/
 		OCR1A_REG=((copy_f32DutyCycle*(ICR1_REG+1))/100)-1;
+		
+		/*Clock Select>>clk/64(From prescaler)*/
+		SET_BIT(TCCR1B_REG,CS10);
+		SET_BIT(TCCR1B_REG,CS11);
+		CLR_BIT(TCCR1B_REG,CS12);
+		
+	}
+	else
+	{
+		//error 
+	}
+	
+}
+
+
+
+void PWM_voidGenerateChannel_1B(u16 copy_u16Frequency_hz,f32 copy_f32DutyCycle)
+{
+	if(copy_f32DutyCycle<=100)
+	{
+		/*Set freq by clkI/O/64 (From prescaler)*/
+		ICR1_REG=((1000000UL/copy_u16Frequency_hz)/4)-1;
+		
+		/*Calculating Duty for non inverting*/
+		OCR1B_REG=((copy_f32DutyCycle*(ICR1_REG+1))/100)-1;
 		
 		/*Clock Select>>clk/64(From prescaler)*/
 		SET_BIT(TCCR1B_REG,CS10);

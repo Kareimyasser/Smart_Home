@@ -35,5 +35,5 @@ void SERVO_voidStartByAngle(f32 copy_f32ServoAngle)
 	//calculate servo duty
 	Local_f32Dutycycle=((2.5*copy_f32ServoAngle)+675)/90;
 	
-	PWM_voidGenerateChannel_1A(SERVO_FREQUENCY_HZ,Local_f32Dutycycle);
+	PWM_voidGenerateChannel_1B(SERVO_FREQUENCY_HZ,Local_f32Dutycycle);
 }

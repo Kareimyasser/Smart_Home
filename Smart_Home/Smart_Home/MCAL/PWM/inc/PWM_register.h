@@ -53,6 +53,8 @@
 #define TCCR1A_REG	(*(volatile u8*)0x4F)
 #define  COM1A1		7
 #define  COM1A0		6
+#define  COM1B1		5
+#define  COM1B0		4
 #define  WGM11		1
 #define  WGM10		0
 
@@ -71,6 +73,9 @@
 
 /*Output Compare Register 1 A*/
 #define OCR1A_REG	(*(volatile u16*)0x4A)
+ 
+/*Output Compare Register 1 B*/
+#define OCR1B_REG	(*(volatile u16*)0x48) 
 
 
 /*Input Capture Register 1*/
