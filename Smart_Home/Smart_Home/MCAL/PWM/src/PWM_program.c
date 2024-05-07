@@ -15,36 +15,36 @@
 #include"PWM_private.h"
 
 
-void PWM_voidInitChannel_0(void)
-{
-	/*Waveform Generation Mode>>Fast PWM*/
-	SET_BIT(TCCR0_REG, WGM00);
-	SET_BIT(TCCR0_REG, WGM01);
+// void PWM_voidInitChannel_0(void)
+// {
+// 	/*Waveform Generation Mode>>Fast PWM*/
+// 	SET_BIT(TCCR0_REG, WGM00);
+// 	SET_BIT(TCCR0_REG, WGM01);
 	
 	
-	/*Compare Match Output Mode>>Clear OC0 on compare match, set OC0 at TOP*/
-	SET_BIT(TCCR0_REG, COM01);
-	CLR_BIT(TCCR0_REG, COM00);
+// 	/*Compare Match Output Mode>>Clear OC0 on compare match, set OC0 at TOP*/
+// 	SET_BIT(TCCR0_REG, COM01);
+// 	CLR_BIT(TCCR0_REG, COM00);
 	
-}
-void PWM_voidGenerateChannel_0(u8 copy_u8DutyCycle)
-{
-	if(copy_u8DutyCycle<=100)
-	{
-		/*Calculating Duty for non inverting*/
-		OCR0_REG=((copy_u8DutyCycle*256)/100)-1;
+// }
+// void PWM_voidGenerateChannel_0(u8 copy_u8DutyCycle)
+// {
+// 	if(copy_u8DutyCycle<=100)
+// 	{
+// 		/*Calculating Duty for non inverting*/
+// 		OCR0_REG=((copy_u8DutyCycle*256)/100)-1;
 		
-		/*Clock Select>>clk/64(From prescaler)*/
-		SET_BIT(TCCR0_REG,CS00);
-		SET_BIT(TCCR0_REG,CS01);
-		CLR_BIT(TCCR0_REG,CS02);
-	}
-	else
-	{
-		//error 
-	}
+// 		/*Clock Select>>clk/64(From prescaler)*/
+// 		SET_BIT(TCCR0_REG,CS00);
+// 		SET_BIT(TCCR0_REG,CS01);
+// 		CLR_BIT(TCCR0_REG,CS02);
+// 	}
+// 	else
+// 	{
+// 		//error 
+// 	}
 	
-}
+// }
 
 
 void PWM_voidInitChannel_1A(void)

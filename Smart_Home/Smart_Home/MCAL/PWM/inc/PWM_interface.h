@@ -15,8 +15,8 @@
 
 /*************************************************PWM_APIs*************************************************/
 
-void PWM_voidInitChannel_0		(void);
-void PWM_voidGenerateChannel_0	(u8 copy_u8DutyCycle);
+// void PWM_voidInitChannel_0		(void);
+// void PWM_voidGenerateChannel_0	(u8 copy_u8DutyCycle);
 
 void PWM_voidInitChannel_1A		(void);
 void PWM_voidInitChannel_1B     (void);

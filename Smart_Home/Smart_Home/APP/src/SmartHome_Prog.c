@@ -33,21 +33,27 @@
 #include "SmartHome.h"
 
 
+//global variable for the application accessed by SmartHome.c and main.c
+// only for testing purposes
+u8 global_accessType = accessPermited;
 
 
-
-
-
+//global variables for the application accessed only by SmartHome.c
+//local KPD variables for the application
 u8 Local_copyKPDValue = KPD_Not_Pressed;
 u8 local_lightNum = KPD_Not_Pressed;
 u8 local_lightStatus = KPD_Not_Pressed;
-u8 led_status = 0;
 u8 local_KPDIdleValue = KPD_Not_Pressed;
 
+//local LED variable for checking led status
+u8 led_status = 0;
+u8 dimmer_brightness = 0;
+
+//local temp 
 u8 local_temp = 0;
 
 
-u8 global_accessType = accessPermited;
+
 
 
 
@@ -56,29 +62,14 @@ void APP_init(void)
 {
     HOME_voidInit();
 	
-<<<<<<< Updated upstream
     ADC_voidInit(ADC_REFERENCE_INTRNAL);
+	DIO_voidSetPinDirection(DIO_PORTA,DIO_PIN0,DIO_PIN_INPUT);
 	
-
-	
-
-
-
-    // display the welcome screen
-    WelcomeScreen();
+	// display the welcome screen
+	WelcomeScreen();
 	LCD_voidClear();
+
 	
-	u8 testusername[8]={"11111111"};
-	u8 testuserpass[8]={"22222222"};
-	u8 testadminname[8]={"12345678"};
-	u8 testadminpass[8]={"12345678"};
-=======
-    ADC_voidInit(ADC_REFERENCE_AVCC);
-	//DIO_voidSetPinDirection(DIO_PORTA,DIO_PIN0,DIO_PIN_INPUT);
-	//
-	//// display the welcome screen
-	//WelcomeScreen();
-	//LCD_voidClear();
 	
 	u8 testusername[8]="7654321";
 	u8 testuserpass[8]="7654321";
@@ -86,7 +77,6 @@ void APP_init(void)
 	u8 testadminpass[8]="1122334";
 	u8 testusername1[8]="1002003";
 	u8 testuserpass1[8]="1002003";
->>>>>>> Stashed changes
 	u8 usertype;	
 	
 	EEPROM_voidWritePage(16,&testusername[0]);
@@ -95,14 +85,10 @@ void APP_init(void)
 	EEPROM_voidWritePage(88,&testadminpass[0]);
 	EEPROM_voidWritePage(96,&testusername1[0]);
 	EEPROM_voidWritePage(104,&testuserpass1[0]);
-	
-	
-<<<<<<< Updated upstream
-	// HOME_voidCheckUserAndPass(HOME_LOCAL_ACCESS,&usertype);
 
-	// HOME_voidCheckUserAndPass(HOME_REMOTE_ACCESS,&usertype);
-=======
->>>>>>> Stashed changes
+	
+	
+	
 	
 
 
@@ -384,7 +370,7 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus)
 									
 						}
 						
-						//if the pass right now we difine the user type(admin or user)
+						//if the pass right now we difine the user type(admin or user)AD
 						if(Local_u8PassByteCheck==HOME_USER_NAME_AND_PASS_MAX_LENGTh)
 						{
 							
@@ -1064,28 +1050,100 @@ void KPD_Interface_user(void)
 
                 LCD_voidClear();
 				
-                if (led_status == 1)
+                if (dimmer_brightness > 0)
                 {
                     LCD_voidDisplayStringDelay((u8 *)"Light 6 is On");
+					_delay_ms(1000);
+					LCD_voidClear();
+					LCD_voidDisplayString("Brightness:  %");
+					LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
+					LCD_voidDisplayNumber(dimmer_brightness);
                     LCD_voidSendCommand(Write_SecondLine);
-                    LCD_voidDisplayStringDelay((u8 *)"1-To Turn It Off");
+                    LCD_voidDisplayStringDelay((u8 *)"1)+10 2)-10 0)H");
+					while (local_lightStatus == KPD_Not_Pressed)
+					{
+						KPD_voidGetValue(&local_lightStatus);
+						if (local_lightStatus == '1')
+						{
+							dimmer_brightness += 10;
+							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
+							LCD_voidDisplayNumber(dimmer_brightness);
+							if (dimmer_brightness > 100)
+							{
+								dimmer_brightness = 100;
+								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							}
+						
+							
+						}
+						else if (local_lightStatus == '2')
+						{
+							dimmer_brightness -= 10;
+							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
+							LCD_voidDisplayNumber(dimmer_brightness);
+							if (dimmer_brightness < 0)
+							{
+								dimmer_brightness = 0;
+								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							}
+						}
+						else if (local_lightStatus == '0')
+						{
+							LCD_voidClear();
+							break;
+						}						
+						
+					}
 					
                 }
                 else if (led_status == 0)
                 {
                     LCD_voidDisplayStringDelay((u8 *)"Light 6 is OFF");
+					_delay_ms(1000);
+                    LCD_voidClear();
+					LCD_voidDisplayString("Brightness:  %");
+					LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
+					LCD_voidDisplayNumber(dimmer_brightness);
                     LCD_voidSendCommand(Write_SecondLine);
-                    LCD_voidDisplayStringDelay((u8 *)"1-To Turn It On");
-                    while (local_lightStatus == KPD_Not_Pressed)
-                    {
-                        KPD_voidGetValue(&local_lightStatus);
-                    }
-
-                    if (local_lightStatus == '1')
-                    {
-					PWM_voidGenerateChannel_1A(1000, 10);
-                    }
-                    local_lightStatus = KPD_Not_Pressed;					
+                    LCD_voidDisplayStringDelay((u8 *)"1)+10 2)-10 0)H");
+					while (local_lightStatus == KPD_Not_Pressed)
+					{
+						KPD_voidGetValue(&local_lightStatus);
+						if (local_lightStatus == '1')
+						{
+							dimmer_brightness += 10;
+							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
+							LCD_voidDisplayNumber(dimmer_brightness);
+							if (dimmer_brightness > 100)
+							{
+								dimmer_brightness = 100;
+								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							}
+						
+							
+						}
+						else if (local_lightStatus == '2')
+						{
+							dimmer_brightness -= 10;
+							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
+							LCD_voidDisplayNumber(dimmer_brightness);
+							if (dimmer_brightness < 0)
+							{
+								dimmer_brightness = 0;
+								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							}
+						}
+						else if (local_lightStatus == '0')
+						{
+							LCD_voidClear();
+							break;
+						}
+						
+					}				
                 }
                 break;
 		
@@ -1095,7 +1153,7 @@ void KPD_Interface_user(void)
 			case ('3'):
 			
 				LCD_voidClear();
-				// ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
+				ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
 				LCD_voidSendCommand(Write_FirstLine);
 				LCD_voidDisplayString((u8 *)"Room Temp:  c");
 				LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,11);
@@ -1136,6 +1194,8 @@ void WelcomeScreen()
     LCD_voidDisplayStringDelay((u8 *)"   Smart Home");
     _delay_ms(1000);
 }
+
+
 
 void Idle_Action()
 { 
