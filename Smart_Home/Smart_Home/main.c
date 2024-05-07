@@ -36,22 +36,49 @@ extern u8 global_accessType;
 
 int main()
 {
+<<<<<<< Updated upstream
 	DIO_voidSetPinDirection(DIO_PORTA,DIO_PIN0,DIO_PIN_INPUT);
 	APP_init();
 
+=======
+	u8 suc;
+	APP_init();
+>>>>>>> Stashed changes
 
 
+	HOME_voidFireAnALarm(HOME_LOGIN_FAILED);
+	BL_voidTxString	("ok");
+	BL_voidTxChar('\n');
 	while(1)
 	{
-		if (global_accessType ==accessPermited)
-		{
-		KPD_Interface_user();
-		}
-		else if (global_accessType ==accessDenied)
-		{
-			LCD_voidDisplayString((u8*)"Access Denied");
-			break;
-		}
+		
+		//HOME_voidCheckUserAndPass(HOME_REMOTE_ACCESS,&suc);
+		//
+		//switch(suc)
+		//{
+		//	case 4:
+		//	BL_voidTxChar('u');
+		//	break;
+		//	case 3:
+		//	BL_voidTxChar('D');
+		//	break;
+		//	case 5:
+		//	BL_voidTxChar('F');
+		//	break;
+		//}
+		
+		
+		
+		//HOME_voidChangeUserNameAndPass();
+		//if (global_accessType ==accessPermited)
+		//{
+		//	KPD_Interface_user();
+		//}
+		//else if (global_accessType ==accessDenied)
+		//{
+		//	LCD_voidDisplayString((u8*)"Access Denied");
+		//	break;
+		//}
 		
 		
 		

@@ -54,12 +54,43 @@ Discarded input sections
  .text          0x00000000        0x0 APP/src/SmartHome_Prog.o
  .data          0x00000000        0x0 APP/src/SmartHome_Prog.o
  .bss           0x00000000        0x0 APP/src/SmartHome_Prog.o
+<<<<<<< Updated upstream
  .text.HOME_voidLocalGetUserAndPass
                 0x00000000       0xe2 APP/src/SmartHome_Prog.o
  .text.HOME_voidRemoteGetUserAndPass
                 0x00000000       0xc4 APP/src/SmartHome_Prog.o
  .text.HOME_voidCheckUserAndPass
                 0x00000000      0x3be APP/src/SmartHome_Prog.o
+=======
+ .text.LCD_DisplayTemp
+                0x00000000       0x7a APP/src/SmartHome_Prog.o
+ .text.HOME_voidLocalGetUserAndPass
+                0x00000000       0xf2 APP/src/SmartHome_Prog.o
+ .text.HOME_voidRemoteGetUserAndPass
+                0x00000000       0xe0 APP/src/SmartHome_Prog.o
+ .text.HOME_voidCheckUserAndPass
+                0x00000000      0x3c2 APP/src/SmartHome_Prog.o
+ .text.HOME_voidChangeUserNameAndPass
+                0x00000000      0x160 APP/src/SmartHome_Prog.o
+ .text.WelcomeScreen
+                0x00000000       0x2a APP/src/SmartHome_Prog.o
+ .text.Reset_AllKPDValues
+                0x00000000       0x10 APP/src/SmartHome_Prog.o
+ .text.KPD_Interface_user
+                0x00000000      0x432 APP/src/SmartHome_Prog.o
+ .data.global_accessType
+                0x00000000        0x1 APP/src/SmartHome_Prog.o
+ .data.local_KPDIdleValue
+                0x00000000        0x1 APP/src/SmartHome_Prog.o
+ .bss.led_status
+                0x00000000        0x1 APP/src/SmartHome_Prog.o
+ .data.local_lightStatus
+                0x00000000        0x1 APP/src/SmartHome_Prog.o
+ .data.local_lightNum
+                0x00000000        0x1 APP/src/SmartHome_Prog.o
+ .data.Local_copyKPDValue
+                0x00000000        0x1 APP/src/SmartHome_Prog.o
+>>>>>>> Stashed changes
  .text          0x00000000        0x0 HAL/BL/src/BL_program.o
  .data          0x00000000        0x0 HAL/BL/src/BL_program.o
  .bss           0x00000000        0x0 HAL/BL/src/BL_program.o
@@ -95,18 +126,28 @@ Discarded input sections
  .text          0x00000000        0x0 HAL/EEPROM/src/EEPROM_program.o
  .data          0x00000000        0x0 HAL/EEPROM/src/EEPROM_program.o
  .bss           0x00000000        0x0 HAL/EEPROM/src/EEPROM_program.o
+<<<<<<< Updated upstream
  .text.EEPROM_voidWriteByte
                 0x00000000       0x3c HAL/EEPROM/src/EEPROM_program.o
  .text.EEPROM_voidReadByte
                 0x00000000       0x50 HAL/EEPROM/src/EEPROM_program.o
+=======
+>>>>>>> Stashed changes
  .text.EEPROM_voidSequentialRead
                 0x00000000       0x80 HAL/EEPROM/src/EEPROM_program.o
  .text          0x00000000        0x0 HAL/KPD/src/KeyPad_program.o
  .data          0x00000000        0x0 HAL/KPD/src/KeyPad_program.o
  .bss           0x00000000        0x0 HAL/KPD/src/KeyPad_program.o
+ .rodata        0x00000000        0xc HAL/KPD/src/KeyPad_program.o
+ .text.KPD_voidGetValue
+                0x00000000      0x158 HAL/KPD/src/KeyPad_program.o
  .text          0x00000000        0x0 HAL/LCD/src/LCD_PROGRAM.o
  .data          0x00000000        0x0 HAL/LCD/src/LCD_PROGRAM.o
  .bss           0x00000000        0x0 HAL/LCD/src/LCD_PROGRAM.o
+ .text.LCD_voidDisplayStringDelay
+                0x00000000       0x3e HAL/LCD/src/LCD_PROGRAM.o
+ .text.LCD_voidDisplayNumber
+                0x00000000       0xa6 HAL/LCD/src/LCD_PROGRAM.o
  .text.LCD_voidShiftCursor
                 0x00000000       0x6c HAL/LCD/src/LCD_PROGRAM.o
  .text.LCD_voidShiftDisplay
@@ -116,6 +157,10 @@ Discarded input sections
  .text          0x00000000        0x0 HAL/LED/src/LED_program.o
  .data          0x00000000        0x0 HAL/LED/src/LED_program.o
  .bss           0x00000000        0x0 HAL/LED/src/LED_program.o
+ .text.LED_voidOn
+                0x00000000       0x1a HAL/LED/src/LED_program.o
+ .text.LED_voidOff
+                0x00000000       0x1a HAL/LED/src/LED_program.o
  .text.LED_voidToggle
                 0x00000000        0x6 HAL/LED/src/LED_program.o
  .text          0x00000000        0x0 HAL/SERVO/src/SERVO_program.o
@@ -127,9 +172,13 @@ Discarded input sections
  .text          0x00000000        0x0 MCAL/ADC/src/ADC_program.o
  .data          0x00000000        0x0 MCAL/ADC/src/ADC_program.o
  .bss           0x00000000        0x0 MCAL/ADC/src/ADC_program.o
+ .text.ADC_voidGetDigitalValue
+                0x00000000       0x2e MCAL/ADC/src/ADC_program.o
  .text          0x00000000        0x0 MCAL/DIO/src/DIO_program.o
  .data          0x00000000        0x0 MCAL/DIO/src/DIO_program.o
  .bss           0x00000000        0x0 MCAL/DIO/src/DIO_program.o
+ .text.DIO_voidGetPinValue
+                0x00000000       0x76 MCAL/DIO/src/DIO_program.o
  .text.DIO_voidTogglePinValue
                 0x00000000       0x70 MCAL/DIO/src/DIO_program.o
  .text          0x00000000        0x0 MCAL/GI/src/GI_program.o
@@ -145,11 +194,18 @@ Discarded input sections
  .text          0x00000000        0x0 MCAL/TMR0/src/TMR0_program.o
  .data          0x00000000        0x0 MCAL/TMR0/src/TMR0_program.o
  .bss           0x00000000        0x0 MCAL/TMR0/src/TMR0_program.o
+ .text.TMR0_voidStart
+                0x00000000       0x1c MCAL/TMR0/src/TMR0_program.o
+ .text.TMR0_voidStop
+                0x00000000       0x14 MCAL/TMR0/src/TMR0_program.o
  .text.TMR0_SetCallBackOVF
+                0x00000000        0xe MCAL/TMR0/src/TMR0_program.o
+ .text.TMR0_SetCallBackCTC
                 0x00000000        0xe MCAL/TMR0/src/TMR0_program.o
  .text          0x00000000        0x0 MCAL/TWI/src/TWI_program.o
  .data          0x00000000        0x0 MCAL/TWI/src/TWI_program.o
  .bss           0x00000000        0x0 MCAL/TWI/src/TWI_program.o
+<<<<<<< Updated upstream
  .text.TWI_voidSendRepeatedStartCondition
                 0x00000000       0x1c MCAL/TWI/src/TWI_program.o
  .text.TWI_voidSendSlaveAddWithRead
@@ -158,6 +214,10 @@ Discarded input sections
                 0x00000000       0x2c MCAL/TWI/src/TWI_program.o
  .text.TWI_voidRecieveMasterDataByteWithNAch
                 0x00000000       0x20 MCAL/TWI/src/TWI_program.o
+=======
+ .text.TWI_voidRecieveMasterDataByteWithAch
+                0x00000000       0x2c MCAL/TWI/src/TWI_program.o
+>>>>>>> Stashed changes
  .text          0x00000000        0x0 MCAL/UART/src/UART_program.o
  .data          0x00000000        0x0 MCAL/UART/src/UART_program.o
  .bss           0x00000000        0x0 MCAL/UART/src/UART_program.o
@@ -239,6 +299,8 @@ Discarded input sections
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc.mul
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+ .text.libgcc.div
+                0x00000000       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
  .text.libgcc.prologue
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
@@ -451,7 +513,11 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
+<<<<<<< Updated upstream
 .text           0x00000000     0x1986
+=======
+.text           0x00000000      0xbec
+>>>>>>> Stashed changes
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -532,6 +598,7 @@ END GROUP
                 0x00000092                . = ALIGN (0x2)
  *(.text.*)
  .text.HOME_voidInit
+<<<<<<< Updated upstream
                 0x00000092       0x78 APP/src/SmartHome_Prog.o
                 0x00000092                HOME_voidInit
  .text.WelcomeScreen
@@ -761,6 +828,136 @@ END GROUP
  .fini9         0x00001982        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
                 0x00001982                _exit
                 0x00001982                exit
+=======
+                0x00000092       0x56 APP/src/SmartHome_Prog.o
+                0x00000092                HOME_voidInit
+ .text.APP_init
+                0x000000e8       0xf0 APP/src/SmartHome_Prog.o
+                0x000000e8                APP_init
+ .text.HOME_voidFireAnALarm
+                0x000001d8       0x70 APP/src/SmartHome_Prog.o
+                0x000001d8                HOME_voidFireAnALarm
+ .text.BL_voidInit
+                0x00000248        0x6 HAL/BL/src/BL_program.o
+                0x00000248                BL_voidInit
+ .text.BL_voidTxChar
+                0x0000024e        0x6 HAL/BL/src/BL_program.o
+                0x0000024e                BL_voidTxChar
+ .text.BL_voidRxChar
+                0x00000254        0x6 HAL/BL/src/BL_program.o
+                0x00000254                BL_voidRxChar
+ .text.BL_voidTxString
+                0x0000025a        0x6 HAL/BL/src/BL_program.o
+                0x0000025a                BL_voidTxString
+ .text.EEPROM_voidInit
+                0x00000260        0x6 HAL/EEPROM/src/EEPROM_program.o
+                0x00000260                EEPROM_voidInit
+ .text.EEPROM_voidWriteByte
+                0x00000266       0x3c HAL/EEPROM/src/EEPROM_program.o
+                0x00000266                EEPROM_voidWriteByte
+ .text.EEPROM_voidWritePage
+                0x000002a2       0x56 HAL/EEPROM/src/EEPROM_program.o
+                0x000002a2                EEPROM_voidWritePage
+ .text.EEPROM_voidReadByte
+                0x000002f8       0x50 HAL/EEPROM/src/EEPROM_program.o
+                0x000002f8                EEPROM_voidReadByte
+ .text.KPD_voidInit
+                0x00000348       0x68 HAL/KPD/src/KeyPad_program.o
+                0x00000348                KPD_voidInit
+ .text.PRV_voidWriteHalfPort
+                0x000003b0       0x70 HAL/LCD/src/LCD_PROGRAM.o
+ .text.LCD_voidSendCommand
+                0x00000420       0x6c HAL/LCD/src/LCD_PROGRAM.o
+                0x00000420                LCD_voidSendCommand
+ .text.LCD_voidInit
+                0x0000048c       0xc4 HAL/LCD/src/LCD_PROGRAM.o
+                0x0000048c                LCD_voidInit
+ .text.LCD_voidDisplayChar
+                0x00000550       0x6c HAL/LCD/src/LCD_PROGRAM.o
+                0x00000550                LCD_voidDisplayChar
+ .text.LCD_voidDisplayString
+                0x000005bc       0x2c HAL/LCD/src/LCD_PROGRAM.o
+                0x000005bc                LCD_voidDisplayString
+ .text.LCD_voidClear
+                0x000005e8       0x62 HAL/LCD/src/LCD_PROGRAM.o
+                0x000005e8                LCD_voidClear
+ .text.LCD_voidGoTOSpecificPosition
+                0x0000064a       0x36 HAL/LCD/src/LCD_PROGRAM.o
+                0x0000064a                LCD_voidGoTOSpecificPosition
+ .text.LED_voidInit
+                0x00000680        0x8 HAL/LED/src/LED_program.o
+                0x00000680                LED_voidInit
+ .text.main     0x00000688       0x1a main.o
+                0x00000688                main
+ .text.ADC_voidInit
+                0x000006a2       0x60 MCAL/ADC/src/ADC_program.o
+                0x000006a2                ADC_voidInit
+ .text.DIO_voidSetPinDirection
+                0x00000702      0x100 MCAL/DIO/src/DIO_program.o
+                0x00000702                DIO_voidSetPinDirection
+ .text.DIO_voidSetPinValue
+                0x00000802      0x100 MCAL/DIO/src/DIO_program.o
+                0x00000802                DIO_voidSetPinValue
+ .text.DIO_voidActivePinInPullUpResistance
+                0x00000902       0x70 MCAL/DIO/src/DIO_program.o
+                0x00000902                DIO_voidActivePinInPullUpResistance
+ .text.GI_voidEnable
+                0x00000972        0x8 MCAL/GI/src/GI_program.o
+                0x00000972                GI_voidEnable
+ .text.TMR0_voidInit
+                0x0000097a       0x24 MCAL/TMR0/src/TMR0_program.o
+                0x0000097a                TMR0_voidInit
+ .text.TMR0clear_flag
+                0x0000099e        0xe MCAL/TMR0/src/TMR0_program.o
+                0x0000099e                TMR0clear_flag
+ .text.__vector_11
+                0x000009ac       0x76 MCAL/TMR0/src/TMR0_program.o
+                0x000009ac                __vector_11
+ .text.__vector_10
+                0x00000a22       0x76 MCAL/TMR0/src/TMR0_program.o
+                0x00000a22                __vector_10
+ .text.TWI_voidInitMaster
+                0x00000a98       0x18 MCAL/TWI/src/TWI_program.o
+                0x00000a98                TWI_voidInitMaster
+ .text.TWI_voidSendStartCondition
+                0x00000ab0       0x1c MCAL/TWI/src/TWI_program.o
+                0x00000ab0                TWI_voidSendStartCondition
+ .text.TWI_voidSendRepeatedStartCondition
+                0x00000acc       0x1c MCAL/TWI/src/TWI_program.o
+                0x00000acc                TWI_voidSendRepeatedStartCondition
+ .text.TWI_voidSendStopCondition
+                0x00000ae8        0xe MCAL/TWI/src/TWI_program.o
+                0x00000ae8                TWI_voidSendStopCondition
+ .text.TWI_voidSendSlaveAddWithWrite
+                0x00000af6       0x2a MCAL/TWI/src/TWI_program.o
+                0x00000af6                TWI_voidSendSlaveAddWithWrite
+ .text.TWI_voidSendSlaveAddWithRead
+                0x00000b20       0x2a MCAL/TWI/src/TWI_program.o
+                0x00000b20                TWI_voidSendSlaveAddWithRead
+ .text.TWI_voidTransmitMasterDataByte
+                0x00000b4a       0x18 MCAL/TWI/src/TWI_program.o
+                0x00000b4a                TWI_voidTransmitMasterDataByte
+ .text.TWI_voidRecieveMasterDataByteWithNAch
+                0x00000b62       0x20 MCAL/TWI/src/TWI_program.o
+                0x00000b62                TWI_voidRecieveMasterDataByteWithNAch
+ .text.UART_voidInit
+                0x00000b82       0x22 MCAL/UART/src/UART_program.o
+                0x00000b82                UART_voidInit
+ .text.UART_voidTxChar
+                0x00000ba4        0x8 MCAL/UART/src/UART_program.o
+                0x00000ba4                UART_voidTxChar
+ .text.UART_voidRxChar
+                0x00000bac       0x10 MCAL/UART/src/UART_program.o
+                0x00000bac                UART_voidRxChar
+ .text.UART_voidTxString
+                0x00000bbc       0x2c MCAL/UART/src/UART_program.o
+                0x00000bbc                UART_voidTxString
+                0x00000be8                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x00000be8        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000be8                _exit
+                0x00000be8                exit
+>>>>>>> Stashed changes
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -779,35 +976,27 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
+<<<<<<< Updated upstream
  .fini0         0x00001982        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
                 0x00001986                _etext = .
 
 .data           0x00800060      0x28c load address 0x00001986
+=======
+ .fini0         0x00000be8        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ *(.fini0)
+                0x00000bec                _etext = .
+
+.data           0x00800060      0x2b6 load address 0x00000bec
+>>>>>>> Stashed changes
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
- .data.global_accessType
-                0x00800060        0x1 APP/src/SmartHome_Prog.o
-                0x00800060                global_accessType
- .data.local_KPDIdleValue
-                0x00800061        0x1 APP/src/SmartHome_Prog.o
-                0x00800061                local_KPDIdleValue
- .data.local_lightStatus
-                0x00800062        0x1 APP/src/SmartHome_Prog.o
-                0x00800062                local_lightStatus
- .data.local_lightNum
-                0x00800063        0x1 APP/src/SmartHome_Prog.o
-                0x00800063                local_lightNum
- .data.Local_copyKPDValue
-                0x00800064        0x1 APP/src/SmartHome_Prog.o
-                0x00800064                Local_copyKPDValue
  *(.gnu.linkonce.d*)
  *(.rodata)
- .rodata        0x00800065       0x1b APP/src/SmartHome_Prog.o
- .rodata        0x00800080        0xc HAL/KPD/src/KeyPad_program.o
  *(.rodata*)
  .rodata.str1.1
+<<<<<<< Updated upstream
                 0x0080008c      0x251 APP/src/SmartHome_Prog.o
                                 0x25c (size before relaxing)
  .rodata.str1.1
@@ -844,6 +1033,37 @@ END GROUP
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
                 0x008002f4                _end = .
+=======
+                0x00800060      0x2b3 APP/src/SmartHome_Prog.o
+                                0x2be (size before relaxing)
+ .rodata.str1.1
+                0x00800313        0x3 main.o
+ *(.gnu.linkonce.r*)
+                0x00800316                . = ALIGN (0x2)
+                0x00800316                _edata = .
+                0x00800316                PROVIDE (__data_end, .)
+
+.bss            0x00800316        0x6
+                0x00800316                PROVIDE (__bss_start, .)
+ *(.bss)
+ *(.bss*)
+ .bss.local_u16Counter
+                0x00800316        0x2 MCAL/TMR0/src/TMR0_program.o
+ .bss.PRV_pFunCallBackCTC
+                0x00800318        0x2 MCAL/TMR0/src/TMR0_program.o
+ .bss.PRV_pFunCallBackOVF
+                0x0080031a        0x2 MCAL/TMR0/src/TMR0_program.o
+ *(COMMON)
+                0x0080031c                PROVIDE (__bss_end, .)
+                0x00000bec                __data_load_start = LOADADDR (.data)
+                0x00000ea2                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x0080031c        0x0
+                [!provide]                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                [!provide]                PROVIDE (__noinit_end, .)
+                0x0080031c                _end = .
+>>>>>>> Stashed changes
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -922,6 +1142,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
+<<<<<<< Updated upstream
 .debug_aranges  0x00000000      0x3d8
  *(.debug_aranges)
  .debug_aranges
@@ -954,10 +1175,41 @@ END GROUP
                 0x00000338       0x60 MCAL/TWI/src/TWI_program.o
  .debug_aranges
                 0x00000398       0x40 MCAL/UART/src/UART_program.o
+=======
+.debug_aranges  0x00000000      0x370
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x70 APP/src/SmartHome_Prog.o
+ .debug_aranges
+                0x00000070       0x40 HAL/BL/src/BL_program.o
+ .debug_aranges
+                0x000000b0       0x40 HAL/EEPROM/src/EEPROM_program.o
+ .debug_aranges
+                0x000000f0       0x28 HAL/KPD/src/KeyPad_program.o
+ .debug_aranges
+                0x00000118       0x78 HAL/LCD/src/LCD_PROGRAM.o
+ .debug_aranges
+                0x00000190       0x38 HAL/LED/src/LED_program.o
+ .debug_aranges
+                0x000001c8       0x20 main.o
+ .debug_aranges
+                0x000001e8       0x28 MCAL/ADC/src/ADC_program.o
+ .debug_aranges
+                0x00000210       0x40 MCAL/DIO/src/DIO_program.o
+ .debug_aranges
+                0x00000250       0x28 MCAL/GI/src/GI_program.o
+ .debug_aranges
+                0x00000278       0x58 MCAL/TMR0/src/TMR0_program.o
+ .debug_aranges
+                0x000002d0       0x60 MCAL/TWI/src/TWI_program.o
+ .debug_aranges
+                0x00000330       0x40 MCAL/UART/src/UART_program.o
+>>>>>>> Stashed changes
 
 .debug_pubnames
  *(.debug_pubnames)
 
+<<<<<<< Updated upstream
 .debug_info     0x00000000     0x480f
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
@@ -1082,6 +1334,118 @@ END GROUP
  .debug_loc     0x000021ad      0x196 MCAL/TMR0/src/TMR0_program.o
  .debug_loc     0x00002343       0xbf MCAL/TWI/src/TWI_program.o
  .debug_loc     0x00002402      0x171 MCAL/UART/src/UART_program.o
+=======
+.debug_info     0x00000000     0x468b
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
+ .debug_info    0x000004e6     0x1d25 APP/src/SmartHome_Prog.o
+ .debug_info    0x0000220b      0x1d2 HAL/BL/src/BL_program.o
+ .debug_info    0x000023dd      0x557 HAL/EEPROM/src/EEPROM_program.o
+ .debug_info    0x00002934      0x350 HAL/KPD/src/KeyPad_program.o
+ .debug_info    0x00002c84      0xee1 HAL/LCD/src/LCD_PROGRAM.o
+ .debug_info    0x00003b65      0x20e HAL/LED/src/LED_program.o
+ .debug_info    0x00003d73      0x12d main.o
+ .debug_info    0x00003ea0       0xe3 MCAL/ADC/src/ADC_program.o
+ .debug_info    0x00003f83      0x1ad MCAL/DIO/src/DIO_program.o
+ .debug_info    0x00004130       0x98 MCAL/GI/src/GI_program.o
+ .debug_info    0x000041c8      0x19e MCAL/TMR0/src/TMR0_program.o
+ .debug_info    0x00004366      0x198 MCAL/TWI/src/TWI_program.o
+ .debug_info    0x000044fe      0x18d MCAL/UART/src/UART_program.o
+
+.debug_abbrev   0x00000000     0x107b
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
+ .debug_abbrev  0x000004a3      0x251 APP/src/SmartHome_Prog.o
+ .debug_abbrev  0x000006f4       0x94 HAL/BL/src/BL_program.o
+ .debug_abbrev  0x00000788      0x13f HAL/EEPROM/src/EEPROM_program.o
+ .debug_abbrev  0x000008c7       0xe9 HAL/KPD/src/KeyPad_program.o
+ .debug_abbrev  0x000009b0      0x221 HAL/LCD/src/LCD_PROGRAM.o
+ .debug_abbrev  0x00000bd1       0x8d HAL/LED/src/LED_program.o
+ .debug_abbrev  0x00000c5e       0xa4 main.o
+ .debug_abbrev  0x00000d02       0x6f MCAL/ADC/src/ADC_program.o
+ .debug_abbrev  0x00000d71       0x87 MCAL/DIO/src/DIO_program.o
+ .debug_abbrev  0x00000df8       0x46 MCAL/GI/src/GI_program.o
+ .debug_abbrev  0x00000e3e       0xcb MCAL/TMR0/src/TMR0_program.o
+ .debug_abbrev  0x00000f09       0x90 MCAL/TWI/src/TWI_program.o
+ .debug_abbrev  0x00000f99       0xe2 MCAL/UART/src/UART_program.o
+
+.debug_line     0x00000000     0x2517
+ *(.debug_line .debug_line.* .debug_line_end)
+ .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
+ .debug_line    0x00000116      0xe52 APP/src/SmartHome_Prog.o
+ .debug_line    0x00000f68       0xe8 HAL/BL/src/BL_program.o
+ .debug_line    0x00001050      0x2f4 HAL/EEPROM/src/EEPROM_program.o
+ .debug_line    0x00001344      0x175 HAL/KPD/src/KeyPad_program.o
+ .debug_line    0x000014b9      0x569 HAL/LCD/src/LCD_PROGRAM.o
+ .debug_line    0x00001a22       0xf6 HAL/LED/src/LED_program.o
+ .debug_line    0x00001b18       0xa8 main.o
+ .debug_line    0x00001bc0      0x106 MCAL/ADC/src/ADC_program.o
+ .debug_line    0x00001cc6      0x2a4 MCAL/DIO/src/DIO_program.o
+ .debug_line    0x00001f6a       0x82 MCAL/GI/src/GI_program.o
+ .debug_line    0x00001fec      0x1a6 MCAL/TMR0/src/TMR0_program.o
+ .debug_line    0x00002192      0x23f MCAL/TWI/src/TWI_program.o
+ .debug_line    0x000023d1      0x146 MCAL/UART/src/UART_program.o
+
+.debug_frame    0x00000000      0x824
+ *(.debug_frame)
+ .debug_frame   0x00000000      0x1a4 APP/src/SmartHome_Prog.o
+ .debug_frame   0x000001a4       0x64 HAL/BL/src/BL_program.o
+ .debug_frame   0x00000208       0xbc HAL/EEPROM/src/EEPROM_program.o
+ .debug_frame   0x000002c4       0x80 HAL/KPD/src/KeyPad_program.o
+ .debug_frame   0x00000344      0x144 HAL/LCD/src/LCD_PROGRAM.o
+ .debug_frame   0x00000488       0x54 HAL/LED/src/LED_program.o
+ .debug_frame   0x000004dc       0x24 main.o
+ .debug_frame   0x00000500       0x34 MCAL/ADC/src/ADC_program.o
+ .debug_frame   0x00000534       0x64 MCAL/DIO/src/DIO_program.o
+ .debug_frame   0x00000598       0x34 MCAL/GI/src/GI_program.o
+ .debug_frame   0x000005cc      0x124 MCAL/TMR0/src/TMR0_program.o
+ .debug_frame   0x000006f0       0xa4 MCAL/TWI/src/TWI_program.o
+ .debug_frame   0x00000794       0x90 MCAL/UART/src/UART_program.o
+
+.debug_str      0x00000000     0x1283
+ *(.debug_str)
+ .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
+ .debug_str     0x00000196      0x956 APP/src/SmartHome_Prog.o
+                                0x98a (size before relaxing)
+ .debug_str     0x00000aec      0x100 HAL/BL/src/BL_program.o
+                                0x242 (size before relaxing)
+ .debug_str     0x00000bec      0x1d4 HAL/EEPROM/src/EEPROM_program.o
+                                0x3f8 (size before relaxing)
+ .debug_str     0x00000dc0       0xee HAL/KPD/src/KeyPad_program.o
+                                0x287 (size before relaxing)
+ .debug_str     0x00000eae      0x11a HAL/LCD/src/LCD_PROGRAM.o
+                                0x3be (size before relaxing)
+ .debug_str     0x00000fc8       0x7d HAL/LED/src/LED_program.o
+                                0x213 (size before relaxing)
+ .debug_str     0x00001045       0x11 main.o
+                                0x1e4 (size before relaxing)
+ .debug_str     0x00001056       0x61 MCAL/ADC/src/ADC_program.o
+                                0x1cc (size before relaxing)
+ .debug_str     0x000010b7       0x6e MCAL/DIO/src/DIO_program.o
+                                0x22f (size before relaxing)
+ .debug_str     0x00001125       0x2b MCAL/GI/src/GI_program.o
+                                0x17f (size before relaxing)
+ .debug_str     0x00001150       0x95 MCAL/TMR0/src/TMR0_program.o
+                                0x229 (size before relaxing)
+ .debug_str     0x000011e5       0x3c MCAL/TWI/src/TWI_program.o
+                                0x2a1 (size before relaxing)
+ .debug_str     0x00001221       0x62 MCAL/UART/src/UART_program.o
+                                0x217 (size before relaxing)
+
+.debug_loc      0x00000000     0x259b
+ *(.debug_loc)
+ .debug_loc     0x00000000      0xc92 APP/src/SmartHome_Prog.o
+ .debug_loc     0x00000c92       0x93 HAL/BL/src/BL_program.o
+ .debug_loc     0x00000d25      0x47c HAL/EEPROM/src/EEPROM_program.o
+ .debug_loc     0x000011a1      0x183 HAL/KPD/src/KeyPad_program.o
+ .debug_loc     0x00001324      0x979 HAL/LCD/src/LCD_PROGRAM.o
+ .debug_loc     0x00001c9d      0x1e0 HAL/LED/src/LED_program.o
+ .debug_loc     0x00001e7d       0x74 MCAL/ADC/src/ADC_program.o
+ .debug_loc     0x00001ef1      0x2e4 MCAL/DIO/src/DIO_program.o
+ .debug_loc     0x000021d5      0x196 MCAL/TMR0/src/TMR0_program.o
+ .debug_loc     0x0000236b       0xbf MCAL/TWI/src/TWI_program.o
+ .debug_loc     0x0000242a      0x171 MCAL/UART/src/UART_program.o
+>>>>>>> Stashed changes
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1101,6 +1465,7 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
+<<<<<<< Updated upstream
 .debug_ranges   0x00000000      0x360
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x88 APP/src/SmartHome_Prog.o
@@ -1118,6 +1483,23 @@ END GROUP
  .debug_ranges  0x00000280       0x48 MCAL/TMR0/src/TMR0_program.o
  .debug_ranges  0x000002c8       0x50 MCAL/TWI/src/TWI_program.o
  .debug_ranges  0x00000318       0x48 MCAL/UART/src/UART_program.o
+=======
+.debug_ranges   0x00000000      0x318
+ *(.debug_ranges)
+ .debug_ranges  0x00000000       0x90 APP/src/SmartHome_Prog.o
+ .debug_ranges  0x00000090       0x30 HAL/BL/src/BL_program.o
+ .debug_ranges  0x000000c0       0x30 HAL/EEPROM/src/EEPROM_program.o
+ .debug_ranges  0x000000f0       0x18 HAL/KPD/src/KeyPad_program.o
+ .debug_ranges  0x00000108       0x98 HAL/LCD/src/LCD_PROGRAM.o
+ .debug_ranges  0x000001a0       0x28 HAL/LED/src/LED_program.o
+ .debug_ranges  0x000001c8       0x10 main.o
+ .debug_ranges  0x000001d8       0x18 MCAL/ADC/src/ADC_program.o
+ .debug_ranges  0x000001f0       0x30 MCAL/DIO/src/DIO_program.o
+ .debug_ranges  0x00000220       0x18 MCAL/GI/src/GI_program.o
+ .debug_ranges  0x00000238       0x48 MCAL/TMR0/src/TMR0_program.o
+ .debug_ranges  0x00000280       0x50 MCAL/TWI/src/TWI_program.o
+ .debug_ranges  0x000002d0       0x48 MCAL/UART/src/UART_program.o
+>>>>>>> Stashed changes
 
 .debug_macro
  *(.debug_macro)
