@@ -33,8 +33,9 @@
 #include "SmartHome.h"
 
 extern u8 global_accessType;
+global_accessType = accessPermited;
 
-u8 user_type =HOME_LOCAL_USER;
+u8 user_type =HOME_REMOTE_USER;
 
 int main()
 {
@@ -72,14 +73,11 @@ int main()
 			{
 				KPD_Interface_RemoteAdmin();
 			}
-			else if (user_type == HOME_REMOTE_USER)
-			{
-				/* code */
-			}
+
 
 			else if (user_type == HOME_LOCAL_USER)
 			{
-				KPD_Interface_user();
+				KPD_Interface_Localuser();
 			}
 
 			

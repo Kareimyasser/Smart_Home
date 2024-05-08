@@ -8,6 +8,7 @@
         "adc_interface.h": "c",
         "adc_register.h": "c",
         "bl_interface.h": "c",
-        "led_interface.h": "c"
+        "led_interface.h": "c",
+        "lcd_interface.h": "c"
     }
 }

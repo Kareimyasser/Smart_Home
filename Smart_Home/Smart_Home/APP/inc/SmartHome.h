@@ -31,13 +31,16 @@
 
 
 void APP_init(void);
+void Idle_RemoteAction();
+void Display_Remotetemp(void);
 void Idle_Action();
-void WelcomeScreen();
-void action(void);
-void KPD_Interface_user(void);
-void KPD_Interface_RemoteAdmin(void);
-void Reset_AllKPDValues();
 void Display_temp(void);
+void WelcomeScreen();
+void KPD_Interface_Localuser(void);
+void KPD_Interface_RemoteAdmin(void);
+
+void Reset_AllKPDValues();
+
 
 
 

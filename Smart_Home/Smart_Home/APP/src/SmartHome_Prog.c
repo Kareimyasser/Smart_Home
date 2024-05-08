@@ -35,7 +35,7 @@
 
 //global variable for the application accessed by SmartHome.c and main.c
 // only for testing purposes
-u8 global_accessType = accessPermited;
+u8 global_accessType;
 
 
 //global variables for the application accessed only by SmartHome.c
@@ -48,6 +48,10 @@ u8 local_KPDSelectValue = KPD_Not_Pressed;
 
 //local bluetooth variable for checking bluetooth status
 u8 bluetooh_value;
+
+char DimmerString[20];
+char tempString[20];
+
 
 //local LED variable for checking led status
 u8 led_status = 0;
@@ -249,6 +253,7 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 		}
 		copy_pu8RemoteUserName[Local_u8UserNameLengthCounter]='\0';
 		BL_voidTxString("Entered User Name:");
+		BL_voidTxChar('\r');
 		//loop for 8 digits user name
 		
 		for(Local_u8UserNameLengthCounter=0;Local_u8UserNameLengthCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8UserNameLengthCounter++)
@@ -279,6 +284,7 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 		}
 		copy_pu8RemoteUserPass[Local_u8UserPassCounter]='\0';
 		BL_voidTxString("Entered Pass:");
+		BL_voidTxChar('\r');
 		//loop for 8 digits user pass
 		for(Local_u8UserPassCounter=0;Local_u8UserPassCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8UserPassCounter++)
 		{
@@ -800,217 +806,213 @@ void HOME_voidFireAnALarm(u8 copy_pu8UserStatus)
 
 void KPD_Interface_RemoteAdmin(void)
 {
+	TMR0_SetCallBackCTC(&Idle_RemoteAction);
+	BL_voidTxChar('\r');
 	BL_voidTxString("1-AC 2-light");
 	BL_voidTxChar('\r');
 	BL_voidTxString("3-temp 4-Door");
 	BL_voidTxChar('\r');
+	TMR0_voidStart();
 	BL_voidRxChar(&bluetooh_value);
+	TMR0_voidStop();
 	switch (bluetooh_value)
 	{
 	case ('1'):
 		BL_voidTxString("AC Is On/off");
         BL_voidTxChar('\r');
-        BL_voidTxString("Room Temp: 30c");
+        ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp); 
+				sprintf(tempString, "Room Temp: %d c", local_temp);
+				BL_voidTxString(tempString);
+				BL_voidTxChar('\r');
+				BL_voidTxString("0-go to home");
+				BL_voidTxChar('\r');
+				TMR0_voidStart();
+				BL_voidRxChar(&bluetooh_value);
+				TMR0_voidStop();
+				if (bluetooh_value=='0')
+				{
+					
+				}
 		break;
 	
 	case ('2'):
 
-       ////////////////////////////					STOPED MY WORK HERE		/////////////////////////////////////     
+       
+	   		BL_voidTxChar('\r');     
             BL_voidTxString("Choose light to");
             BL_voidTxChar('\r');
             BL_voidTxString("control(1-6)");
-
-            TMR0_SetCallBackCTC(&Idle_Action);
+			BL_voidTxChar('\r');
+			BL_voidTxChar('\r');
             TMR0_voidStart();
-            // busy wait for KPD
-
+			BL_voidRxChar(&bluetooh_value);
             TMR0_voidStop();
-            switch (local_lightNum)
+            switch (bluetooh_value)
             {
             case ('1'):
 
                 DIO_voidGetPinValue(DIO_PORTD, DIO_PIN3, &led_status);
-                LCD_voidClear();
+                
                 if (led_status == 1)
                 {
-                    LCD_voidDisplayStringDelay("Light 1 is On");
-                    LCD_voidSendCommand(Write_SecondLine);
-                    LCD_voidDisplayStringDelay("1-To Turn It Off");
-                    while (local_lightStatus == KPD_Not_Pressed)
-                    {
-                        KPD_voidGetValue(&local_lightStatus);
-                    }
-                    if (local_lightStatus == '1')
+                    BL_voidTxString("Light 1 is On");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It Off");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+                    if (bluetooh_value == '1')
                     {
                         LED_voidOff(DIO_PORTD, DIO_PIN3, LED_FORWARD_CONNECTION);
                     }
-                    Reset_AllKPDValues();
+                    
 					break;
                 }
                 else if (led_status == 0)
                 {
-                    LCD_voidDisplayStringDelay("Light 1 is OFF");
-                    LCD_voidSendCommand(Write_SecondLine);
-                    LCD_voidDisplayStringDelay("1-To Turn It On");
-                    while (local_lightStatus == KPD_Not_Pressed)
-                    {
-                        KPD_voidGetValue(&local_lightStatus);
-                    }
-                    if (local_lightStatus == '1')
+                    BL_voidTxString("Light 1 is OFF");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It On");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+                    if (bluetooh_value == '1')
                     {
                         LED_voidOn(DIO_PORTD, DIO_PIN3, LED_FORWARD_CONNECTION);
                     }
-                    Reset_AllKPDValues();
+                    
                 }
                 break;
 
             case ('2'):
 
-                DIO_voidGetPinValue(DIO_PORTD, DIO_PIN4, &led_status);
-                LCD_voidClear();
+                DIO_voidGetPinValue(DIO_PORTB, DIO_PIN0, &led_status);
+                
                 if (led_status == 1)
                 {
-                    LCD_voidDisplayStringDelay("Light 2 is On");
-                    LCD_voidSendCommand(Write_SecondLine);
-                    LCD_voidDisplayStringDelay("1-To Turn It Off");
-                    while (local_lightStatus == KPD_Not_Pressed)
+                    BL_voidTxString("Light 2 is On");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It Off");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+                    if (bluetooh_value == '1')
                     {
-                        KPD_voidGetValue(&local_lightStatus);
+                        LED_voidOff(DIO_PORTB, DIO_PIN0, LED_FORWARD_CONNECTION);
                     }
-                    if (local_lightStatus == '1')
-                    {
-                        LED_voidOff(DIO_PORTD, DIO_PIN4, LED_FORWARD_CONNECTION);
-                    }
-                    local_lightStatus = KPD_Not_Pressed;
+                    bluetooh_value = KPD_Not_Pressed;
                 }
                 else if (led_status == 0)
                 {
-                    LCD_voidDisplayStringDelay("Light 2 is OFF");
-                    LCD_voidSendCommand(Write_SecondLine);
-                    LCD_voidDisplayStringDelay("1-To Turn It On");
-                    while (local_lightStatus == KPD_Not_Pressed)
+                    BL_voidTxString("Light 2 is OFF");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It On");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+                    if (bluetooh_value == '1')
                     {
-                        KPD_voidGetValue(&local_lightStatus);
+                        LED_voidOn(DIO_PORTB, DIO_PIN0, LED_FORWARD_CONNECTION);
                     }
-                    if (local_lightStatus == '1')
-                    {
-                        LED_voidOn(DIO_PORTD, DIO_PIN4, LED_FORWARD_CONNECTION);
-                    }
-                    local_lightStatus = KPD_Not_Pressed;
+                    bluetooh_value = KPD_Not_Pressed;
                 }
                 break;
 
             case ('3'):
 
                 DIO_voidGetPinValue(DIO_PORTA, DIO_PIN2, &led_status);
-                LCD_voidClear();
+                
                 if (led_status == 1)
                 {
-                    LCD_voidDisplayStringDelay("Light 3 is On");
-                    LCD_voidSendCommand(Write_SecondLine);
-                    LCD_voidDisplayStringDelay("1-To Turn It Off");
-                    while (local_lightStatus == KPD_Not_Pressed)
-                    {
-                        KPD_voidGetValue(&local_lightStatus);
-                    }
+                    BL_voidTxString("Light 3 is On");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It Off");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
 
-                    if (local_lightStatus == '1')
+                    if (bluetooh_value == '1')
                     {
                         LED_voidOff(DIO_PORTA, DIO_PIN2, LED_FORWARD_CONNECTION);
                     }
-                    local_lightStatus = KPD_Not_Pressed;
+                    bluetooh_value = KPD_Not_Pressed;
                 }
                 else if (led_status == 0)
                 {
-                    LCD_voidDisplayStringDelay("Light 3 is OFF");
-                    LCD_voidSendCommand(Write_SecondLine);
-                    LCD_voidDisplayStringDelay("1-To Turn It On");
-                    while (local_lightStatus == KPD_Not_Pressed)
-                    {
-                        KPD_voidGetValue(&local_lightStatus);
-                    }
+                    BL_voidTxString("Light 3 is OFF");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It On");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
 
-                    if (local_lightStatus == '1')
+                    if (bluetooh_value == '1')
                     {
                         LED_voidOn(DIO_PORTA, DIO_PIN2, LED_FORWARD_CONNECTION);
                     }
-                    local_lightStatus = KPD_Not_Pressed;
+                    bluetooh_value = KPD_Not_Pressed;
                 }
                 break;
 
             case ('4'):
 
                 DIO_voidGetPinValue(DIO_PORTA, DIO_PIN3, &led_status);
-                LCD_voidClear();
+                
                 if (led_status == 1)
                 {
-                    LCD_voidDisplayStringDelay("Light 4 is On");
-                    LCD_voidSendCommand(Write_SecondLine);
-                    LCD_voidDisplayStringDelay("1-To Turn It Off");
-                    while (local_lightStatus == KPD_Not_Pressed)
-                    {
-                        KPD_voidGetValue(&local_lightStatus);
-                    }
+                    BL_voidTxString("Light 4 is On");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It Off");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
 
-                    if (local_lightStatus == '1')
+                    if (bluetooh_value == '1')
                     {
                         LED_voidOff(DIO_PORTA, DIO_PIN3, LED_FORWARD_CONNECTION);
                     }
-                    local_lightStatus = KPD_Not_Pressed;
+                    bluetooh_value = KPD_Not_Pressed;
                 }
                 else if (led_status == 0)
                 {
-                    LCD_voidDisplayStringDelay("Light 4 is OFF");
-                    LCD_voidSendCommand(Write_SecondLine);
-                    LCD_voidDisplayStringDelay("1-To Turn It On");
-                    while (local_lightStatus == KPD_Not_Pressed)
-                    {
-                        KPD_voidGetValue(&local_lightStatus);
-                    }
+                    BL_voidTxString("Light 4 is OFF");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It On");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
 
-                    if (local_lightStatus == '1')
+                    if (bluetooh_value == '1')
                     {
                         LED_voidOn(DIO_PORTA, DIO_PIN3, LED_FORWARD_CONNECTION);
                     }
-                    local_lightStatus = KPD_Not_Pressed;
+                    bluetooh_value = KPD_Not_Pressed;
                 }
                 break;
 
             case ('5'):
 
                 DIO_voidGetPinValue(DIO_PORTD, DIO_PIN2, &led_status);
-                LCD_voidClear();
+                
                 if (led_status == 1)
                 {
-                    LCD_voidDisplayStringDelay("Light 5 is On");
-                    LCD_voidSendCommand(Write_SecondLine);
-                    LCD_voidDisplayStringDelay("1-To Turn It Off");
-                    while (local_lightStatus == KPD_Not_Pressed)
-                    {
-                        KPD_voidGetValue(&local_lightStatus);
-                    }
+                    BL_voidTxString("Light 5 is On");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It Off");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
 
-                    if (local_lightStatus == '1')
+                    if (bluetooh_value == '1')
                     {
                         LED_voidOff(DIO_PORTD, DIO_PIN2, LED_FORWARD_CONNECTION);
                     }
-                    local_lightStatus = KPD_Not_Pressed;
+                    bluetooh_value = KPD_Not_Pressed;
                 }
                 else if (led_status == 0)
                 {
-                    LCD_voidDisplayStringDelay("Light 5 is OFF");
-                    LCD_voidSendCommand(Write_SecondLine);
-                    LCD_voidDisplayStringDelay("1-To Turn It On");
-                    while (local_lightStatus == KPD_Not_Pressed)
-                    {
-                        KPD_voidGetValue(&local_lightStatus);
-                    }
+                    BL_voidTxString("Light 5 is OFF");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It On");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
 
-                    if (local_lightStatus == '1')
+                    if (bluetooh_value == '1')
                     {
                         LED_voidOn(DIO_PORTD, DIO_PIN2, LED_FORWARD_CONNECTION);
                     }
-                    local_lightStatus = KPD_Not_Pressed;
+                    bluetooh_value = KPD_Not_Pressed;
                 }
                 break;
 
@@ -1018,99 +1020,114 @@ void KPD_Interface_RemoteAdmin(void)
 			// if the user choose light 6 (DIMMER LED)
 
             case ('6'):
-
-                LCD_voidClear();
+				
+                
 				
                 if (dimmer_brightness > 0)
                 {
-                    LCD_voidDisplayStringDelay("Light 6 is On");
-					_delay_ms(1000);
-					LCD_voidClear();
-					LCD_voidDisplayString("Brightness:  %");
-					LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
-					LCD_voidDisplayNumber(dimmer_brightness);
-                    LCD_voidSendCommand(Write_SecondLine);
-                    LCD_voidDisplayStringDelay("1)+10 2)-10 0)H");
-					while (local_lightStatus == KPD_Not_Pressed)
+					 BL_voidTxChar('\r');
+                    BL_voidTxString("Light 6 is On");
+					BL_voidTxChar('\r');
+					sprintf(DimmerString, "Brightness: %d%", dimmer_brightness);
+					BL_voidTxString(DimmerString);
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1)+10 2)-10 0)H");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+					while (bluetooh_value != 0)
 					{
-						KPD_voidGetValue(&local_lightStatus);
-						if (local_lightStatus == '1')
+						if (bluetooh_value == '1')
 						{
 							dimmer_brightness += 10;
 							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
-							LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
-							LCD_voidDisplayNumber(dimmer_brightness);
+							sprintf(DimmerString, "Brightness: %d%", dimmer_brightness);
+							BL_voidTxString(DimmerString);
+                    		BL_voidTxChar('\r');
+                    		BL_voidTxString("1)+10 2)-10 0)H");
+							BL_voidTxChar('\r');
 							if (dimmer_brightness > 100)
 							{
 								dimmer_brightness = 100;
 								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
 							}
-						
-							
+							break;													
 						}
-						else if (local_lightStatus == '2')
+						else if (bluetooh_value == '2')
 						{
 							dimmer_brightness -= 10;
 							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
-							LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
-							LCD_voidDisplayNumber(dimmer_brightness);
+							sprintf(DimmerString, "Brightness: %d%", dimmer_brightness);
+							BL_voidTxString(DimmerString);
+                    		BL_voidTxChar('\r');
+                    		BL_voidTxString("1)+10 2)-10 0)H");
+							BL_voidTxChar('\r');
 							if (dimmer_brightness < 0)
 							{
 								dimmer_brightness = 0;
 								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
 							}
-						}
-						else if (local_lightStatus == '0')
-						{
-							LCD_voidClear();
 							break;
-						}						
-						
+						}
+						else if (bluetooh_value == '0')
+						{
+							
+							break;
+						}	
+						break;					
+	
 					}
 					
                 }
-                else if (led_status == 0)
+                else if (dimmer_brightness == 0)
                 {
-                    LCD_voidDisplayStringDelay("Light 6 is OFF");
+                    BL_voidTxString("Light 6 is OFF");
 					_delay_ms(1000);
-                    LCD_voidClear();
-					LCD_voidDisplayString("Brightness:  %");
-					LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
-					LCD_voidDisplayNumber(dimmer_brightness);
-                    LCD_voidSendCommand(Write_SecondLine);
-                    LCD_voidDisplayStringDelay("1)+10 2)-10 0)H");
-					while (local_lightStatus == KPD_Not_Pressed)
+					BL_voidTxChar('\r');
+					sprintf(DimmerString, "Brightness: %d%", dimmer_brightness);
+					BL_voidTxString(DimmerString);
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1)+10 2)-10 0)H");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+					while (bluetooh_value != 0)
 					{
-						KPD_voidGetValue(&local_lightStatus);
-						if (local_lightStatus == '1')
+						if (bluetooh_value == '1')
 						{
 							dimmer_brightness += 10;
 							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
-							LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
-							LCD_voidDisplayNumber(dimmer_brightness);
+							sprintf(DimmerString, "Brightness: %d%", dimmer_brightness);
+							BL_voidTxString(DimmerString);
+                    		BL_voidTxChar('\r');
+                    		BL_voidTxString("1)+10 2)-10 0)H");
+							BL_voidTxChar('\r');
 							if (dimmer_brightness > 100)
 							{
 								dimmer_brightness = 100;
 								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
 							}
+							break;
 						
 							
 						}
-						else if (local_lightStatus == '2')
+						else if (bluetooh_value == '2')
 						{
 							dimmer_brightness -= 10;
 							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
-							LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
-							LCD_voidDisplayNumber(dimmer_brightness);
+							sprintf(DimmerString, "Brightness: %d%", dimmer_brightness);
+							BL_voidTxString(DimmerString);
+                    		BL_voidTxChar('\r');
+                    		BL_voidTxString("1)+10 2)-10 0)H");
+							BL_voidTxChar('\r');
 							if (dimmer_brightness < 0)
 							{
 								dimmer_brightness = 0;
 								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
 							}
+							break;
 						}
-						else if (local_lightStatus == '0')
+						else if (bluetooh_value == '0')
 						{
-							LCD_voidClear();
+							
 							break;
 						}
 						
@@ -1123,36 +1140,26 @@ void KPD_Interface_RemoteAdmin(void)
 
 			case ('3'):
 			
-				LCD_voidClear();
-				ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
-				LCD_voidSendCommand(Write_FirstLine);
-				LCD_voidDisplayString("Room Temp:  c");
-				LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,11);
-				LCD_voidDisplayNumber(local_temp);
-				LCD_voidDisplayChar('c');
-				LCD_voidSendCommand(Write_SecondLine);
-				LCD_voidDisplayStringDelay("0-go to home");
-				while(local_KPDIdleValue==KPD_Not_Pressed)
+				
+				ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp); 
+				sprintf(tempString, "Room Temp: %d c", local_temp);
+				BL_voidTxString(tempString);
+				BL_voidTxChar('\r');
+				BL_voidTxString("0-go to home");
+				BL_voidTxChar('\r');
+				BL_voidRxChar(&bluetooh_value);	
+				if (bluetooh_value=='0')
 				{
-					KPD_voidGetValue(&local_KPDIdleValue);
-					Display_temp();
-				}	
-				if (local_KPDIdleValue=='0')
-				{
-					LCD_voidClear();
+					
 				}
-			break;
 
 			case ('4'):
-			LCD_voidClear();
-			LCD_voidDisplayString("Door is opening");
-			SERVO_voidStartByAngle(90);
-			_delay_ms(10000);
-			SERVO_voidStartByAngle(0);
-
+				BL_voidTxString("Door is opening");
+				SERVO_voidStartByAngle(90);
+				_delay_ms(10000);
+				SERVO_voidStartByAngle(0);
 			break;
-			
-		Reset_AllKPDValues();
+					
         break;
         }
     
@@ -1163,7 +1170,7 @@ void KPD_Interface_RemoteAdmin(void)
 
 
 
-void KPD_Interface_user(void)
+void KPD_Interface_Localuser(void)
 {
 
         Reset_AllKPDValues();
@@ -1558,12 +1565,7 @@ void KPD_Interface_user(void)
 				}
 			break;
 
-			case ('4'):
-			LCD_voidClear();
-			LCD_voidDisplayString("Door is opening");
-			SERVO_voidStartByAngle(90);
-			_delay_ms(10000);
-			SERVO_voidStartByAngle(0);
+
 
 			break;
 			
@@ -1582,6 +1584,27 @@ void WelcomeScreen()
 }
 
 
+void Idle_RemoteAction()
+{ 
+    BL_voidTxChar('\r');
+	Display_Remotetemp();
+	BL_voidTxString("0-Go to Home");
+	BL_voidTxChar('\r');
+	BL_voidRxChar(&bluetooh_value);
+    if (bluetooh_value == '0')
+    {
+        TMR0clear_flag();
+		
+    }
+}
+
+void Display_Remotetemp(void)
+{
+	ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp); 
+	sprintf(tempString, "Room Temp: %d c", local_temp);
+	BL_voidTxString(tempString);
+	BL_voidTxChar('\r');
+}
 
 void Idle_Action()
 { 
