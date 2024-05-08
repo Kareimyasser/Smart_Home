@@ -38,7 +38,7 @@ void Display_temp(void);
 void WelcomeScreen();
 void KPD_Interface_Localuser(void);
 void KPD_Interface_RemoteAdmin(void);
-
+void KPD_Interface_RemoteUser(void);
 void Reset_AllKPDValues();
 
 

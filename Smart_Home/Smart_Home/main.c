@@ -73,7 +73,10 @@ int main()
 			{
 				KPD_Interface_RemoteAdmin();
 			}
-
+			else if (user_type == HOME_REMOTE_USER)
+			{
+				KPD_Interface_RemoteUser();
+			}
 
 			else if (user_type == HOME_LOCAL_USER)
 			{

@@ -1166,7 +1166,360 @@ void KPD_Interface_RemoteAdmin(void)
 	}
 
 
+void KPD_Interface_RemoteUser(void)
+{
+	TMR0_SetCallBackCTC(&Idle_RemoteAction);
+	BL_voidTxChar('\r');
+	BL_voidTxString("1-AC 2-light");
+	BL_voidTxChar('\r');
+	BL_voidTxString("3-temp 4-Door");
+	BL_voidTxChar('\r');
+	TMR0_voidStart();
+	BL_voidRxChar(&bluetooh_value);
+	TMR0_voidStop();
+	switch (bluetooh_value)
+	{
+	case ('1'):
+		BL_voidTxString("AC Is On/off");
+        BL_voidTxChar('\r');
+        ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp); 
+				sprintf(tempString, "Room Temp: %d c", local_temp);
+				BL_voidTxString(tempString);
+				BL_voidTxChar('\r');
+				BL_voidTxString("0-go to home");
+				BL_voidTxChar('\r');
+				TMR0_voidStart();
+				BL_voidRxChar(&bluetooh_value);
+				TMR0_voidStop();
+				if (bluetooh_value=='0')
+				{
+					
+				}
+		break;
+	
+	case ('2'):
 
+       
+	   		BL_voidTxChar('\r');     
+            BL_voidTxString("Choose light to");
+            BL_voidTxChar('\r');
+            BL_voidTxString("control(1-6)");
+			BL_voidTxChar('\r');
+			BL_voidTxChar('\r');
+            TMR0_voidStart();
+			BL_voidRxChar(&bluetooh_value);
+            TMR0_voidStop();
+            switch (bluetooh_value)
+            {
+            case ('1'):
+
+                DIO_voidGetPinValue(DIO_PORTD, DIO_PIN3, &led_status);
+                
+                if (led_status == 1)
+                {
+                    BL_voidTxString("Light 1 is On");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It Off");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+                    if (bluetooh_value == '1')
+                    {
+                        LED_voidOff(DIO_PORTD, DIO_PIN3, LED_FORWARD_CONNECTION);
+                    }
+                    
+					break;
+                }
+                else if (led_status == 0)
+                {
+                    BL_voidTxString("Light 1 is OFF");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It On");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+                    if (bluetooh_value == '1')
+                    {
+                        LED_voidOn(DIO_PORTD, DIO_PIN3, LED_FORWARD_CONNECTION);
+                    }
+                    
+                }
+                break;
+
+            case ('2'):
+
+                DIO_voidGetPinValue(DIO_PORTB, DIO_PIN0, &led_status);
+                
+                if (led_status == 1)
+                {
+                    BL_voidTxString("Light 2 is On");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It Off");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+                    if (bluetooh_value == '1')
+                    {
+                        LED_voidOff(DIO_PORTB, DIO_PIN0, LED_FORWARD_CONNECTION);
+                    }
+                    bluetooh_value = KPD_Not_Pressed;
+                }
+                else if (led_status == 0)
+                {
+                    BL_voidTxString("Light 2 is OFF");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It On");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+                    if (bluetooh_value == '1')
+                    {
+                        LED_voidOn(DIO_PORTB, DIO_PIN0, LED_FORWARD_CONNECTION);
+                    }
+                    bluetooh_value = KPD_Not_Pressed;
+                }
+                break;
+
+            case ('3'):
+
+                DIO_voidGetPinValue(DIO_PORTA, DIO_PIN2, &led_status);
+                
+                if (led_status == 1)
+                {
+                    BL_voidTxString("Light 3 is On");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It Off");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+
+                    if (bluetooh_value == '1')
+                    {
+                        LED_voidOff(DIO_PORTA, DIO_PIN2, LED_FORWARD_CONNECTION);
+                    }
+                    bluetooh_value = KPD_Not_Pressed;
+                }
+                else if (led_status == 0)
+                {
+                    BL_voidTxString("Light 3 is OFF");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It On");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+
+                    if (bluetooh_value == '1')
+                    {
+                        LED_voidOn(DIO_PORTA, DIO_PIN2, LED_FORWARD_CONNECTION);
+                    }
+                    bluetooh_value = KPD_Not_Pressed;
+                }
+                break;
+
+            case ('4'):
+
+                DIO_voidGetPinValue(DIO_PORTA, DIO_PIN3, &led_status);
+                
+                if (led_status == 1)
+                {
+                    BL_voidTxString("Light 4 is On");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It Off");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+
+                    if (bluetooh_value == '1')
+                    {
+                        LED_voidOff(DIO_PORTA, DIO_PIN3, LED_FORWARD_CONNECTION);
+                    }
+                    bluetooh_value = KPD_Not_Pressed;
+                }
+                else if (led_status == 0)
+                {
+                    BL_voidTxString("Light 4 is OFF");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It On");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+
+                    if (bluetooh_value == '1')
+                    {
+                        LED_voidOn(DIO_PORTA, DIO_PIN3, LED_FORWARD_CONNECTION);
+                    }
+                    bluetooh_value = KPD_Not_Pressed;
+                }
+                break;
+
+            case ('5'):
+
+                DIO_voidGetPinValue(DIO_PORTD, DIO_PIN2, &led_status);
+                
+                if (led_status == 1)
+                {
+                    BL_voidTxString("Light 5 is On");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It Off");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+
+                    if (bluetooh_value == '1')
+                    {
+                        LED_voidOff(DIO_PORTD, DIO_PIN2, LED_FORWARD_CONNECTION);
+                    }
+                    bluetooh_value = KPD_Not_Pressed;
+                }
+                else if (led_status == 0)
+                {
+                    BL_voidTxString("Light 5 is OFF");
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1-To Turn It On");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+
+                    if (bluetooh_value == '1')
+                    {
+                        LED_voidOn(DIO_PORTD, DIO_PIN2, LED_FORWARD_CONNECTION);
+                    }
+                    bluetooh_value = KPD_Not_Pressed;
+                }
+                break;
+
+                
+			// if the user choose light 6 (DIMMER LED)
+
+            case ('6'):
+				
+                
+				
+                if (dimmer_brightness > 0)
+                {
+					 BL_voidTxChar('\r');
+                    BL_voidTxString("Light 6 is On");
+					BL_voidTxChar('\r');
+					sprintf(DimmerString, "Brightness: %d%", dimmer_brightness);
+					BL_voidTxString(DimmerString);
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1)+10 2)-10 0)H");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+					while (bluetooh_value != 0)
+					{
+						if (bluetooh_value == '1')
+						{
+							dimmer_brightness += 10;
+							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							sprintf(DimmerString, "Brightness: %d%", dimmer_brightness);
+							BL_voidTxString(DimmerString);
+                    		BL_voidTxChar('\r');
+                    		BL_voidTxString("1)+10 2)-10 0)H");
+							BL_voidTxChar('\r');
+							if (dimmer_brightness > 100)
+							{
+								dimmer_brightness = 100;
+								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							}
+							break;													
+						}
+						else if (bluetooh_value == '2')
+						{
+							dimmer_brightness -= 10;
+							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							sprintf(DimmerString, "Brightness: %d%", dimmer_brightness);
+							BL_voidTxString(DimmerString);
+                    		BL_voidTxChar('\r');
+                    		BL_voidTxString("1)+10 2)-10 0)H");
+							BL_voidTxChar('\r');
+							if (dimmer_brightness < 0)
+							{
+								dimmer_brightness = 0;
+								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							}
+							break;
+						}
+						else if (bluetooh_value == '0')
+						{
+							
+							break;
+						}	
+						break;					
+	
+					}
+					
+                }
+                else if (dimmer_brightness == 0)
+                {
+                    BL_voidTxString("Light 6 is OFF");
+					_delay_ms(1000);
+					BL_voidTxChar('\r');
+					sprintf(DimmerString, "Brightness: %d%", dimmer_brightness);
+					BL_voidTxString(DimmerString);
+                    BL_voidTxChar('\r');
+                    BL_voidTxString("1)+10 2)-10 0)H");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+					while (bluetooh_value != 0)
+					{
+						if (bluetooh_value == '1')
+						{
+							dimmer_brightness += 10;
+							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							sprintf(DimmerString, "Brightness: %d%", dimmer_brightness);
+							BL_voidTxString(DimmerString);
+                    		BL_voidTxChar('\r');
+                    		BL_voidTxString("1)+10 2)-10 0)H");
+							BL_voidTxChar('\r');
+							if (dimmer_brightness > 100)
+							{
+								dimmer_brightness = 100;
+								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							}
+							break;
+						
+							
+						}
+						else if (bluetooh_value == '2')
+						{
+							dimmer_brightness -= 10;
+							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							sprintf(DimmerString, "Brightness: %d%", dimmer_brightness);
+							BL_voidTxString(DimmerString);
+                    		BL_voidTxChar('\r');
+                    		BL_voidTxString("1)+10 2)-10 0)H");
+							BL_voidTxChar('\r');
+							if (dimmer_brightness < 0)
+							{
+								dimmer_brightness = 0;
+								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							}
+							break;
+						}
+						else if (bluetooh_value == '0')
+						{
+							
+							break;
+						}
+						
+					}				
+                }
+                break;
+		
+            }
+			break;
+
+			case ('3'):
+			
+				
+				ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp); 
+				sprintf(tempString, "Room Temp: %d c", local_temp);
+				BL_voidTxString(tempString);
+				BL_voidTxChar('\r');
+				BL_voidTxString("0-go to home");
+				BL_voidTxChar('\r');
+				BL_voidRxChar(&bluetooh_value);	
+				if (bluetooh_value=='0')
+				{
+					
+				}
+
+					
+        break;
+        }
+    
+	}
 
 
 
