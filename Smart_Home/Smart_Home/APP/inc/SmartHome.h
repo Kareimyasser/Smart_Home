@@ -34,7 +34,8 @@ void APP_init(void);
 void Idle_Action();
 void WelcomeScreen();
 void action(void);
-void KPD_Interface(void);
+void KPD_Interface_user(void);
+void KPD_Interface_RemoteAdmin(void);
 void Reset_AllKPDValues();
 void Display_temp(void);
 

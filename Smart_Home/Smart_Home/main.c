@@ -34,6 +34,8 @@
 
 extern u8 global_accessType;
 
+u8 user_type =HOME_LOCAL_USER;
+
 int main()
 {
 	u8 suc;
@@ -66,7 +68,21 @@ int main()
 		// HOME_voidChangeUserNameAndPass();
 		if (global_accessType ==accessPermited)
 		{
-			KPD_Interface_user();
+			if (user_type == HOME_REMOTE_ADMIN)
+			{
+				KPD_Interface_RemoteAdmin();
+			}
+			else if (user_type == HOME_REMOTE_USER)
+			{
+				/* code */
+			}
+
+			else if (user_type == HOME_LOCAL_USER)
+			{
+				KPD_Interface_user();
+			}
+
+			
 		}
 		else if (global_accessType ==accessDenied)
 		{

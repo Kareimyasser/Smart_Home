@@ -44,6 +44,10 @@ u8 Local_copyKPDValue = KPD_Not_Pressed;
 u8 local_lightNum = KPD_Not_Pressed;
 u8 local_lightStatus = KPD_Not_Pressed;
 u8 local_KPDIdleValue = KPD_Not_Pressed;
+u8 local_KPDSelectValue = KPD_Not_Pressed;
+
+//local bluetooth variable for checking bluetooth status
+u8 bluetooh_value;
 
 //local LED variable for checking led status
 u8 led_status = 0;
@@ -85,6 +89,10 @@ void APP_init(void)
 	EEPROM_voidWritePage(88,&testadminpass[0]);
 	EEPROM_voidWritePage(96,&testusername1[0]);
 	EEPROM_voidWritePage(104,&testuserpass1[0]);
+
+	
+	HOME_voidCheckUserAndPass(HOME_REMOTE_ACCESS,&usertype);
+	
 
 	
 	
@@ -225,7 +233,7 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 	
 		//dis request for user name
 		BL_voidTxString	("User Name:");
-		BL_voidTxChar('\n');
+		BL_voidTxChar('\r');
 	
 		//loop for 8 digits user name
 		for(Local_u8UserNameLengthCounter=0;Local_u8UserNameLengthCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8UserNameLengthCounter++)
@@ -251,12 +259,12 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 			
 		}
 		
-		BL_voidTxChar('\n');
+		BL_voidTxChar('\r');
 		
 		
 		//display request for pass
 		BL_voidTxString	("Password:");
-		BL_voidTxChar('\n');
+		BL_voidTxChar('\r');
 	
 		//loop for 8 digits user pass
 		for(Local_u8UserPassCounter=0;Local_u8UserPassCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh+1;Local_u8UserPassCounter++)
@@ -279,7 +287,7 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 		
 		}
 
-		BL_voidTxChar('\n');
+		BL_voidTxChar('\r');
 	}
 	else
 	{
@@ -570,23 +578,23 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus)
 				{
 					
 					BL_voidTxString	("ACCESS PERMITED");
-					BL_voidTxChar('\n');
+					BL_voidTxChar('\r');
 					break;
 				}
 				//is the entery was wrong 
 				else if(Local_u8WrongUserNameCounter==(HOME_MAX_NUM_OF_LOCAL_USER+1))
 				{
 					BL_voidTxString	("ACCESS DENIED");
-					BL_voidTxChar('\n');
+					BL_voidTxChar('\r');
 					BL_voidTxString	("Wrong User Name");
-					BL_voidTxChar('\n');
+					BL_voidTxChar('\r');
 					
 					//dont display this message on trial 3
 					if(Local_u8TrailsCounter!=(HOME_MAX_NUMBER_OF_TRIALS-1))
 					{	
 						
 						BL_voidTxString	("Please Try Again");
-						BL_voidTxChar('\n');
+						BL_voidTxChar('\r');
 						
 					}
 				}
@@ -594,15 +602,15 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus)
 				else if(Local_u8WrongUserPassCounter!=0)
 				{
 					BL_voidTxString	("ACCESS DENIED");
-					BL_voidTxChar('\n');
+					BL_voidTxChar('\r');
 					BL_voidTxString	("Wrong Password");
-					BL_voidTxChar('\n');
+					BL_voidTxChar('\r');
 										
 					//dont display this message on trial 3
 					if(Local_u8TrailsCounter!=(HOME_MAX_NUMBER_OF_TRIALS-1))
 					{
 						BL_voidTxString	("Please Try Again");
-						BL_voidTxChar('\n');
+						BL_voidTxChar('\r');
 					}
 				}
 				
@@ -726,14 +734,14 @@ void HOME_voidChangeUserNameAndPass(void)
 	{
 		
 		BL_voidTxString	("Please Enter The new User And Pass");
-		BL_voidTxChar('\n');
+		BL_voidTxChar('\r');
 		//get New user name and pass from BL
 		HOME_voidRemoteGetUserAndPass(&local_u8TempUserName,&local_u8TempUserPass);
 		//write the new user name & pass in EEPROM
 		EEPROM_voidWritePage(Local_u8UserNameLocation,&local_u8TempUserName);
 		EEPROM_voidWritePage((Local_u8UserNameLocation+HOME_USER_NAME_AND_PASS_MAX_LENGTh),&local_u8TempUserPass);
 		BL_voidTxString	("User Data Changed Successfully");
-		BL_voidTxChar('\n');
+		BL_voidTxChar('\r');
 		
 	}
 	//is the entery was wrong 
@@ -741,7 +749,7 @@ void HOME_voidChangeUserNameAndPass(void)
 	{
 
 		BL_voidTxString	("Wrong User Name or password");
-		BL_voidTxChar('\n');
+		BL_voidTxChar('\r');
 		
 
 	}
@@ -770,7 +778,7 @@ void HOME_voidFireAnALarm(u8 copy_pu8UserStatus)
 		while(1)
 		{
 			BL_voidTxString	("ACCESS DENIED");
-			BL_voidTxChar('\n');
+			BL_voidTxChar('\r');
 			
 			LCD_voidClear();
 			LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,0);
@@ -788,6 +796,367 @@ void HOME_voidFireAnALarm(u8 copy_pu8UserStatus)
 		EEPROM_voidWriteByte(HOME_ALARM_LOCATION,HOME_ALARM_CLEAR_VALUE);
 	}
 }
+
+
+void KPD_Interface_RemoteAdmin(void)
+{
+	BL_voidTxString("1-AC 2-light");
+	BL_voidTxChar('\r');
+	BL_voidTxString("3-temp 4-Door");
+	BL_voidTxChar('\r');
+	BL_voidRxChar(&bluetooh_value);
+	switch (bluetooh_value)
+	{
+	case ('1'):
+		BL_voidTxString("AC Is On/off");
+        BL_voidTxChar('\r');
+        BL_voidTxString("Room Temp: 30c");
+		break;
+	
+	case ('2'):
+
+       ////////////////////////////					STOPED MY WORK HERE		/////////////////////////////////////     
+            BL_voidTxString("Choose light to");
+            BL_voidTxChar('\r');
+            BL_voidTxString("control(1-6)");
+
+            TMR0_SetCallBackCTC(&Idle_Action);
+            TMR0_voidStart();
+            // busy wait for KPD
+
+            TMR0_voidStop();
+            switch (local_lightNum)
+            {
+            case ('1'):
+
+                DIO_voidGetPinValue(DIO_PORTD, DIO_PIN3, &led_status);
+                LCD_voidClear();
+                if (led_status == 1)
+                {
+                    LCD_voidDisplayStringDelay("Light 1 is On");
+                    LCD_voidSendCommand(Write_SecondLine);
+                    LCD_voidDisplayStringDelay("1-To Turn It Off");
+                    while (local_lightStatus == KPD_Not_Pressed)
+                    {
+                        KPD_voidGetValue(&local_lightStatus);
+                    }
+                    if (local_lightStatus == '1')
+                    {
+                        LED_voidOff(DIO_PORTD, DIO_PIN3, LED_FORWARD_CONNECTION);
+                    }
+                    Reset_AllKPDValues();
+					break;
+                }
+                else if (led_status == 0)
+                {
+                    LCD_voidDisplayStringDelay("Light 1 is OFF");
+                    LCD_voidSendCommand(Write_SecondLine);
+                    LCD_voidDisplayStringDelay("1-To Turn It On");
+                    while (local_lightStatus == KPD_Not_Pressed)
+                    {
+                        KPD_voidGetValue(&local_lightStatus);
+                    }
+                    if (local_lightStatus == '1')
+                    {
+                        LED_voidOn(DIO_PORTD, DIO_PIN3, LED_FORWARD_CONNECTION);
+                    }
+                    Reset_AllKPDValues();
+                }
+                break;
+
+            case ('2'):
+
+                DIO_voidGetPinValue(DIO_PORTD, DIO_PIN4, &led_status);
+                LCD_voidClear();
+                if (led_status == 1)
+                {
+                    LCD_voidDisplayStringDelay("Light 2 is On");
+                    LCD_voidSendCommand(Write_SecondLine);
+                    LCD_voidDisplayStringDelay("1-To Turn It Off");
+                    while (local_lightStatus == KPD_Not_Pressed)
+                    {
+                        KPD_voidGetValue(&local_lightStatus);
+                    }
+                    if (local_lightStatus == '1')
+                    {
+                        LED_voidOff(DIO_PORTD, DIO_PIN4, LED_FORWARD_CONNECTION);
+                    }
+                    local_lightStatus = KPD_Not_Pressed;
+                }
+                else if (led_status == 0)
+                {
+                    LCD_voidDisplayStringDelay("Light 2 is OFF");
+                    LCD_voidSendCommand(Write_SecondLine);
+                    LCD_voidDisplayStringDelay("1-To Turn It On");
+                    while (local_lightStatus == KPD_Not_Pressed)
+                    {
+                        KPD_voidGetValue(&local_lightStatus);
+                    }
+                    if (local_lightStatus == '1')
+                    {
+                        LED_voidOn(DIO_PORTD, DIO_PIN4, LED_FORWARD_CONNECTION);
+                    }
+                    local_lightStatus = KPD_Not_Pressed;
+                }
+                break;
+
+            case ('3'):
+
+                DIO_voidGetPinValue(DIO_PORTA, DIO_PIN2, &led_status);
+                LCD_voidClear();
+                if (led_status == 1)
+                {
+                    LCD_voidDisplayStringDelay("Light 3 is On");
+                    LCD_voidSendCommand(Write_SecondLine);
+                    LCD_voidDisplayStringDelay("1-To Turn It Off");
+                    while (local_lightStatus == KPD_Not_Pressed)
+                    {
+                        KPD_voidGetValue(&local_lightStatus);
+                    }
+
+                    if (local_lightStatus == '1')
+                    {
+                        LED_voidOff(DIO_PORTA, DIO_PIN2, LED_FORWARD_CONNECTION);
+                    }
+                    local_lightStatus = KPD_Not_Pressed;
+                }
+                else if (led_status == 0)
+                {
+                    LCD_voidDisplayStringDelay("Light 3 is OFF");
+                    LCD_voidSendCommand(Write_SecondLine);
+                    LCD_voidDisplayStringDelay("1-To Turn It On");
+                    while (local_lightStatus == KPD_Not_Pressed)
+                    {
+                        KPD_voidGetValue(&local_lightStatus);
+                    }
+
+                    if (local_lightStatus == '1')
+                    {
+                        LED_voidOn(DIO_PORTA, DIO_PIN2, LED_FORWARD_CONNECTION);
+                    }
+                    local_lightStatus = KPD_Not_Pressed;
+                }
+                break;
+
+            case ('4'):
+
+                DIO_voidGetPinValue(DIO_PORTA, DIO_PIN3, &led_status);
+                LCD_voidClear();
+                if (led_status == 1)
+                {
+                    LCD_voidDisplayStringDelay("Light 4 is On");
+                    LCD_voidSendCommand(Write_SecondLine);
+                    LCD_voidDisplayStringDelay("1-To Turn It Off");
+                    while (local_lightStatus == KPD_Not_Pressed)
+                    {
+                        KPD_voidGetValue(&local_lightStatus);
+                    }
+
+                    if (local_lightStatus == '1')
+                    {
+                        LED_voidOff(DIO_PORTA, DIO_PIN3, LED_FORWARD_CONNECTION);
+                    }
+                    local_lightStatus = KPD_Not_Pressed;
+                }
+                else if (led_status == 0)
+                {
+                    LCD_voidDisplayStringDelay("Light 4 is OFF");
+                    LCD_voidSendCommand(Write_SecondLine);
+                    LCD_voidDisplayStringDelay("1-To Turn It On");
+                    while (local_lightStatus == KPD_Not_Pressed)
+                    {
+                        KPD_voidGetValue(&local_lightStatus);
+                    }
+
+                    if (local_lightStatus == '1')
+                    {
+                        LED_voidOn(DIO_PORTA, DIO_PIN3, LED_FORWARD_CONNECTION);
+                    }
+                    local_lightStatus = KPD_Not_Pressed;
+                }
+                break;
+
+            case ('5'):
+
+                DIO_voidGetPinValue(DIO_PORTD, DIO_PIN2, &led_status);
+                LCD_voidClear();
+                if (led_status == 1)
+                {
+                    LCD_voidDisplayStringDelay("Light 5 is On");
+                    LCD_voidSendCommand(Write_SecondLine);
+                    LCD_voidDisplayStringDelay("1-To Turn It Off");
+                    while (local_lightStatus == KPD_Not_Pressed)
+                    {
+                        KPD_voidGetValue(&local_lightStatus);
+                    }
+
+                    if (local_lightStatus == '1')
+                    {
+                        LED_voidOff(DIO_PORTD, DIO_PIN2, LED_FORWARD_CONNECTION);
+                    }
+                    local_lightStatus = KPD_Not_Pressed;
+                }
+                else if (led_status == 0)
+                {
+                    LCD_voidDisplayStringDelay("Light 5 is OFF");
+                    LCD_voidSendCommand(Write_SecondLine);
+                    LCD_voidDisplayStringDelay("1-To Turn It On");
+                    while (local_lightStatus == KPD_Not_Pressed)
+                    {
+                        KPD_voidGetValue(&local_lightStatus);
+                    }
+
+                    if (local_lightStatus == '1')
+                    {
+                        LED_voidOn(DIO_PORTD, DIO_PIN2, LED_FORWARD_CONNECTION);
+                    }
+                    local_lightStatus = KPD_Not_Pressed;
+                }
+                break;
+
+                
+			// if the user choose light 6 (DIMMER LED)
+
+            case ('6'):
+
+                LCD_voidClear();
+				
+                if (dimmer_brightness > 0)
+                {
+                    LCD_voidDisplayStringDelay("Light 6 is On");
+					_delay_ms(1000);
+					LCD_voidClear();
+					LCD_voidDisplayString("Brightness:  %");
+					LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
+					LCD_voidDisplayNumber(dimmer_brightness);
+                    LCD_voidSendCommand(Write_SecondLine);
+                    LCD_voidDisplayStringDelay("1)+10 2)-10 0)H");
+					while (local_lightStatus == KPD_Not_Pressed)
+					{
+						KPD_voidGetValue(&local_lightStatus);
+						if (local_lightStatus == '1')
+						{
+							dimmer_brightness += 10;
+							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
+							LCD_voidDisplayNumber(dimmer_brightness);
+							if (dimmer_brightness > 100)
+							{
+								dimmer_brightness = 100;
+								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							}
+						
+							
+						}
+						else if (local_lightStatus == '2')
+						{
+							dimmer_brightness -= 10;
+							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
+							LCD_voidDisplayNumber(dimmer_brightness);
+							if (dimmer_brightness < 0)
+							{
+								dimmer_brightness = 0;
+								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							}
+						}
+						else if (local_lightStatus == '0')
+						{
+							LCD_voidClear();
+							break;
+						}						
+						
+					}
+					
+                }
+                else if (led_status == 0)
+                {
+                    LCD_voidDisplayStringDelay("Light 6 is OFF");
+					_delay_ms(1000);
+                    LCD_voidClear();
+					LCD_voidDisplayString("Brightness:  %");
+					LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
+					LCD_voidDisplayNumber(dimmer_brightness);
+                    LCD_voidSendCommand(Write_SecondLine);
+                    LCD_voidDisplayStringDelay("1)+10 2)-10 0)H");
+					while (local_lightStatus == KPD_Not_Pressed)
+					{
+						KPD_voidGetValue(&local_lightStatus);
+						if (local_lightStatus == '1')
+						{
+							dimmer_brightness += 10;
+							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
+							LCD_voidDisplayNumber(dimmer_brightness);
+							if (dimmer_brightness > 100)
+							{
+								dimmer_brightness = 100;
+								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							}
+						
+							
+						}
+						else if (local_lightStatus == '2')
+						{
+							dimmer_brightness -= 10;
+							PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,13);
+							LCD_voidDisplayNumber(dimmer_brightness);
+							if (dimmer_brightness < 0)
+							{
+								dimmer_brightness = 0;
+								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
+							}
+						}
+						else if (local_lightStatus == '0')
+						{
+							LCD_voidClear();
+							break;
+						}
+						
+					}				
+                }
+                break;
+		
+            }
+			break;
+
+			case ('3'):
+			
+				LCD_voidClear();
+				ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
+				LCD_voidSendCommand(Write_FirstLine);
+				LCD_voidDisplayString("Room Temp:  c");
+				LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,11);
+				LCD_voidDisplayNumber(local_temp);
+				LCD_voidDisplayChar('c');
+				LCD_voidSendCommand(Write_SecondLine);
+				LCD_voidDisplayStringDelay("0-go to home");
+				while(local_KPDIdleValue==KPD_Not_Pressed)
+				{
+					KPD_voidGetValue(&local_KPDIdleValue);
+					Display_temp();
+				}	
+				if (local_KPDIdleValue=='0')
+				{
+					LCD_voidClear();
+				}
+			break;
+
+			case ('4'):
+			LCD_voidClear();
+			LCD_voidDisplayString("Door is opening");
+			SERVO_voidStartByAngle(90);
+			_delay_ms(10000);
+			SERVO_voidStartByAngle(0);
+
+			break;
+			
+		Reset_AllKPDValues();
+        break;
+        }
+    
+	}
 
 
 
@@ -827,9 +1196,26 @@ void KPD_Interface_user(void)
         case ('1'):
 
             LCD_voidClear();
-            LCD_voidDisplayStringDelay((u8 *)"AC Is On/off");
+            LCD_voidDisplayStringDelay((u8 *)"AC Is On/off 0-H");
             LCD_voidSendCommand(Write_SecondLine);
-            LCD_voidDisplayStringDelay((u8 *)"Room Temp: 30c");
+			ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
+            LCD_voidDisplayStringDelay((u8 *)"Room Temp:  c");
+			LCD_voidGoTOSpecificPosition(LCD_LINE_TWO, 12);
+			LCD_voidDisplayNumber(local_temp);
+			while (local_KPDSelectValue == KPD_Not_Pressed)
+			{
+				KPD_voidGetValue(&local_KPDSelectValue);
+				ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
+				LCD_voidGoTOSpecificPosition(LCD_LINE_TWO, 12);
+				LCD_voidDisplayNumber(local_temp);
+				if (local_KPDSelectValue == '0')
+				{
+					local_KPDSelectValue = KPD_Not_Pressed;
+					break;
+				}
+				
+			}
+			
 
             break;
 			
