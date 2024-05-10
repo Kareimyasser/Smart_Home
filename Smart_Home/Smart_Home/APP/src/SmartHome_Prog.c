@@ -37,7 +37,6 @@
 // only for testing purposes
 u8 global_accessType =accessPermited;
 u8 usertype;
-u8 door_angle = 0;
 
 
 
@@ -48,10 +47,14 @@ u8 local_lightNum = KPD_Not_Pressed;
 u8 local_lightStatus = KPD_Not_Pressed;
 u8 local_KPDIdleValue = KPD_Not_Pressed;
 u8 local_KPDSelectValue = KPD_Not_Pressed;
+u8 door_angle = 0;
+
 
 //local bluetooth variable for checking bluetooth status
 u8 bluetooh_value;
 
+
+//local BL variables for the displaying on terminal 
 char DimmerString[20];
 char tempString[20];
 
@@ -71,17 +74,12 @@ u8 local_temp = 0;
 
 void APP_init(void)
 {
-    HOME_voidInit();
-	
-    ADC_voidInit(ADC_REFERENCE_INTRNAL);
-	DIO_voidSetPinDirection(DIO_PORTA,DIO_PIN0,DIO_PIN_INPUT);
+	/*APP_init function is for the logic initialization of the smart home system setting initial 
+	values for the users and epprom locations for saving */
 
-	// AC PIN
-	DIO_voidSetPinDirection(DIO_PORTC,DIO_PIN2,DIO_PIN_OUTPUT);
-	//
-	
-	
-	
+
+    HOME_voidInit();
+
 	// display the welcome screen
 	WelcomeScreen();
 	LCD_voidClear();
@@ -125,6 +123,7 @@ void APP_init(void)
 
 void HOME_voidInit(void)
 {
+	//Home initialization function is for the hardware initialization of the smart home system
 	    // initialize the LCD
     LCD_voidInit();
 	// initialize the PWM
@@ -141,6 +140,13 @@ void HOME_voidInit(void)
 
 	// initialize the KPD
     KPD_voidInit();
+
+	// initialize the ADC
+	ADC_voidInit(ADC_REFERENCE_INTRNAL);
+	DIO_voidSetPinDirection(DIO_PORTA,DIO_PIN0,DIO_PIN_INPUT);
+
+	// AC PIN
+	DIO_voidSetPinDirection(DIO_PORTC,DIO_PIN2,DIO_PIN_OUTPUT);
 
 	// initialize the Buzzer
 	BUZZER_voidInit(DIO_PORTD,DIO_PIN6);
@@ -823,6 +829,9 @@ void HOME_voidFireAnALarm(u8 copy_pu8UserStatus)
 
 void KPD_Interface_RemoteAdmin(void)
 {
+	// This function is for admin usertype for accessing the smart home remotely showing all options available for the admin//
+
+	//setting the TRM0 ctc interrupt function
 	TMR0_SetCallBackCTC(&Idle_RemoteAction);
 	BL_voidTxChar('\r');
 	BL_voidTxString("1-AC 2-light");
@@ -832,6 +841,7 @@ void KPD_Interface_RemoteAdmin(void)
 	BL_voidTxString("5- change username and password");
 	BL_voidTxChar('\r');
 	TMR0_voidStart();
+	//reciving user selection from BL
 	BL_voidRxChar(&bluetooh_value);
 	TMR0_voidStop();
 	switch (bluetooh_value)
@@ -839,7 +849,9 @@ void KPD_Interface_RemoteAdmin(void)
 	case ('1'):
 		BL_voidTxString("AC Is On/off");
         BL_voidTxChar('\r');
+		//getting temp from ADC
         ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp); 
+				//sprintf is used to format and store a string in a buffer
 				sprintf(tempString, "Room Temp: %d c", local_temp);
 				BL_voidTxString(tempString);
 				BL_voidTxChar('\r');
@@ -869,6 +881,7 @@ void KPD_Interface_RemoteAdmin(void)
             switch (bluetooh_value)
             {
             case ('1'):
+			//DIO_voidGetPinValue is used to check if the led is on or off before changing its state
 
                 DIO_voidGetPinValue(DIO_PORTD, DIO_PIN3, &led_status);
                 
@@ -1039,9 +1052,7 @@ void KPD_Interface_RemoteAdmin(void)
 			// if the user choose light 6 (DIMMER LED)
 
             case ('6'):
-				
-                
-				
+				// Dimmer can be controlled using TMR1 PWM mode range from 0 to 100 with -+10% step
                 if (dimmer_brightness > 0)
                 {
 					 BL_voidTxChar('\r');
@@ -1064,8 +1075,10 @@ void KPD_Interface_RemoteAdmin(void)
                     		BL_voidTxChar('\r');
                     		BL_voidTxString("1)+10 2)-10 0)H");
 							BL_voidTxChar('\r');
+							// check if is the brightness is more than 100
 							if (dimmer_brightness > 100)
 							{
+								//block increasing the brightness above 100
 								dimmer_brightness = 100;
 								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
 							}
@@ -1080,13 +1093,16 @@ void KPD_Interface_RemoteAdmin(void)
                     		BL_voidTxChar('\r');
                     		BL_voidTxString("1)+10 2)-10 0)H");
 							BL_voidTxChar('\r');
+							// check if is the brightness is less than 0
 							if (dimmer_brightness < 0)
 							{
+								//block decreasing the brightness below 0
 								dimmer_brightness = 0;
 								PWM_voidGenerateChannel_1A(1000, dimmer_brightness);
 							}
 							break;
 						}
+						// if the user choose to go to home
 						else if (bluetooh_value == '0')
 						{
 							
@@ -1159,7 +1175,7 @@ void KPD_Interface_RemoteAdmin(void)
 
 			case ('3'):
 			
-				
+				// checking the temperature from the ADC before displaying it
 				ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp); 
 				sprintf(tempString, "Room Temp: %d c", local_temp);
 				BL_voidTxString(tempString);
@@ -1174,6 +1190,7 @@ void KPD_Interface_RemoteAdmin(void)
 				break;
 
 			case ('4'):
+				// checking the door status before displaying it
 				if (door_angle==0)
 				{
 					BL_voidTxString("Door is closed");
@@ -1189,6 +1206,7 @@ void KPD_Interface_RemoteAdmin(void)
 						door_angle=90;
 						
 					}
+					// if the user choose to go to home
 					else if (bluetooh_value=='0')
 					{
 						break;
@@ -1220,6 +1238,7 @@ void KPD_Interface_RemoteAdmin(void)
 
 
 			case ('5'):
+			// this case is only for admin to change the username and password (Admin is only remote typeuser)
 			HOME_voidChangeUserNameAndPass();
 					
         break;
@@ -1230,6 +1249,7 @@ void KPD_Interface_RemoteAdmin(void)
 
 void KPD_Interface_RemoteUser(void)
 {
+	//this is the remote user interface to control the smart home (same as the admin but with less options without(door control,changing username and password))
 	TMR0_SetCallBackCTC(&Idle_RemoteAction);
 	BL_voidTxChar('\r');
 	BL_voidTxString("1-AC 2-light");
@@ -1587,11 +1607,18 @@ void KPD_Interface_RemoteUser(void)
 
 void KPD_Interface_Localuser(void)
 {
-
+	//this is the local user interface to control the smart home all user allowed functions using lcd to display options and KPD for interaction
+		//reseting all KPD variables for new values to be entered
         Reset_AllKPDValues();
-
+		/*using the tmr0 for the 5 secs idle 
+		1-set the ctc function to do after interrupt flag is up
+		2-start tmr0 before busy wait for KPD to avoid starting the tmr0 counter when the lcd didnt finish printing the options
+		3-after the wihle loop is finished make sure to stop the tmr0 to avoid going to the idle function
+		*/
+	
+		//setting the TRM0 ctc interrupt function
         TMR0_SetCallBackCTC(&Idle_Action);
-
+		//starting the timer0
         TMR0_voidStart();
         LCD_voidClear();
         LCD_voidDisplayString((u8 *)"1-AC 2-light");
@@ -1599,7 +1626,7 @@ void KPD_Interface_Localuser(void)
         LCD_voidDisplayString((u8 *)"3-temp 4-Door");
         Reset_AllKPDValues();
 
-        // busy wait for KPD
+        // busy wait for KPD to get the value. timr0 is still counting for the 5 sec idle to go to interrupt function
         while (Local_copyKPDValue == KPD_Not_Pressed)
         {
             if (local_KPDIdleValue == '0')
@@ -1612,6 +1639,7 @@ void KPD_Interface_Localuser(void)
                 KPD_voidGetValue(&Local_copyKPDValue);
             }
         }
+		//stopping timer after reciving the value to avoid tmr0 from going to idle function
         TMR0_voidStop();
         switch (Local_copyKPDValue)
         {
@@ -1991,6 +2019,7 @@ void KPD_Interface_Localuser(void)
 }
 
 void WelcomeScreen()
+// this function is for greeting the user in local user interface
 {
     LCD_voidDisplayStringDelay((u8 *)" Welcome to your");
     LCD_voidSendCommand(Write_SecondLine);
@@ -1999,6 +2028,8 @@ void WelcomeScreen()
 }
 
 void CheckTempForAc()
+//this function is for cheking the temperature and turn on the AC if the temperature is above 28 and turn it off if the temperature is below 21
+// this is the function that get called for tmr2 interrupt
 {
 	ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
 	if (local_temp > 28)
@@ -2018,6 +2049,8 @@ void CheckTempForAc()
 
 
 void Idle_RemoteAction()
+//this function is for the remote user interface to go to the idle function after 5 sec of inactivity
+// tmr0 interrupt function for the remote user 
 { 
     BL_voidTxChar('\r');
 	Display_Remotetemp();
@@ -2032,6 +2065,7 @@ void Idle_RemoteAction()
 }
 
 void Display_Remotetemp(void)
+//function for getting temp value from temp sensor and displaying it for remote user
 {
 	ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp); 
 	sprintf(tempString, "Room Temp: %d c", local_temp);
@@ -2040,6 +2074,8 @@ void Display_Remotetemp(void)
 }
 
 void Idle_Action()
+//this function is for the local user interface to go to the idle function after 5 sec of inactivity
+// tmr0 interrupt function for the local user
 { 
     LCD_voidClear();
 	LCD_voidSendCommand(Write_FirstLine);
@@ -2065,6 +2101,7 @@ void Idle_Action()
 }
 
 void Display_temp(void)
+//function for getting temp value from temp sensor and displaying it for local user
 {
 	ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
 	LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,11);
@@ -2073,6 +2110,7 @@ void Display_temp(void)
 }
 
 void Reset_AllKPDValues()
+//function for reseting all KPD values for new values to be entered
 {
     Local_copyKPDValue = KPD_Not_Pressed;
     local_lightNum = KPD_Not_Pressed;
