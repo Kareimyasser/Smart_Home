@@ -35,6 +35,7 @@ void Idle_RemoteAction();
 void Display_Remotetemp(void);
 void Idle_Action();
 void Display_temp(void);
+void CheckTempForAc  (void);
 void WelcomeScreen();
 void KPD_Interface_Localuser(void);
 void KPD_Interface_RemoteAdmin(void);

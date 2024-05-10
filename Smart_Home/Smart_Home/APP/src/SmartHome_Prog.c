@@ -14,7 +14,7 @@
 // MCAL
 #include "DIO_INTERFACE.h"
 #include "TMR0_interface.h"
-#include "tmr0_register.h"
+#include "TMR2_interface.h"
 #include "GI_interface.h"
 #include "PWM_interface.h"
 #include "UART_interface.h"
@@ -35,7 +35,10 @@
 
 //global variable for the application accessed by SmartHome.c and main.c
 // only for testing purposes
-u8 global_accessType;
+u8 global_accessType =accessPermited;
+u8 usertype;
+u8 door_angle = 0;
+
 
 
 //global variables for the application accessed only by SmartHome.c
@@ -72,6 +75,12 @@ void APP_init(void)
 	
     ADC_voidInit(ADC_REFERENCE_INTRNAL);
 	DIO_voidSetPinDirection(DIO_PORTA,DIO_PIN0,DIO_PIN_INPUT);
+
+	// AC PIN
+	DIO_voidSetPinDirection(DIO_PORTC,DIO_PIN2,DIO_PIN_OUTPUT);
+	//
+	
+	
 	
 	// display the welcome screen
 	WelcomeScreen();
@@ -85,7 +94,7 @@ void APP_init(void)
 	u8 testadminpass[8]="1122334";
 	u8 testusername1[8]="1002003";
 	u8 testuserpass1[8]="1002003";
-	u8 usertype;	
+		
 	
 	EEPROM_voidWritePage(16,&testusername[0]);
 	EEPROM_voidWritePage(24,&testuserpass[0]);
@@ -96,6 +105,8 @@ void APP_init(void)
 
 	
 	HOME_voidCheckUserAndPass(HOME_REMOTE_ACCESS,&usertype);
+	// HOME_voidCheckUserAndPass(HOME_LOCAL_ACCESS,&usertype);
+	HOME_voidFireAnALarm(usertype);
 	
 
 	
@@ -130,6 +141,9 @@ void HOME_voidInit(void)
 
 	// initialize the KPD
     KPD_voidInit();
+
+	// initialize the Buzzer
+	BUZZER_voidInit(DIO_PORTD,DIO_PIN6);
 	
     // initialize the Bluetooth
 	BL_voidInit();
@@ -152,12 +166,12 @@ void HOME_voidInit(void)
     LED_voidInit(DIO_PORTD, DIO_PIN2);
 	// Dimmer LED 6
 	LED_voidInit(DIO_PORTD, DIO_PIN5);
-	
 
+	// initialize tmr2
+	TMR2_voidInit();
+	TMR2_SetCallBackCTC(CheckTempForAc);
+	TMR2_voidStart();
 
-
-	
-	//check alarm 
 }
 
 
@@ -650,7 +664,7 @@ void HOME_voidChangeUserNameAndPass(void)
 	
 	//dis request for use name and pass
 	BL_voidTxString	("Please Enter User Name & Password u want to change");
-	BL_voidTxString("\n");
+	BL_voidTxString("\r");
 	
 	//get user name and pass from BL
 	HOME_voidRemoteGetUserAndPass(&local_u8OldUserName,&local_u8OldUserPass);
@@ -785,6 +799,8 @@ void HOME_voidFireAnALarm(u8 copy_pu8UserStatus)
 		{
 			BL_voidTxString	("ACCESS DENIED");
 			BL_voidTxChar('\r');
+
+			BUZZER_voidOn(DIO_PORTD,DIO_PIN6);
 			
 			LCD_voidClear();
 			LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,0);
@@ -794,6 +810,7 @@ void HOME_voidFireAnALarm(u8 copy_pu8UserStatus)
 			BL_voidRxChar(&Local_u8ResetValue);
 			if(Local_u8ResetValue=='#')
 			{
+				BUZZER_voidOff(DIO_PORTD,DIO_PIN6);
 				break;
 			}
 			
@@ -811,6 +828,8 @@ void KPD_Interface_RemoteAdmin(void)
 	BL_voidTxString("1-AC 2-light");
 	BL_voidTxChar('\r');
 	BL_voidTxString("3-temp 4-Door");
+	BL_voidTxChar('\r');
+	BL_voidTxString("5- change username and password");
 	BL_voidTxChar('\r');
 	TMR0_voidStart();
 	BL_voidRxChar(&bluetooh_value);
@@ -1152,13 +1171,56 @@ void KPD_Interface_RemoteAdmin(void)
 				{
 					
 				}
+				break;
 
 			case ('4'):
-				BL_voidTxString("Door is opening");
-				SERVO_voidStartByAngle(90);
-				_delay_ms(10000);
-				SERVO_voidStartByAngle(0);
+				if (door_angle==0)
+				{
+					BL_voidTxString("Door is closed");
+					BL_voidTxChar('\r');
+					BL_voidTxString("1-Open Door 0-Home");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+					BL_voidTxChar('\r');
+					if (bluetooh_value=='1')
+					{
+						BL_voidTxString("Door is opening");
+						SERVO_voidStartByAngle(90);
+						door_angle=90;
+						
+					}
+					else if (bluetooh_value=='0')
+					{
+						break;
+					}
+					break;
+
+				}
+				else if (door_angle==90)
+				{
+					BL_voidTxString("Door is open");
+					BL_voidTxChar('\r');
+					BL_voidTxString("1-Close Door 0-Home");
+					BL_voidTxChar('\r');
+					BL_voidRxChar(&bluetooh_value);
+					BL_voidTxChar('\r');
+					if (bluetooh_value=='1')
+					{
+						BL_voidTxString("Door is closing");
+						SERVO_voidStartByAngle(0);
+						door_angle=0;
+						
+					}
+					else if (bluetooh_value=='0')
+					{
+						break;
+					}
+				}			
 			break;
+
+
+			case ('5'):
+			HOME_voidChangeUserNameAndPass();
 					
         break;
         }
@@ -1935,6 +1997,24 @@ void WelcomeScreen()
     LCD_voidDisplayStringDelay((u8 *)"   Smart Home");
     _delay_ms(1000);
 }
+
+void CheckTempForAc()
+{
+	ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp);
+	if (local_temp > 28)
+	{
+		DIO_voidSetPinValue(DIO_PORTC,DIO_PIN2,DIO_PIN_LOW);
+		
+	}
+	else if (local_temp <21)
+	
+	{
+		DIO_voidSetPinValue(DIO_PORTC,DIO_PIN2,DIO_PIN_HIGH);
+	}
+
+}
+
+
 
 
 void Idle_RemoteAction()

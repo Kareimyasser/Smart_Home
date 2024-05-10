@@ -30,6 +30,8 @@ MCAL\PWM\src\PWM_program.c
 
 MCAL\TMR0\src\TMR0_program.c
 
+MCAL\TMR2\src\TMR2_program.c
+
 MCAL\TWI\src\TWI_program.c
 
 MCAL\UART\src\UART_program.c

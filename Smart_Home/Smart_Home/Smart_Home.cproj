@@ -132,6 +132,7 @@
       <Value>../UTILES_LIB</Value>
       <Value>../APP/inc</Value>
       <Value>../MCAL/ADC/inc</Value>
+      <Value>../MCAL/TMR2/inc</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcc.compiler.optimization.level>
@@ -279,6 +280,21 @@
     <Compile Include="MCAL\TMR0\src\TMR0_program.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCAL\TMR2\inc\TMR2_config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\TMR2\inc\TMR2_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\TMR2\inc\TMR2_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\TMR2\inc\TMR2_register.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\TMR2\src\TMR2_program.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="MCAL\TWI\inc\TWI_interface.h">
       <SubType>compile</SubType>
     </Compile>
@@ -341,8 +357,11 @@
     <Folder Include="MCAL\GI\inc" />
     <Folder Include="MCAL\GI\src" />
     <Folder Include="MCAL\ADC" />
+    <Folder Include="MCAL\TMR2" />
     <Folder Include="MCAL\PWM\inc\" />
     <Folder Include="MCAL\PWM\src\" />
+    <Folder Include="MCAL\TMR2\inc" />
+    <Folder Include="MCAL\TMR2\src" />
     <Folder Include="MCAL\TWI\inc\" />
     <Folder Include="MCAL\TWI\src\" />
     <Folder Include="MCAL\UART" />

@@ -9,6 +9,10 @@
         "adc_register.h": "c",
         "bl_interface.h": "c",
         "led_interface.h": "c",
-        "lcd_interface.h": "c"
+        "lcd_interface.h": "c",
+        "buzzer_interface.h": "c",
+        "tmr0_config.h": "c",
+        "std_types.h": "c",
+        "dio_interface.h": "c"
     }
 }
