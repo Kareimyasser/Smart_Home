@@ -35,8 +35,8 @@
 
 //global variable for the application accessed by SmartHome.c and main.c
 // only for testing purposes
-u8 global_accessType;
-u8 usertype;
+u8 global_accessType =accessPermited;
+u8 usertype=HOME_NO_LOGIN;
 
 
 
@@ -67,56 +67,71 @@ u8 dimmer_brightness = 0;
 u8 local_temp = 0;
 
 
-
-
-
-
-
-void APP_init(void)
+void HOME_InitUserNameAndPass(void)
 {
-	/*APP_init function is for the logic initialization of the smart home system setting initial 
-	values for the users and epprom locations for saving */
-
-
-    HOME_voidInit();
-
-	// display the welcome screen
-	WelcomeScreenLocal();
-	WelcomeScreenRemote();
-	LCD_voidClear();
-
-	
-	
-	u8 testusername[8]="7654321";
-	u8 testuserpass[8]="7654321";
-	u8 testadminname[8]="1122334";
-	u8 testadminpass[8]="1122334";
-	u8 testusername1[8]="1002003";
-	u8 testuserpass1[8]="1002003";
+		//Local users
+		u8 Local_u8IntialUserName1[8]="1112223";
+		u8 Local_u8IntialUserPass1[8]="1112223";
+		u8 Local_u8IntialUserName2[8]="2223334";
+		u8 Local_u8IntialUserPass2[8]="2223334";
+		u8 Local_u8IntialUserName3[8]="3334445";
+		u8 Local_u8IntialUserPass3[8]="3334445";
+		u8 Local_u8IntialUserName4[8]="4445556";
+		u8 Local_u8IntialUserPass4[8]="4445556";
+		u8 Local_u8IntialUserName5[8]="5556667";
+		u8 Local_u8IntialUserPass5[8]="5556667";
 		
+		//admin user
+		u8 Local_u8IntialUserName6[8]="4433221";
+		u8 Local_u8IntialUserPass6[8]="4433221";
+		
+		//remote user
+		u8 Local_u8IntialUserName7[8]="1001011";
+		u8 Local_u8IntialUserPass7[8]="1001011";
+		u8 Local_u8IntialUserName8[8]="2002012";
+		u8 Local_u8IntialUserPass8[8]="2002012";
+		u8 Local_u8IntialUserName9[8]="3003013";
+		u8 Local_u8IntialUserPass9[8]="3003013";
+		u8 Local_u8IntialUserName10[8]="4004014";
+		u8 Local_u8IntialUserPass10[8]="4004014";
+		u8 Local_u8IntialUserName11[8]="5005015";
+		u8 Local_u8IntialUserPass11[8]="5005015";
+		
+		
+		//write local users
+		EEPROM_voidWritePage(0,&Local_u8IntialUserName1[0]);
+		EEPROM_voidWritePage(8,&Local_u8IntialUserPass1[0]);
+		EEPROM_voidWritePage(16,&Local_u8IntialUserName2[0]);
+		EEPROM_voidWritePage(24,&Local_u8IntialUserPass2[0]);
+		EEPROM_voidWritePage(32,&Local_u8IntialUserName3[0]);
+		EEPROM_voidWritePage(40,&Local_u8IntialUserPass3[0]);
+		EEPROM_voidWritePage(48,&Local_u8IntialUserName4[0]);
+		EEPROM_voidWritePage(56,&Local_u8IntialUserPass4[0]);
+		EEPROM_voidWritePage(64,&Local_u8IntialUserName5[0]);
+		EEPROM_voidWritePage(72,&Local_u8IntialUserPass5[0]);
+		
+		//write adminuser
+		EEPROM_voidWritePage(80,&Local_u8IntialUserName6[0]);
+		EEPROM_voidWritePage(88,&Local_u8IntialUserPass6[0]);
+		
+		//write remoteusers
+		EEPROM_voidWritePage(96,&Local_u8IntialUserName7[0]);
+		EEPROM_voidWritePage(104,&Local_u8IntialUserPass7[0]);
+		EEPROM_voidWritePage(112,&Local_u8IntialUserName8[0]);
+		EEPROM_voidWritePage(120,&Local_u8IntialUserPass8[0]);
+		EEPROM_voidWritePage(128,&Local_u8IntialUserName9[0]);
+		EEPROM_voidWritePage(136,&Local_u8IntialUserPass9[0]);
+		EEPROM_voidWritePage(144,&Local_u8IntialUserName10[0]);
+		EEPROM_voidWritePage(152,&Local_u8IntialUserPass10[0]);
+		EEPROM_voidWritePage(160,&Local_u8IntialUserName11[0]);
+		EEPROM_voidWritePage(168,&Local_u8IntialUserPass11[0]);
 	
-	EEPROM_voidWritePage(16,&testusername[0]);
-	EEPROM_voidWritePage(24,&testuserpass[0]);
-	EEPROM_voidWritePage(80,&testadminname[0]);
-	EEPROM_voidWritePage(88,&testadminpass[0]);
-	EEPROM_voidWritePage(96,&testusername1[0]);
-	EEPROM_voidWritePage(104,&testuserpass1[0]);
-
-	
-	
-	
-
-	
-	
-	
-	
-
-
-
-
-
-
 }
+
+
+
+
+
 
 
 
