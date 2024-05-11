@@ -20,6 +20,7 @@
 void BL_voidInit		(void);
 void BL_voidTxChar		(u8 copy_u8BlTxData);
 void BL_voidRxChar		(u8* copy_pu8BlRxData);
+void BL_voidRxCharWithTimeout(u8* copy_pu8BlRxData);
 void BL_voidTxString	(u8* copy_pu8BlTxString);
 void BL_voidRxString	(u8* copy_pu8BlRxString);
 

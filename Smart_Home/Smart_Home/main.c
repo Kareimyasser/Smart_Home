@@ -38,32 +38,14 @@ extern u8 usertype;
 
 int main()
 {
-	u8 suc;
+	
 	APP_init();
+	
 
-
-	// HOME_voidFireAnALarm(HOME_LOGIN_FAILED);
-	// BL_voidTxString	("ok");
-	// BL_voidTxChar('\n');
 	while(1)
 	{
 		
-		//HOME_voidCheckUserAndPass(HOME_REMOTE_ACCESS,&suc);
-		//
-		//switch(suc)
-		//{
-		//	case 4:
-		//	BL_voidTxChar('u');
-		//	break;
-		//	case 3:
-		//	BL_voidTxChar('D');
-		//	break;
-		//	case 5:
-		//	BL_voidTxChar('F');
-		//	break;
-		//}
-		
-		
+
 		
 		// HOME_voidChangeUserNameAndPass();
 		if (global_accessType ==accessPermited)
