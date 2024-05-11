@@ -24,22 +24,20 @@
 #define HOME_REMOTE_ACCESS						2
 
 #define HOME_ALARM_LOCATION						180
-#define HOME_ALARM_VALUE						0xff
+#define HOME_ALARM_VALUE						200
 #define HOME_ALARM_CLEAR_VALUE					0x00
 
 #define Led_freq                                10000
 
-
 void GetUserType(void);
 void APP_init(void);
-
 void Idle_RemoteAction();
 void Display_Remotetemp(void);
 void Idle_Action();
 void Display_temp(void);
 void CheckTempForAc  (void);
-void WelcomeScreenLocal(void);
-void WelcomeScreenRemote(void);
+void WelcomeScreenRemote();
+void WelcomeScreenLocal();
 void KPD_Interface_Localuser(void);
 void KPD_Interface_RemoteAdmin(void);
 void KPD_Interface_RemoteUser(void);
@@ -54,8 +52,6 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus );
 void HOME_voidChangeUserNameAndPass(void);
 void HOME_voidFireAnALarm(u8 copy_pu8UserStatus);
-void HOME_InitUserNameAndPass(void);
-
 
 
 #endif

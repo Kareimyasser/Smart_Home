@@ -5,12 +5,12 @@
  *  Author: Saed Abozied
  */ 
 
-#define F_CPU 16000000UL
-#include <util/delay.h>
 
  /*UTILES_LIB*/
 #include"BIT_MATH.h"
 #include"STD_TYPES.h"
+#define F_CPU 16000000UL
+#include <util/delay.h>
 
  /*MCAL*/
 #include"UART_register.h"
@@ -93,30 +93,7 @@ void UART_voidRxChar(u8* copy_pu8RxData)
 		//error state
 	}
 }
-void UART_voidRxCharWithTimeout(u8* copy_pu8RxData)
-{
-	u16 Local_u16TimeoutCounter=0;
-	if(copy_pu8RxData!=NULL)
-	{
-		/*busy wait for unread data in data register*/
-		while(0==GET_BIT(UCSRA_REG,RXC))
-		{
-			if(Local_u16TimeoutCounter>=UART_TIMEOUT_MS)
-			{
-				return 0;
-			}
-			_delay_ms(1);
-			Local_u16TimeoutCounter++;
-		}
-		/*Read data to data register*/
-		*copy_pu8RxData=UDR_REG;
-		
-	}
-	else
-	{
-		
-	}
-}
+
 void UART_voidTxString	(u8* copy_pu8TxString)
 {
 	
@@ -179,4 +156,29 @@ void UART_voidRxString	(u8* copy_pu8RxString)
 		//error state
 	}
 	
+}
+
+void UART_voidRxCharWithTimeout(u8* copy_pu8RxData)
+{
+	u16 Local_u16TimeoutCounter=0;
+	if(copy_pu8RxData!=NULL)
+	{
+		/*busy wait for unread data in data register*/
+		while(0==GET_BIT(UCSRA_REG,RXC))
+		{
+			if(Local_u16TimeoutCounter>=UART_TIMEOUT_MS)
+			{
+				return 0;
+			}
+			_delay_ms(1);
+			Local_u16TimeoutCounter++;
+		}
+		/*Read data to data register*/
+		*copy_pu8RxData=UDR_REG;
+
+	}
+	else
+	{
+
+	}
 }

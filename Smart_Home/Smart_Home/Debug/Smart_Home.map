@@ -62,6 +62,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 Allocating common symbols
 Common symbol       size              file
 
+bluetooh_value      0x1               APP/src/SmartHome_Prog.o
 DimmerString        0x14              APP/src/SmartHome_Prog.o
 tempString          0x14              APP/src/SmartHome_Prog.o
 
@@ -72,20 +73,6 @@ Discarded input sections
  .text          0x00000000        0x0 APP/src/SmartHome_Prog.o
  .data          0x00000000        0x0 APP/src/SmartHome_Prog.o
  .bss           0x00000000        0x0 APP/src/SmartHome_Prog.o
- .text.APP_init
-                0x00000000      0x306 APP/src/SmartHome_Prog.o
- .text.HOME_voidLocalGetUserAndPass
-                0x00000000       0xf2 APP/src/SmartHome_Prog.o
- .text.HOME_voidCheckUserAndPass
-                0x00000000      0x3c2 APP/src/SmartHome_Prog.o
- .text.GetUserType
-                0x00000000       0x88 APP/src/SmartHome_Prog.o
- .text.HOME_voidFireAnALarm
-                0x00000000       0x80 APP/src/SmartHome_Prog.o
- .bss.local_ac_status
-                0x00000000        0x1 APP/src/SmartHome_Prog.o
- .data.global_accessType
-                0x00000000        0x1 APP/src/SmartHome_Prog.o
  .text          0x00000000        0x0 HAL/BL/src/BL_program.o
  .data          0x00000000        0x0 HAL/BL/src/BL_program.o
  .bss           0x00000000        0x0 HAL/BL/src/BL_program.o
@@ -96,31 +83,19 @@ Discarded input sections
  .text          0x00000000        0x0 HAL/BUZZER/src/BUZZER_program.o
  .data          0x00000000        0x0 HAL/BUZZER/src/BUZZER_program.o
  .bss           0x00000000        0x0 HAL/BUZZER/src/BUZZER_program.o
- .text.BUZZER_voidOn
-                0x00000000        0x8 HAL/BUZZER/src/BUZZER_program.o
- .text.BUZZER_voidOff
-                0x00000000        0x8 HAL/BUZZER/src/BUZZER_program.o
  .text.BUZZER_voidToggle
                 0x00000000        0x6 HAL/BUZZER/src/BUZZER_program.o
  .text          0x00000000        0x0 HAL/EEPROM/src/EEPROM_program.o
  .data          0x00000000        0x0 HAL/EEPROM/src/EEPROM_program.o
  .bss           0x00000000        0x0 HAL/EEPROM/src/EEPROM_program.o
- .text.EEPROM_voidWriteByte
-                0x00000000       0x3c HAL/EEPROM/src/EEPROM_program.o
- .text.EEPROM_voidReadByte
-                0x00000000       0x50 HAL/EEPROM/src/EEPROM_program.o
  .text          0x00000000        0x0 HAL/KPD/src/KeyPad_program.o
  .data          0x00000000        0x0 HAL/KPD/src/KeyPad_program.o
  .bss           0x00000000        0x0 HAL/KPD/src/KeyPad_program.o
  .text          0x00000000        0x0 HAL/LCD/src/LCD_PROGRAM.o
  .data          0x00000000        0x0 HAL/LCD/src/LCD_PROGRAM.o
  .bss           0x00000000        0x0 HAL/LCD/src/LCD_PROGRAM.o
- .text.LCD_voidShiftCursor
-                0x00000000       0x6c HAL/LCD/src/LCD_PROGRAM.o
  .text.LCD_voidShiftDisplay
                 0x00000000       0x6c HAL/LCD/src/LCD_PROGRAM.o
- .text.LCD_voidPwdEffect
-                0x00000000       0x20 HAL/LCD/src/LCD_PROGRAM.o
  .text          0x00000000        0x0 HAL/LED/src/LED_program.o
  .data          0x00000000        0x0 HAL/LED/src/LED_program.o
  .bss           0x00000000        0x0 HAL/LED/src/LED_program.o
@@ -156,8 +131,6 @@ Discarded input sections
  .text          0x00000000        0x0 MCAL/TMR2/src/TMR2_program.o
  .data          0x00000000        0x0 MCAL/TMR2/src/TMR2_program.o
  .bss           0x00000000        0x0 MCAL/TMR2/src/TMR2_program.o
- .text.TMR2_voidStop
-                0x00000000       0x14 MCAL/TMR2/src/TMR2_program.o
  .text.TMR2_SetCallBackOVF
                 0x00000000        0xe MCAL/TMR2/src/TMR2_program.o
  .text          0x00000000        0x0 MCAL/TWI/src/TWI_program.o
@@ -166,10 +139,10 @@ Discarded input sections
  .text          0x00000000        0x0 MCAL/UART/src/UART_program.o
  .data          0x00000000        0x0 MCAL/UART/src/UART_program.o
  .bss           0x00000000        0x0 MCAL/UART/src/UART_program.o
- .text.UART_voidRxCharWithTimeout
-                0x00000000       0x2e MCAL/UART/src/UART_program.o
  .text.UART_voidRxString
                 0x00000000       0x36 MCAL/UART/src/UART_program.o
+ .text.UART_voidRxCharWithTimeout
+                0x00000000       0x2e MCAL/UART/src/UART_program.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
@@ -471,7 +444,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x35d6
+.text           0x00000000     0x3fa2
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -553,321 +526,357 @@ END GROUP
                 0x00000092       0x2e APP/src/SmartHome_Prog.o
                 0x00000092                CheckTempForAc
  .text.HOME_voidInit
-                0x000000c0       0xaa APP/src/SmartHome_Prog.o
+                0x000000c0       0xa6 APP/src/SmartHome_Prog.o
                 0x000000c0                HOME_voidInit
+ .text.APP_init
+                0x00000166       0xee APP/src/SmartHome_Prog.o
+                0x00000166                APP_init
+ .text.HOME_voidLocalGetUserAndPass
+                0x00000254       0xf6 APP/src/SmartHome_Prog.o
+                0x00000254                HOME_voidLocalGetUserAndPass
  .text.HOME_voidRemoteGetUserAndPass
-                0x0000016a       0xe0 APP/src/SmartHome_Prog.o
-                0x0000016a                HOME_voidRemoteGetUserAndPass
+                0x0000034a       0xec APP/src/SmartHome_Prog.o
+                0x0000034a                HOME_voidRemoteGetUserAndPass
+ .text.HOME_voidCheckUserAndPass
+                0x00000436      0x3c2 APP/src/SmartHome_Prog.o
+                0x00000436                HOME_voidCheckUserAndPass
+ .text.GetUserType
+                0x000007f8       0x6c APP/src/SmartHome_Prog.o
+                0x000007f8                GetUserType
  .text.HOME_voidChangeUserNameAndPass
-                0x0000024a      0x160 APP/src/SmartHome_Prog.o
-                0x0000024a                HOME_voidChangeUserNameAndPass
+                0x00000864      0x160 APP/src/SmartHome_Prog.o
+                0x00000864                HOME_voidChangeUserNameAndPass
+ .text.HOME_voidFireAnALarm
+                0x000009c4       0x80 APP/src/SmartHome_Prog.o
+                0x000009c4                HOME_voidFireAnALarm
  .text.KPD_Interface_RemoteAdmin
-                0x000003aa      0x800 APP/src/SmartHome_Prog.o
-                0x000003aa                KPD_Interface_RemoteAdmin
+                0x00000a44      0x900 APP/src/SmartHome_Prog.o
+                0x00000a44                KPD_Interface_RemoteAdmin
  .text.KPD_Interface_RemoteUser
-                0x00000baa      0x734 APP/src/SmartHome_Prog.o
-                0x00000baa                KPD_Interface_RemoteUser
+                0x00001344      0x83a APP/src/SmartHome_Prog.o
+                0x00001344                KPD_Interface_RemoteUser
  .text.WelcomeScreenRemote
-                0x000012de       0x30 APP/src/SmartHome_Prog.o
-                0x000012de                WelcomeScreenRemote
+                0x00001b7e       0x10 APP/src/SmartHome_Prog.o
+                0x00001b7e                WelcomeScreenRemote
  .text.WelcomeScreenLocal
-                0x0000130e       0x2a APP/src/SmartHome_Prog.o
-                0x0000130e                WelcomeScreenLocal
+                0x00001b8e       0x2a APP/src/SmartHome_Prog.o
+                0x00001b8e                WelcomeScreenLocal
  .text.Display_Remotetemp
-                0x00001338       0x42 APP/src/SmartHome_Prog.o
-                0x00001338                Display_Remotetemp
+                0x00001bb8       0x42 APP/src/SmartHome_Prog.o
+                0x00001bb8                Display_Remotetemp
  .text.Idle_RemoteAction
-                0x0000137a       0x2e APP/src/SmartHome_Prog.o
-                0x0000137a                Idle_RemoteAction
+                0x00001bfa       0x2e APP/src/SmartHome_Prog.o
+                0x00001bfa                Idle_RemoteAction
  .text.Display_temp
-                0x000013a8       0x22 APP/src/SmartHome_Prog.o
-                0x000013a8                Display_temp
+                0x00001c28       0x22 APP/src/SmartHome_Prog.o
+                0x00001c28                Display_temp
  .text.Idle_Action
-                0x000013ca       0x4c APP/src/SmartHome_Prog.o
-                0x000013ca                Idle_Action
+                0x00001c4a       0x4c APP/src/SmartHome_Prog.o
+                0x00001c4a                Idle_Action
  .text.Reset_AllKPDValues
-                0x00001416       0x14 APP/src/SmartHome_Prog.o
-                0x00001416                Reset_AllKPDValues
+                0x00001c96       0x14 APP/src/SmartHome_Prog.o
+                0x00001c96                Reset_AllKPDValues
  .text.KPD_Interface_Localuser
-                0x0000142a      0x6d6 APP/src/SmartHome_Prog.o
-                0x0000142a                KPD_Interface_Localuser
+                0x00001caa      0x6e8 APP/src/SmartHome_Prog.o
+                0x00001caa                KPD_Interface_Localuser
  .text.BL_voidInit
-                0x00001b00        0x6 HAL/BL/src/BL_program.o
-                0x00001b00                BL_voidInit
+                0x00002392        0x6 HAL/BL/src/BL_program.o
+                0x00002392                BL_voidInit
  .text.BL_voidTxChar
-                0x00001b06        0x6 HAL/BL/src/BL_program.o
-                0x00001b06                BL_voidTxChar
+                0x00002398        0x6 HAL/BL/src/BL_program.o
+                0x00002398                BL_voidTxChar
  .text.BL_voidRxChar
-                0x00001b0c        0x6 HAL/BL/src/BL_program.o
-                0x00001b0c                BL_voidRxChar
+                0x0000239e        0x6 HAL/BL/src/BL_program.o
+                0x0000239e                BL_voidRxChar
  .text.BL_voidTxString
-                0x00001b12        0x6 HAL/BL/src/BL_program.o
-                0x00001b12                BL_voidTxString
+                0x000023a4        0x6 HAL/BL/src/BL_program.o
+                0x000023a4                BL_voidTxString
  .text.BUZZER_voidInit
-                0x00001b18        0x8 HAL/BUZZER/src/BUZZER_program.o
-                0x00001b18                BUZZER_voidInit
+                0x000023aa        0x8 HAL/BUZZER/src/BUZZER_program.o
+                0x000023aa                BUZZER_voidInit
+ .text.BUZZER_voidOn
+                0x000023b2        0x8 HAL/BUZZER/src/BUZZER_program.o
+                0x000023b2                BUZZER_voidOn
+ .text.BUZZER_voidOff
+                0x000023ba        0x8 HAL/BUZZER/src/BUZZER_program.o
+                0x000023ba                BUZZER_voidOff
  .text.EEPROM_voidInit
-                0x00001b20        0x6 HAL/EEPROM/src/EEPROM_program.o
-                0x00001b20                EEPROM_voidInit
+                0x000023c2        0x6 HAL/EEPROM/src/EEPROM_program.o
+                0x000023c2                EEPROM_voidInit
+ .text.EEPROM_voidWriteByte
+                0x000023c8       0x3c HAL/EEPROM/src/EEPROM_program.o
+                0x000023c8                EEPROM_voidWriteByte
  .text.EEPROM_voidWritePage
-                0x00001b26       0x56 HAL/EEPROM/src/EEPROM_program.o
-                0x00001b26                EEPROM_voidWritePage
+                0x00002404       0x56 HAL/EEPROM/src/EEPROM_program.o
+                0x00002404                EEPROM_voidWritePage
+ .text.EEPROM_voidReadByte
+                0x0000245a       0x50 HAL/EEPROM/src/EEPROM_program.o
+                0x0000245a                EEPROM_voidReadByte
  .text.EEPROM_voidSequentialRead
-                0x00001b7c       0x80 HAL/EEPROM/src/EEPROM_program.o
-                0x00001b7c                EEPROM_voidSequentialRead
+                0x000024aa       0x80 HAL/EEPROM/src/EEPROM_program.o
+                0x000024aa                EEPROM_voidSequentialRead
  .text.KPD_voidInit
-                0x00001bfc       0x68 HAL/KPD/src/KeyPad_program.o
-                0x00001bfc                KPD_voidInit
+                0x0000252a       0x68 HAL/KPD/src/KeyPad_program.o
+                0x0000252a                KPD_voidInit
  .text.KPD_voidGetValue
-                0x00001c64      0x158 HAL/KPD/src/KeyPad_program.o
-                0x00001c64                KPD_voidGetValue
+                0x00002592      0x158 HAL/KPD/src/KeyPad_program.o
+                0x00002592                KPD_voidGetValue
  .text.PRV_voidWriteHalfPort
-                0x00001dbc       0x70 HAL/LCD/src/LCD_PROGRAM.o
+                0x000026ea       0x70 HAL/LCD/src/LCD_PROGRAM.o
  .text.LCD_voidSendCommand
-                0x00001e2c       0x6c HAL/LCD/src/LCD_PROGRAM.o
-                0x00001e2c                LCD_voidSendCommand
+                0x0000275a       0x6c HAL/LCD/src/LCD_PROGRAM.o
+                0x0000275a                LCD_voidSendCommand
  .text.LCD_voidInit
-                0x00001e98       0xc4 HAL/LCD/src/LCD_PROGRAM.o
-                0x00001e98                LCD_voidInit
+                0x000027c6       0xc4 HAL/LCD/src/LCD_PROGRAM.o
+                0x000027c6                LCD_voidInit
  .text.LCD_voidDisplayChar
-                0x00001f5c       0x6c HAL/LCD/src/LCD_PROGRAM.o
-                0x00001f5c                LCD_voidDisplayChar
+                0x0000288a       0x6c HAL/LCD/src/LCD_PROGRAM.o
+                0x0000288a                LCD_voidDisplayChar
  .text.LCD_voidDisplayString
-                0x00001fc8       0x2c HAL/LCD/src/LCD_PROGRAM.o
-                0x00001fc8                LCD_voidDisplayString
+                0x000028f6       0x2c HAL/LCD/src/LCD_PROGRAM.o
+                0x000028f6                LCD_voidDisplayString
  .text.LCD_voidDisplayStringDelay
-                0x00001ff4       0x3e HAL/LCD/src/LCD_PROGRAM.o
-                0x00001ff4                LCD_voidDisplayStringDelay
+                0x00002922       0x3e HAL/LCD/src/LCD_PROGRAM.o
+                0x00002922                LCD_voidDisplayStringDelay
  .text.LCD_voidDisplayNumber
-                0x00002032       0xa6 HAL/LCD/src/LCD_PROGRAM.o
-                0x00002032                LCD_voidDisplayNumber
+                0x00002960       0xa6 HAL/LCD/src/LCD_PROGRAM.o
+                0x00002960                LCD_voidDisplayNumber
  .text.LCD_voidClear
-                0x000020d8       0x62 HAL/LCD/src/LCD_PROGRAM.o
-                0x000020d8                LCD_voidClear
+                0x00002a06       0x62 HAL/LCD/src/LCD_PROGRAM.o
+                0x00002a06                LCD_voidClear
+ .text.LCD_voidShiftCursor
+                0x00002a68       0x6c HAL/LCD/src/LCD_PROGRAM.o
+                0x00002a68                LCD_voidShiftCursor
  .text.LCD_voidGoTOSpecificPosition
-                0x0000213a       0x36 HAL/LCD/src/LCD_PROGRAM.o
-                0x0000213a                LCD_voidGoTOSpecificPosition
+                0x00002ad4       0x36 HAL/LCD/src/LCD_PROGRAM.o
+                0x00002ad4                LCD_voidGoTOSpecificPosition
+ .text.LCD_voidPwdEffect
+                0x00002b0a       0x20 HAL/LCD/src/LCD_PROGRAM.o
+                0x00002b0a                LCD_voidPwdEffect
  .text.LED_voidInit
-                0x00002170        0x8 HAL/LED/src/LED_program.o
-                0x00002170                LED_voidInit
+                0x00002b2a        0x8 HAL/LED/src/LED_program.o
+                0x00002b2a                LED_voidInit
  .text.LED_voidOn
-                0x00002178       0x1a HAL/LED/src/LED_program.o
-                0x00002178                LED_voidOn
+                0x00002b32       0x1a HAL/LED/src/LED_program.o
+                0x00002b32                LED_voidOn
  .text.LED_voidOff
-                0x00002192       0x1a HAL/LED/src/LED_program.o
-                0x00002192                LED_voidOff
+                0x00002b4c       0x1a HAL/LED/src/LED_program.o
+                0x00002b4c                LED_voidOff
  .text.SERVO_voidInit
-                0x000021ac        0xc HAL/SERVO/src/SERVO_program.o
-                0x000021ac                SERVO_voidInit
+                0x00002b66        0xc HAL/SERVO/src/SERVO_program.o
+                0x00002b66                SERVO_voidInit
  .text.SERVO_voidStartByAngle
-                0x000021b8       0x32 HAL/SERVO/src/SERVO_program.o
-                0x000021b8                SERVO_voidStartByAngle
- .text.main     0x000021ea       0x4c main.o
-                0x000021ea                main
+                0x00002b72       0x32 HAL/SERVO/src/SERVO_program.o
+                0x00002b72                SERVO_voidStartByAngle
+ .text.main     0x00002ba4       0x4a main.o
+                0x00002ba4                main
  .text.ADC_voidInit
-                0x00002236       0x60 MCAL/ADC/src/ADC_program.o
-                0x00002236                ADC_voidInit
+                0x00002bee       0x60 MCAL/ADC/src/ADC_program.o
+                0x00002bee                ADC_voidInit
  .text.ADC_voidGetDigitalValue
-                0x00002296       0x36 MCAL/ADC/src/ADC_program.o
-                0x00002296                ADC_voidGetDigitalValue
+                0x00002c4e       0x36 MCAL/ADC/src/ADC_program.o
+                0x00002c4e                ADC_voidGetDigitalValue
  .text.DIO_voidSetPinDirection
-                0x000022cc      0x100 MCAL/DIO/src/DIO_program.o
-                0x000022cc                DIO_voidSetPinDirection
+                0x00002c84      0x100 MCAL/DIO/src/DIO_program.o
+                0x00002c84                DIO_voidSetPinDirection
  .text.DIO_voidSetPinValue
-                0x000023cc      0x100 MCAL/DIO/src/DIO_program.o
-                0x000023cc                DIO_voidSetPinValue
+                0x00002d84      0x100 MCAL/DIO/src/DIO_program.o
+                0x00002d84                DIO_voidSetPinValue
  .text.DIO_voidGetPinValue
-                0x000024cc       0x76 MCAL/DIO/src/DIO_program.o
-                0x000024cc                DIO_voidGetPinValue
+                0x00002e84       0x76 MCAL/DIO/src/DIO_program.o
+                0x00002e84                DIO_voidGetPinValue
  .text.DIO_voidActivePinInPullUpResistance
-                0x00002542       0x70 MCAL/DIO/src/DIO_program.o
-                0x00002542                DIO_voidActivePinInPullUpResistance
+                0x00002efa       0x70 MCAL/DIO/src/DIO_program.o
+                0x00002efa                DIO_voidActivePinInPullUpResistance
  .text.GI_voidEnable
-                0x000025b2        0x8 MCAL/GI/src/GI_program.o
-                0x000025b2                GI_voidEnable
+                0x00002f6a        0x8 MCAL/GI/src/GI_program.o
+                0x00002f6a                GI_voidEnable
  .text.PWM_voidInitChannel_1A
-                0x000025ba       0x26 MCAL/PWM/src/PWM_program.o
-                0x000025ba                PWM_voidInitChannel_1A
+                0x00002f72       0x26 MCAL/PWM/src/PWM_program.o
+                0x00002f72                PWM_voidInitChannel_1A
  .text.PWM_voidInitChannel_1B
-                0x000025e0       0x26 MCAL/PWM/src/PWM_program.o
-                0x000025e0                PWM_voidInitChannel_1B
+                0x00002f98       0x26 MCAL/PWM/src/PWM_program.o
+                0x00002f98                PWM_voidInitChannel_1B
  .text.PWM_voidGenerateChannel_1A
-                0x00002606       0x98 MCAL/PWM/src/PWM_program.o
-                0x00002606                PWM_voidGenerateChannel_1A
+                0x00002fbe       0x98 MCAL/PWM/src/PWM_program.o
+                0x00002fbe                PWM_voidGenerateChannel_1A
  .text.PWM_voidGenerateChannel_1B
-                0x0000269e       0x98 MCAL/PWM/src/PWM_program.o
-                0x0000269e                PWM_voidGenerateChannel_1B
+                0x00003056       0x98 MCAL/PWM/src/PWM_program.o
+                0x00003056                PWM_voidGenerateChannel_1B
  .text.TMR0_voidInit
-                0x00002736       0x24 MCAL/TMR0/src/TMR0_program.o
-                0x00002736                TMR0_voidInit
+                0x000030ee       0x24 MCAL/TMR0/src/TMR0_program.o
+                0x000030ee                TMR0_voidInit
  .text.TMR0_voidStart
-                0x0000275a       0x1c MCAL/TMR0/src/TMR0_program.o
-                0x0000275a                TMR0_voidStart
+                0x00003112       0x1c MCAL/TMR0/src/TMR0_program.o
+                0x00003112                TMR0_voidStart
  .text.TMR0_voidStop
-                0x00002776       0x14 MCAL/TMR0/src/TMR0_program.o
-                0x00002776                TMR0_voidStop
+                0x0000312e       0x14 MCAL/TMR0/src/TMR0_program.o
+                0x0000312e                TMR0_voidStop
  .text.TMR0_SetCallBackCTC
-                0x0000278a        0xe MCAL/TMR0/src/TMR0_program.o
-                0x0000278a                TMR0_SetCallBackCTC
+                0x00003142        0xe MCAL/TMR0/src/TMR0_program.o
+                0x00003142                TMR0_SetCallBackCTC
  .text.TMR0clear_flag
-                0x00002798        0xe MCAL/TMR0/src/TMR0_program.o
-                0x00002798                TMR0clear_flag
+                0x00003150        0xe MCAL/TMR0/src/TMR0_program.o
+                0x00003150                TMR0clear_flag
  .text.__vector_11
-                0x000027a6       0x76 MCAL/TMR0/src/TMR0_program.o
-                0x000027a6                __vector_11
+                0x0000315e       0x76 MCAL/TMR0/src/TMR0_program.o
+                0x0000315e                __vector_11
  .text.__vector_10
-                0x0000281c       0x76 MCAL/TMR0/src/TMR0_program.o
-                0x0000281c                __vector_10
+                0x000031d4       0x76 MCAL/TMR0/src/TMR0_program.o
+                0x000031d4                __vector_10
  .text.TMR2_voidInit
-                0x00002892       0x24 MCAL/TMR2/src/TMR2_program.o
-                0x00002892                TMR2_voidInit
+                0x0000324a       0x24 MCAL/TMR2/src/TMR2_program.o
+                0x0000324a                TMR2_voidInit
  .text.TMR2_voidStart
-                0x000028b6       0x1c MCAL/TMR2/src/TMR2_program.o
-                0x000028b6                TMR2_voidStart
+                0x0000326e       0x1c MCAL/TMR2/src/TMR2_program.o
+                0x0000326e                TMR2_voidStart
+ .text.TMR2_voidStop
+                0x0000328a       0x14 MCAL/TMR2/src/TMR2_program.o
+                0x0000328a                TMR2_voidStop
  .text.TMR2_SetCallBackCTC
-                0x000028d2        0xe MCAL/TMR2/src/TMR2_program.o
-                0x000028d2                TMR2_SetCallBackCTC
+                0x0000329e        0xe MCAL/TMR2/src/TMR2_program.o
+                0x0000329e                TMR2_SetCallBackCTC
  .text.TMR2_clear_flag
-                0x000028e0        0xe MCAL/TMR2/src/TMR2_program.o
-                0x000028e0                TMR2_clear_flag
+                0x000032ac        0xe MCAL/TMR2/src/TMR2_program.o
+                0x000032ac                TMR2_clear_flag
  .text.__vector_5
-                0x000028ee       0x76 MCAL/TMR2/src/TMR2_program.o
-                0x000028ee                __vector_5
+                0x000032ba       0x76 MCAL/TMR2/src/TMR2_program.o
+                0x000032ba                __vector_5
  .text.__vector_4
-                0x00002964       0x76 MCAL/TMR2/src/TMR2_program.o
-                0x00002964                __vector_4
+                0x00003330       0x76 MCAL/TMR2/src/TMR2_program.o
+                0x00003330                __vector_4
  .text.TWI_voidInitMaster
-                0x000029da       0x18 MCAL/TWI/src/TWI_program.o
-                0x000029da                TWI_voidInitMaster
+                0x000033a6       0x18 MCAL/TWI/src/TWI_program.o
+                0x000033a6                TWI_voidInitMaster
  .text.TWI_voidSendStartCondition
-                0x000029f2       0x1c MCAL/TWI/src/TWI_program.o
-                0x000029f2                TWI_voidSendStartCondition
+                0x000033be       0x1c MCAL/TWI/src/TWI_program.o
+                0x000033be                TWI_voidSendStartCondition
  .text.TWI_voidSendRepeatedStartCondition
-                0x00002a0e       0x1c MCAL/TWI/src/TWI_program.o
-                0x00002a0e                TWI_voidSendRepeatedStartCondition
+                0x000033da       0x1c MCAL/TWI/src/TWI_program.o
+                0x000033da                TWI_voidSendRepeatedStartCondition
  .text.TWI_voidSendStopCondition
-                0x00002a2a        0xe MCAL/TWI/src/TWI_program.o
-                0x00002a2a                TWI_voidSendStopCondition
+                0x000033f6        0xe MCAL/TWI/src/TWI_program.o
+                0x000033f6                TWI_voidSendStopCondition
  .text.TWI_voidSendSlaveAddWithWrite
-                0x00002a38       0x2a MCAL/TWI/src/TWI_program.o
-                0x00002a38                TWI_voidSendSlaveAddWithWrite
+                0x00003404       0x2a MCAL/TWI/src/TWI_program.o
+                0x00003404                TWI_voidSendSlaveAddWithWrite
  .text.TWI_voidSendSlaveAddWithRead
-                0x00002a62       0x2a MCAL/TWI/src/TWI_program.o
-                0x00002a62                TWI_voidSendSlaveAddWithRead
+                0x0000342e       0x2a MCAL/TWI/src/TWI_program.o
+                0x0000342e                TWI_voidSendSlaveAddWithRead
  .text.TWI_voidTransmitMasterDataByte
-                0x00002a8c       0x18 MCAL/TWI/src/TWI_program.o
-                0x00002a8c                TWI_voidTransmitMasterDataByte
+                0x00003458       0x18 MCAL/TWI/src/TWI_program.o
+                0x00003458                TWI_voidTransmitMasterDataByte
  .text.TWI_voidRecieveMasterDataByteWithAch
-                0x00002aa4       0x2c MCAL/TWI/src/TWI_program.o
-                0x00002aa4                TWI_voidRecieveMasterDataByteWithAch
+                0x00003470       0x2c MCAL/TWI/src/TWI_program.o
+                0x00003470                TWI_voidRecieveMasterDataByteWithAch
  .text.TWI_voidRecieveMasterDataByteWithNAch
-                0x00002ad0       0x20 MCAL/TWI/src/TWI_program.o
-                0x00002ad0                TWI_voidRecieveMasterDataByteWithNAch
+                0x0000349c       0x20 MCAL/TWI/src/TWI_program.o
+                0x0000349c                TWI_voidRecieveMasterDataByteWithNAch
  .text.UART_voidInit
-                0x00002af0       0x22 MCAL/UART/src/UART_program.o
-                0x00002af0                UART_voidInit
+                0x000034bc       0x22 MCAL/UART/src/UART_program.o
+                0x000034bc                UART_voidInit
  .text.UART_voidTxChar
-                0x00002b12        0x8 MCAL/UART/src/UART_program.o
-                0x00002b12                UART_voidTxChar
+                0x000034de        0x8 MCAL/UART/src/UART_program.o
+                0x000034de                UART_voidTxChar
  .text.UART_voidRxChar
-                0x00002b1a       0x10 MCAL/UART/src/UART_program.o
-                0x00002b1a                UART_voidRxChar
+                0x000034e6       0x10 MCAL/UART/src/UART_program.o
+                0x000034e6                UART_voidRxChar
  .text.UART_voidTxString
-                0x00002b2a       0x2c MCAL/UART/src/UART_program.o
-                0x00002b2a                UART_voidTxString
+                0x000034f6       0x2c MCAL/UART/src/UART_program.o
+                0x000034f6                UART_voidTxString
  .text.avr-libc.fplib
-                0x00002b56        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
-                0x00002b56                __subsf3
-                0x00002b58                __addsf3
+                0x00003522        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
+                0x00003522                __subsf3
+                0x00003524                __addsf3
  .text.avr-libc.fplib
-                0x00002b64       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
-                0x00002b86                __addsf3x
+                0x00003530       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
+                0x00003552                __addsf3x
  .text.avr-libc.fplib
-                0x00002c30        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
-                0x00002c30                __nesf2
-                0x00002c30                __eqsf2
-                0x00002c30                __cmpsf2
-                0x00002c30                __ltsf2
-                0x00002c30                __lesf2
+                0x000035fc        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
+                0x000035fc                __nesf2
+                0x000035fc                __eqsf2
+                0x000035fc                __cmpsf2
+                0x000035fc                __ltsf2
+                0x000035fc                __lesf2
  .text.avr-libc.fplib
-                0x00002c3a        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
-                0x00002c3a                __divsf3
+                0x00003606        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
+                0x00003606                __divsf3
  .text.avr-libc.fplib
-                0x00002c42       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
-                0x00002c62                __divsf3x
-                0x00002c68                __divsf3_pse
+                0x0000360e       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
+                0x0000362e                __divsf3x
+                0x00003634                __divsf3_pse
  .text.avr-libc.fplib
-                0x00002d1e       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
-                0x00002d1e                __fixunssfsi
+                0x000036ea       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
+                0x000036ea                __fixunssfsi
  .text.avr-libc.fplib
-                0x00002d7c       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
-                0x00002d7c                __floatunsisf
-                0x00002d80                __floatsisf
+                0x00003748       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
+                0x00003748                __floatunsisf
+                0x0000374c                __floatsisf
  .text.avr-libc.fplib
-                0x00002df6       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
-                0x00002df6                __fp_cmp
+                0x000037c2       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
+                0x000037c2                __fp_cmp
  .text.avr-libc.fplib
-                0x00002e3e        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
-                0x00002e3e                __fp_inf
+                0x0000380a        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
+                0x0000380a                __fp_inf
  .text.avr-libc.fplib
-                0x00002e4a        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
-                0x00002e4a                __fp_nan
+                0x00003816        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
+                0x00003816                __fp_nan
  .text.avr-libc.fplib
-                0x00002e50        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
-                0x00002e50                __fp_pscA
+                0x0000381c        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
+                0x0000381c                __fp_pscA
  .text.avr-libc.fplib
-                0x00002e5e        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
-                0x00002e5e                __fp_pscB
+                0x0000382a        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
+                0x0000382a                __fp_pscB
  .text.avr-libc.fplib
-                0x00002e6c       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
-                0x00002e6c                __fp_round
+                0x00003838       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
+                0x00003838                __fp_round
  .text.avr-libc.fplib
-                0x00002e8e       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
-                0x00002e8e                __fp_split3
-                0x00002e9e                __fp_splitA
+                0x0000385a       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
+                0x0000385a                __fp_split3
+                0x0000386a                __fp_splitA
  .text.avr-libc.fplib
-                0x00002ed2        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
-                0x00002ed2                __fp_zero
-                0x00002ed4                __fp_szero
+                0x0000389e        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
+                0x0000389e                __fp_zero
+                0x000038a0                __fp_szero
  .text.avr-libc.fplib
-                0x00002ee0        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
-                0x00002ee0                __mulsf3
+                0x000038ac        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
+                0x000038ac                __mulsf3
  .text.avr-libc.fplib
-                0x00002ee8       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
-                0x00002f06                __mulsf3x
-                0x00002f0c                __mulsf3_pse
+                0x000038b4       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+                0x000038d2                __mulsf3x
+                0x000038d8                __mulsf3_pse
  .text.libgcc.div
-                0x00002fba       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x00002fba                __udivmodsi4
+                0x00003986       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00003986                __udivmodsi4
  .text.avr-libc
-                0x00002ffe       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
-                0x00002ffe                sprintf
+                0x000039ca       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
+                0x000039ca                sprintf
  .text.avr-libc
-                0x00003042      0x3c2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x00003042                vfprintf
+                0x00003a0e      0x3c2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x00003a0e                vfprintf
  .text.avr-libc
-                0x00003404       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x00003404                strnlen_P
+                0x00003dd0       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x00003dd0                strnlen_P
  .text.avr-libc
-                0x0000341a       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x0000341a                strnlen
+                0x00003de6       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x00003de6                strnlen
  .text.avr-libc
-                0x00003430       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x00003430                fputc
+                0x00003dfc       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x00003dfc                fputc
  .text.avr-libc
-                0x000034a8       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x000034a8                __ultoa_invert
+                0x00003e74       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00003e74                __ultoa_invert
  .text.libgcc.prologue
-                0x00003564       0x38 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
-                0x00003564                __prologue_saves__
+                0x00003f30       0x38 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
+                0x00003f30                __prologue_saves__
  .text.libgcc.prologue
-                0x0000359c       0x36 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
-                0x0000359c                __epilogue_restores__
-                0x000035d2                . = ALIGN (0x2)
+                0x00003f68       0x36 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
+                0x00003f68                __epilogue_restores__
+                0x00003f9e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000035d2        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000035d2                _exit
-                0x000035d2                exit
+ .fini9         0x00003f9e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00003f9e                _exit
+                0x00003f9e                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -886,11 +895,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000035d2        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00003f9e        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000035d6                _etext = .
+                0x00003fa2                _etext = .
 
-.data           0x00800060      0x466 load address 0x000035d6
+.data           0x00800060      0x468 load address 0x00003fa2
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -910,66 +919,66 @@ END GROUP
                 0x00800064        0x1 APP/src/SmartHome_Prog.o
                 0x00800064                Local_copyKPDValue
  .data.usertype
-                0x00800065        0x1 APP/src/SmartHome_Prog.o
+                0x00800065        0x1 main.o
                 0x00800065                usertype
  *(.gnu.linkonce.d*)
  *(.rodata)
  .rodata        0x00800066        0xc HAL/KPD/src/KeyPad_program.o
  *(.rodata*)
  .rodata.str1.1
-                0x00800072      0x446 APP/src/SmartHome_Prog.o
-                                0x45c (size before relaxing)
- .rodata.str1.1
-                0x008004b8        0xe main.o
+                0x00800072      0x455 APP/src/SmartHome_Prog.o
+                                0x460 (size before relaxing)
  *(.gnu.linkonce.r*)
-                0x008004c6                . = ALIGN (0x2)
-                0x008004c6                _edata = .
-                0x008004c6                PROVIDE (__data_end, .)
+                0x008004c8                . = ALIGN (0x2)
+ *fill*         0x008004c7        0x1 
+                0x008004c8                _edata = .
+                0x008004c8                PROVIDE (__data_end, .)
 
-.bss            0x008004c6       0x39
-                0x008004c6                PROVIDE (__bss_start, .)
+.bss            0x008004c8       0x3a
+                0x008004c8                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.local_temp
-                0x008004c6        0x1 APP/src/SmartHome_Prog.o
-                0x008004c6                local_temp
- .bss.dimmer_brightness
-                0x008004c7        0x1 APP/src/SmartHome_Prog.o
-                0x008004c7                dimmer_brightness
- .bss.led_status
                 0x008004c8        0x1 APP/src/SmartHome_Prog.o
-                0x008004c8                led_status
- .bss.bluetooh_value
+                0x008004c8                local_temp
+ .bss.dimmer_brightness
                 0x008004c9        0x1 APP/src/SmartHome_Prog.o
-                0x008004c9                bluetooh_value
- .bss.door_angle
+                0x008004c9                dimmer_brightness
+ .bss.led_status
                 0x008004ca        0x1 APP/src/SmartHome_Prog.o
-                0x008004ca                door_angle
+                0x008004ca                led_status
+ .bss.ac_status
+                0x008004cb        0x1 APP/src/SmartHome_Prog.o
+                0x008004cb                ac_status
+ .bss.door_angle
+                0x008004cc        0x1 APP/src/SmartHome_Prog.o
+                0x008004cc                door_angle
  .bss.local_u16Counter
-                0x008004cb        0x2 MCAL/TMR0/src/TMR0_program.o
- .bss.PRV_pFunCallBackCTC
                 0x008004cd        0x2 MCAL/TMR0/src/TMR0_program.o
- .bss.PRV_pFunCallBackOVF
-                0x008004cf        0x2 MCAL/TMR0/src/TMR0_program.o
- .bss.local_u16Counter
-                0x008004d1        0x2 MCAL/TMR2/src/TMR2_program.o
  .bss.PRV_pFunCallBackCTC
-                0x008004d3        0x2 MCAL/TMR2/src/TMR2_program.o
+                0x008004cf        0x2 MCAL/TMR0/src/TMR0_program.o
  .bss.PRV_pFunCallBackOVF
+                0x008004d1        0x2 MCAL/TMR0/src/TMR0_program.o
+ .bss.local_u16Counter
+                0x008004d3        0x2 MCAL/TMR2/src/TMR2_program.o
+ .bss.PRV_pFunCallBackCTC
                 0x008004d5        0x2 MCAL/TMR2/src/TMR2_program.o
+ .bss.PRV_pFunCallBackOVF
+                0x008004d7        0x2 MCAL/TMR2/src/TMR2_program.o
  *(COMMON)
- COMMON         0x008004d7       0x28 APP/src/SmartHome_Prog.o
-                0x008004d7                DimmerString
-                0x008004eb                tempString
-                0x008004ff                PROVIDE (__bss_end, .)
-                0x000035d6                __data_load_start = LOADADDR (.data)
-                0x00003a3c                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008004d9       0x29 APP/src/SmartHome_Prog.o
+                0x008004d9                bluetooh_value
+                0x008004da                DimmerString
+                0x008004ee                tempString
+                0x00800502                PROVIDE (__bss_end, .)
+                0x00003fa2                __data_load_start = LOADADDR (.data)
+                0x0000440a                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008004ff        0x0
+.noinit         0x00800502        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008004ff                _end = .
+                0x00800502                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -1094,144 +1103,144 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x79a3
+.debug_info     0x00000000     0x7b0a
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_info    0x000004e6     0x4892 APP/src/SmartHome_Prog.o
- .debug_info    0x00004d78      0x21f HAL/BL/src/BL_program.o
- .debug_info    0x00004f97      0x1e6 HAL/BUZZER/src/BUZZER_program.o
- .debug_info    0x0000517d      0x557 HAL/EEPROM/src/EEPROM_program.o
- .debug_info    0x000056d4      0x350 HAL/KPD/src/KeyPad_program.o
- .debug_info    0x00005a24      0xee1 HAL/LCD/src/LCD_PROGRAM.o
- .debug_info    0x00006905      0x20e HAL/LED/src/LED_program.o
- .debug_info    0x00006b13      0x14f HAL/SERVO/src/SERVO_program.o
- .debug_info    0x00006c62      0x18b main.o
- .debug_info    0x00006ded      0x118 MCAL/ADC/src/ADC_program.o
- .debug_info    0x00006f05      0x1ad MCAL/DIO/src/DIO_program.o
- .debug_info    0x000070b2       0x98 MCAL/GI/src/GI_program.o
- .debug_info    0x0000714a      0x11c MCAL/PWM/src/PWM_program.o
- .debug_info    0x00007266      0x19e MCAL/TMR0/src/TMR0_program.o
- .debug_info    0x00007404      0x19e MCAL/TMR2/src/TMR2_program.o
- .debug_info    0x000075a2      0x198 MCAL/TWI/src/TWI_program.o
- .debug_info    0x0000773a      0x269 MCAL/UART/src/UART_program.o
+ .debug_info    0x000004e6     0x49c3 APP/src/SmartHome_Prog.o
+ .debug_info    0x00004ea9      0x21f HAL/BL/src/BL_program.o
+ .debug_info    0x000050c8      0x1e6 HAL/BUZZER/src/BUZZER_program.o
+ .debug_info    0x000052ae      0x557 HAL/EEPROM/src/EEPROM_program.o
+ .debug_info    0x00005805      0x350 HAL/KPD/src/KeyPad_program.o
+ .debug_info    0x00005b55      0xee1 HAL/LCD/src/LCD_PROGRAM.o
+ .debug_info    0x00006a36      0x20e HAL/LED/src/LED_program.o
+ .debug_info    0x00006c44      0x14f HAL/SERVO/src/SERVO_program.o
+ .debug_info    0x00006d93      0x1c1 main.o
+ .debug_info    0x00006f54      0x118 MCAL/ADC/src/ADC_program.o
+ .debug_info    0x0000706c      0x1ad MCAL/DIO/src/DIO_program.o
+ .debug_info    0x00007219       0x98 MCAL/GI/src/GI_program.o
+ .debug_info    0x000072b1      0x11c MCAL/PWM/src/PWM_program.o
+ .debug_info    0x000073cd      0x19e MCAL/TMR0/src/TMR0_program.o
+ .debug_info    0x0000756b      0x19e MCAL/TMR2/src/TMR2_program.o
+ .debug_info    0x00007709      0x198 MCAL/TWI/src/TWI_program.o
+ .debug_info    0x000078a1      0x269 MCAL/UART/src/UART_program.o
 
-.debug_abbrev   0x00000000     0x1407
+.debug_abbrev   0x00000000     0x13e6
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_abbrev  0x000004a3      0x2a0 APP/src/SmartHome_Prog.o
- .debug_abbrev  0x00000743       0x94 HAL/BL/src/BL_program.o
- .debug_abbrev  0x000007d7       0x80 HAL/BUZZER/src/BUZZER_program.o
- .debug_abbrev  0x00000857      0x13f HAL/EEPROM/src/EEPROM_program.o
- .debug_abbrev  0x00000996       0xe9 HAL/KPD/src/KeyPad_program.o
- .debug_abbrev  0x00000a7f      0x221 HAL/LCD/src/LCD_PROGRAM.o
- .debug_abbrev  0x00000ca0       0x8d HAL/LED/src/LED_program.o
- .debug_abbrev  0x00000d2d       0xc1 HAL/SERVO/src/SERVO_program.o
- .debug_abbrev  0x00000dee       0xb6 main.o
- .debug_abbrev  0x00000ea4       0x92 MCAL/ADC/src/ADC_program.o
- .debug_abbrev  0x00000f36       0x87 MCAL/DIO/src/DIO_program.o
- .debug_abbrev  0x00000fbd       0x46 MCAL/GI/src/GI_program.o
- .debug_abbrev  0x00001003       0x87 MCAL/PWM/src/PWM_program.o
- .debug_abbrev  0x0000108a       0xcb MCAL/TMR0/src/TMR0_program.o
- .debug_abbrev  0x00001155       0xcb MCAL/TMR2/src/TMR2_program.o
- .debug_abbrev  0x00001220       0x90 MCAL/TWI/src/TWI_program.o
- .debug_abbrev  0x000012b0      0x157 MCAL/UART/src/UART_program.o
+ .debug_abbrev  0x000004a3      0x2b1 APP/src/SmartHome_Prog.o
+ .debug_abbrev  0x00000754       0x94 HAL/BL/src/BL_program.o
+ .debug_abbrev  0x000007e8       0x80 HAL/BUZZER/src/BUZZER_program.o
+ .debug_abbrev  0x00000868      0x13f HAL/EEPROM/src/EEPROM_program.o
+ .debug_abbrev  0x000009a7       0xe9 HAL/KPD/src/KeyPad_program.o
+ .debug_abbrev  0x00000a90      0x221 HAL/LCD/src/LCD_PROGRAM.o
+ .debug_abbrev  0x00000cb1       0x8d HAL/LED/src/LED_program.o
+ .debug_abbrev  0x00000d3e       0xc1 HAL/SERVO/src/SERVO_program.o
+ .debug_abbrev  0x00000dff       0x84 main.o
+ .debug_abbrev  0x00000e83       0x92 MCAL/ADC/src/ADC_program.o
+ .debug_abbrev  0x00000f15       0x87 MCAL/DIO/src/DIO_program.o
+ .debug_abbrev  0x00000f9c       0x46 MCAL/GI/src/GI_program.o
+ .debug_abbrev  0x00000fe2       0x87 MCAL/PWM/src/PWM_program.o
+ .debug_abbrev  0x00001069       0xcb MCAL/TMR0/src/TMR0_program.o
+ .debug_abbrev  0x00001134       0xcb MCAL/TMR2/src/TMR2_program.o
+ .debug_abbrev  0x000011ff       0x90 MCAL/TWI/src/TWI_program.o
+ .debug_abbrev  0x0000128f      0x157 MCAL/UART/src/UART_program.o
 
-.debug_line     0x00000000     0x39d7
+.debug_line     0x00000000     0x3a90
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_line    0x00000116     0x1d2d APP/src/SmartHome_Prog.o
- .debug_line    0x00001e43       0xfe HAL/BL/src/BL_program.o
- .debug_line    0x00001f41       0xd8 HAL/BUZZER/src/BUZZER_program.o
- .debug_line    0x00002019      0x2f4 HAL/EEPROM/src/EEPROM_program.o
- .debug_line    0x0000230d      0x175 HAL/KPD/src/KeyPad_program.o
- .debug_line    0x00002482      0x569 HAL/LCD/src/LCD_PROGRAM.o
- .debug_line    0x000029eb       0xf6 HAL/LED/src/LED_program.o
- .debug_line    0x00002ae1       0xd9 HAL/SERVO/src/SERVO_program.o
- .debug_line    0x00002bba       0xe0 main.o
- .debug_line    0x00002c9a      0x10c MCAL/ADC/src/ADC_program.o
- .debug_line    0x00002da6      0x2a4 MCAL/DIO/src/DIO_program.o
- .debug_line    0x0000304a       0x82 MCAL/GI/src/GI_program.o
- .debug_line    0x000030cc      0x137 MCAL/PWM/src/PWM_program.o
- .debug_line    0x00003203      0x1a6 MCAL/TMR0/src/TMR0_program.o
- .debug_line    0x000033a9      0x1a6 MCAL/TMR2/src/TMR2_program.o
- .debug_line    0x0000354f      0x23f MCAL/TWI/src/TWI_program.o
- .debug_line    0x0000378e      0x249 MCAL/UART/src/UART_program.o
+ .debug_line    0x00000116     0x1db1 APP/src/SmartHome_Prog.o
+ .debug_line    0x00001ec7       0xfe HAL/BL/src/BL_program.o
+ .debug_line    0x00001fc5       0xd8 HAL/BUZZER/src/BUZZER_program.o
+ .debug_line    0x0000209d      0x2f4 HAL/EEPROM/src/EEPROM_program.o
+ .debug_line    0x00002391      0x175 HAL/KPD/src/KeyPad_program.o
+ .debug_line    0x00002506      0x569 HAL/LCD/src/LCD_PROGRAM.o
+ .debug_line    0x00002a6f       0xf6 HAL/LED/src/LED_program.o
+ .debug_line    0x00002b65       0xd9 HAL/SERVO/src/SERVO_program.o
+ .debug_line    0x00002c3e      0x117 main.o
+ .debug_line    0x00002d55      0x10c MCAL/ADC/src/ADC_program.o
+ .debug_line    0x00002e61      0x2a4 MCAL/DIO/src/DIO_program.o
+ .debug_line    0x00003105       0x82 MCAL/GI/src/GI_program.o
+ .debug_line    0x00003187      0x137 MCAL/PWM/src/PWM_program.o
+ .debug_line    0x000032be      0x1a6 MCAL/TMR0/src/TMR0_program.o
+ .debug_line    0x00003464      0x1a6 MCAL/TMR2/src/TMR2_program.o
+ .debug_line    0x0000360a      0x23f MCAL/TWI/src/TWI_program.o
+ .debug_line    0x00003849      0x247 MCAL/UART/src/UART_program.o
 
-.debug_frame    0x00000000      0xc68
+.debug_frame    0x00000000      0xc8c
  *(.debug_frame)
- .debug_frame   0x00000000      0x388 APP/src/SmartHome_Prog.o
- .debug_frame   0x00000388       0x74 HAL/BL/src/BL_program.o
- .debug_frame   0x000003fc       0x54 HAL/BUZZER/src/BUZZER_program.o
- .debug_frame   0x00000450       0xbc HAL/EEPROM/src/EEPROM_program.o
- .debug_frame   0x0000050c       0x80 HAL/KPD/src/KeyPad_program.o
- .debug_frame   0x0000058c      0x144 HAL/LCD/src/LCD_PROGRAM.o
- .debug_frame   0x000006d0       0x54 HAL/LED/src/LED_program.o
- .debug_frame   0x00000724       0x34 HAL/SERVO/src/SERVO_program.o
- .debug_frame   0x00000758       0x24 main.o
- .debug_frame   0x0000077c       0x34 MCAL/ADC/src/ADC_program.o
- .debug_frame   0x000007b0       0x64 MCAL/DIO/src/DIO_program.o
- .debug_frame   0x00000814       0x34 MCAL/GI/src/GI_program.o
- .debug_frame   0x00000848       0x94 MCAL/PWM/src/PWM_program.o
- .debug_frame   0x000008dc      0x124 MCAL/TMR0/src/TMR0_program.o
- .debug_frame   0x00000a00      0x124 MCAL/TMR2/src/TMR2_program.o
- .debug_frame   0x00000b24       0xa4 MCAL/TWI/src/TWI_program.o
- .debug_frame   0x00000bc8       0xa0 MCAL/UART/src/UART_program.o
+ .debug_frame   0x00000000      0x3ac APP/src/SmartHome_Prog.o
+ .debug_frame   0x000003ac       0x74 HAL/BL/src/BL_program.o
+ .debug_frame   0x00000420       0x54 HAL/BUZZER/src/BUZZER_program.o
+ .debug_frame   0x00000474       0xbc HAL/EEPROM/src/EEPROM_program.o
+ .debug_frame   0x00000530       0x80 HAL/KPD/src/KeyPad_program.o
+ .debug_frame   0x000005b0      0x144 HAL/LCD/src/LCD_PROGRAM.o
+ .debug_frame   0x000006f4       0x54 HAL/LED/src/LED_program.o
+ .debug_frame   0x00000748       0x34 HAL/SERVO/src/SERVO_program.o
+ .debug_frame   0x0000077c       0x24 main.o
+ .debug_frame   0x000007a0       0x34 MCAL/ADC/src/ADC_program.o
+ .debug_frame   0x000007d4       0x64 MCAL/DIO/src/DIO_program.o
+ .debug_frame   0x00000838       0x34 MCAL/GI/src/GI_program.o
+ .debug_frame   0x0000086c       0x94 MCAL/PWM/src/PWM_program.o
+ .debug_frame   0x00000900      0x124 MCAL/TMR0/src/TMR0_program.o
+ .debug_frame   0x00000a24      0x124 MCAL/TMR2/src/TMR2_program.o
+ .debug_frame   0x00000b48       0xa4 MCAL/TWI/src/TWI_program.o
+ .debug_frame   0x00000bec       0xa0 MCAL/UART/src/UART_program.o
 
-.debug_str      0x00000000     0x17aa
+.debug_str      0x00000000     0x1660
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196      0xcf9 APP/src/SmartHome_Prog.o
-                                0xd32 (size before relaxing)
- .debug_str     0x00000e8f       0xdf HAL/BL/src/BL_program.o
-                                0x276 (size before relaxing)
- .debug_str     0x00000f6e       0x88 HAL/BUZZER/src/BUZZER_program.o
+ .debug_str     0x00000196      0xb5d APP/src/SmartHome_Prog.o
+                                0xb96 (size before relaxing)
+ .debug_str     0x00000cf3       0xf8 HAL/BL/src/BL_program.o
+                                0x2ca (size before relaxing)
+ .debug_str     0x00000deb       0xc4 HAL/BUZZER/src/BUZZER_program.o
                                 0x227 (size before relaxing)
- .debug_str     0x00000ff6      0x1d4 HAL/EEPROM/src/EEPROM_program.o
+ .debug_str     0x00000eaf      0x1d4 HAL/EEPROM/src/EEPROM_program.o
                                 0x3f8 (size before relaxing)
- .debug_str     0x000011ca       0xda HAL/KPD/src/KeyPad_program.o
+ .debug_str     0x00001083       0xda HAL/KPD/src/KeyPad_program.o
                                 0x287 (size before relaxing)
- .debug_str     0x000012a4      0x11a HAL/LCD/src/LCD_PROGRAM.o
+ .debug_str     0x0000115d      0x108 HAL/LCD/src/LCD_PROGRAM.o
                                 0x3be (size before relaxing)
- .debug_str     0x000013be       0x66 HAL/LED/src/LED_program.o
+ .debug_str     0x00001265       0x66 HAL/LED/src/LED_program.o
                                 0x213 (size before relaxing)
- .debug_str     0x00001424       0x83 HAL/SERVO/src/SERVO_program.o
+ .debug_str     0x000012cb       0x83 HAL/SERVO/src/SERVO_program.o
                                 0x21e (size before relaxing)
- .debug_str     0x000014a7       0x11 main.o
-                                0x24f (size before relaxing)
- .debug_str     0x000014b8       0x61 MCAL/ADC/src/ADC_program.o
-                                0x203 (size before relaxing)
- .debug_str     0x00001519       0x6e MCAL/DIO/src/DIO_program.o
-                                0x22f (size before relaxing)
- .debug_str     0x00001587       0x2b MCAL/GI/src/GI_program.o
-                                0x17f (size before relaxing)
- .debug_str     0x000015b2       0x45 MCAL/PWM/src/PWM_program.o
-                                0x1ef (size before relaxing)
- .debug_str     0x000015f7       0x95 MCAL/TMR0/src/TMR0_program.o
-                                0x229 (size before relaxing)
- .debug_str     0x0000168c       0x68 MCAL/TMR2/src/TMR2_program.o
-                                0x228 (size before relaxing)
- .debug_str     0x000016f4       0x3c MCAL/TWI/src/TWI_program.o
-                                0x2a1 (size before relaxing)
- .debug_str     0x00001730       0x7a MCAL/UART/src/UART_program.o
+ .debug_str     0x0000134e       0x2e main.o
                                 0x2c0 (size before relaxing)
+ .debug_str     0x0000137c       0x61 MCAL/ADC/src/ADC_program.o
+                                0x203 (size before relaxing)
+ .debug_str     0x000013dd       0x6e MCAL/DIO/src/DIO_program.o
+                                0x22f (size before relaxing)
+ .debug_str     0x0000144b       0x2b MCAL/GI/src/GI_program.o
+                                0x17f (size before relaxing)
+ .debug_str     0x00001476       0x45 MCAL/PWM/src/PWM_program.o
+                                0x1ef (size before relaxing)
+ .debug_str     0x000014bb       0x95 MCAL/TMR0/src/TMR0_program.o
+                                0x229 (size before relaxing)
+ .debug_str     0x00001550       0x5a MCAL/TMR2/src/TMR2_program.o
+                                0x228 (size before relaxing)
+ .debug_str     0x000015aa       0x3c MCAL/TWI/src/TWI_program.o
+                                0x2a1 (size before relaxing)
+ .debug_str     0x000015e6       0x7a MCAL/UART/src/UART_program.o
+                                0x314 (size before relaxing)
 
-.debug_loc      0x00000000     0x3220
+.debug_loc      0x00000000     0x328d
  *(.debug_loc)
- .debug_loc     0x00000000     0x136d APP/src/SmartHome_Prog.o
- .debug_loc     0x0000136d       0xb9 HAL/BL/src/BL_program.o
- .debug_loc     0x00001426      0x108 HAL/BUZZER/src/BUZZER_program.o
- .debug_loc     0x0000152e      0x47c HAL/EEPROM/src/EEPROM_program.o
- .debug_loc     0x000019aa      0x183 HAL/KPD/src/KeyPad_program.o
- .debug_loc     0x00001b2d      0x979 HAL/LCD/src/LCD_PROGRAM.o
- .debug_loc     0x000024a6      0x1e0 HAL/LED/src/LED_program.o
- .debug_loc     0x00002686       0x8e HAL/SERVO/src/SERVO_program.o
- .debug_loc     0x00002714       0x8c MCAL/ADC/src/ADC_program.o
- .debug_loc     0x000027a0      0x2e4 MCAL/DIO/src/DIO_program.o
- .debug_loc     0x00002a84      0x1ba MCAL/PWM/src/PWM_program.o
- .debug_loc     0x00002c3e      0x196 MCAL/TMR0/src/TMR0_program.o
- .debug_loc     0x00002dd4      0x196 MCAL/TMR2/src/TMR2_program.o
- .debug_loc     0x00002f6a       0xbf MCAL/TWI/src/TWI_program.o
- .debug_loc     0x00003029      0x1f7 MCAL/UART/src/UART_program.o
+ .debug_loc     0x00000000     0x13da APP/src/SmartHome_Prog.o
+ .debug_loc     0x000013da       0xb9 HAL/BL/src/BL_program.o
+ .debug_loc     0x00001493      0x108 HAL/BUZZER/src/BUZZER_program.o
+ .debug_loc     0x0000159b      0x47c HAL/EEPROM/src/EEPROM_program.o
+ .debug_loc     0x00001a17      0x183 HAL/KPD/src/KeyPad_program.o
+ .debug_loc     0x00001b9a      0x979 HAL/LCD/src/LCD_PROGRAM.o
+ .debug_loc     0x00002513      0x1e0 HAL/LED/src/LED_program.o
+ .debug_loc     0x000026f3       0x8e HAL/SERVO/src/SERVO_program.o
+ .debug_loc     0x00002781       0x8c MCAL/ADC/src/ADC_program.o
+ .debug_loc     0x0000280d      0x2e4 MCAL/DIO/src/DIO_program.o
+ .debug_loc     0x00002af1      0x1ba MCAL/PWM/src/PWM_program.o
+ .debug_loc     0x00002cab      0x196 MCAL/TMR0/src/TMR0_program.o
+ .debug_loc     0x00002e41      0x196 MCAL/TMR2/src/TMR2_program.o
+ .debug_loc     0x00002fd7       0xbf MCAL/TWI/src/TWI_program.o
+ .debug_loc     0x00003096      0x1f7 MCAL/UART/src/UART_program.o
 
 .debug_macinfo
  *(.debug_macinfo)

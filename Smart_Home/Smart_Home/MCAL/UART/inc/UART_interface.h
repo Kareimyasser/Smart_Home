@@ -16,10 +16,8 @@
 #ifndef UART_INTERFACE_H_
 #define UART_INTERFACE_H_
 
-#define UART_TIMEOUT_MS	 100
-
 /********************************UART_APIs********************************/
-
+#define UART_TIMEOUT_MS	 100
 
 void UART_voidInit		(void);
 void UART_voidTxChar	(u8 copy_u8TxData);

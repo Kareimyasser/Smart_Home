@@ -42,6 +42,7 @@ BL_voidRxCharWithTimeout(u8* copy_pu8BlRxData)
 	 UART_voidRxCharWithTimeout(copy_pu8BlRxData);
 }
 
+
 void BL_voidTxString(u8* copy_pu8BlTxString)
 {
 	UART_voidTxString(copy_pu8BlTxString);

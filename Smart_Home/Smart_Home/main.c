@@ -14,6 +14,7 @@
 // MCAL
 #include "DIO_INTERFACE.h"
 #include "TMR0_interface.h"
+#include "TMR2_interface.h"
 #include "tmr0_register.h"
 #include "GI_interface.h"
 #include "PWM_interface.h"
@@ -34,30 +35,26 @@
 
 
 
-extern u8 usertype;
+ u8 usertype =HOME_NO_LOGIN;
 
 int main()
 {
-	//use for first time to init users and pass  then comment this line and download again
-	void APP_init();
-	
-	//check alarm
-	// HOME_voidFireAnALarm(usertype);
-	
-	//init home  
-	HOME_voidInit();
+
+	APP_init();
 	
 
+	
 	while(1)
 	{
-		
-
-		// display the welcome screen
-		WelcomeScreenLocal();
+		LCD_voidClear();
+		Reset_AllKPDValues();
 		WelcomeScreenRemote();
-		HOME_voidRemoteGetUserAndPass(HOME_REMOTE_ACCESS,&usertype);
-
-		// GetUserType();
+		WelcomeScreenLocal();
+		GetUserType();
+		HOME_voidFireAnALarm(usertype);
+		TMR2_voidStart();
+	
+		// HOME_voidChangeUserNameAndPass();
 		
 			if (usertype == HOME_REMOTE_ADMIN)
 			{
@@ -73,15 +70,18 @@ int main()
 				KPD_Interface_Localuser();
 			}
 
-	
+			TMR2_voidStop();
+			
 		
-			else if (usertype ==HOME_LOGIN_FAILED)
-			{
-			LCD_voidDisplayString((u8*)"Access Denied");
-			break;
-			}
+		// else if (global_accessType ==accessDenied)
+		// {
+		// 	LCD_voidDisplayString((u8*)"Access Denied");
+		// 	break;
+		// }
 		
 		
 		
 	}
 }
+
+

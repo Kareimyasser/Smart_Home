@@ -35,8 +35,8 @@
 
 //global variable for the application accessed by SmartHome.c and main.c
 // only for testing purposes
-u8 global_accessType =accessPermited;
-u8 usertype=HOME_NO_LOGIN;
+
+extern u8 usertype;
 
 
 
@@ -48,11 +48,11 @@ u8 local_lightStatus = KPD_Not_Pressed;
 u8 local_KPDIdleValue = KPD_Not_Pressed;
 u8 local_KPDSelectValue = KPD_Not_Pressed;
 u8 door_angle = 0;
-u8 local_ac_status = 0;
+u8 ac_status = 0;
 
 
 //local bluetooth variable for checking bluetooth status
-u8 bluetooh_value=0;
+u8 bluetooh_value;
 
 
 //local BL variables for the displaying on terminal 
@@ -68,73 +68,53 @@ u8 dimmer_brightness = 0;
 u8 local_temp = 0;
 
 
-void APP_init()
+
+
+
+
+
+void APP_init(void)
 {
-		//Local users
-		u8 Local_u8IntialUserName1[8]="1112223";
-		u8 Local_u8IntialUserPass1[8]="1112223";
-		u8 Local_u8IntialUserName2[8]="2223334";
-		u8 Local_u8IntialUserPass2[8]="2223334";
-		u8 Local_u8IntialUserName3[8]="3334445";
-		u8 Local_u8IntialUserPass3[8]="3334445";
-		u8 Local_u8IntialUserName4[8]="4445556";
-		u8 Local_u8IntialUserPass4[8]="4445556";
-		u8 Local_u8IntialUserName5[8]="5556667";
-		u8 Local_u8IntialUserPass5[8]="5556667";
+	/*APP_init function is for the logic initialization of the smart home system setting initial 
+	values for the users and epprom locations for saving */
+
+
+    HOME_voidInit();
+
+	// display the welcome screen
+
+	LCD_voidClear();
+
+	
+	// local users
+	u8 testusername[8]="7654321";
+	u8 testuserpass[8]="7654321";
+
+	// Remote users
+		//admin users
+	u8 testadminname[8]="1122334";
+	u8 testadminpass[8]="1122334";
+		//remote users
+	u8 testusername1[8]="1002003";
+	u8 testuserpass1[8]="1002003";
 		
-		//admin user
-		u8 Local_u8IntialUserName6[8]="4433221";
-		u8 Local_u8IntialUserPass6[8]="4433221";
-		
-		//remote user
-		u8 Local_u8IntialUserName7[8]="1001011";
-		u8 Local_u8IntialUserPass7[8]="1001011";
-		u8 Local_u8IntialUserName8[8]="2002012";
-		u8 Local_u8IntialUserPass8[8]="2002012";
-		u8 Local_u8IntialUserName9[8]="3003013";
-		u8 Local_u8IntialUserPass9[8]="3003013";
-		u8 Local_u8IntialUserName10[8]="4004014";
-		u8 Local_u8IntialUserPass10[8]="4004014";
-		u8 Local_u8IntialUserName11[8]="5005015";
-		u8 Local_u8IntialUserPass11[8]="5005015";
-		
-		
-		//write local users
-		EEPROM_voidWritePage(0,&Local_u8IntialUserName1[0]);
-		EEPROM_voidWritePage(8,&Local_u8IntialUserPass1[0]);
-		EEPROM_voidWritePage(16,&Local_u8IntialUserName2[0]);
-		EEPROM_voidWritePage(24,&Local_u8IntialUserPass2[0]);
-		EEPROM_voidWritePage(32,&Local_u8IntialUserName3[0]);
-		EEPROM_voidWritePage(40,&Local_u8IntialUserPass3[0]);
-		EEPROM_voidWritePage(48,&Local_u8IntialUserName4[0]);
-		EEPROM_voidWritePage(56,&Local_u8IntialUserPass4[0]);
-		EEPROM_voidWritePage(64,&Local_u8IntialUserName5[0]);
-		EEPROM_voidWritePage(72,&Local_u8IntialUserPass5[0]);
-		
-		//write adminuser
-		EEPROM_voidWritePage(80,&Local_u8IntialUserName6[0]);
-		EEPROM_voidWritePage(88,&Local_u8IntialUserPass6[0]);
-		
-		//write remoteusers
-		EEPROM_voidWritePage(96,&Local_u8IntialUserName7[0]);
-		EEPROM_voidWritePage(104,&Local_u8IntialUserPass7[0]);
-		EEPROM_voidWritePage(112,&Local_u8IntialUserName8[0]);
-		EEPROM_voidWritePage(120,&Local_u8IntialUserPass8[0]);
-		EEPROM_voidWritePage(128,&Local_u8IntialUserName9[0]);
-		EEPROM_voidWritePage(136,&Local_u8IntialUserPass9[0]);
-		EEPROM_voidWritePage(144,&Local_u8IntialUserName10[0]);
-		EEPROM_voidWritePage(152,&Local_u8IntialUserPass10[0]);
-		EEPROM_voidWritePage(160,&Local_u8IntialUserName11[0]);
-		EEPROM_voidWritePage(168,&Local_u8IntialUserPass11[0]);
+	
+	EEPROM_voidWritePage(16,&testusername[0]);
+	EEPROM_voidWritePage(24,&testuserpass[0]);
+	EEPROM_voidWritePage(80,&testadminname[0]);
+	EEPROM_voidWritePage(88,&testadminpass[0]);
+	EEPROM_voidWritePage(96,&testusername1[0]);
+	EEPROM_voidWritePage(104,&testuserpass1[0]);
+
+	
+	// HOME_voidCheckUserAndPass(HOME_REMOTE_ACCESS,&usertype);
+	// HOME_voidCheckUserAndPass(HOME_LOCAL_ACCESS,&usertype);
+	
 
 
 	
+	
 }
-
-
-
-
-
 
 
 
@@ -193,40 +173,32 @@ void HOME_voidInit(void)
 	// initialize tmr2
 	TMR2_voidInit();
 	TMR2_SetCallBackCTC(CheckTempForAc);
-	TMR2_voidStart();
+	
 
 }
-
-void GetUserType(void)
-//this function is to check if user is connecting remotly or local 
+void GetUserType()
 {
-	LCD_voidClear();
-	LCD_voidDisplayStringDelay((u8*)"Press # to login");
-	BL_voidTxChar('\r');
 	BL_voidTxString("Press # to login");
 	BL_voidTxChar('\r');
-	while (Local_copyKPDValue == KPD_Not_Pressed && bluetooh_value != '#')
+	LCD_voidClear();
+	LCD_voidDisplayString("Press # to login");
+	while (Local_copyKPDValue ==KPD_Not_Pressed && bluetooh_value != '#')
 	{
-		BL_voidRxCharWithTimeout(&bluetooh_value);
 		KPD_voidGetValue(&Local_copyKPDValue);
+		// BL_voidRxCharWithTimeout(&bluetooh_value);
 	}
-	if (Local_copyKPDValue == '#')
+	if (Local_copyKPDValue =='#')
 	{
-		BL_voidTxString("system is being used by local user");
+		BL_voidTxString("Local User");
 		HOME_voidCheckUserAndPass(HOME_LOCAL_ACCESS,&usertype);
-		
+	
 	}
 	else if (bluetooh_value == '#')
 	{
 		LCD_voidClear();
-		LCD_voidDisplayString("system is being used");
-		LCD_voidSendCommand(Write_SecondLine);
-		LCD_voidDisplayString("by remote user");
+		LCD_voidDisplayString("Remote User");
 		HOME_voidCheckUserAndPass(HOME_REMOTE_ACCESS,&usertype);
-
-		
 	}
-
 	
 
 }
@@ -283,6 +255,7 @@ void HOME_voidLocalGetUserAndPass(u8* copy_pu8LocalUserName,u8* copy_pu8LocalUse
 			
 				LCD_voidGoTOSpecificPosition(LCD_LINE_TWO,Local_u8UserPassCounter);
 				LCD_voidDisplayChar(copy_pu8LocalUserPass[Local_u8UserPassCounter]);
+				LCD_voidPwdEffect();
 			}
 			copy_pu8LocalUserPass[Local_u8UserPassCounter]='\0';
 	}
@@ -308,7 +281,7 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 	
 		//dis request for user name
 		BL_voidTxString	("User Name:");
-		BL_voidTxChar('\n');
+		BL_voidTxChar('\r');
 	
 		//loop for 8 digits user name
 		for(Local_u8UserNameLengthCounter=0;Local_u8UserNameLengthCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8UserNameLengthCounter++)
@@ -324,6 +297,7 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 		}
 		copy_pu8RemoteUserName[Local_u8UserNameLengthCounter]='\0';
 		BL_voidTxString("Entered User Name:");
+		BL_voidTxChar('\r');
 		//loop for 8 digits user name
 		
 		for(Local_u8UserNameLengthCounter=0;Local_u8UserNameLengthCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8UserNameLengthCounter++)
@@ -334,12 +308,12 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 			
 		}
 		
-		BL_voidTxChar('\n');
+		BL_voidTxChar('\r');
 		
 		
 		//display request for pass
 		BL_voidTxString	("Password:");
-		BL_voidTxChar('\n');
+		BL_voidTxChar('\r');
 	
 		//loop for 8 digits user pass
 		for(Local_u8UserPassCounter=0;Local_u8UserPassCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh+1;Local_u8UserPassCounter++)
@@ -354,6 +328,7 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 		}
 		copy_pu8RemoteUserPass[Local_u8UserPassCounter]='\0';
 		BL_voidTxString("Entered Pass:");
+		BL_voidTxChar('\r');
 		//loop for 8 digits user pass
 		for(Local_u8UserPassCounter=0;Local_u8UserPassCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8UserPassCounter++)
 		{
@@ -362,7 +337,7 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 		
 		}
 
-		BL_voidTxChar('\n');
+		BL_voidTxChar('\r');
 	}
 	else
 	{
@@ -453,7 +428,7 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus)
 									
 						}
 						
-						//if the pass right now we difine the user type(admin or user)
+						//if the pass right now we difine the user type(admin or user)AD
 						if(Local_u8PassByteCheck==HOME_USER_NAME_AND_PASS_MAX_LENGTh)
 						{
 							
@@ -653,23 +628,23 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus)
 				{
 					
 					BL_voidTxString	("ACCESS PERMITED");
-					BL_voidTxChar('\n');
+					BL_voidTxChar('\r');
 					break;
 				}
 				//is the entery was wrong 
 				else if(Local_u8WrongUserNameCounter==(HOME_MAX_NUM_OF_LOCAL_USER+1))
 				{
 					BL_voidTxString	("ACCESS DENIED");
-					BL_voidTxChar('\n');
+					BL_voidTxChar('\r');
 					BL_voidTxString	("Wrong User Name");
-					BL_voidTxChar('\n');
+					BL_voidTxChar('\r');
 					
 					//dont display this message on trial 3
 					if(Local_u8TrailsCounter!=(HOME_MAX_NUMBER_OF_TRIALS-1))
 					{	
 						
 						BL_voidTxString	("Please Try Again");
-						BL_voidTxChar('\n');
+						BL_voidTxChar('\r');
 						
 					}
 				}
@@ -677,15 +652,15 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus)
 				else if(Local_u8WrongUserPassCounter!=0)
 				{
 					BL_voidTxString	("ACCESS DENIED");
-					BL_voidTxChar('\n');
+					BL_voidTxChar('\r');
 					BL_voidTxString	("Wrong Password");
-					BL_voidTxChar('\n');
+					BL_voidTxChar('\r');
 										
 					//dont display this message on trial 3
 					if(Local_u8TrailsCounter!=(HOME_MAX_NUMBER_OF_TRIALS-1))
 					{
 						BL_voidTxString	("Please Try Again");
-						BL_voidTxChar('\n');
+						BL_voidTxChar('\r');
 					}
 				}
 				
@@ -719,7 +694,7 @@ void HOME_voidChangeUserNameAndPass(void)
 	
 	//dis request for use name and pass
 	BL_voidTxString	("Please Enter User Name & Password u want to change");
-	BL_voidTxString("\n");
+	BL_voidTxString("\r");
 	
 	//get user name and pass from BL
 	HOME_voidRemoteGetUserAndPass(&local_u8OldUserName,&local_u8OldUserPass);
@@ -809,14 +784,14 @@ void HOME_voidChangeUserNameAndPass(void)
 	{
 		
 		BL_voidTxString	("Please Enter The new User And Pass");
-		BL_voidTxChar('\n');
+		BL_voidTxChar('\r');
 		//get New user name and pass from BL
 		HOME_voidRemoteGetUserAndPass(&local_u8TempUserName,&local_u8TempUserPass);
 		//write the new user name & pass in EEPROM
 		EEPROM_voidWritePage(Local_u8UserNameLocation,&local_u8TempUserName);
 		EEPROM_voidWritePage((Local_u8UserNameLocation+HOME_USER_NAME_AND_PASS_MAX_LENGTh),&local_u8TempUserPass);
 		BL_voidTxString	("User Data Changed Successfully");
-		BL_voidTxChar('\n');
+		BL_voidTxChar('\r');
 		
 	}
 	//is the entery was wrong 
@@ -824,7 +799,7 @@ void HOME_voidChangeUserNameAndPass(void)
 	{
 
 		BL_voidTxString	("Wrong User Name or password");
-		BL_voidTxChar('\n');
+		BL_voidTxChar('\r');
 		
 
 	}
@@ -852,14 +827,14 @@ void HOME_voidFireAnALarm(u8 copy_pu8UserStatus)
 	{
 		while(1)
 		{
-			BL_voidTxString	("ACCESS DENIED");
+			BL_voidTxString	("SYSTEM IS BLOCKED");
 			BL_voidTxChar('\r');
 
 			BUZZER_voidOn(DIO_PORTD,DIO_PIN6);
 			
 			LCD_voidClear();
 			LCD_voidGoTOSpecificPosition(LCD_LINE_ONE,0);
-			LCD_voidDisplayString("ACCESS DENIED");
+			LCD_voidDisplayString("SYSTEM IS BLOCKED");
 			
 			//if the user enter # end alarm
 			BL_voidRxChar(&Local_u8ResetValue);
@@ -889,6 +864,8 @@ void KPD_Interface_RemoteAdmin(void)
 	BL_voidTxChar('\r');
 	BL_voidTxString("5- change username and password");
 	BL_voidTxChar('\r');
+	BL_voidTxString("6- To Sign Out");
+	BL_voidTxChar('\r');
 	TMR0_voidStart();
 	//reciving user selection from BL
 	BL_voidRxChar(&bluetooh_value);
@@ -896,23 +873,68 @@ void KPD_Interface_RemoteAdmin(void)
 	switch (bluetooh_value)
 	{
 	case ('1'):
-		BL_voidTxString("AC Is On/off");
-        BL_voidTxChar('\r');
+		DIO_voidGetPinValue(DIO_PORTC,DIO_PIN2,&ac_status);
+		if (ac_status==0)
+		{
+			BL_voidTxString("AC is Off");
+			BL_voidTxChar('\r');
 		//getting temp from ADC
         ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp); 
-				//sprintf is used to format and store a string in a buffer
-				sprintf(tempString, "Room Temp: %d c", local_temp);
-				BL_voidTxString(tempString);
-				BL_voidTxChar('\r');
-				BL_voidTxString("0-go to home");
-				BL_voidTxChar('\r');
-				TMR0_voidStart();
-				BL_voidRxChar(&bluetooh_value);
-				TMR0_voidStop();
-				if (bluetooh_value=='0')
+		//sprintf is used to format and store a string in a buffer
+		sprintf(tempString, "Room Temp: %d c", local_temp);
+		BL_voidTxString(tempString);
+		BL_voidTxChar('\r');
+		BL_voidTxString("1- To Turn It On");
+		BL_voidTxChar('\r');
+		BL_voidTxString("0-go to home");
+		BL_voidTxChar('\r');
+		TMR0_voidStart();
+		BL_voidRxChar(&bluetooh_value);
+		TMR0_voidStop();
+		if (bluetooh_value=='0')
+			{
+				break;
+			}
+		if (bluetooh_value=='1')
+			{
+				DIO_voidSetPinValue(DIO_PORTC,DIO_PIN2,DIO_PIN_HIGH);
+			}
+
+
+			
+
+		}
+				if (ac_status==1)
+		{
+			BL_voidTxString("AC is On");
+			BL_voidTxChar('\r');
+			BL_voidTxString("1- To Turn It Off");
+			BL_voidTxChar('\r');
+			ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp); 
+			//sprintf is used to format and store a string in a buffer
+			sprintf(tempString, "Room Temp: %d c", local_temp);
+			BL_voidTxString(tempString);
+			BL_voidTxChar('\r');
+			BL_voidTxString("1- To Turn It On");
+			BL_voidTxChar('\r');
+			BL_voidTxString("0-go to home");
+			BL_voidTxChar('\r');
+			TMR0_voidStart();
+			BL_voidRxChar(&bluetooh_value);
+			TMR0_voidStop();
+			if (bluetooh_value=='0')
 				{
-					
+					break;
 				}
+			
+			if (bluetooh_value=='1')
+				{
+					DIO_voidSetPinValue(DIO_PORTC,DIO_PIN2,DIO_PIN_LOW);
+				}
+	
+
+		}
+		
 		break;
 	
 	case ('2'):
@@ -1290,7 +1312,11 @@ void KPD_Interface_RemoteAdmin(void)
 			// this case is only for admin to change the username and password (Admin is only remote typeuser)
 			HOME_voidChangeUserNameAndPass();
 					
-        break;
+        	break;
+
+			case('6'):
+			usertype =HOME_NO_LOGIN;
+			break;
         }
     
 	}
@@ -1303,7 +1329,9 @@ void KPD_Interface_RemoteUser(void)
 	BL_voidTxChar('\r');
 	BL_voidTxString("1-AC 2-light");
 	BL_voidTxChar('\r');
-	BL_voidTxString("3-temp 4-Door");
+	BL_voidTxString("3-temp");
+	BL_voidTxChar('\r');
+	BL_voidTxString("6- To Sign Out");
 	BL_voidTxChar('\r');
 	TMR0_voidStart();
 	BL_voidRxChar(&bluetooh_value);
@@ -1311,22 +1339,68 @@ void KPD_Interface_RemoteUser(void)
 	switch (bluetooh_value)
 	{
 	case ('1'):
-		// DIO_voidGetPinValue()/////////////////////////////
-		BL_voidTxString("AC Is On/off");
-        BL_voidTxChar('\r');
+				DIO_voidGetPinValue(DIO_PORTC,DIO_PIN2,&ac_status);
+		if (ac_status==0)
+		{
+			BL_voidTxString("AC is Off");
+			BL_voidTxChar('\r');
+		//getting temp from ADC
         ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp); 
-				sprintf(tempString, "Room Temp: %d c", local_temp);
-				BL_voidTxString(tempString);
-				BL_voidTxChar('\r');
-				BL_voidTxString("0-go to home");
-				BL_voidTxChar('\r');
-				TMR0_voidStart();
-				BL_voidRxChar(&bluetooh_value);
-				TMR0_voidStop();
-				if (bluetooh_value=='0')
+		//sprintf is used to format and store a string in a buffer
+		sprintf(tempString, "Room Temp: %d c", local_temp);
+		BL_voidTxString(tempString);
+		BL_voidTxChar('\r');
+		BL_voidTxString("1- To Turn It On");
+		BL_voidTxChar('\r');
+		BL_voidTxString("0-go to home");
+		BL_voidTxChar('\r');
+		TMR0_voidStart();
+		BL_voidRxChar(&bluetooh_value);
+		TMR0_voidStop();
+		if (bluetooh_value=='0')
+			{
+				break;
+			}
+		if (bluetooh_value=='1')
+			{
+				DIO_voidSetPinValue(DIO_PORTC,DIO_PIN2,DIO_PIN_HIGH);
+			}
+
+
+			
+
+		}
+				if (ac_status==1)
+		{
+			BL_voidTxString("AC is On");
+			BL_voidTxChar('\r');
+			BL_voidTxString("1- To Turn It Off");
+			BL_voidTxChar('\r');
+			ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp); 
+			//sprintf is used to format and store a string in a buffer
+			sprintf(tempString, "Room Temp: %d c", local_temp);
+			BL_voidTxString(tempString);
+			BL_voidTxChar('\r');
+			BL_voidTxString("1- To Turn It On");
+			BL_voidTxChar('\r');
+			BL_voidTxString("0-go to home");
+			BL_voidTxChar('\r');
+			TMR0_voidStart();
+			BL_voidRxChar(&bluetooh_value);
+			TMR0_voidStop();
+			if (bluetooh_value=='0')
 				{
-					
+					break;
 				}
+			
+			if (bluetooh_value=='1')
+				{
+					DIO_voidSetPinValue(DIO_PORTC,DIO_PIN2,DIO_PIN_LOW);
+				}
+	
+
+		}
+		
 		break;
 	
 	case ('2'):
@@ -1647,6 +1721,10 @@ void KPD_Interface_RemoteUser(void)
 					
 				}
 
+			case('6'):
+			usertype =HOME_NO_LOGIN;
+			break;
+
 					
         break;
         }
@@ -1673,7 +1751,7 @@ void KPD_Interface_Localuser(void)
         LCD_voidClear();
         LCD_voidDisplayString((u8 *)"1-AC 2-light");
         LCD_voidSendCommand(Write_SecondLine);
-        LCD_voidDisplayString((u8 *)"3-temp 4-Door");
+        LCD_voidDisplayString((u8 *)"3-temp 6-LogOut");
         Reset_AllKPDValues();
 
         // busy wait for KPD to get the value. timr0 is still counting for the 5 sec idle to go to interrupt function
@@ -2058,24 +2136,20 @@ void KPD_Interface_Localuser(void)
 				}
 			break;
 
-
-
+			case('6'):
+			usertype =HOME_NO_LOGIN;
 			break;
+		
 			
 		Reset_AllKPDValues();
         break;
         }
     
 }
-
 void WelcomeScreenRemote()
-// this function is for greeting the user in remote user interface
 {
-    BL_voidTxString(" Welcome to your");
-    BL_voidTxChar('\r');
-    BL_voidTxString("Smart Home");
-    BL_voidTxChar('\r');
-    _delay_ms(1000);
+	BL_voidTxString(" Welcome to your Smart Home");
+	BL_voidTxChar('\r');
 }
 
 void WelcomeScreenLocal()
@@ -2085,6 +2159,7 @@ void WelcomeScreenLocal()
     LCD_voidSendCommand(Write_SecondLine);
     LCD_voidDisplayStringDelay((u8 *)"   Smart Home");
     _delay_ms(1000);
+	
 }
 
 void CheckTempForAc()

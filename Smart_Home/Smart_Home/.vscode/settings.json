@@ -14,6 +14,10 @@
         "tmr0_config.h": "c",
         "std_types.h": "c",
         "dio_interface.h": "c",
+        "pwm_interface.h": "c",
+        "eeprom_interface.h": "c",
+        "uart_interface.h": "c",
+        "gi_interface.h": "c",
         "tmr0_interface.h": "c"
     }
 }
