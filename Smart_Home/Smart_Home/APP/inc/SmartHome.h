@@ -24,7 +24,7 @@
 #define HOME_REMOTE_ACCESS						2
 
 #define HOME_ALARM_LOCATION						180
-#define HOME_ALARM_VALUE						200
+#define HOME_ALARM_VALUE						1520
 #define HOME_ALARM_CLEAR_VALUE					0x00
 
 #define Led_freq                                10000

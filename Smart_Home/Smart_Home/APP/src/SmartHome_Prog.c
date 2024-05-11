@@ -185,7 +185,7 @@ void GetUserType()
 	while (Local_copyKPDValue ==KPD_Not_Pressed && bluetooh_value != '#')
 	{
 		KPD_voidGetValue(&Local_copyKPDValue);
-		// BL_voidRxCharWithTimeout(&bluetooh_value);
+		BL_voidRxCharWithTimeout(&bluetooh_value);
 	}
 	if (Local_copyKPDValue =='#')
 	{
