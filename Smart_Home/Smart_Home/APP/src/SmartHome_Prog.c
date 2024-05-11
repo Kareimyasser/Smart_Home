@@ -35,7 +35,7 @@
 
 //global variable for the application accessed by SmartHome.c and main.c
 // only for testing purposes
-u8 global_accessType =accessPermited;
+u8 global_accessType;
 u8 usertype;
 
 
@@ -51,7 +51,7 @@ u8 door_angle = 0;
 
 
 //local bluetooth variable for checking bluetooth status
-u8 bluetooh_value;
+u8 bluetooh_value=0;
 
 
 //local BL variables for the displaying on terminal 
@@ -81,7 +81,8 @@ void APP_init(void)
     HOME_voidInit();
 
 	// display the welcome screen
-	WelcomeScreen();
+	WelcomeScreenLocal();
+	WelcomeScreenRemote();
 	LCD_voidClear();
 
 	
@@ -102,9 +103,7 @@ void APP_init(void)
 	EEPROM_voidWritePage(104,&testuserpass1[0]);
 
 	
-	HOME_voidCheckUserAndPass(HOME_REMOTE_ACCESS,&usertype);
-	// HOME_voidCheckUserAndPass(HOME_LOCAL_ACCESS,&usertype);
-	HOME_voidFireAnALarm(usertype);
+	
 	
 
 	
@@ -177,6 +176,35 @@ void HOME_voidInit(void)
 	TMR2_voidInit();
 	TMR2_SetCallBackCTC(CheckTempForAc);
 	TMR2_voidStart();
+
+}
+
+void GetUserType(void)
+//this function is to check if user is connecting remotly or local 
+{
+	LCD_voidDisplayStringDelay((u8*)"Press # to login");
+	BL_voidTxString("Press # to login");
+	while (Local_copyKPDValue == KPD_Not_Pressed && bluetooh_value != '#')
+	{
+		BL_voidRxCharWithTimeout(&bluetooh_value);
+		KPD_voidGetValue(&Local_copyKPDValue);
+	}
+	if (Local_copyKPDValue == "#")
+	{
+		BL_voidTxString("system is being used by loacl user");
+		HOME_voidCheckUserAndPass(HOME_LOCAL_ACCESS,&usertype);
+		HOME_voidFireAnALarm(usertype);
+	}
+	else if (bluetooh_value == '#')
+	{
+		HOME_voidCheckUserAndPass(HOME_REMOTE_ACCESS,&usertype);
+		LCD_voidDisplayString("system is being used");
+		LCD_voidSendCommand(Write_SecondLine);
+		LCD_voidDisplayString("by remote user");
+		HOME_voidFireAnALarm(usertype);
+	}
+
+	
 
 }
 
@@ -491,6 +519,7 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus)
 			//check the alarm after the 3rd trial
 			if((HOME_MAX_NUMBER_OF_TRIALS==Local_u8FireAnAlarm)&&(LocaL_u8RightEntery==0))
 			{
+				
 				*copy_pu8UserStatus=HOME_LOGIN_FAILED;
 			}
 		}
@@ -605,6 +634,7 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus)
 					
 					BL_voidTxString	("ACCESS PERMITED");
 					BL_voidTxChar('\r');
+				
 					break;
 				}
 				//is the entery was wrong 
@@ -644,6 +674,7 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus)
 			//check the alarm after the 3rd trial
 			if((HOME_MAX_NUMBER_OF_TRIALS==Local_u8FireAnAlarm)&&(LocaL_u8RightEntery==0))
 			{
+				
 				*copy_pu8UserStatus=HOME_LOGIN_FAILED;
 			}
 			
@@ -2018,7 +2049,17 @@ void KPD_Interface_Localuser(void)
     
 }
 
-void WelcomeScreen()
+void WelcomeScreenRemote()
+// this function is for greeting the user in remote user interface
+{
+    BL_voidTxString(" Welcome to your");
+    BL_voidTxChar('\r');
+    BL_voidTxString("Smart Home");
+    BL_voidTxChar('\r');
+    _delay_ms(1000);
+}
+
+void WelcomeScreenLocal()
 // this function is for greeting the user in local user interface
 {
     LCD_voidDisplayStringDelay((u8 *)" Welcome to your");

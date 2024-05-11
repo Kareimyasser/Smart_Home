@@ -32,7 +32,7 @@
 #include "BL_interface.h"
 #include "SmartHome.h"
 
-extern u8 global_accessType;
+
 
 extern u8 usertype;
 
@@ -44,12 +44,10 @@ int main()
 
 	while(1)
 	{
-		
+		GetUserType();
 
-		
 		// HOME_voidChangeUserNameAndPass();
-		if (global_accessType ==accessPermited)
-		{
+	
 			if (usertype == HOME_REMOTE_ADMIN)
 			{
 				KPD_Interface_RemoteAdmin();
@@ -63,14 +61,15 @@ int main()
 			{
 				KPD_Interface_Localuser();
 			}
-
+			else if (usertype == HOME_LOGIN_FAILED)
+			{
+				LCD_voidDisplayString("Login Failed");
+			}
 			
-		}
-		else if (global_accessType ==accessDenied)
-		{
-			LCD_voidDisplayString((u8*)"Access Denied");
-			break;
-		}
+
+		
+
+		
 		
 		
 		

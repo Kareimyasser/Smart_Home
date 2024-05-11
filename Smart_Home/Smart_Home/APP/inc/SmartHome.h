@@ -30,13 +30,15 @@
 #define Led_freq                                10000
 
 
+void GetUserType(void);
 void APP_init(void);
 void Idle_RemoteAction();
 void Display_Remotetemp(void);
 void Idle_Action();
 void Display_temp(void);
 void CheckTempForAc  (void);
-void WelcomeScreen();
+void WelcomeScreenLocal();
+void WelcomeScreenRemote();
 void KPD_Interface_Localuser(void);
 void KPD_Interface_RemoteAdmin(void);
 void KPD_Interface_RemoteUser(void);
