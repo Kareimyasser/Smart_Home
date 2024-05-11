@@ -38,8 +38,8 @@ void Display_Remotetemp(void);
 void Idle_Action();
 void Display_temp(void);
 void CheckTempForAc  (void);
-void WelcomeScreenLocal();
-void WelcomeScreenRemote();
+void WelcomeScreenLocal(void);
+void WelcomeScreenRemote(void);
 void KPD_Interface_Localuser(void);
 void KPD_Interface_RemoteAdmin(void);
 void KPD_Interface_RemoteUser(void);
@@ -55,6 +55,7 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus );
 void HOME_voidChangeUserNameAndPass(void);
 void HOME_voidFireAnALarm(u8 copy_pu8UserStatus);
 void HOME_InitUserNameAndPass(void);
+
 
 
 #endif

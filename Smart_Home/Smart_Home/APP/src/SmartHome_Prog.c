@@ -48,6 +48,7 @@ u8 local_lightStatus = KPD_Not_Pressed;
 u8 local_KPDIdleValue = KPD_Not_Pressed;
 u8 local_KPDSelectValue = KPD_Not_Pressed;
 u8 door_angle = 0;
+u8 local_ac_status = 0;
 
 
 //local bluetooth variable for checking bluetooth status
@@ -67,7 +68,7 @@ u8 dimmer_brightness = 0;
 u8 local_temp = 0;
 
 
-void HOME_InitUserNameAndPass(void)
+void APP_init()
 {
 		//Local users
 		u8 Local_u8IntialUserName1[8]="1112223";
@@ -125,6 +126,8 @@ void HOME_InitUserNameAndPass(void)
 		EEPROM_voidWritePage(152,&Local_u8IntialUserPass10[0]);
 		EEPROM_voidWritePage(160,&Local_u8IntialUserName11[0]);
 		EEPROM_voidWritePage(168,&Local_u8IntialUserPass11[0]);
+
+
 	
 }
 
@@ -197,26 +200,31 @@ void HOME_voidInit(void)
 void GetUserType(void)
 //this function is to check if user is connecting remotly or local 
 {
+	LCD_voidClear();
 	LCD_voidDisplayStringDelay((u8*)"Press # to login");
+	BL_voidTxChar('\r');
 	BL_voidTxString("Press # to login");
+	BL_voidTxChar('\r');
 	while (Local_copyKPDValue == KPD_Not_Pressed && bluetooh_value != '#')
 	{
 		BL_voidRxCharWithTimeout(&bluetooh_value);
 		KPD_voidGetValue(&Local_copyKPDValue);
 	}
-	if (Local_copyKPDValue == "#")
+	if (Local_copyKPDValue == '#')
 	{
-		BL_voidTxString("system is being used by loacl user");
+		BL_voidTxString("system is being used by local user");
 		HOME_voidCheckUserAndPass(HOME_LOCAL_ACCESS,&usertype);
-		HOME_voidFireAnALarm(usertype);
+		
 	}
 	else if (bluetooh_value == '#')
 	{
-		HOME_voidCheckUserAndPass(HOME_REMOTE_ACCESS,&usertype);
+		LCD_voidClear();
 		LCD_voidDisplayString("system is being used");
 		LCD_voidSendCommand(Write_SecondLine);
 		LCD_voidDisplayString("by remote user");
-		HOME_voidFireAnALarm(usertype);
+		HOME_voidCheckUserAndPass(HOME_REMOTE_ACCESS,&usertype);
+
+		
 	}
 
 	
@@ -300,7 +308,7 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 	
 		//dis request for user name
 		BL_voidTxString	("User Name:");
-		BL_voidTxChar('\r');
+		BL_voidTxChar('\n');
 	
 		//loop for 8 digits user name
 		for(Local_u8UserNameLengthCounter=0;Local_u8UserNameLengthCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8UserNameLengthCounter++)
@@ -316,7 +324,6 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 		}
 		copy_pu8RemoteUserName[Local_u8UserNameLengthCounter]='\0';
 		BL_voidTxString("Entered User Name:");
-		BL_voidTxChar('\r');
 		//loop for 8 digits user name
 		
 		for(Local_u8UserNameLengthCounter=0;Local_u8UserNameLengthCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8UserNameLengthCounter++)
@@ -327,12 +334,12 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 			
 		}
 		
-		BL_voidTxChar('\r');
+		BL_voidTxChar('\n');
 		
 		
 		//display request for pass
 		BL_voidTxString	("Password:");
-		BL_voidTxChar('\r');
+		BL_voidTxChar('\n');
 	
 		//loop for 8 digits user pass
 		for(Local_u8UserPassCounter=0;Local_u8UserPassCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh+1;Local_u8UserPassCounter++)
@@ -347,7 +354,6 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 		}
 		copy_pu8RemoteUserPass[Local_u8UserPassCounter]='\0';
 		BL_voidTxString("Entered Pass:");
-		BL_voidTxChar('\r');
 		//loop for 8 digits user pass
 		for(Local_u8UserPassCounter=0;Local_u8UserPassCounter<HOME_USER_NAME_AND_PASS_MAX_LENGTh;Local_u8UserPassCounter++)
 		{
@@ -356,7 +362,7 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 		
 		}
 
-		BL_voidTxChar('\r');
+		BL_voidTxChar('\n');
 	}
 	else
 	{
@@ -447,7 +453,7 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus)
 									
 						}
 						
-						//if the pass right now we difine the user type(admin or user)AD
+						//if the pass right now we difine the user type(admin or user)
 						if(Local_u8PassByteCheck==HOME_USER_NAME_AND_PASS_MAX_LENGTh)
 						{
 							
@@ -534,7 +540,6 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus)
 			//check the alarm after the 3rd trial
 			if((HOME_MAX_NUMBER_OF_TRIALS==Local_u8FireAnAlarm)&&(LocaL_u8RightEntery==0))
 			{
-				
 				*copy_pu8UserStatus=HOME_LOGIN_FAILED;
 			}
 		}
@@ -648,24 +653,23 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus)
 				{
 					
 					BL_voidTxString	("ACCESS PERMITED");
-					BL_voidTxChar('\r');
-				
+					BL_voidTxChar('\n');
 					break;
 				}
 				//is the entery was wrong 
 				else if(Local_u8WrongUserNameCounter==(HOME_MAX_NUM_OF_LOCAL_USER+1))
 				{
 					BL_voidTxString	("ACCESS DENIED");
-					BL_voidTxChar('\r');
+					BL_voidTxChar('\n');
 					BL_voidTxString	("Wrong User Name");
-					BL_voidTxChar('\r');
+					BL_voidTxChar('\n');
 					
 					//dont display this message on trial 3
 					if(Local_u8TrailsCounter!=(HOME_MAX_NUMBER_OF_TRIALS-1))
 					{	
 						
 						BL_voidTxString	("Please Try Again");
-						BL_voidTxChar('\r');
+						BL_voidTxChar('\n');
 						
 					}
 				}
@@ -673,15 +677,15 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus)
 				else if(Local_u8WrongUserPassCounter!=0)
 				{
 					BL_voidTxString	("ACCESS DENIED");
-					BL_voidTxChar('\r');
+					BL_voidTxChar('\n');
 					BL_voidTxString	("Wrong Password");
-					BL_voidTxChar('\r');
+					BL_voidTxChar('\n');
 										
 					//dont display this message on trial 3
 					if(Local_u8TrailsCounter!=(HOME_MAX_NUMBER_OF_TRIALS-1))
 					{
 						BL_voidTxString	("Please Try Again");
-						BL_voidTxChar('\r');
+						BL_voidTxChar('\n');
 					}
 				}
 				
@@ -689,7 +693,6 @@ void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus)
 			//check the alarm after the 3rd trial
 			if((HOME_MAX_NUMBER_OF_TRIALS==Local_u8FireAnAlarm)&&(LocaL_u8RightEntery==0))
 			{
-				
 				*copy_pu8UserStatus=HOME_LOGIN_FAILED;
 			}
 			
@@ -716,7 +719,7 @@ void HOME_voidChangeUserNameAndPass(void)
 	
 	//dis request for use name and pass
 	BL_voidTxString	("Please Enter User Name & Password u want to change");
-	BL_voidTxString("\r");
+	BL_voidTxString("\n");
 	
 	//get user name and pass from BL
 	HOME_voidRemoteGetUserAndPass(&local_u8OldUserName,&local_u8OldUserPass);
@@ -806,14 +809,14 @@ void HOME_voidChangeUserNameAndPass(void)
 	{
 		
 		BL_voidTxString	("Please Enter The new User And Pass");
-		BL_voidTxChar('\r');
+		BL_voidTxChar('\n');
 		//get New user name and pass from BL
 		HOME_voidRemoteGetUserAndPass(&local_u8TempUserName,&local_u8TempUserPass);
 		//write the new user name & pass in EEPROM
 		EEPROM_voidWritePage(Local_u8UserNameLocation,&local_u8TempUserName);
 		EEPROM_voidWritePage((Local_u8UserNameLocation+HOME_USER_NAME_AND_PASS_MAX_LENGTh),&local_u8TempUserPass);
 		BL_voidTxString	("User Data Changed Successfully");
-		BL_voidTxChar('\r');
+		BL_voidTxChar('\n');
 		
 	}
 	//is the entery was wrong 
@@ -821,7 +824,7 @@ void HOME_voidChangeUserNameAndPass(void)
 	{
 
 		BL_voidTxString	("Wrong User Name or password");
-		BL_voidTxChar('\r');
+		BL_voidTxChar('\n');
 		
 
 	}
@@ -1308,6 +1311,7 @@ void KPD_Interface_RemoteUser(void)
 	switch (bluetooh_value)
 	{
 	case ('1'):
+		// DIO_voidGetPinValue()/////////////////////////////
 		BL_voidTxString("AC Is On/off");
         BL_voidTxChar('\r');
         ADC_voidGetDigitalValue(ADC_CHANNEL_0, &local_temp); 

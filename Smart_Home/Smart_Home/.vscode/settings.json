@@ -13,6 +13,7 @@
         "buzzer_interface.h": "c",
         "tmr0_config.h": "c",
         "std_types.h": "c",
-        "dio_interface.h": "c"
+        "dio_interface.h": "c",
+        "tmr0_interface.h": "c"
     }
 }

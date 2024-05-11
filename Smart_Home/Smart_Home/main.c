@@ -38,16 +38,27 @@ extern u8 usertype;
 
 int main()
 {
+	//use for first time to init users and pass  then comment this line and download again
+	void APP_init();
 	
-	APP_init();
+	//check alarm
+	// HOME_voidFireAnALarm(usertype);
+	
+	//init home  
+	HOME_voidInit();
 	
 
 	while(1)
 	{
-		GetUserType();
+		
 
-		// HOME_voidChangeUserNameAndPass();
-	
+		// display the welcome screen
+		WelcomeScreenLocal();
+		WelcomeScreenRemote();
+		HOME_voidRemoteGetUserAndPass(HOME_REMOTE_ACCESS,&usertype);
+
+		// GetUserType();
+		
 			if (usertype == HOME_REMOTE_ADMIN)
 			{
 				KPD_Interface_RemoteAdmin();
@@ -61,19 +72,16 @@ int main()
 			{
 				KPD_Interface_Localuser();
 			}
-			else if (usertype == HOME_LOGIN_FAILED)
+
+	
+		
+			else if (usertype ==HOME_LOGIN_FAILED)
 			{
-				LCD_voidDisplayString("Login Failed");
+			LCD_voidDisplayString((u8*)"Access Denied");
+			break;
 			}
-			
-
-		
-
-		
 		
 		
 		
 	}
 }
-
-
