@@ -38,16 +38,23 @@ extern u8 usertype;
 
 int main()
 {
+	//use for first time to init users and pass  then comment this line and download again
+	HOME_InitUserNameAndPass();
 	
-	APP_init();
+	//check alarm
+	HOME_voidFireAnALarm(usertype);
+	
+	//init home  
+	HOME_voidInit();
 	
 
 	while(1)
 	{
 		
 
-		
-		// HOME_voidChangeUserNameAndPass();
+		// display the welcome screen
+		WelcomeScreen();
+
 		if (global_accessType ==accessPermited)
 		{
 			if (usertype == HOME_REMOTE_ADMIN)

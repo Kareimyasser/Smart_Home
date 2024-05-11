@@ -30,7 +30,7 @@
 #define Led_freq                                10000
 
 
-void APP_init(void);
+
 void Idle_RemoteAction();
 void Display_Remotetemp(void);
 void Idle_Action();
@@ -51,6 +51,7 @@ void HOME_voidRemoteGetUserAndPass(u8* copy_pu8RemoteUserName,u8* copy_pu8Remote
 void HOME_voidCheckUserAndPass(u8 copy_u8AccessType,u8* copy_pu8UserStatus );
 void HOME_voidChangeUserNameAndPass(void);
 void HOME_voidFireAnALarm(u8 copy_pu8UserStatus);
+void HOME_InitUserNameAndPass(void);
 
 
 #endif
